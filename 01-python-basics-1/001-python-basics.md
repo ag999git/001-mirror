@@ -332,8 +332,46 @@ calculate_internal_grades()  # This is an internal function/ private to the scri
 
 
 
-### 6. 
+### 6. Python Keywords — Meaning + Example in form of a Table are given below
 
+| Keyword | Meaning / Simple Explanation | Example Sentence (Code) | Real-Life Example / Analogy |
+| --- | --- | --- | --- |
+| `and` | Both conditions must be true | if x > 0 and y > 0: | “I will go for a walk if it’s sunny and I have free time.” |
+| `or` | At least one condition must be true | if age < 18 or age > 60: | “I will drink tea or coffee — either one is fine.” |
+| `not` | Reverses a condition | if not is_raining: | “I will go out not if it’s raining.” |
+| `if` | Decision-making | if score >= 50: | “If it’s your birthday, you get a gift.” |
+| `elif` | Additional condition | elif score >= 40: | “If not birthday, elif it’s festival, you get sweets.” |
+| `else` | Runs when all conditions fail | else: | “Otherwise, nothing special happens.” |
+| `for` | Loop over a sequence | for n in [1,2,3]: | “Give chocolates to each student in class.” |
+| `while` | Loop while condition is true | while count < 5: | “I study while it’s quiet.” |
+| `break` | Stop the loop | if n == 5: break | “Stop the game if someone gets hurt.” |
+| `continue` | Skip current iteration | if n % 2 == 0: continue | “Skip this person and move to the next.” |
+| `pass` | Do nothing | def func(): pass | Calling roll: “Absent? … pass.” |
+| `def` | Define a function | def add(a, b): | Writing a recipe: “def make_tea():” |
+| `return` | Send value back | return a + b | At end of recipe: “Serve tea.” |
+| `lambda` | Small anonymous function | square = lambda x: x*x | Quick rule: “Multiply by 2” without naming it. |
+| `class` | Define a class | class Car: | Blueprint for a car model. |
+| `import` | Bring a module | import math | “Bring a tool from the toolbox.” |
+| `from` | Import part of a module | from math import sqrt | “Bring only the screwdriver from the toolbox.” |
+| `as` | Give short name to module | import math as m | “Call the screwdriver ‘SD’ for short.” |
+| `try` | Code that may cause error | try: | “Try opening the door; it might be locked.” |
+| `except` | Handle the error | except ValueError: | “If locked, use the key.” |
+| `finally` | Always runs | finally: | “Before leaving, lock the gate — always.” |
+| `raise` | Throw an error | raise TypeError("Wrong") | “Raise a complaint if rules are broken.” |
+| `assert` | Debug check | assert x > 0 | “Check seatbelt is on before driving.” |
+| `in` | Check membership | if "a" in "apple": | “Is your name in the list?” |
+| `is` | Check if same object | if x is None: | “Two cups look same — are they the same cup?” |
+| `global` | Use global variable | global count | Taking money from main family wallet. |
+| `nonlocal` | Use outer function variable | nonlocal total | Helper using owner’s cash drawer. |
+| `with` | Automatic setup + cleanup | with open("a.txt") as f: | “With washing machine, wash + clean happens automatically.” |
+| `yield` | Return values one at a time | yield item | Tree gives mangoes one by one. |
+| `del` | Delete variable/item | del numbers[0] | Throw away old notebook. |
+| `exec` | Execute Python code dynamically | exec("print('Hello')") | “Follow these written instructions exactly.” |
+| `print` | Show output | print("Hello") | Saying something out loud. |
+
+
+
+[Back toTable of Contents](#table-of-contents)
 
 ### New addition below this
 [Back toTable of Contents](#table-of-contents)
