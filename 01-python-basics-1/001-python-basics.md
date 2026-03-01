@@ -307,6 +307,13 @@ You can run the above script in Google Colab
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1o0MazyhjW0tcmbxILSQXFVWrI8qp-gJ_?usp=sharing)
 
 
+
+You can run the above script in Google Colab
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YOUR_GITHUB_USERNAME/001-Python-book-2026/blob/main/colab-nb/01Chapter1_pep.ipynb)
+
+
+
+
 ### 5. Table: Identifiers vs Variables
 [Back to Table of Contents](#table-of-contents)
 
