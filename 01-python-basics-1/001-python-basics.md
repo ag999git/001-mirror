@@ -303,12 +303,12 @@ print(f"Section 5: {_internal_utility_function()}")
 
 ```
 
-You can run the above script in Google Colab
+You can run the above script in Google Colab (From Google Drive)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1o0MazyhjW0tcmbxILSQXFVWrI8qp-gJ_?usp=sharing)
 
 
 
-You can run the above script in Google Colab
+You can run the above script in Google Colab (Same notebook from GitHub)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ag999git/001-Python-book-2026/blob/main/colab-nb/01Chapter1_pep.ipynb)
 
 
