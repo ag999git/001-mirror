@@ -4,7 +4,7 @@ You can also visit my GitHub repository by clicking the badge below
 ![Python Basics](https://img.shields.io/badge/Python_Basics-3776AB?style=for-the-badge&logo=python&logoColor=white)
 
 
-| 📚 Book Repository | 🚀 Interactive Labs |
+| Book Repository | Interactive Labs |
 | :--- | :--- |
 | [![Book Repo](https://img.shields.io/badge/GitHub-Full_Book_Repo-3776AB?style=for-the-badge&logo=github&logoColor=white&labelColor=555555)](https://github.com/ag999git/001-Python-book-2026) | [![Colab Folder](https://img.shields.io/badge/Google_Colab-Notebook_Folder-FFD700?style=for-the-badge&logo=googlecolab&logoColor=white&labelColor=228B22)](https://github.com/ag999git/001-Python-book-2026/tree/main/colab-nb) |
 
