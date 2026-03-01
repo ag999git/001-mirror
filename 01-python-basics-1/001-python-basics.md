@@ -304,7 +304,7 @@ print(f"Section 5: {_internal_utility_function()}")
 ```
 
 You can run the above script in Google Colab
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](YOUR_COLAB_URL_HERE)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1o0MazyhjW0tcmbxILSQXFVWrI8qp-gJ_?usp=sharing)
 
 
 ### 5. Table: Identifiers vs Variables
