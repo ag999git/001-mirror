@@ -303,6 +303,9 @@ print(f"Section 5: {_internal_utility_function()}")
 
 ```
 
+You can run the above script in Google Colab
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](YOUR_COLAB_URL_HERE)
+
 
 ### 5. Table: Identifiers vs Variables
 [Back to Table of Contents](#table-of-contents)
