@@ -1,3 +1,5 @@
+![Python Basics](https://img.shields.io/badge/Python_Basics-3776AB?style=for-the-badge&logo=python&logoColor=white)
+
 ### Table of Contents
 - [1. Python Keywords — Meaning, Code Example, Real-Life Analogy](#1-python-keywords-meaning-code-example-real-life-analogy)
 - [2 Comparison between Hash and triple quotes](#2-comparison-between-hash-and-triple-quotes)
