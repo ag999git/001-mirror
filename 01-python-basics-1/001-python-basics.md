@@ -1,7 +1,6 @@
-You can also visit my GitHub repository by clicking the badge below
+You can also visit my GitHub repository or the Google Colab notebooks by clicking the badges below
 
 
-![Python Basics](https://img.shields.io/badge/Python_Basics-3776AB?style=for-the-badge&logo=python&logoColor=white)
 
 
 | Book Repository | Interactive Labs |
