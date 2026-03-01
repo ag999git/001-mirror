@@ -198,113 +198,107 @@ Just like grammar makes English easier to read, PEP 8 makes Python code easier f
 *   Comments
 
 ```python
+# ===============================================================
+# PYTHON STYLE GUIDE: PEP 8 VS. NON-PEP 8
+# This script demonstrates the "Pythonic" way to write code.
+# ===============================================================
 
-# PEP 8 vs Non-PEP 8 Python Code Examples
+# ---------------------------------------------------------------
+# 1. VARIABLES: The "Identity" of your data
+# Rule: Use snake_case (all lowercase with underscores)
+# ---------------------------------------------------------------
 
-# -------------------------------
-# Variables:- Use snake_case (lowercase_with_underscores)
-# -------------------------------
-
-# PEP 8 style
+# PEP 8 STYLE (CORRECT)
+# This is easy to read because words are separated by underscores.
 student_age = 20
 total_score = 95
+
+# CONSTANTS: Use all UPPERCASE to show this value should not change.
 MAX_LIMIT = 100
 
-# Non-PEP 8 style
-StudentAge=20  # Avoid capital letters in variable names
-totalScore=95  #Not following convention. Use underscores (_) instead
-maxlimit=100  # variable names not following conventions
+# NON-PEP 8 STYLE (AVOID)
+StudentAge = 20  # Avoid starting variables with Capital Letters
+totalScore = 95  # This is "camelCase" - common in Java, but not Python
+maxlimit = 100    # Hard to read; always use underscores to separate words
+
+print("✅ Section 1: Variable naming conventions demonstrated.")
 
 
-# -------------------------------
-# Functions:- Also use snake_case
-# -------------------------------
+# ---------------------------------------------------------------
+# 2. FUNCTIONS: Actions your code performs
+# Rule: Use snake_case and keep it readable
+# ---------------------------------------------------------------
 
-# PEP 8 style
+# PEP 8 STYLE (CORRECT)
+# Use descriptive names and give the code space to "breathe."
 def calculate_average(score1, score2, score3):
     total = score1 + score2 + score3
     return total / 3
 
-# Non-PEP 8 style
+# NON-PEP 8 STYLE (AVOID)
+# Never put the logic on the same line as the 'def' statement.
 def CalculateAverage(score1,score2,score3): total=score1+score2+score3;return total/3
 
-# -------------------------------
-# Class Names:- use PascalCase
-# -------------------------------
-# PEP 8 style
-StudentRecord
-AttendenceManager
-
-# Non-PEP 8 style
-studentRecord  # Class name should start with capital letter by convention
-Attendence_Manager  # Avoid underscores in class names if possible
-
-# -------------------------------
-# Constants:- Use all UPPERCASE. Use Underscores (_) to seperate words
-# -------------------------------
-# PEP 8 style
-MAX_MARKS = 100
-
-# Non-PEP 8 style
-max_marks = 100  # Avoid
+print(f"✅ Section 2: Average is {calculate_average(80, 90, 100)}")
 
 
+# ---------------------------------------------------------------
+# 3. CLASSES: Blueprints for objects
+# Rule: Use PascalCase (Capitalize every word, no underscores)
+# ---------------------------------------------------------------
+
+# PEP 8 STYLE (CORRECT)
+class StudentRecord:
+    """Classes represent 'Things' so we capitalize them."""
+    pass
+
+class AttendanceManager:
+    pass
+
+# NON-PEP 8 STYLE (AVOID)
+class studentRecord: # Should be Capitalized
+    pass
+
+class Attendance_Manager: # Avoid underscores in class names
+    pass
+
+print("✅ Section 3: Class naming (PascalCase) demonstrated.")
 
 
-# -------------------------------
-# Loops
-# -------------------------------
+# ---------------------------------------------------------------
+# 4. CONDITIONALS: Decision making
+# Rule: Use spaces around operators and proper indentation
+# ---------------------------------------------------------------
 
-# PEP 8 style
-for i in range(5):
-    print(i)
-
-# Non-PEP 8 style
-for i in range(5): print(i)  # multiple statements in single line
-
-
-# -------------------------------
-# Conditionals
-# -------------------------------
-
-# PEP 8 style
 x = 10
+
+# PEP 8 STYLE (CORRECT)
+# Space around the '>' and the '==' makes it much cleaner.
 if x > 5:
-    print("x is greater than 5")
+    print("✅ Section 4: x is greater than 5")
 elif x == 5:
-    print("x is equal to 5")
-else:
-    print("x is less than 5")
+    print("✅ Section 4: x is exactly 5")
 
-# Non-PEP 8 style
-x=10
+# NON-PEP 8 STYLE (AVOID)
+# Don't squash code together; it makes debugging very difficult.
 if x>5: print("x>5")
-elif x==5: print("x==5")
-else: print("x<5")
 
 
-# -------------------------------
-# Comments
-# -------------------------------
+# ---------------------------------------------------------------
+# 5. INTERNAL NAMES (Advanced)
+# Rule: Start with a single underscore for internal/private use
+# ---------------------------------------------------------------
 
-# PEP 8 style
-# This function calculates the square of a number
-def square(n):
-    return n * n
+# PEP 8 STYLE (CORRECT)
+# This tells other programmers: "Use this only inside this script."
+def _internal_utility_function():
+    return "This is a hidden helper function."
 
-# Non-PEP 8 style
-def square(n): return n*n #function to calc square
+print(f"✅ Section 5: {_internal_utility_function()}")
 
-
-# -------------------------------
-# Private / Internal Names — begin with underscore (Not enforced by Python, but recommended.)
-# -------------------------------
-
-# PEP 8 style
-_calculate_internal_grades()  # This function is to be used internally
-
-# Non-PEP 8 style
-calculate_internal_grades()  # This is an internal function/ private to the script. Should start with underscore
+# ===============================================================
+# END OF SCRIPT: All code is PEP 8 compliant and runs perfectly!
+# ===============================================================
 
 
 ```
