@@ -15,6 +15,7 @@ You can also visit my GitHub repository or the Google Colab notebooks by clickin
 - [3. Good Rules for Writing Identifiers in Python](#3-good-rules-for-writing-identifiers-in-python)
 - [4. What are PEP and PEP 8 in Python? (Simple Explanation)](#4-what-are-pep-and-pep-8-in-python-simple-explanation)
 - [5. Table: Identifiers vs Variables](#5-table-identifiers-vs-variables)
+- [Python Keywords — Meaning + Example in form of a Table ](#6-python-keywords--meaning--example-in-form-of-a-table-are-given-below)
 
 ### 1. Python Keywords — Meaning, Code Example, Real-Life Analogy
 The following table has 4 columns. 
