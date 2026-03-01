@@ -309,7 +309,7 @@ You can run the above script in Google Colab
 
 
 You can run the above script in Google Colab
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YOUR_GITHUB_USERNAME/001-Python-book-2026/blob/main/colab-nb/01Chapter1_pep.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ag999git/001-Python-book-2026/blob/main/colab-nb/01Chapter1_pep.ipynb)
 
 
 
