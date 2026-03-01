@@ -221,7 +221,7 @@ StudentAge = 20  # Avoid starting variables with Capital Letters
 totalScore = 95  # This is "camelCase" - common in Java, but not Python
 maxlimit = 100    # Hard to read; always use underscores to separate words
 
-print("✅ Section 1: Variable naming conventions demonstrated.")
+print("Section 1: Variable naming conventions demonstrated.")
 
 
 # ---------------------------------------------------------------
@@ -239,7 +239,7 @@ def calculate_average(score1, score2, score3):
 # Never put the logic on the same line as the 'def' statement.
 def CalculateAverage(score1,score2,score3): total=score1+score2+score3;return total/3
 
-print(f"✅ Section 2: Average is {calculate_average(80, 90, 100)}")
+print(f"Section 2: Average is {calculate_average(80, 90, 100)}")
 
 
 # ---------------------------------------------------------------
@@ -262,7 +262,7 @@ class studentRecord: # Should be Capitalized
 class Attendance_Manager: # Avoid underscores in class names
     pass
 
-print("✅ Section 3: Class naming (PascalCase) demonstrated.")
+print("Section 3: Class naming (PascalCase) demonstrated.")
 
 
 # ---------------------------------------------------------------
@@ -275,9 +275,9 @@ x = 10
 # PEP 8 STYLE (CORRECT)
 # Space around the '>' and the '==' makes it much cleaner.
 if x > 5:
-    print("✅ Section 4: x is greater than 5")
+    print("Section 4: x is greater than 5")
 elif x == 5:
-    print("✅ Section 4: x is exactly 5")
+    print("Section 4: x is exactly 5")
 
 # NON-PEP 8 STYLE (AVOID)
 # Don't squash code together; it makes debugging very difficult.
@@ -294,7 +294,7 @@ if x>5: print("x>5")
 def _internal_utility_function():
     return "This is a hidden helper function."
 
-print(f"✅ Section 5: {_internal_utility_function()}")
+print(f"Section 5: {_internal_utility_function()}")
 
 # ===============================================================
 # END OF SCRIPT: All code is PEP 8 compliant and runs perfectly!
