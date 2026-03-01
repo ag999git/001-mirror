@@ -1,8 +1,10 @@
 
 [![Open In Colab](https://img.shields.io/badge/Google_Colab-Try_Interactive_Code-FFD700?style=for-the-badge&logo=googlecolab&logoColor=white&labelColor=228B22)](https://colab.research.google.com/github/ag999git/001-Python-book-2026/blob/main/colab-nb/pep8_basics.ipynb)
 
+[![Open In Colab](https://img.shields.io/badge/Google_Colab-Try_Interactive_Code-FFD700?style=for-the-badge&logo=googlecolab&logoColor=white&labelColor=228B22)](https://colab.research.google.com/github/ag999git/001-Python-book-2026/blob/main/colab-nb/01Chapter1_pep.ipynb)
 
-https://colab.research.google.com/github/ag999git/001-Python-book-2026/blob/main/colab-nb/pep8_basics.ipynb 
+
+
 
 https://colab.research.google.com/github/ag999git/001-Python-book-2026/blob/main/colab-nb/01Chapter1_pep.ipynb
 
