@@ -395,6 +395,8 @@ You can run the above script in Google Colab (Same notebook from GitHub)
 
 
 
+![Flowchart for debugging a Python script in an IDE](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/Debugging-chart.png)
+
 
 
 [Back toTable of Contents](#table-of-contents)
