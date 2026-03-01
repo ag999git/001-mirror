@@ -392,11 +392,54 @@ You can run the above script in Google Colab (Same notebook from GitHub)
 
 ### 7. Debugging Python scripts on an IDE
 
-
+The following flowchart shows how to debug a Python script
 
 
 ![Flowchart for debugging a Python script in an IDE](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/Debugging-chart.png)
 
 
+
+#### Step-by-step explanation of the debug flowchart
+
+Below is a short, clear walk-through of each step in the above flowchart. It gives a typical cycle used when debugging in VS Code (or any debugger).
+
+1.  Start Debugging  
+    Begin the debugging session — open the code you want to inspect.
+2.  Open Code  
+    Make sure the file(s) you want to debug are visible in the editor and the correct project/folder is opened.
+3.  Set Breakpoints  
+    Click the left margin next to one or more lines to place breakpoints (red dots). These tell the debugger where to pause execution.
+4.  Run Debugger? (Decision)  
+    Choose to start the debugger. If not yet started, press F5 or click Run & Debug to launch it.
+5.  Debugger Starts  
+    The program begins running under the debugger’s control (a debug session is active).
+6.  Breakpoint Hit? (Decision)  
+    The debugger checks whether execution reaches a breakpoint:
+
+*   Yes → Inspect Variables (execution is paused)
+*   No → Continue Running (program runs until next breakpoint or end)
+
+8.  Inspect Variables  
+    While paused, examine variable values by hovering, looking at the _VARIABLES_ panel, or using the _WATCH_ panel. Also check the _CALL STACK_ to know where you are.
+9.  Continue Running  
+    If no breakpoint was hit, let the program continue running (it may hit another breakpoint later).
+10.  Bug Found? (Decision)  
+    After inspection, decide whether the cause of the problem is clear:
+
+*   Yes → Fix Code
+*   No → Add Breakpoints or Logs
+
+12.  Fix Code  
+    Edit the source to correct the bug (logic error, wrong value, off-by-one, etc.).
+13.  Test Fix  
+    Re-run the debugger (usually by starting again with F5 or using Restart) to verify the change.
+14.  Working? (Decision)  
+    Check whether the program now behaves correctly:
+
+*   Yes → End (debugging finished)
+*   No → Add Breakpoints or Logs (go back into the cycle)
+
+16.  Add Breakpoints or Logs  
+    If the bug is not yet identified, add more breakpoints or temporary print() / logging statements, then return to Run Debugger? to repeat the cycle.
 
 [Back toTable of Contents](#table-of-contents)
