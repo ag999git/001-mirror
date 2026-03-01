@@ -1,9 +1,7 @@
 
-[![VS Code](https://img.shields.io/badge/IDE-VS_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white&labelColor=2C2C32)](https://code.visualstudio.com/)
 
 
-
-| 📚 Source | 🚀 Run (Cloud) | 💻 Local IDE | 📓 Notebook |
+| Source | Run (Cloud) | Local IDE | Notebook |
 | :--- | :--- | :--- | :--- |
 | [![GitHub](https://img.shields.io/badge/GitHub-Repo-3776AB?style=for-the-badge&logo=github&logoColor=white&labelColor=555555)](https://github.com/ag999git/001-Python-book-2026) | [![Colab](https://img.shields.io/badge/Colab-Labs-FFD700?style=for-the-badge&logo=googlecolab&logoColor=white&labelColor=228B22)](https://github.com/ag999git/001-Python-book-2026/tree/main/colab-nb) | [![VS Code](https://img.shields.io/badge/IDE-VS_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white&labelColor=2C2C32)](https://code.visualstudio.com/) | [![Jupyter](https://img.shields.io/badge/Notebook-Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white&labelColor=333333)](https://jupyter.org/) |
 
