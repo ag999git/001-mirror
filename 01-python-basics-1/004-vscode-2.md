@@ -1,4 +1,6 @@
 
+[![VS Code](https://img.shields.io/badge/IDE-VS_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white&labelColor=2C2C32)](https://code.visualstudio.com/)
+
 
 
 
