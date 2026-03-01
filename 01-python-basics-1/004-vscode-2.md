@@ -1,5 +1,7 @@
 
 
+The table below provides direct access to our course resources: (1) The full repository on GitHub, (2) Interactive labs via Google Colab, (3) VS Code for local development, and (4) Jupyter Notebooks for local server-based execution.
+
 
 | Source | Run (Cloud) | Local IDE | Notebook |
 | :--- | :--- | :--- | :--- |
