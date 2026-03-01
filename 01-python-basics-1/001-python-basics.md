@@ -1,5 +1,5 @@
 You can also visit my GitHub repository by clicking the badge below
-[![Go to GitHub](https://img.shields.io/badge/Google_Colab-Try_it_Interactive-FFD700?style=for-the-badge&logo=googlecolab&logoColor=white&labelColor=228B22)](https://github.com/ag999git/001-Python-book-2026/tree/main)
+[![Go to GitHub](https://img.shields.io/badge/Go_to_my_GitHub_Repo-FFD700?style=for-the-badge&logo=googlecolab&logoColor=white&labelColor=228B22)](https://github.com/ag999git/001-Python-book-2026/tree/main)
 
 ![Python Basics](https://img.shields.io/badge/Python_Basics-3776AB?style=for-the-badge&logo=python&logoColor=white)
 
