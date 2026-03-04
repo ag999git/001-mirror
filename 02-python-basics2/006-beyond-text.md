@@ -94,12 +94,12 @@
 
 | Command | What it does |
 | --- | --- |
-| uv init | Creates a new Python project folder with a pyproject.toml. |
-| uv add <package> | Installs a package AND adds it to your project file automatically. |
-| uv remove <package> | Uninstalls a package and cleans up your project file. |
-| uv run <script.py> | Runs your code in the correct virtual environment (no need to "activate" anything!). |
-| uv python install 3.12 | Downloads and installs a specific version of Python itself. |
-| uv pip install -r req.txt | A "compatibility mode" that works exactly like the old pip command. |
+| `uv init` | Creates a new Python project folder with a pyproject.toml. |
+| `uv add <package>` | Installs a package AND adds it to your project file automatically. |
+| `uv remove <package>` | Uninstalls a package and cleans up your project file. |
+| `uv run <script.py>` | Runs your code in the correct virtual environment (no need to "activate" anything!). |
+| `uv python install 3.12` | Downloads and installs a specific version of Python itself. |
+| `uv pip install -r req.txt` | A "compatibility mode" that works exactly like the old pip command. |
 
 * * *
 
