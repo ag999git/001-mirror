@@ -20,5 +20,6 @@
 * [Complex Numbers Basics](02-python-basics2/003-ch2-complex-numbers-basics.md)
 * [Complex Numbers Advanced](02-python-basics2/004-ch2-complex-numbers-advanced.md)
 * [Book End Q&A](02-python-basics2/005-ch2-book-end-qa.md)
+* [Beyond Text (pip and uv)](02-python-basics2/006-beyond-text.md)
 
 
