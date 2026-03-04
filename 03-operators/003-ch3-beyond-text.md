@@ -39,6 +39,46 @@ print("Result of M @ v:\n", result)  # Should output the product of M and v
 
 ```
 
+#### 2. There are also set operators in Python. Python supports the following set operators:- (1) |   union (2) &   intersection (3) -   difference (4) ^   symmetric difference. Study these set operators in Python
+
+```python
+
+"""
+Set Operators
+Sets support:
+
+|   union
+&   intersection
+-   difference
+^   symmetric difference
+
+"""
+
+# Example 1: Union
+set_a = {1, 2, 3}
+set_b = {3, 4, 5}
+union_set = set_a | set_b
+print("Union:", union_set)  # Output: {1, 2, 3, 4, 5}
+
+# Example 2: Intersection
+intersection_set = set_a & set_b
+print("Intersection:", intersection_set)  # Output: {3}
+
+# Example 3: Difference
+difference_set = set_a - set_b  
+print("Difference (A - B):", difference_set)  # Output: {1, 2}
+
+# Example 4: Symmetric Difference   
+symmetric_diff_set = set_a ^ set_b
+print("Symmetric Difference:", symmetric_diff_set)  # Output: {1, 2, 4, 5}
+
+
+```
+
+
+
+
+
 
 
 
