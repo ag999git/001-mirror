@@ -2,9 +2,9 @@
 
 
 #### 1\. Matrix Multiplication Operator (@) 
-Operator (@) was introduced in Python 3.5 and later. It is useful for matrix and vector multiplications especially in NumPy. Study Matrix Multiplication Operator (@)
+Operator (@) was introduced in Python 3.5 and later. It is useful for matrix and vector multiplications especially in NumPy. Study Matrix Multiplication Operator (`@`)
 
-The following script explains how Matrix Multiplication Operator (@) works
+The following script explains how Matrix Multiplication Operator (`@`) works
 
 ```python
 
@@ -36,9 +36,6 @@ result = M @ v  # Matrix multiplication of M and v
 print("Matrix M:\n", M)
 print("Vector v:\n", v) 
 print("Result of M @ v:\n", result)  # Should output the product of M and v
-
-
-
 
 ```
 
