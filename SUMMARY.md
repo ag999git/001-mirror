@@ -21,6 +21,7 @@
 * [Complex Numbers Advanced](02-python-basics2/004-ch2-complex-numbers-advanced.md)
 * [Book End Q&A](02-python-basics2/005-ch2-book-end-qa.md)
 * [Beyond Text (pip and uv)](02-python-basics2/006-beyond-text.md)
+* [Google Colab NB (Chapter 2)](02-python-basics2/colab-link.md)
 * [Chapter 2 Google Colab NB](colab-nb/chapter2-basics-part2.ipynb)
 * [Chapter 2 Google Colab NB](001-Python-book-2026/02_Chapter2.ipynb)
 
