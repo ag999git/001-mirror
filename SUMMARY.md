@@ -23,4 +23,9 @@
 * [Beyond Text (pip and uv)](02-python-basics2/006-beyond-text.md)
 * [Google Colab NB (Chapter 2)](02-python-basics2/colab-link.md)
 
+## Chapter 3: Operators in Python
+* [Introduction to Chapter 3](03-operators/README.md)
+* [Question-Answers Chapter 3](03-operators/001-ch3-qa.md)
+* [Beyond Text Chapter 3](03-operators/003-ch3-beyond-text.md)
+
 
