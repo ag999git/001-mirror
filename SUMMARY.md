@@ -27,6 +27,6 @@
 * [Introduction to Chapter 3](03-operators/README.md)
 * [Question-Answers Chapter 3](03-operators/001-ch3-qa.md)
 * [Beyond Text Chapter 3](03-operators/003-ch3-beyond-text.md)
-* [Google Colab NB (Chapter 3)](02-python-basics2/004-colabnb.md)
+* [Google Colab NB Chapter 3](03-operators/004-Ch3-colabnb.md)
 
 
