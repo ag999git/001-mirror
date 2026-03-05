@@ -76,7 +76,47 @@ Advanced functions used in specialized engineering and statistics.
 | math.erf(x) | Single number $x$ | Gaussian Error Function | math.erf(0) $\to$ 0.0 |
 
 
+### Some problems on math module
 
+#### 1. Calculate the Hypotenuse of a right triangle.Formula: 
+ $c = \sqrt{a^2 + b^2}$   
+
+where a and b are the lengths of the two legs of the triangle, and c is the length of the hypotenuse. 
+
+```python
+
+import math
+# Function to calculate the hypotenuse
+def calculate_hypotenuse(a, b):
+    hypotenuse = math.sqrt(a**2 + b**2)
+    return hypotenuse   
+# Example usage
+leg_a = 3   
+leg_b = 4
+hypotenuse_length = calculate_hypotenuse(leg_a, leg_b)
+print(f"The length of the hypotenuse is: {hypotenuse_length}")
+
+
+```
+
+#### 2. Find the area of a circle.Formula: $Area = \pi \times r^2$
+
+
+```python
+
+
+import math
+# Given radius
+radius = 5
+# Calculate area using the formula
+area = math.pi * radius ** 2
+print("Area of the circle with radius", radius, "is:", area)  # Output: Area of the circle with radius 5 is: 78.53981633974483
+# We use math.pi for a more accurate value of π and ** for exponentiation to calculate r^2.
+
+
+```
+
+  
 
 
 
