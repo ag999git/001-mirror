@@ -113,10 +113,28 @@ area = math.pi * radius ** 2
 print("Area of the circle with radius", radius, "is:", area)  # Output: Area of the circle with radius 5 is: 78.53981633974483
 # We use math.pi for a more accurate value of π and ** for exponentiation to calculate r^2.
 
-
 ```
 
   
+
+
+  
+
+  
+
+### Modern Alternatives to math
+
+While `math` is great for single numbers, modern Python uses these for more power:
+
+1.  **NumPy:** The "Gold Standard" for modern data science. It does everything `math` does but can handle entire lists (arrays) of numbers at once.
+    
+2.  **SciPy:** Built on top of NumPy, used for complex scientific engineering (calculus, signal processing).
+    
+3.  **SymPy:** Used for "Symbolic Math." Instead of giving you `0.333`, it can keep the result as a fraction ($1/3$).
+    
+4.  **Decimal Module:** Used in financial applications where you need exact decimal precision (to avoid the `0.1 + 0.2` error).
+
+
 
 
 
