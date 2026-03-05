@@ -1,5 +1,5 @@
 ---
-description: Python Book by Anurag Gupta
+description: Python tutorial by Anurag Gupta for the book python999. Access the GitHub code, interactive GitBook chapters, and ready-to-run Google Colab NB.
 ---
 
 
