@@ -30,3 +30,16 @@
 * [Google Colab NB Chapter 3](03-operators/004-Ch3-colabnb.md)
 
 
+
+
+
+
+## Chapter 5: Functions Part 1
+* [Introduction to Chapter 5](05-functions1/README.md)
+* [Chapter 5 Google Colab](05-functions1/000-ch5-colab.md)
+* [Math module in details](05-functions1/README.md)
+* [Chapter End Q & A](05-functions1/003-ch5-functions-qa.md)
+
+
+
+
