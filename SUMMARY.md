@@ -31,10 +31,10 @@
 
 
 ## Chapter 4: Flow Control
-* [Introduction to Chapter 3](04-flow-control/README.md)
-* [Introduction to Chapter 3](04-flow-control/00-ch4-colan-nb.md)
-* [Introduction to Chapter 3](04-flow-control/03-flow-control-ch4-qa.md)
-* [Introduction to Chapter 3](04-flow-control/04-ch4-flow-control-beyond-text.md)
+* [Introduction to Chapter 4](04-flow-control/README.md)
+* [Chapter 4 Google Colab NB](04-flow-control/00-ch4-colan-nb.md)
+* [Chapter 4 Book End Q&A](04-flow-control/03-flow-control-ch4-qa.md)
+* [Chapter 4 Beyond Text Solution](04-flow-control/04-ch4-flow-control-beyond-text.md)
 
 
 
