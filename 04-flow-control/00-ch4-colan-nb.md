@@ -2,7 +2,7 @@
 
 
 
-# Chapter 4 Flow Xontrol (Interactive Notebook)
+# Chapter 4 Flow Control (Interactive Notebook)
 
 Click the button below to open the interactive exercises for this chapter in Google Colab.
 
