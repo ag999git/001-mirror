@@ -1,7 +1,69 @@
 
 
 
-### This is the solution to the Beyond Text problem given In Chapter 4 Flow Control
+
+  #### 1. This is solution to the "Beyond Text" problem of:- How dead code manifests in different scenarios?
+
+
+The following table gives comparison of Unreachable Code Types
+  
+
+| Type | Mechanism | Common Cause | How to Fix |
+| --- | --- | --- | --- |
+| Post-Return | The return statement exits a function immediately. | Placing cleanup code or logging after the return. | Move the code before the return or use a finally block if in a try statement. |
+| Post-Break | The break statement exits a loop immediately. | Writing code at the bottom of a loop body after a break condition is met. | Ensure the break is the final action in its conditional branch. |
+| Logical Gap | An if or else condition that can never be met (e.g., if False:). | Hard-coded flags or conflicting logic (e.g., if x > 5 and x < 2:). | Review the boolean logic or remove the block if the feature is no longer needed. |
+| Post-Raise | An exception is raised, stopping the current execution flow. | Writing code after a raise statement without a try/except handler. | Ensure error handling is in place or move logic before the error is triggered. |
+
+
+The following script shows how dead code might enter into your script:-
+
+
+```python
+
+# --- EXAMPLE 1: DEAD CODE AFTER RETURN ---
+def check_weather(is_sunny):
+    if is_sunny:
+        return "Wear sunglasses!"  # The function exits here if it's sunny, so the line below is DEAD CODE.
+        # The line below is DEAD CODE. 
+        # Python exits the function the moment it hits 'return'.
+        print("This message is invisible.") # VS Code will often gray out this line to indicate it's unreachable code.
+    
+    return "Stay inside."
+
+# --- EXAMPLE 2: DEAD CODE AFTER BREAK ---
+def find_treasure(items):
+    for item in items:
+        if item == "Gold":  # When we find "Gold", we want to stop searching, so we use 'break'.
+            print("Found the Gold!")
+            break
+            # The line below is DEAD CODE.
+            # 'break' jumps completely out of the loop immediately.
+            print("I am trapped behind the break statement.") # VS Code will often gray out this line to indicate it's unreachable code.
+        print(f"Checking: {item}")
+
+# --- FUNCTION CALLS (Executing the code) ---
+
+print("--- Weather Test ---")
+# Call the function and store the result
+result = check_weather(True) 
+print(result) # This prints "Wear sunglasses!"
+
+print("\n--- Treasure Test ---")
+# Call the function with a list of items
+bag_of_items = ["Stone", "Stick", "Gold", "Silver"]
+find_treasure(bag_of_items)
+# Notice that "Silver" is never checked because the loop broke at "Gold"!
+
+
+
+
+```
+
+
+
+
+### 2. This is the solution to the Beyond Text problem given In Chapter 4 Flow Control
 
 In Python, we often use for loops to go through lists or strings. But have you ever wondered how the for loop actually "talks" to the list? It uses the **Iterator Protocol**.
 
