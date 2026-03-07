@@ -30,6 +30,11 @@
 * [Google Colab NB Chapter 3](03-operators/004-Ch3-colabnb.md)
 
 
+## Chapter 4: Flow Control
+* [Introduction to Chapter 3](04-flow-control/README.md)
+* [Introduction to Chapter 3](04-flow-control/00-ch4-colan-nb.md)
+* [Introduction to Chapter 3](04-flow-control/03-flow-control-ch4-qa.md)
+* [Introduction to Chapter 3](04-flow-control/04-ch4-flow-control-beyond-text.md)
 
 
 
