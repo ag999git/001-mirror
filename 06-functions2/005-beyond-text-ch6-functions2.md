@@ -126,3 +126,206 @@ Later library version adds new parameter:
 `plt.plot(x,y,alpha=0.7)`
 
 Old programs still work because the new parameters are **optional keyword arguments stored in `**kwargs`**.
+
+
+
+
+
+### Task 2 — Documentation Investigation
+
+Visit the official Matplotlib documentation for:
+
+	matplotlib.pyplot.plot()	
+
+Find and list **five keyword arguments** that can be passed to the function.
+
+Example format:
+
+  
+
+  
+
+| Keyword Argument | Purpose |
+| --- | --- |
+| color | Sets line color |
+| linewidth | Sets thickness |
+| marker | Controls point markers |
+| linestyle | Controls line style |
+| label | Text for legend |
+
+#### Mosdel solution Task 2 — Documentation Investigation
+
+Example keyword arguments for `matplotlib.pyplot.plot()`:
+
+  
+
+  
+
+| Keyword Argument | Purpose |
+| --- | --- |
+| color | Sets the color of the line |
+| linewidth | Controls thickness of the line |
+| marker | Specifies the marker symbol |
+| linestyle | Defines the pattern of the line |
+| label | Provides a label used in the legend |
+| alpha | Controls transparency |
+| markersize | Size of markers |
+| markerfacecolor | Color inside markers |
+
+Example usage:
+
+plt.plot(x, y, color="red", linewidth=2, marker="o")
+
+----------
+### Task 3 — Programming Experiment
+
+Write a Python program that calls `plot()` in **three different ways**:
+
+1.  Using only **mandatory arguments**
+    
+2.  Using **`*args` formatting string**
+    
+3.  Using **`**kwargs` options**
+    
+
+Example template:
+
+```python
+
+import  matplotlib.pyplot  as  plt  
+  
+x  = [1,2,3,4]  
+y  = [1,4,9,16]  
+  
+# Case 1: Mandatory arguments only  
+plt.plot(x,y)  
+  
+# Case 2: Using *args formatting  
+plt.plot(x,y,"ro--")  
+  
+# Case 3: Using **kwargs  
+plt.plot(x,y,color="green",linewidth=3)  
+  
+plt.show()
+```
+
+Explain how each version changes the appearance of the plot.
+#### Model solution Task 3 — Programming Experiment
+
+Example script:
+
+```python
+
+import  matplotlib.pyplot  as  plt  
+  
+x  = [1,2,3,4]  
+y  = [1,4,9,16]  
+  
+# Case 1: Mandatory arguments only  
+plt.plot(x, y)  
+  
+# Case 2: Using *args formatting string  
+plt.plot(x, y, "ro--")  
+
+# Case 3: Using **kwargs  
+plt.plot(x, y, color="green", linewidth=3)  
+  
+plt.show()
+```
+
+##### Explanation
+
+  
+
+  
+
+| Case | Code | Result |
+| --- | --- | --- |
+| 1 | plt.plot(x,y) | Default blue line |
+| 2 | plt.plot(x,y,"ro--") | Red dashed line with circle markers |
+| 3 | plt.plot(x,y,color="green",linewidth=3) | Thick green line |
+
+Observations:
+
+-   `*args` provides **short style formatting**
+    
+-   `**kwargs` provides **detailed customization**
+    
+
+----------
+### Task 4 — API Design Thinking
+
+Suppose you are designing a library function for plotting data.
+
+You could define the function in two ways.
+
+##### Version A (Rigid)
+
+`def  plot(x, y, color="blue", linewidth=1, marker=None,  
+  linestyle="-", label=None, grid=False):`
+
+##### Version B (Flexible)
+
+`def  plot(x, y, *args, **kwargs):`
+
+##### Question
+
+Explain why **Version B is often preferred in large libraries**.
+
+Discuss the following:
+
+-   flexibility
+    
+-   future extension
+    
+-   backward compatibility
+    
+-   readability of documentation
+
+
+
+
+#### Model Solution Task 4 — API Design Thinking
+
+Two possible designs:
+
+##### Version A (Rigid)
+
+
+```python
+
+def  plot(x, y, color="blue", linewidth=1, marker=None,  
+  linestyle="-", label=None, grid=False):
+
+```
+
+##### Version B (Flexible)
+
+`def  plot(x, y, *args, **kwargs):`
+
+----------
+
+##### Why Version B is preferred in large libraries
+
+  
+
+  
+
+| Feature | Version A | Version B |
+| --- | --- | --- |
+| Flexibility | Limited | Very high |
+| Future extension | Difficult | Easy |
+| Backward compatibility | Harder | Easier |
+| Parameter count | Fixed | Unlimited |
+
+
+
+
+
+
+
+
+
+
+
+
