@@ -153,7 +153,7 @@ Example format:
 | linestyle | Controls line style |
 | label | Text for legend |
 
-#### Mosdel solution Task 2 — Documentation Investigation
+#### Model solution Task 2 — Documentation Investigation
 
 Example keyword arguments for `matplotlib.pyplot.plot()`:
 
