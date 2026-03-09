@@ -140,7 +140,8 @@ Old programs still work because the new parameters are **optional keyword argume
 
 Visit the official Matplotlib documentation for:
 
-	`matplotlib.pyplot.plot()`	
+
+`matplotlib.pyplot.plot()`	
 
 You can access Matplotlib documentation [here](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html)
 
