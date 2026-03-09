@@ -21,13 +21,15 @@ Your explanation should address the following points:
 
 ### Model Answers Task 1 — Investigate a Real Python Library Function
 
+You can access Matplotlib documentation [here](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html)
+
 Function signature (simplified):
 
 `plot(x, y, *args, **kwargs)`
 
-#### 1. Mandatory arguments
+#### A. Mandatory arguments of the function
 
-The **mandatory arguments** are:
+The **mandatory arguments** of the function are:
 
 -   `x` → list/array of x-coordinates
     
@@ -38,11 +40,11 @@ Example:
 
 `plt.plot(x, y)`
 
-These specify the **data points that must be plotted**.
+These specify the **data points that must be plotted**. If you dont provide the data points, then obviously, the points cannot be plotted
 
 ----------
 
-#### 2. What can be passed using `*args`
+#### B. What can be passed using `*args`
 
 `*args` allows additional **positional arguments**.
 
@@ -71,7 +73,9 @@ Meaning:
 
 So `*args` allows **compact style specifications**.
 
-#### 3. What can be passed using `**kwargs`
+But providing *args is optional. If you dont provide any *args, then the library will use the default values
+
+#### C. What can be passed using `**kwargs`
 
 `**kwargs` allows **keyword arguments** for many optional settings.
 
@@ -95,7 +99,7 @@ These options make the plot **highly customizable**.
 
 ----------
 
-#### 4. Why this design helps when libraries add new features
+#### D. Why this design helps when libraries add new features
 
 If a library developer adds a new option such as:
 
@@ -113,7 +117,7 @@ Thus `**kwargs` allows **future extension of the library**.
 
 ----------
 
-#### 5. How this helps backward compatibility
+#### E. How this helps backward compatibility
 
 Backward compatibility means **old programs continue to run after library updates**.
 
