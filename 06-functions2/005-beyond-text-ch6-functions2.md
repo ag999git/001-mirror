@@ -19,7 +19,7 @@ Your explanation should address the following points:
 5.  How does this design help **old programs continue to run without modification**?
 
 
-### Model Answers Task 1 — Investigate a Real Python Library Function
+#### Model Answers Task 1 — Investigate a Real Python Library Function
 
 You can access Matplotlib documentation [here](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html)
 
@@ -137,17 +137,18 @@ Old programs still work because the new parameters are **optional keyword argume
 
 ### Task 2 — Documentation Investigation
 
+
 Visit the official Matplotlib documentation for:
 
-	matplotlib.pyplot.plot()	
+	`matplotlib.pyplot.plot()`	
+
+You can access Matplotlib documentation [here](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html)
 
 Find and list **five keyword arguments** that can be passed to the function.
 
 Example format:
 
-  
 
-  
 
 | Keyword Argument | Purpose |
 | --- | --- |
@@ -161,9 +162,6 @@ Example format:
 
 Example keyword arguments for `matplotlib.pyplot.plot()`:
 
-  
-
-  
 
 | Keyword Argument | Purpose |
 | --- | --- |
@@ -178,7 +176,7 @@ Example keyword arguments for `matplotlib.pyplot.plot()`:
 
 Example usage:
 
-plt.plot(x, y, color="red", linewidth=2, marker="o")
+`plt.plot(x, y, color="red", linewidth=2, marker="o")`
 
 ----------
 ### Task 3 — Programming Experiment
@@ -239,10 +237,6 @@ plt.show()
 
 ##### Explanation
 
-  
-
-  
-
 | Case | Code | Result |
 | --- | --- | --- |
 | 1 | plt.plot(x,y) | Default blue line |
@@ -274,7 +268,7 @@ You could define the function in two ways.
 
 ##### Question
 
-Explain why **Version B is often preferred in large libraries**.
+Explain why **Version B is often preferred in large libraries** ?.
 
 Discuss the following:
 
