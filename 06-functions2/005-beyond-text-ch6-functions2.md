@@ -4,7 +4,7 @@
 
 The plotting function in **Matplotlib** has the following simplified form:
 
-plot(x, y, *args, **kwargs)
+`plot(x, y, *args, **kwargs)`
 
 #### Research Question
 
