@@ -254,6 +254,66 @@ print(list(integers))  # [10, 20, 30]
 ```
 
 
+# 4. `filter()` Function
+
+### Concept
+
+The `filter()` function selects elements from an iterable based on a **Boolean condition**.
+
+The filtering function must return **True or False**.
+
+----------
+
+#### Syntax
+
+`filter(function, iterable)`
+
+----------
+
+#### Key Properties
+
+  
+
+| Feature | Description |
+| --- | --- |
+| Input | function returning Boolean |
+| Output | filter iterator |
+| Purpose | selection of elements |
+
+#### Script Demonstrating `filter()`
+
+```python
+
+# Demonstration of filter() function
+
+# 1: Filtering even numbers
+numbers = list(range(10))
+even_numbers = filter(lambda x: x % 2 == 0, numbers)
+print(list(even_numbers))  # [0, 2, 4, 6, 8]
+
+# 2: Filtering positive numbers
+data = [-5, -2, 0, 3, 7, -1]
+positive_numbers = filter(lambda x: x > 0, data)
+print(list(positive_numbers))  # [3, 7]
+
+# 3: Filtering strings longer than 3 characters
+words = ["cat", "elephant", "dog", "tiger"]
+long_words = filter(lambda x: len(x) > 3, words)
+print(list(long_words))  # ['elephant', 'tiger']
+
+# 4: Using filter with normal function
+def is_odd(n):
+    return n % 2 != 0
+
+numbers = list(range(10))
+odd_numbers = filter(is_odd, numbers)
+print(list(odd_numbers))  # [1, 3, 5, 7, 9]
+
+
+```
+
+
+
 
 
 
