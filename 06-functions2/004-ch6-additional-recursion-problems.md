@@ -95,17 +95,11 @@ The recursive calls proceed as follows:
   
 
 | Step | Function Call |
-| --- | --- |
 | 1 | is_even_recursive(7) |
-| --- | --- |
 | 2 | is_even_recursive(5) |
-| --- | --- |
 | 3 | is_even_recursive(3) |
-| --- | --- |
 | 4 | is_even_recursive(1) |
-| --- | --- |
 | 5 | Base case reached → return False |
-| --- | --- |
 
 
 
