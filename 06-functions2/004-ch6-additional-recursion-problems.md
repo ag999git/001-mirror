@@ -121,6 +121,37 @@ Base case → return False
 
 ```
 
+##### Why This Method Is Not Efficient
+
+Although recursion works here, it is not efficient for large numbers.
+
+Example:
+
+`is_even_recursive(1,000,000)`
+
+This would require 500,000 recursive calls.
+
+The efficient method is:
+
+`n % 2 == 0`
+
+which completes in one step.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
