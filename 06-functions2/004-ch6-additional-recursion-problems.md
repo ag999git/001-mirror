@@ -1,3 +1,5 @@
+### Additional Problems on recursion
+
 
 
 #### Recursive function to find a number is even or not. (Not very efficient)
@@ -91,20 +93,33 @@ print("100 is even?  ", is_even_recursive(100))   # True  (even)
 
 The recursive calls proceed as follows:
 
-
   
 
 | Step | Function Call |
+| --- | --- |
 | 1 | is_even_recursive(7) |
 | 2 | is_even_recursive(5) |
 | 3 | is_even_recursive(3) |
 | 4 | is_even_recursive(1) |
 | 5 | Base case reached → return False |
+  
 
 
+##### Visual Representation of the Recursion
 
+```python
 
+is_even_recursive(7)
+      ↓
+is_even_recursive(5)
+      ↓
+is_even_recursive(3)
+      ↓
+is_even_recursive(1)
+      ↓
+Base case → return False
 
+```
 
 
 
