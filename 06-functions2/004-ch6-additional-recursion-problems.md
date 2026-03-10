@@ -374,8 +374,305 @@ Move 31 = final solved state
 | 31 | 1 | A→C | [] | [] | [5,4,3,2,1] |
 
   
+Given below is the script which implements the Tower of Hanoi problem
+
+```python
+
+# Tower of Hanoi using three lists representing towers A, B, C. Each list acts
+# like a stack. In the list leftmost item is at bottom (Biggest) and rightmost 
+# is at top (Smallest). The script also counts and displays move numbers.
+
+def print_towers(towers):
+    """Display the current state of all three towers."""
+    print(f"A: {towers['A']}   B: {towers['B']}   C: {towers['C']}")
+    print("-" * 40)
+
+def move_disk(towers, source, target, move_counter):
+    # Move top disk from one tower to another also increment the move counter
+
+    disk = towers[source].pop()     # Remove top disk from source
+    towers[target].append(disk)     # Place disk on target
+
+    move_counter[0] += 1            # Increment move count
+
+    print(f"Move {move_counter[0]}: disk from {source} → {target}")
+    print_towers(towers)
+
+def hanoi_recursive(n, source, target, auxiliary, towers, move_counter):
+    """
+    Recursive solution to Tower of Hanoi.
+
+    n         -> number of disks
+    source    -> source tower (A/B/C)
+    target    -> target tower (A/B/C)
+    auxiliary -> auxiliary tower (A/B/C)
+    towers    -> dictionary storing the towers
+    move_counter -> list used to track number of moves
+    """
+
+    # -------- Base Case --------
+    if n == 1:
+        move_disk(towers, source, target, move_counter)
+        return
+
+    # -------- Recursive Case --------
+
+    # Step 1: Move n-1 disks from source → auxiliary
+    hanoi_recursive(n - 1, source, auxiliary, target, towers, move_counter)
+
+    # Step 2: Move largest disk from source → target
+    move_disk(towers, source, target, move_counter)
+
+    # Step 3: Move n-1 disks from auxiliary → target
+    hanoi_recursive(n - 1, auxiliary, target, source, towers, move_counter)
+
+# INITIAL SETUP
+
+num_disks = 3
+
+# Towers represented as a dictionary. Create initial state for tower A with 
+# disks from largest on left to smallest on right.
+initial_state_A = list(range(num_disks, 0, -1)) 
+# Initialize towers with initial_state_A for tower A. Empty lists for B & C
+towers = {"A": initial_state_A, "B": [], "C": []}
+
+# Move counter stored in a list so recursion can update it
+move_counter = [0]
+
+print("Initial State")
+print_towers(towers)
+
+# Solve the puzzle
+hanoi_recursive(num_disks, "A", "C", "B", towers, move_counter)
+
+# Display total moves
+print(f"Total moves required: {move_counter[0]}")
+
+```
 
 
+##### Representation of Towers
+
+The towers are represented using Python lists.
+
+```python
+
+Example initial state for 3 disks:
+A: [3, 2, 1]
+B: []
+C: []
+
+```
+
+Important conventions used in the script:
+
+  
+
+| List Position | Meaning |
+| --- | --- |
+| Left side | Bottom of tower |
+| Right side | Top of tower |
+
+Thus:
+
+```python
+
+[3, 2, 1]
+
+means
+
+3 (largest disk at bottom)
+2
+1 (smallest disk at top)
+2. The towers Dictionary
+
+```
+
+The three towers are stored in a dictionary:
+
+`towers = {"A": initial_state_A, "B": [], "C": []}`
+
+This allows us to refer to towers by name:
+```python
+
+towers["A"]
+towers["B"]
+towers["C"]
+
+Example state:
+
+A: [3]
+B: [2]
+C: [1]
+
+```
+
+
+##### 3. The print_towers() Function
+
+Purpose: Displays the current configuration of the towers.
+
+Function definition:
+`def print_towers(towers):`
+
+Example output:
+
+```python
+
+A: [3, 2]
+B: []
+C: [1]
+
+```
+
+
+----------------------------------------
+
+This function helps the reader visualize how disks move after each step.
+
+##### 4. The move_disk() Function
+
+Purpose: Moves one disk from a source tower to a target tower.
+
+Function definition:
+`move_disk(towers, source, target, move_counter)`
+
+Parameters:
+
+  
+
+| Parameter | Meaning |
+| --- | --- |
+| towers | dictionary containing the three towers |
+| source | tower from which disk is removed |
+| target | tower to which disk is moved |
+| move_counter | counts the number of moves |
+
+
+##### Key operations:
+
+###### A. Remove top disk
+`disk = towers[source].pop()  # Remove top disk`
+
+Since lists behave like stacks, `.pop()` removes the top disk.
+
+Place disk on target tower
+`towers[target].append(disk)  #Place disk on target tower`
+Increment move counter
+`move_counter[0] += 1`
+Display move
+
+Example output:
+
+Move 3: disk from A → C
+A: [3]
+B: [2]
+C: [1]
+
+
+
+##### 5. The move_counter Variable
+`move_counter = [0]`
+
+Why a list instead of a normal integer? Because lists are mutable objects in Python.
+
+When recursion calls functions repeatedly, the list allows all recursive calls to update the same counter.
+
+Thus every move increases the same shared counter.
+
+###### 6. The `hanoi_recursive()` Function
+
+This is the core algorithm.
+
+Function definition:
+
+`hanoi_recursive(n, source, target, auxiliary, towers, move_counter)`
+
+Parameters:
+  
+
+| Parameter | Meaning |
+| --- | --- |
+| n | number of disks to move |
+| --- | --- |
+| source | tower where disks start |
+| --- | --- |
+| target | tower where disks must go |
+| --- | --- |
+| auxiliary | temporary tower used during movement |
+| --- | --- |
+| towers | dictionary storing towers |
+| --- | --- |
+| move_counter | counts moves |
+| --- | --- |
+
+
+###### 7. The Base Case
+
+```python
+
+if n == 1:
+    move_disk(...)
+```
+
+If only one disk remains, simply move it directly from source to target.
+
+Example:
+
+A → C
+
+This stops the recursion.
+
+###### 8. The Recursive Case
+
+When more than one disk exists, the algorithm performs three steps.
+
+**Step 1**
+
+Move n−1 disks from source → auxiliary
+
+`hanoi_recursive(n-1, source, auxiliary, target)`
+
+Example:
+
+Move disks 1 and 2 from A → B
+**Step 2**
+
+Move the largest disk from source → target
+
+`move_disk(...)`
+
+Example:
+
+Move disk 3 from A → C
+**Step 3**
+
+Move the n−1 disks from auxiliary → target
+
+`hanoi_recursive(n-1, auxiliary, target, source)`
+
+Example:
+
+Move disks 1 and 2 from B → C
+
+###### Overall Flow of the Program
+
+```python
+
+Initial state printed
+        ↓
+hanoi_recursive called
+        ↓
+Recursive breakdown of problem
+        ↓
+Each move performed using move_disk()
+        ↓
+Towers printed after each move
+        ↓
+Final state reached
+        ↓
+Total moves displayed
+```
 
 
 
