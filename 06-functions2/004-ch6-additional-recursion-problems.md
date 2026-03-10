@@ -285,8 +285,30 @@ print(f"Fibonacci(10) → {fibonacci_recursive(10)}")  # 55
 
 ```
 
+The following diagram shows the flow of execution 
+
+Below is a diagram that illustrates Euclid’s Algorithm for computing GCD using recursion.
+
+The diagram shows the execution for: $gcd(48,18)$ . It has numbered blocks so students can follow the algorithm step-by-step.
 
 
+![GCD](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch-6-functions2-gcd-recursion.png)
+
+
+The following table explains each block in the flow chart:-
+
+  
+
+  
+
+| Block No. | Block Description | What Happens in This Step | Example |
+| --- | --- | --- | --- |
+| 1 | Start | Begin the algorithm with two numbers a and b whose GCD we want to find. | gcd(48, 18) |
+| 2 | Check if b = 0 | This is the base condition. If b = 0, the algorithm stops. | Check if 18 = 0 |
+| 3 | Compute remainder | Calculate the remainder when a is divided by b using the modulo operator %. | 48 % 18 = 12 |
+| 4 | Recursive call | Replace a with b and b with the remainder and call the function again. | gcd(18, 12) |
+| 5 | Repeat process | Continue repeating the same steps until b becomes 0. | gcd(12, 6) → gcd(6, 0) |
+| 6 | Return result | When b = 0, the value of a is the GCD. | gcd(6, 0) = 6 |
 
 
 ### 4. Recursive function to find a number is even or not. (Not very efficient)
