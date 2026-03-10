@@ -86,6 +86,125 @@ for base, exponent in test_cases:
 ```
 
 
+### 2. Using Recursion to Check Whether a String Is a Palindrome
+
+A palindrome is a word, phrase, or sequence of characters that reads the same forward and backward.
+
+Examples:
+```python
+madam
+level
+racecar
+
+```
+
+Each of these strings remains the same when the characters are reversed.
+
+Idea Behind the Recursive Solution
+
+A string is a palindrome if:
+
+The first character and last character are the same.
+
+The remaining middle portion of the string is also a palindrome.
+
+For example:
+
+```python
+madam
+Step-by-step comparison:
+
+m   ada   m
+↑         ↑
+match
+Now check the inner string:
+
+ada
+Again:
+
+a  d  a
+↑     ↑
+match
+Now check:
+d
+A single character is always a palindrome.
+
+```
+
+**Recursive Logic**
+
+  
+
+| Condition | Result |
+| --- | --- |
+| Length ≤ 1 | Palindrome (base case) |
+| First ≠ Last | Not a palindrome |
+| First = Last | Recursively check the inner substring |
+
+
+Thus the recursion continues until the string becomes empty or one character long.
+
+##### Recursive Python Implementation
+
+```python
+
+
+# Recursive function to check whether a string is a palindrome
+# A palindrome reads the same forward and backward.
+
+def is_palindrome(text):
+
+    # Returns True if 'text' is a palindrome, otherwise False.
+
+    # ---------- BASE CASE ----------
+    # If the string has length 0 or 1,
+    # it is automatically a palindrome
+    if len(text) <= 1:
+        return True
+
+    # ---------- MISMATCH CHECK ----------
+    # Compare the first and last characters
+    if text[0] != text[-1]:
+        return False   # characters differ → not a palindrome
+
+    # ---------- RECURSIVE CASE ----------
+    # Remove first and last characters
+    # and test the remaining substring
+    inner_text = text[1:-1]
+
+    return is_palindrome(inner_text)
+
+
+
+# Testing the palindrome function.
+
+print(is_palindrome("level"))            # True
+print(is_palindrome("madam"))            # True
+print(is_palindrome("racecar"))          # True
+print(is_palindrome("python"))           # False
+print(is_palindrome("neveroddoreven"))   # True
+print(is_palindrome(""))                 # True (empty string)
+print(is_palindrome("a"))                # True (single character)
+
+```
+
+
+#### Optional Improvement (Often Done in Real Programs)
+
+Real programs often ignore spaces and case differences.
+
+Example:
+```python
+"Never Odd Or Even"
+```
+
+To handle this, we convert the string to lowercase and remove spaces before checking.
+
+Example preprocessing:
+
+`text = text.lower().replace(" ", "")`
+
+
 
 
 ### 3. Recursive function to find a number is even or not. (Not very efficient)
