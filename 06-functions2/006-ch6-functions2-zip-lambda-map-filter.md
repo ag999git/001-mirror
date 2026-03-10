@@ -186,6 +186,76 @@ print(sorted_students)  # [('Bob', 21), ('Alice', 23), ('Charlie', 25)]
 
 ```
 
+### 3. `map()` Function
+
+#### Concept
+
+The `map()` function applies a **function to every element of an iterable**.
+
+It returns a **map object (iterator)**.
+
+----------
+
+#### Syntax
+
+`map(function, iterable)`
+
+Multiple iterables can also be used:
+
+`map(function, iterable1, iterable2)`
+
+----------
+
+#### Key Properties
+
+  
+
+  
+
+| Feature | Description |
+| --- | --- |
+| Input | function + iterable |
+| Output | map iterator |
+| Purpose | transform elements |
+| Works with | multiple iterables |
+
+
+```python
+
+# Demonstration of map() function
+
+# 1: Using map with normal function
+def cube(n):
+    return n ** 3
+
+numbers = [1,2,3,4,5]
+
+# 2. Using map to apply cube function to each element in numbers
+cube_map = map(cube, numbers)
+print(list(cube_map))  # [1, 8, 27, 64, 125]
+
+# 3: Using map with lambda function
+numbers = [1,2,3,4,5]
+cubes = map(lambda x: x**3, numbers)
+print(list(cubes))  # [1, 8, 27, 64, 125]
+
+# 4: Using map with two lists
+list1 = [1,2,3,4]
+list2 = [10,20,30,40]
+result = map(lambda x, y: x + y, list1, list2)
+print(list(result))  # [11, 22, 33, 44]
+
+# 5: Converting strings to integers
+string_numbers = ["10","20","30"]
+integers = map(int, string_numbers)
+print(list(integers))  # [10, 20, 30]
+
+
+```
+
+
+
+
 
 
 
