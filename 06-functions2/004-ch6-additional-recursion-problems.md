@@ -510,7 +510,7 @@ C: [1]
 ```
 
 
-##### 2. The print_towers() Function
+##### 2. The `print_towers()` Function
 
 Purpose: Displays the current configuration of the towers.
 
@@ -521,7 +521,7 @@ Function definition:
 
 This function helps the reader visualize how disks move after each step.
 
-##### 4. The move_disk() Function
+##### 4. The `move_disk()` Function
 
 Purpose: Moves one disk from a source tower to a target tower.
 
@@ -555,7 +555,7 @@ Since lists behave like stacks, `.pop()` removes the top disk.
 
 
 
-##### 6. The move_counter Variable
+##### 6. The `move_counter` Variable
 `move_counter = [0]`
 
 Why a list instead of a normal integer? Because lists are mutable objects in Python.
@@ -607,7 +607,7 @@ Example:
 
 This stops the recursion.
 
-###### 9. The Recursive Case
+##### 9. The Recursive Case
 
 When more than one disk exists, the algorithm performs three steps.
 
@@ -618,6 +618,7 @@ Move n−1 disks from source → auxiliary
 `hanoi_recursive(n-1, source, auxiliary, target)`
 
 Example: Move disks 1 and 2 from A → B
+
 **Step 2**
 
 Move the largest disk from source → target
