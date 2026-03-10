@@ -106,8 +106,99 @@ values = ['Rahul', 25, 'Delhi']
 dictionary = dict(zip(keys, values))
 print(dictionary)  # {'name': 'Rahul', 'age': 25, 'city': 'Delhi'}
 
+```
+
+
+### 2. Lambda Functions
+
+#### Concept
+
+A **lambda function** is a small anonymous function.
+
+Unlike normal functions defined with `def`, lambda functions:
+
+-   have **no name**
+    
+-   are written in **a single expression**
+    
+
+They are commonly used when a **small temporary function** is required.
+
+----------
+
+#### Syntax
+
+`lambda arguments : expression`
+
+Example:
+
+`lambda x : x * x`
+
+----------
+
+#### Key Characteristics
+  
+
+  
+
+| Feature | Description |
+| --- | --- |
+| Anonymous | no function name |
+| One expression only | no statements |
+| Automatic return | expression result returned |
+| Often used with | map(), filter(), sorted() |
+
+
+```python
+
+# Demonstration of lambda functions
+
+# 1: Normal function
+def square(x):
+    return x * x
+
+print(square(5))  # 25 
+
+# 2: Lambda equivalent
+
+square_lambda = lambda x: x * x
+print(square_lambda(6))  # 36
+
+# 3: Lambda with multiple arguments
+
+add = lambda x, y: x + y
+print(add(3, 4))  # 7
+
+# 4: Lambda with three arguments
+
+sum_three = lambda a, b, c: a + b + c
+print(sum_three(2,3,4))  # 9
+
+# 5: Lambda inside sorted
+
+students = [("Alice", 23), ("Bob", 21), ("Charlie", 25)]
+
+# Sort by age
+sorted_students = sorted(students, key=lambda x: x[1])
+
+print(sorted_students)  # [('Bob', 21), ('Alice', 23), ('Charlie', 25)] 
+
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
