@@ -206,8 +206,90 @@ Example preprocessing:
 
 
 
+### 3. Recursive Function to Find GCD (Greatest Common Divisor)
 
-### 3. Recursive function to find a number is even or not. (Not very efficient)
+The Greatest Common Divisor (GCD) of two integers is the largest positive integer that divides both numbers exactly.
+
+For example: find $GCD(48, 18)$
+
+Note that the common divisors of 48 and 18 are: $1, 2, 3, 6$
+But the largest of these is 6.
+So $GCD(48, 18) = 6$
+
+##### Euclid’s Algorithm
+
+It is one of the most efficient methods to compute the GCD is Euclid’s Algorithm.
+
+The algorithm is based on the mathematical identity: $gcd(a,b)=gcd(b,amodb)$
+
+where a mod b is the remainder when a is divided by b.
+
+The recursion continues until the remainder becomes 0.
+
+At that point: $gcd(a,0)=a$
+
+This becomes the base case of the recursion.
+
+Example
+
+```python
+
+Find GCD(48,18)
+
+gcd(48,18)
+= gcd(18, 48 % 18)
+= gcd(18,12)
+
+= gcd(12, 18 % 12)
+= gcd(12,6)
+
+= gcd(6, 12 % 6)
+= gcd(6,0)
+
+GCD = 6
+
+```
+
+Recursive Python Implementation
+
+
+```python
+
+# Recursive function to compute the nth Fibonacci number
+
+def fibonacci_recursive(n):
+    # Returns the nth Fibonacci number using recursion.
+    # There are 2 base cases: Fibonacci(0) = 0 and Fibonacci(1) = 1
+
+    # -------- Base Case 1 --------
+    # If n = 0, return 
+    if n == 0:
+        return 0
+
+    # -------- Base Case 2 --------
+    # If n = 1, return 1 
+    elif n == 1:
+        return 1
+
+    # -------- Recursive Case --------
+    # Compute the sum of the previous two Fibonacci numbers
+    return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2)
+
+# Test calls
+
+print(f"Fibonacci(5)  → {fibonacci_recursive(5)}")   # 5
+print(f"Fibonacci(6)  → {fibonacci_recursive(6)}")   # 8
+print(f"Fibonacci(7)  → {fibonacci_recursive(7)}")   # 13
+print(f"Fibonacci(10) → {fibonacci_recursive(10)}")  # 55
+
+
+```
+
+
+
+
+
+### 4. Recursive function to find a number is even or not. (Not very efficient)
 
 We can test a number to be even or odd by recursion also. The steps are as follows:-
 
