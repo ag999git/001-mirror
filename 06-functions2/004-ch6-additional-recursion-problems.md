@@ -311,7 +311,75 @@ The following table explains each block in the flow chart:-
 | 6 | Return result | When b = 0, the value of a is the GCD. | gcd(6, 0) = 6 |
 
 
-### 4. Recursive function to find a number is even or not. (Not very efficient)
+### 4. Recursive function to implement Tower of Hanoi
+
+The recursion solution to the Tower of Hanoi is given in details in the book.
+
+Some additional points are mentioned here
+
+#### Below is the complete table of Tower of Hanoi states for 5 disks.
+
+Conventions used:
+
+Source = A
+
+Auxiliary = B
+
+Destination = C
+
+Lists show disks largest → smallest (left → right).
+
+Move 0 = initial state
+
+Move 31 = final solved state
+
+  
+    
+
+  
+
+| Move | Disk Moved | Move | A (Source) | B (Aux) | C (Dest) |
+| --- | --- | --- | --- | --- | --- |
+| 0 | – | Initial | [5,4,3,2,1] | [] | [] |
+| 1 | 1 | A→C | [5,4,3,2] | [] | [1] |
+| 2 | 2 | A→B | [5,4,3] | [2] | [1] |
+| 3 | 1 | C→B | [5,4,3] | [2,1] | [] |
+| 4 | 3 | A→C | [5,4] | [2,1] | [3] |
+| 5 | 1 | B→A | [5,4,1] | [2] | [3] |
+| 6 | 2 | B→C | [5,4,1] | [] | [3,2] |
+| 7 | 1 | A→C | [5,4] | [] | [3,2,1] |
+| 8 | 4 | A→B | [5] | [4] | [3,2,1] |
+| 9 | 1 | C→B | [5] | [4,1] | [3,2] |
+| 10 | 2 | C→A | [5,2] | [4,1] | [3] |
+| 11 | 1 | B→A | [5,2,1] | [4] | [3] |
+| 12 | 3 | C→B | [5,2,1] | [4,3] | [] |
+| 13 | 1 | A→C | [5,2] | [4,3] | [1] |
+| 14 | 2 | A→B | [5] | [4,3,2] | [1] |
+| 15 | 1 | C→B | [5] | [4,3,2,1] | [] |
+| 16 | 5 | A→C | [] | [4,3,2,1] | [5] |
+| 17 | 1 | B→A | [1] | [4,3,2] | [5] |
+| 18 | 2 | B→C | [1] | [4,3] | [5,2] |
+| 19 | 1 | A→C | [] | [4,3] | [5,2,1] |
+| 20 | 3 | B→A | [3] | [4] | [5,2,1] |
+| 21 | 1 | C→B | [3] | [4,1] | [5,2] |
+| 22 | 2 | C→A | [3,2] | [4,1] | [5] |
+| 23 | 1 | B→A | [3,2,1] | [4] | [5] |
+| 24 | 4 | B→C | [3,2,1] | [] | [5,4] |
+| 25 | 1 | A→C | [3,2] | [] | [5,4,1] |
+| 26 | 2 | A→B | [3] | [2] | [5,4,1] |
+| 27 | 1 | C→B | [3] | [2,1] | [5,4] |
+| 28 | 3 | A→C | [] | [2,1] | [5,4,3] |
+| 29 | 1 | B→A | [1] | [2] | [5,4,3] |
+| 30 | 2 | B→C | [1] | [] | [5,4,3,2] |
+| 31 | 1 | A→C | [] | [] | [5,4,3,2,1] |
+
+  
+
+
+
+
+
+### 5. Recursive function to find a number is even or not. (Not very efficient)
 
 We can test a number to be even or odd by recursion also. The steps are as follows:-
 
