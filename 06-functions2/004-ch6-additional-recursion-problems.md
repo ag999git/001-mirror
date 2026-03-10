@@ -1,8 +1,94 @@
 ### Additional Problems on recursion
 
+### 1. Recursive Function to Compute $a^b$
+
+Another useful example of recursion is computing the value of:
+
+$a^b$, where $a$ (base) and $b$ (exponent) are non-negative integers.
+
+For example:
+
+$2^5 = 2 × 2 × 2 × 2 × 2 = 32$
+
+<div align="left">
+ 
+$$
+a^b = \begin{cases} 
+1 & \text{if } b = 0 \\ 
+a \times a^{(b-1)} & \text{if } b > 0 
+\end{cases}
+$$
+
+</div>
 
 
-#### Recursive function to find a number is even or not. (Not very efficient)
+Key Components of the Recursive Algorithm
+
+| Component | Description |
+| --- | --- |
+| Base case | When b=0b = 0b=0, return 1 |
+| Recursive case | Multiply a by the result of ab−1a^{b-1}ab−1 |
+| Progress toward base case | The exponent decreases by 1 in each call |
+
+
+```python
+
+# Recursive function to compute a^b (base raised to exponent)
+# The exponent is reduced by 1 in every recursive call
+# until the base case (exponent = 0) is reached.
+
+def power_recursive(base, exponent):
+    
+    # Returns base raised to the power exponent using recursion.
+    
+    # ---------- BASE CASE ----------
+    # Any number raised to the power 0 is equal to 1
+    if exponent == 0:
+        print("Reached base case: exponent = 0 → returning 1")
+        return 1
+
+    # ---------- RECURSIVE CASE ----------
+    # Reduce the exponent and call the function again
+    print(f"Computing {base}^{exponent} → calling {base}^{exponent - 1}")
+
+    # Recursive call with smaller exponent
+    partial_result = power_recursive(base, exponent - 1)
+
+    # Multiply base with result returned from recursion
+    result = base * partial_result
+
+    # Show the computation during the return phase
+    print(f"Returning: {base}^{exponent} = {base} × {partial_result} = {result}")
+
+    return result
+
+# Test cases
+# Each tuple contains (base, exponent)
+
+test_cases = [
+    (2, 5),   # 2^5 = 32
+    (3, 4),   # 3^4 = 81
+    (5, 0),   # 5^0 = 1
+    (7, 1),   # 7^1 = 7
+    (4, 3)    # 4^3 = 64
+]
+
+# Run the recursive function on each test case in the list and print the results
+for base, exponent in test_cases:
+
+    print("\n----------------------------------")
+    print(f"Computing {base}^{exponent}")
+
+    result = power_recursive(base, exponent)
+
+    print(f"Final Result: {base}^{exponent} = {result}")
+
+```
+
+
+
+
+### 3. Recursive function to find a number is even or not. (Not very efficient)
 
 We can test a number to be even or odd by recursion also. The steps are as follows:-
 
