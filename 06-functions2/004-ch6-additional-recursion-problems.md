@@ -450,8 +450,10 @@ print(f"Total moves required: {move_counter[0]}")
 
 ```
 
+#### Detailed discussion of the script given above.
+The following section discusses the above script in detaila
 
-##### Representation of Towers
+##### 1. Representation of Towers and conventions used in the script
 
 The towers are represented using Python lists.
 
@@ -508,25 +510,14 @@ C: [1]
 ```
 
 
-##### 3. The print_towers() Function
+##### 2. The print_towers() Function
 
 Purpose: Displays the current configuration of the towers.
 
 Function definition:
+
 `def print_towers(towers):`
 
-Example output:
-
-```python
-
-A: [3, 2]
-B: []
-C: [1]
-
-```
-
-
-----------------------------------------
 
 This function helps the reader visualize how disks move after each step.
 
@@ -539,8 +530,6 @@ Function definition:
 
 Parameters:
 
-  
-
 | Parameter | Meaning |
 | --- | --- |
 | towers | dictionary containing the three towers |
@@ -549,29 +538,24 @@ Parameters:
 | move_counter | counts the number of moves |
 
 
-##### Key operations:
 
-###### A. Remove top disk
+
+##### 5. Removing top disk, placing disk on target tower and incrementing move counter
+**The following line of script removes disk from top**
 `disk = towers[source].pop()  # Remove top disk`
 
 Since lists behave like stacks, `.pop()` removes the top disk.
 
-Place disk on target tower
+**The following line in script places the disk on the target tower**
+
 `towers[target].append(disk)  #Place disk on target tower`
-Increment move counter
+
+**The following line of script increments the counter representing number of moves**
 `move_counter[0] += 1`
-Display move
-
-Example output:
-
-Move 3: disk from A → C
-A: [3]
-B: [2]
-C: [1]
 
 
 
-##### 5. The move_counter Variable
+##### 6. The move_counter Variable
 `move_counter = [0]`
 
 Why a list instead of a normal integer? Because lists are mutable objects in Python.
@@ -580,7 +564,7 @@ When recursion calls functions repeatedly, the list allows all recursive calls t
 
 Thus every move increases the same shared counter.
 
-###### 6. The `hanoi_recursive()` Function
+##### 7. The `hanoi_recursive()` Function
 
 This is the core algorithm.
 
@@ -607,7 +591,7 @@ Parameters:
 | --- | --- |
 
 
-###### 7. The Base Case
+###### 8. The Base Case
 
 ```python
 
@@ -619,11 +603,11 @@ If only one disk remains, simply move it directly from source to target.
 
 Example:
 
-A → C
+`A → C`
 
 This stops the recursion.
 
-###### 8. The Recursive Case
+###### 9. The Recursive Case
 
 When more than one disk exists, the algorithm performs three steps.
 
@@ -633,27 +617,22 @@ Move n−1 disks from source → auxiliary
 
 `hanoi_recursive(n-1, source, auxiliary, target)`
 
-Example:
-
-Move disks 1 and 2 from A → B
+Example: Move disks 1 and 2 from A → B
 **Step 2**
 
 Move the largest disk from source → target
 
 `move_disk(...)`
 
-Example:
+Example: Move disk 3 from A → C
 
-Move disk 3 from A → C
 **Step 3**
 
 Move the n−1 disks from auxiliary → target
 
 `hanoi_recursive(n-1, auxiliary, target, source)`
 
-Example:
-
-Move disks 1 and 2 from B → C
+Example: Move disks 1 and 2 from B → C
 
 ###### Overall Flow of the Program
 
