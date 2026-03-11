@@ -732,11 +732,36 @@ The algorithm works as follows:
 
 ----------
 
-#### 2. The script implementing the problem is as follows
+#### The following table shows how the matching takes place.
+The script implementing the problem is as follows
 
 In the following script, the text given is `text1 = "acdabcdacabcd"`
 The pattern given is `pattern1 = "cdac"`
 
+
+
+  
+
+  
+
+  
+
+  
+
+| Index | Match found? | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| String |  | a | c | d | a | b | c | d | a | c | a | b | c | d |
+| Pattern (Initially 0) | No | c | d | a | c |  |  |  |  |  |  |  |  |  |
+| 1 | No |  | c | d | a | c |  |  |  |  |  |  |  |  |
+| 2 | No |  |  | c | d | a | c |  |  |  |  |  |  |  |
+| 3 | No |  |  |  | c | d | a | c |  |  |  |  |  |  |
+| 4 | No |  |  |  |  | c | d | a | c |  |  |  |  |  |
+| 5 | Yes |  |  |  |  |  | c | d | a | c |  |  |  |  |
+
+
+
+
+#### The script implementing the problem is as follows
 
 
 ```python
