@@ -545,7 +545,37 @@ for i in range(5):
 
 ```
 
+#### Key Concepts 
 
+#### A. Deterministic randomness
+
+If the **seed is the same**, the **sequence will always be the same**.
+
+Example:
+
+`LinearCongruentialGenerator(seed=10)`
+
+always produces the **same sequence**.
+
+----------
+
+#### B. Why the generator is called "pseudo-random"
+
+The numbers **look random**, but they are actually produced by a **deterministic formula**.
+
+----------
+
+#### C. Role of each parameter
+The following table summarizes the role of various parameters used in the equation to generate PRNG
+
+  
+
+| Parameter | Role |
+| --- | --- |
+| seed | starting value |
+| a | multiplier |
+| c | increment |
+| m | modulus controlling range |
 
 
 
