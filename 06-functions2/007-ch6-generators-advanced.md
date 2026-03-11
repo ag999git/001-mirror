@@ -23,6 +23,9 @@ The following diagram shows how StopIteration works in generator functions.
 
 ![StopIteration Diagram](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch6-generators-stopiteration.png)
 
+
+The following script shos the use of StopIteration for generator functions.
+
 ```python
 
 
@@ -75,4 +78,44 @@ print("In a for-loop, StopIteration happens internally and is NOT shown.")
 
 
 ```
+
+
+#### 2. How a for-loop Handles Generators
+
+A `for` loop internally does something like this:
+
+1.  Call `next()`
+    
+2.  Use the value
+    
+3.  Repeat
+    
+4.  Stop when `StopIteration` occurs
+    
+
+But the **exception is hidden from the user**.
+
+Example:
+
+```python
+for  value  in  simple_generator():  
+  print(value)
+```
+
+
+----------
+
+#### 3. Fibonacci Generator
+
+Generators are perfect for sequences like Fibonacci numbers.
+
+
+
+
+
+
+
+
+
+
 
