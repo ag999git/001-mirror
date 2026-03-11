@@ -734,6 +734,11 @@ The algorithm works as follows:
 
 #### 2. The script implementing the problem is as follows
 
+In the following script, the text given is `text1 = "acdabcdacabcd"`
+The pattern given is `pattern1 = "cdac"`
+
+
+
 ```python
 
 # Brute Force String Search Algorithm
