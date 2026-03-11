@@ -28,7 +28,6 @@ The following script shos the use of StopIteration for generator functions.
 
 ```python
 
-
 # Demonstration of a simple generator and StopIteration
 
 # 1. This generator function has multiple yield statements and print statements to show the flow of execution.
@@ -131,7 +130,7 @@ for _ in range(10):  # _ is a common convention for a variable that is not used
 #### 4. Generator Example — Prime Numbers
 
 
-``python
+```python
 
 # Generator for prime numbers greater than a given number
 
