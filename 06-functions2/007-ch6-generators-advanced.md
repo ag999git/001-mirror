@@ -109,6 +109,36 @@ for  value  in  simple_generator():
 
 Generators are perfect for sequences like Fibonacci numbers.
 
+```python
+
+# Fibonacci generator
+
+def fibonacci_generator():
+    a, b = 0, 1  # Initialize the first two Fibonacci numbers
+
+    while True:  # Loop indefinitely to generate Fibonacci numbers
+        yield a
+        a, b = b, a + b
+
+
+fib = fibonacci_generator()
+
+for _ in range(10):  # _ is a common convention for a variable that is not used
+    print(next(fib))
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 
