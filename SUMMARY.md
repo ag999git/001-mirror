@@ -48,6 +48,7 @@
 
 ## Chapter 6: Functions Part 2
 * [Introduction to Chapter 6](06-functions2/README.md)
+* [Google Colab NB Chapter 6](06-functions2/001-ch6-colab.md)
 * [Additional Problems on Recursion Chapter 6](06-functions2/004-ch6-additional-recursion-problems.md)
 * [Additional discussion on zip(), lamda(), map() filter() Chapter 6](06-functions2/006-ch6-zip.md)
 * [Additional discussion on generators Chapter 6](06-functions2/007-ch6-generators-advanced.md)
