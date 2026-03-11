@@ -319,6 +319,85 @@ def  plot(x, y, color="blue", linewidth=1, marker=None,
 
 
 
+### Task 5: Endianness in Computer Systems
+In computer architecture, endianness refers to the order in which bytes are stored in memory when representing multi-byte data such as integers. Two common conventions are: (1) Big-endian – the most significant byte (MSB) is stored first. (2) Little-endian – the least significant byte (LSB) is stored first.
+Your Tasks:- (1) Study the concepts big-endian and little-endian byte ordering. (2) Explain the difference between these two formats with the help of a small example (for instance, how the number 0x12345678 would be stored in memory). (3) Use Python to determine the endianness of your computer system using the sys module. (4) Write a short Python script that: (a) Prints the system’s byte order. (b) Demonstrates how a number is stored in both little-endian and big-endian formats.
+Hint: The sys module contains an attribute called byteorder.
+
+#### Answer
+
+The `sys` module contains an attribute called `byteorder`.
+
+`sys.byteorder`
+
+Possible values are:
+
+`"little"`  
+`"big"`
+
+
+#### A. Conceptual Explanation
+
+When computers store numbers larger than one byte, they must decide **which byte goes first in memory**.
+
+Suppose we want to store the **32-bit hexadecimal number**
+
+`0x12345678`
+
+This number contains **4 bytes**:
+
+12   34   56   78
+
+#### B. Big-Endian Representation
+
+In **big-endian systems**, the **most significant byte is stored first**.
+
+Memory order:
+
+`12   34   56   78`
+
+This format is sometimes called **network byte order** and is commonly used in network protocols.
+
+----------
+
+#### C. Little-Endian Representation
+
+In **little-endian systems**, the **least significant byte is stored first**.
+
+Memory order:
+
+`78   56   34   12`
+
+Most modern processors such as **Intel x86 and AMD** use **little-endian format**.
+
+----------
+
+#### D. How to Detect Endianness in Python
+
+Python provides the attribute:
+
+`sys.byteorder`
+
+This returns either:
+
+`"little"`
+
+or
+
+`"big"`
+
+depending on the architecture of the computer.
+
+----------
+
+#### E. Python Demonstration Script
+
+This script demonstrates both the **system byte order** and **how integers are stored in different endian formats**.
+
+
+
+
+
 
 
 
