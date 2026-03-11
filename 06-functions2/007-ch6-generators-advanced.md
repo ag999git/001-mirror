@@ -21,7 +21,7 @@ It simply signals that **no more values remain**.
 
 The following diagram shows how StopIteration works in generator functions.
 
-[StopIteration Diagram](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch6-generators-stopiteration.png)
+![StopIteration Diagram](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch6-generators-stopiteration.png)
 
 ```python
 
