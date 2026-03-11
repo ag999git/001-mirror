@@ -49,7 +49,7 @@
 ## Chapter 6: Functions Part 2
 * [Introduction to Chapter 6](06-functions2/README.md)
 * [Additional Problems on Recursion Chapter 6](06-functions2/004-ch6-additional-recursion-problems.md)
-* [Additional discussion on zip(), lamda(), map() filter() Chapter 6](06-function2/006-ch6-func2-zip-others.md)
+* [Additional discussion on zip(), lamda(), map() filter() Chapter 6](06-function2/006-ch6-zip.md)
 * [Additional discussion on generators Chapter 6](06-function2/007-ch6-generators-advanced.md)
 * [Chapter end Questions & Answers Chapter 6](06-function2/008-ch6-q-a.md)
 * [Solution to Beyond Text Book problems Chapter 6](06-functions2/005-beyond-text-ch6-functions2.md)
