@@ -459,6 +459,92 @@ Typical parameter values used in many systems are:
 
 **Questions to Think About: (1)** What happens if the **seed value changes**? (2) Why are these numbers called **pseudo-random** instead of truly random?
 
+#### Script which implements this task
+
+Given below is a script which implements this task
+
+
+```python
+
+# Linear Congruential Generator (LCG)
+# A simple pseudo-random number generator algorithm
+
+
+class LinearCongruentialGenerator:
+    """
+    This class implements the Linear Congruential Generator algorithm.
+
+    Formula:
+        X(n+1) = (a * X(n) + c) mod m
+
+    where:
+        X(n) = current state (seed)
+        a    = multiplier
+        c    = increment
+        m    = modulus
+    """
+
+    def __init__(self, seed=1):
+        """
+        Constructor initializes the generator parameters
+        and starting seed.
+        """
+
+        # Standard parameters used in many C libraries
+        self.a = 1103515245       # multiplier
+        self.c = 12345            # increment
+        self.m = 2**31            # modulus
+
+        # Initial seed (starting value)
+        self.state = seed
+
+    def next_int(self):
+        """
+        Generate the next pseudorandom integer.
+        Updates the internal state.
+        """
+
+        # Apply LCG formula
+        self.state = (self.a * self.state + self.c) % self.m
+
+        # Return the new value
+        return self.state
+
+    def next_float(self):
+        """
+        Convert the generated integer into a floating-point
+        number between 0 and 1.
+        """
+
+        # Generate next integer
+        value = self.next_int()
+
+        # Scale result to [0, 1)
+        return value / self.m
+
+
+# Demonstration of the generator
+print("Demonstrating Linear Congruential Generator")
+
+# Create generator object with a seed
+lcg = LinearCongruentialGenerator(seed=123456)
+
+print("\nFirst 5 pseudorandom integers:")
+
+for i in range(5):
+    print(f"X_{i+1} =", lcg.next_int())
+
+
+# Demonstrate floating-point random numbers
+print("Random numbers scaled to range [0,1):")
+lcg2 = LinearCongruentialGenerator(seed=100)
+
+for i in range(5):
+    print(lcg2.next_float())
+
+
+```
+
 
 
 
