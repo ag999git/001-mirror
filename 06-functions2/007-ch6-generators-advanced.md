@@ -163,13 +163,19 @@ prime_gen = next_prime_generator(100)  # Create a generator that will produce pr
 for _ in range(10):  
     print(next(prime_gen))
 
-
 ```
 
 
+#### 5. Advantages of Generators
 
+The following table shows the advantages of using generators:-
 
-
+| Advantage | Explanation |
+| --- | --- |
+| Memory efficient | values generated only when needed |
+| Faster for large sequences | avoids building large lists |
+| Maintains state automatically | variables preserved between yields |
+| Works naturally with loops | integrates with Python iteration |
 
 
 
