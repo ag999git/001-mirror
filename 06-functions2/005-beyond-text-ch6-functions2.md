@@ -430,6 +430,7 @@ print("Little-endian (hex):", little_endian_bytes.hex())  # Hexadecimal represen
 ### 6. Research Task: Implementing a Pseudo Random Number Generator in Python
 
 Most programming languages provide built-in functions for generating random numbers. However, these numbers are not truly random; they are generated using algorithms called **Pseudo Random Number Generators (PRNGs)**. One of the earliest and simplest PRNG algorithms is the **Linear Congruential Generator (LCG)**. The algorithm generates a sequence of integers using the recurrence relation:
+
 $$
 X_{n+1} = (a \cdot X_n + c) \pmod m
 $$
