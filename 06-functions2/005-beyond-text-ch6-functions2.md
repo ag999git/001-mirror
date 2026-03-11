@@ -587,7 +587,7 @@ However, Python provides a powerful feature called **Partial Unpacking** that al
 
 When a variable is prefixed with `*`, it collects **all remaining unassigned elements** from the iterable.
 
-#### Important Characteristics
+#### A. Important Characteristics
 
 1.  The variable prefixed with `*` collects **multiple elements**.
     
@@ -598,7 +598,7 @@ When a variable is prefixed with `*`, it collects **all remaining unassigned ele
 4.  The starred variable can appear **at the beginning, middle, or end** of the assignment.
     
 
-#### Research Tasks
+#### B. Research Tasks
 
 1.  Study how **iterable unpacking** works in Python.
     
@@ -617,10 +617,67 @@ When a variable is prefixed with `*`, it collects **all remaining unassigned ele
 
 ----------
 
-#### Script which implements the above task
+#### C. Script which implements the above task
 
 
+```python
 
+# Demonstration of Partial Unpacking of Iterables in Python
+
+# Example 1: Catching elements at the end
+print("Example 1: Catching elements at the end")
+
+# The first two variables get the first two elements
+# The starred variable collects the remaining elements
+first, second, *tail = [10, 20, 30, 40, 50]  # The list has 5 elements. first=10, second=20, tail=[30, 40, 50]
+
+print("first =", first, "second =", second, "tail =", tail)  # Output will show the values of first, second, and tail
+
+print("-----------------------------------")
+
+# Example 2: Catching elements in the middle
+print("Example 2: Catching elements in the middle")
+
+# First variable takes the first element
+# Last variable takes the last element
+# Starred variable collects everything in between
+start, *middle, last = [1, 2, 3, 4, 5, 6]
+
+print("start =", start, "middle =", middle, "last =", last)
+
+print("-----------------------------------")
+
+# Example 3: Catching elements at the beginning
+print("Example 3: Catching elements at the beginning")
+
+# Starred variable collects elements at the beginning
+*beginning, second_last, last = [100, 200, 300, 400, 500]
+
+print("beginning =", beginning, "second_last =", second_last, "last =", last)
+
+print("-----------------------------------")
+
+# Example 4: Using partial unpacking with tuples
+print("Example 4: Using partial unpacking with tuples")
+
+data = (11, 22, 33, 44, 55)
+
+a, *b = data
+
+print("a =", a, "b =", b)
+print("Type of b:", type(b))  # Always a list
+
+print("-----------------------------------")
+
+# Example 5: Star variable collecting zero elements
+print("Example 5: Star variable collecting zero elements")
+
+x, y, *rest = [5, 10]
+
+print("x =", x, "y =", y, "rest =", rest)  #
+
+
+```
 
 
 
