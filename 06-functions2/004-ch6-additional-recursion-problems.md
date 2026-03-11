@@ -2,7 +2,7 @@
 
 ### 1. Recursive Function to Compute $a^b$
 
-Another useful example of recursion is computing the value of: $a^b$, where $a$ (base) and $b$ (exponent) are non-negative integers.
+Another useful example of recursion is computing the value of:  $a^b$, where $a$ (base) and $b$ (exponent) are non-negative integers.
 
 For example:
 
