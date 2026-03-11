@@ -579,7 +579,7 @@ The following table summarizes the role of various parameters used in the equati
 | m | modulus controlling range |
 
 
-### 7. Topic Partial Unpacking of Iterables in Python
+### 7. Research Task: Unpacking of Iterables in Python
 
 In Python, it is possible to **unpack elements of an iterable (such as a list or tuple) directly into variables**. Normally, the number of variables must exactly match the number of elements in the iterable.
 
