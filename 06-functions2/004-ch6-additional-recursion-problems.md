@@ -4,7 +4,7 @@
 
 Another useful example of recursion is computing the value of:
 
-$a^b$, where $a$ (base) and $b$ (exponent) are non-negative integers.
+\$a^b\$, where \$a\$ (base) and \$b\$ (exponent) are non-negative integers.
 
 For example:
 
