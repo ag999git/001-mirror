@@ -394,7 +394,38 @@ depending on the architecture of the computer.
 
 This script demonstrates both the **system byte order** and **how integers are stored in different endian formats**.
 
+```python
 
+# Demonstration of Endianness in Python
+
+import sys
+
+print("System Byte Order:", sys.byteorder)  # Shows the byte order of the system (either 'little' or 'big')
+print("-" * 40)
+
+# Example integer (32-bit number)
+number = 0x12345678
+
+print("Original number (hex):", hex(number))
+
+# Convert integer into bytes using big-endian format
+big_endian_bytes = number.to_bytes(4, byteorder='big')  # 4 bytes for a 32-bit integer
+
+# Convert integer into bytes using little-endian format
+little_endian_bytes = number.to_bytes(4, byteorder='little')  # 4 bytes for a 32-bit integer
+
+print("Big-endian byte order:")  # In big-endian, the most significant byte (MSB) is stored first.
+print(list(big_endian_bytes))  # Output will show the byte values in big-endian order
+
+print("Little-endian byte order:")  # In little-endian, the least significant byte (LSB) is stored first.
+print(list(little_endian_bytes))  # Output will show the byte values in little-endian order
+
+# Display hexadecimal representation
+print("Big-endian (hex):", big_endian_bytes.hex())  # Hexadecimal representation of big-endian bytes
+print("Little-endian (hex):", little_endian_bytes.hex())  # Hexadecimal representation of little-endian bytes
+
+
+```
 
 
 
