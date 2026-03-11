@@ -676,11 +676,170 @@ x, y, *rest = [5, 10]
 
 print("x =", x, "y =", y, "rest =", rest)  #
 
-
 ```
 
 
+### 8. Task: Implementing the Brute-Force String Searching Algorithm in Python
 
+Searching for a **substring (pattern)** inside a larger **string (text)** is a common problem in computer science.
+
+One of the simplest methods to perform this task is the **Brute-Force String Searching Algorithm**.
+
+The algorithm works by **checking every possible alignment** of the pattern within the text.
+
+#### Basic Idea
+
+Suppose:
+
+-   **Text (T)** has length **m**
+    
+-   **Pattern (P)** has length **n**
+    
+
+The algorithm works as follows:
+
+1.  Align the beginning of **P** with the first character of **T**.
+    
+2.  Compare characters of **P** with corresponding characters of **T**.
+    
+3.  If all characters match → the pattern is found.
+    
+4.  If a mismatch occurs → slide the pattern **one position to the right**.
+    
+5.  Repeat until:
+    
+    -   the pattern is found, or
+        
+    -   all possible positions have been checked.
+        
+
+### Tasks
+
+1.  Study the **Brute-Force string searching algorithm**.
+    
+2.  Explain how the **pattern slides over the text**.
+    
+3.  Write a Python function that:
+    
+    -   takes **text** and **pattern** as inputs
+        
+    -   returns the **starting index of the match**
+        
+    -   returns **-1 if the pattern is not found**
+        
+4.  Test your program with a few example strings.
+    
+
+----------
+
+#### 2. The script implementing the problem is as follows
+
+```python
+
+# Brute Force String Search Algorithm
+
+def brute_force_search(text, pattern):
+    """
+    Searches for 'pattern' inside 'text' using the brute force method.
+
+    Parameters
+    ----------
+    text : str
+        The larger string in which we search.
+
+    pattern : str
+        The substring we want to find.
+
+    Returns
+    -------
+    int
+        Starting index of the pattern if found.
+        Returns -1 if pattern is not present.
+    """
+
+    # Length of text and pattern
+    m = len(text)  # Length of the text string
+    n = len(pattern)  # Length of the pattern string
+
+    # Try every possible alignment of pattern in text
+    for i in range(m - n + 1):
+
+        print(f"\nChecking alignment starting at text index {i}")
+
+        match = True  # Assume match unless mismatch found
+
+        # Compare characters one by one
+        for j in range(n):  # Loop through each character in the pattern
+
+            print(f"Comparing text[{i+j}]='{text[i+j]}' with pattern[{j}]='{pattern[j]}'")  # Show the characters being compared
+
+            if text[i + j] != pattern[j]:  # If characters do not match
+                print("Mismatch found → shift pattern to the right")
+                match = False  # Set match to False if a mismatch is found
+                break
+
+        # If all characters matched
+        if match:  # If we completed the inner loop without breaking, it means we found a match
+            print("Pattern found!")
+            return i  # Return the starting index of the pattern in the text
+
+    # Pattern not found
+    return -1
+
+
+# Test Examples
+
+text1 = "acdabcdacabcd"
+pattern1 = "cdac"
+
+result = brute_force_search(text1, pattern1)
+
+print("\nFinal Result:")
+print("Pattern found at index:", result)
+
+
+```
+
+The output to above script is 
+
+
+```python
+
+Checking alignment starting at text index 0
+Comparing text[0]='a' with pattern[0]='c'
+Mismatch found → shift pattern to the right
+
+Checking alignment starting at text index 1
+Comparing text[1]='c' with pattern[0]='c'
+Comparing text[2]='d' with pattern[1]='d'
+Comparing text[3]='a' with pattern[2]='a'
+Comparing text[4]='b' with pattern[3]='c'
+Mismatch found → shift pattern to the right
+
+Checking alignment starting at text index 2
+Comparing text[2]='d' with pattern[0]='c'
+Mismatch found → shift pattern to the right
+
+Checking alignment starting at text index 3
+Comparing text[3]='a' with pattern[0]='c'
+Mismatch found → shift pattern to the right
+
+Checking alignment starting at text index 4
+Comparing text[4]='b' with pattern[0]='c'
+Mismatch found → shift pattern to the right
+
+Checking alignment starting at text index 5
+Comparing text[5]='c' with pattern[0]='c'
+Comparing text[6]='d' with pattern[1]='d'
+Comparing text[7]='a' with pattern[2]='a'
+Comparing text[8]='c' with pattern[3]='c'
+Pattern found!
+
+Final Result:
+Pattern found at index: 5
+
+
+```
 
 
 
