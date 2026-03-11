@@ -7,9 +7,6 @@
 
 
 
-
-
-
 # Chapter 5 Interactive Notebook
 
 Click the button below to open the interactive exercises for this chapter in Google Colab.
