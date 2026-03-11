@@ -427,6 +427,51 @@ print("Little-endian (hex):", little_endian_bytes.hex())  # Hexadecimal represen
 
 ```
 
+### 6. Research Task: Implementing a Pseudo Random Number Generator in Python
+
+Most programming languages provide built-in functions for generating random numbers. However, these numbers are not truly random; they are generated using algorithms called **Pseudo Random Number Generators (PRNGs)**. One of the earliest and simplest PRNG algorithms is the **Linear Congruential Generator (LCG)**. The algorithm generates a sequence of integers using the recurrence relation:
+$$
+X_{n+1} = (a \cdot X_n + c) \pmod m
+$$
+
+**Where:**
+* $X$ is the sequence of pseudorandom values.
+* $a$ is the multiplier, where $0 < a < m$.
+* $c$ is the increment, where $0 < c < m$.
+* $X_0$ is the start value (the seed).
+* $m$ is the modulus.
+
+Typical parameter values used in many systems are: 
+(1) m = 2^31 
+(2) a = 1103515245 
+(3) c = 12345
+
+(This problem uses OOP concept of Class, so you may do this after studying the chapter on OOP)
+
+**Your Tasks: 
+- (1)** Study the concept of **Pseudo Random Number Generators (PRNG)**. 
+- (2) Understand how the **Linear Congruential Generator (LCG)** produces a sequence of numbers. 
+- (3) Write a **Python class** that: 
+    - (a) Stores the seed value. 
+    - (b) Generates the next pseudorandom number using the LCG formula. 
+- (4) Add a method that **scales the result to a floating-point number between 0 and 1**. 
+- (5) Demonstrate the generator by printing the first **few values of the sequence**.
+
+**Questions to Think About: (1)** What happens if the **seed value changes**? (2) Why are these numbers called **pseudo-random** instead of truly random?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
