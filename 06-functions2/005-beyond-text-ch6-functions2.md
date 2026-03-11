@@ -578,6 +578,50 @@ The following table summarizes the role of various parameters used in the equati
 | m | modulus controlling range |
 
 
+### 7. Topic Partial Unpacking of Iterables in Python
+
+In Python, it is possible to **unpack elements of an iterable (such as a list or tuple) directly into variables**. Normally, the number of variables must exactly match the number of elements in the iterable.
+
+However, Python provides a powerful feature called **Partial Unpacking** that allows one variable to collect the remaining elements of the iterable. This is done using the **asterisk (`*`) operator**, sometimes called a **star expression**.
+
+When a variable is prefixed with `*`, it collects **all remaining unassigned elements** from the iterable.
+
+#### Important Characteristics
+
+1.  The variable prefixed with `*` collects **multiple elements**.
+    
+2.  The collected elements are stored as a **list**.
+    
+3.  Only **one starred variable** can appear in a single unpacking operation.
+    
+4.  The starred variable can appear **at the beginning, middle, or end** of the assignment.
+    
+
+#### Research Tasks
+
+1.  Study how **iterable unpacking** works in Python.
+    
+2.  Explain the concept of **partial unpacking using the `*` operator**.
+    
+3.  Write Python examples demonstrating:
+    
+    -   capturing elements at the **end**
+        
+    -   capturing elements in the **middle**
+        
+    -   capturing elements at the **beginning**
+        
+4.  Observe the **type of the variable that collects the remaining elements**.
+    
+
+----------
+
+#### Script which implements the above task
+
+
+
+
+
 
 
 
