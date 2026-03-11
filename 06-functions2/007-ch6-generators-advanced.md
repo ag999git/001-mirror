@@ -126,10 +126,46 @@ fib = fibonacci_generator()
 for _ in range(10):  # _ is a common convention for a variable that is not used
     print(next(fib))
 
-
 ```
 
+#### 4. Generator Example — Prime Numbers
 
+
+``python
+
+# Generator for prime numbers greater than a given number
+
+def is_prime(num):  # Helper function to check if a number is prime
+
+    if num <= 1:  # 0 and 1 are not prime numbers
+        return False
+
+    for i in range(2, int(num**0.5) + 1):  # Check divisibility from 2 to sqrt(num)
+        if num % i == 0:  # If num is divisible by any number in this range, it's not prime
+            return False
+
+    return True
+
+
+def next_prime_generator(start):
+    num = start + 1
+
+    while True:  # Loop indefinitely to find the next prime number
+        if is_prime(num):
+            yield num  # Yield the prime number and pause until the next value is requested
+
+        num += 1
+
+
+prime_gen = next_prime_generator(100)  # Create a generator that will produce prime numbers greater than 100
+
+# Get the first 10 prime numbers greater than 100. 
+# Use _ as a throwaway variable since we don't need the loop index
+for _ in range(10):  
+    print(next(prime_gen))
+
+
+```
 
 
 
