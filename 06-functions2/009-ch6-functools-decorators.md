@@ -161,7 +161,9 @@ bark()  # This will show the wrapper's print statements, but the function name a
 | help(bark) | Shows info for the wrapper. | Shows info for the bark function. |
 
 
+#### Diagram shows situation without and with using functools
 
+![Diagram shows situation without and with using functools](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch-6-using-functools.png)
 
 
 
