@@ -52,6 +52,7 @@
 * [Additional Problems on Recursion Chapter 6](06-functions2/004-ch6-additional-recursion-problems.md)
 * [Additional discussion on zip(), lamda(), map() filter() Chapter 6](06-functions2/006-ch6-zip.md)
 * [Additional discussion on generators Chapter 6](06-functions2/007-ch6-generators-advanced.md)
+* [Using functools.wraps in decorators Chapter 6](06-functions2/009-ch6-functools-decorators.md)
 * [Chapter end Questions & Answers Chapter 6](06-functions2/008-ch6-q-a.md)
 * [Solution to Beyond Text Book problems Chapter 6](06-functions2/005-beyond-text-ch6-functions2.md)
 
