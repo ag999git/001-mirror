@@ -163,8 +163,6 @@ bark()  # This will show the wrapper's print statements, but the function name a
 
 #### Diagram shows situation without and with using functools
 
-![Diagram shows situation without and with using functools](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch-6-using-functools.png)
-
 
 ![Diagram shows situation without and with using functools](/resources/ch-6-using-functools.png)
 
