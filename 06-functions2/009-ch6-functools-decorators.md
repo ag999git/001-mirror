@@ -85,7 +85,14 @@ What it does is that it copies the identity of the original (Wrapped) function a
  Showing how identity of wrapped function changes Before vs. After bapplying `@functools.wraps(func)`.
 
 
-#### Case A: Without `@functools.wraps` (The Identity is Lost)
+
+
+
+
+
+#### Example 1
+
+##### Case A: Without `@functools.wraps` (The Identity is Lost)
 
 ```python
 
@@ -165,5 +172,80 @@ bark()  # This will show the wrapper's print statements, but the function name a
 
 
 ![Diagram shows situation without and with using functools](/resources/ch-6-using-functools.png)
+
+
+#### Example 2
+
+##### Case A: Manual way to do exactly what functools.wraps does automatically.
+
+Before functools.wraps existed, programmers had to manually "fix" the identity of the function. 
+To do this, you manually overwrite the wrapper attributes with the values from the original func.
+
+
+
+```python
+
+def food_safety_check(func):
+    def wrapper(food_type):
+        prohibited_foods = ["Chocolate", "Cakes", "Ice Cream", "Onions"]
+        if food_type in prohibited_foods:
+            print(f"ALERT: {food_type} is dangerous for pets! Action blocked.")
+        else:
+            print(f"{food_type} is safe.")
+            return func(food_type)
+
+    # --- MANUAL IDENTITY COPIER ---
+    # Instead of @functools.wraps(func), we do this:
+    wrapper.__name__ = func.__name__
+    wrapper.__doc__ = func.__doc__
+    wrapper.__module__ = func.__module__
+    
+    return wrapper
+
+@food_safety_check
+def feed_pet(food):
+    """Feeds the pet the specified food item."""
+    print(f"Eating the {food} now. Yum!")
+
+# --- TEST ---
+print(f"Function Name: {feed_pet.__name__}") # Shows 'feed_pet'
+print(f"Function Doc:  {feed_pet.__doc__}")  # Shows the 'Feeds the pet...' string
+
+```
+
+
+##### Case B: Using functools
+
+```python
+
+import functools
+
+def food_safety_check(func):
+    @functools.wraps(func)
+    def wrapper(food_type):
+        prohibited_foods = ["Chocolate", "Cakes", "Ice Cream", "Onions"]
+        if food_type in prohibited_foods:
+            print(f"ALERT: {food_type} is dangerous for pets! Action blocked.")
+        else:
+            print(f"{food_type} is safe.")
+            return func(food_type) # Run the original function
+    return wrapper
+
+@food_safety_check
+def feed_pet(food):  # This is the function we are decorating
+    print(f"Eating the {food} now. Yum!")
+
+# Usage
+feed_pet("Carrot")    # Allowed
+feed_pet("Chocolate") # Blocked by decorator
+
+
+```
+
+
+
+
+
+
 
 
