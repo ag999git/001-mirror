@@ -156,7 +156,7 @@ bark()  # This will show the wrapper's print statements, but the function name a
 | Feature Tested | Before: Without functools.wraps | After: With functools.wraps |
 | --- | --- | --- |
 | bark.__name__ | "wrapper" (The generic mask) | "bark" (The correct name) |
-| bark.__doc__ | None (The manual is lost) | "Make Sound" (The manual is preserved) |
+| bark.__doc__ | None (The docstring is lost) | "Make Sound" (The docstring is preserved) |
 | Debug Tracebacks | Show errors in wrapper. | Show errors in bark. |
 | help(bark) | Shows info for the wrapper. | Shows info for the bark function. |
 
