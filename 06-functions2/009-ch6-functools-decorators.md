@@ -50,6 +50,79 @@ Without `functools`, some important information about the original function is *
 
 
 
+#### The Problem of loss of identity when using wrappers
+In Python, every function is an object. Like any object, it has an ID Card (Metadata). This card contains:
+
+`__name__`: The name of the function (e.g., "bark").
+
+`__doc__`: The docstring (e.g., """This function makes a sound.""").
+
+`__annotations__`: Information about type hints.
+
+When you decorate a function, you are performing a reassignment.
+
+```python
+
+# What the @ decorator actually does:
+bark = log_action(bark)
+```
+
+
+Now, the variable bark no longer points to the original "barking" code. It points to the wrapper function inside your decorator. If a debugger or a documentation tool looks at bark, it sees the wrapper's identity (Such as `__name__`, `__doc__` etc), not the original one.
+
+
+#### The solution is to use an "Identity Copier"
+@functools.wraps(func) acts as an "Identity copier". 
+What it does is that it copies the identity of the original (Wrapped) function and gives it to the wrapper inside the decorator. It does this by deep-copying the following attributes from the original function to the wrapper:
+
+- Name: Changes wrapper back to bark.
+
+- Docstring: Keeps your helpful documentation alive.
+
+- Module: Keeps track of where the function was originally defined.
+
+ 
+ Showing how identity of wrapped function changes Before vs. After bapplying `@functools.wraps(func)`.
+
+
+Case A: Without @functools.wraps (The Identity is Lost)
+
+```python
+
+# NO import functools used here!
+
+# --- THE DECORATOR ---
+def my_decorator(func):
+    # NOTICE: The 'Identity Copier' is missing!
+    def wrapper(*args, **kwargs):
+        print("--- Start of Wrapper ---")
+        result = func(*args, **kwargs)
+        print("--- End of Wrapper ---")
+        return result
+    return wrapper
+
+# --- THE FUNCTION ---
+@my_decorator  
+def bark():
+    """Make Sound"""
+    print("Woof!")
+
+# --- THE TEST ---
+# This is where you will see the problem:
+print(f"1. Function Name: {bark.__name__}") 
+# EXPECTED: bark | ACTUAL: wrapper
+
+print(f"2. Function Doc:  {bark.__doc__}")  
+# EXPECTED: Make Sound | ACTUAL: None
+
+
+```
+
+
+
+
+
+
 
 
 
