@@ -85,7 +85,7 @@ What it does is that it copies the identity of the original (Wrapped) function a
  Showing how identity of wrapped function changes Before vs. After bapplying `@functools.wraps(func)`.
 
 
-Case A: Without @functools.wraps (The Identity is Lost)
+#### Case A: Without `@functools.wraps` (The Identity is Lost)
 
 ```python
 
@@ -115,11 +115,42 @@ print(f"1. Function Name: {bark.__name__}")
 print(f"2. Function Doc:  {bark.__doc__}")  
 # EXPECTED: Make Sound | ACTUAL: None
 
-
 ```
 
 
+#### Case : With `@functools.wraps` (The Identity is Retained)
 
+
+```python
+
+import functools
+
+# --- THE DECORATOR ---
+def my_decorator(func):
+    # This 'copies' the ID card from bark() to the wrapper
+    @functools.wraps(func) 
+    def wrapper(*args, **kwargs):
+        print("--- Start of Wrapper ---")
+        result = func(*args, **kwargs)
+        print("--- End of Wrapper ---")
+        return result
+    return wrapper
+
+# --- THE FUNCTION ---
+@my_decorator
+def bark():  # This is the function we are decorating
+    """Make Sound"""  # This is the docstring (the 'manual')
+    print("Woof!")
+
+# --- THE TEST ---
+print(f"1. Function Name: {bark.__name__}")  # EXPECTED: bark | ACTUAL: bark (because of functools.wraps())
+print(f"2. Function Doc:  {bark.__doc__}")  # EXPECTED: Make Sound | ACTUAL: Make Sound (because of functools.wraps())
+
+print("-" * 20)
+bark()  # This will show the wrapper's print statements, but the function name and docstring will be correct due to functools.wraps()
+
+
+```
 
 
 
