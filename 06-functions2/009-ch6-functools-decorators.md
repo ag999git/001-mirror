@@ -149,10 +149,16 @@ print(f"2. Function Doc:  {bark.__doc__}")  # EXPECTED: Make Sound | ACTUAL: Mak
 print("-" * 20)
 bark()  # This will show the wrapper's print statements, but the function name and docstring will be correct due to functools.wraps()
 
-
 ```
 
+#### Table showing the identity attributes of the "wrapped" function without using and with using functools.wraps
 
+| Feature Tested | Before: Without functools.wraps | After: With functools.wraps |
+| --- | --- | --- |
+| bark.__name__ | "wrapper" (The generic mask) | "bark" (The correct name) |
+| bark.__doc__ | None (The manual is lost) | "Make Sound" (The manual is preserved) |
+| Debug Tracebacks | Show errors in wrapper. | Show errors in bark. |
+| help(bark) | Shows info for the wrapper. | Shows info for the bark function. |
 
 
 
