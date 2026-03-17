@@ -84,5 +84,21 @@ The following figure shows how del and `__del__()` operate:
 
 
 
+#### Note about overriding __del__()
+
+When you "override" __del__, you aren't replacing Python's ability to delete memory.
+
+When the reference count hits zero, the following sequence takes place:
+
+1.  **The Trigger:** is when the reference count for your object reaches zero. (Meaning all references to the object have been deleted.)
+2.  **The User's Turn:** Python looks at your class. It sees you have overridden __del__. It calls your method first. This allows you to close files, log messages, or clean up your own data.
+3.  **The System's Turn:** Once _your_ code in __del__ finishes running, Python’s internal **Garbage Collector** takes over. It performs the actual "low-level" work of clearing the bits and bytes from the RAM (the Heap).
+4.  **You don't "kill" the process:** Overriding __del__ does not stop Python from reclaiming memory. It just allows you to "hook" into the moment right before it happens.
+5.  **Automatic Execution:** You never have to manually call __del__. The interpreter handles the call automatically.
+6.  **The Final Step:** Python's internal memory management is written in **C**. After your Python-level __del__ finishes, the C-level code (which you cannot override) actually wipes the memory address.
+
+
+
+
 
 
