@@ -12,6 +12,12 @@ In Python, the copy module provides two ways to duplicate data:
 
 
 
+  
 
+| Feature | Shallow Copy | Deep Copy |
+| --- | --- | --- |
+| New Container? | Yes | Yes |
+| New Inner Objects? | No (Shared) | Yes (Independent) |
+| Performance | Fast | Slower (More memory) |
 
 
