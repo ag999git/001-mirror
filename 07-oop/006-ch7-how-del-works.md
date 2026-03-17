@@ -30,6 +30,41 @@ To understand how `del` command and **`__del__()`** work, one needs to understan
 
 The following script shows hoe del and `__del__()`work. To do reference counting we use sys.getrefcount() . So we have to import sys.
 
+```python
+
+import sys
+
+class Pet:
+    def __init__(self, name):
+        self.name = name
+        print(f"Pet object-> {self.name} allocated memory in the Heap")
+
+    def __del__(self):  # Called automatically when reference count hits 0
+        print(f"Reference count is 0. Memory for Pet {self.name} is freed")
+
+# 1. Create the original object p1
+p1 = Pet("Tiger")  # Reference count for "Tiger" is now 1
+count = sys.getrefcount(p1) - 1  #Subtract 1 (temp ref in getrefcount())
+print(f"Count on creating p1-> {count}")  # Count on creating p1-> 1
+
+# 2. Create an alias of p1 as p2
+p2 = p1  # Reference count for "Tiger" is now 2 (p1 and p2 both point to it)
+print(f"Count after alias p2 (p1 + p2):-> {sys.getrefcount(p1) - 1}")
+
+# 3. Delete the first reference p1
+del p1 
+# Note: __del__ will NOT be called here because p2 still exists.
+print("p1 is gone, but the object survives because p2 still points to it.")
+print(f"Object Count-> {sys.getrefcount(p2) - 1}")
+
+# 4. Delete the second (final) reference p2
+del p2 
+# Note: NOW the __del__ method will trigger automatically.
+print("End of script.")
+
+
+
+```
 
 
 
