@@ -78,6 +78,9 @@ The following table shows the status of reference count and the triggering of __
 The following figure shows how del and `__del__()` operate:
 
 
+![Figure: How del works](/resources/ch07-oop-del.png)
+
+
 
 
 
