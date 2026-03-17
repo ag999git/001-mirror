@@ -62,11 +62,20 @@ del p2
 # Note: NOW the __del__ method will trigger automatically.
 print("End of script.")
 
-
-
 ```
 
+The following table shows the status of reference count and the triggering of __del__() by the Python interpreter after p1 and p2 are created and deleted:-
 
+  
+
+| Action | What happens to the Reference Count? | Does __del__ run? |
+| --- | --- | --- |
+| p1 = Pet() | Count becomes 1. | No. |
+| p2 = p1 | Count becomes 2. | No. |
+| del p1 | Count becomes 1. | No. |
+| del p2 | Count becomes 0. | Yes! Memory is released. |
+
+The following figure shows how del and `__del__()` operate:
 
 
 
