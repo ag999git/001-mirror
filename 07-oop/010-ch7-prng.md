@@ -57,5 +57,69 @@ This research shows that LCG is **not cryptographically secure**. If an attacker
 This script implements the LCG class and then uses two "Breaker" functions to recover the hidden parameters.
 
 
+```python
+
+class LCG:
+    def __init__(self, seed, a=1103515245, c=12345, m=2**31):
+        self.state = seed
+        self.a = a
+        self.c = c
+        self.m = m
+
+    def next(self):
+        self.state = (self.state * self.a + self.c) % self.m
+        return self.state
+
+# --- ASSIGNMENT SOLUTIONS ---
+
+def break_lcg_find_c(x0, x1, a, m):
+    """Assignment 1: Recovers c when a and m are known"""
+    c = (x1 - a * x0) % m
+    return c
+
+def break_lcg_find_a_and_c(x0, x1, x2, m):
+    """Assignment 2: Recovers a and c when only m is known"""
+    # Formula: (X2 - X1) = a * (X1 - X0) (mod m)
+    diff_y = (x2 - x1) % m
+    diff_x = (x1 - x0) % m
+    
+    # To solve for 'a', we find the modular inverse of diff_x
+    # Python 3.8+ handles this with pow(val, -1, mod)
+    try:
+        inv_diff_x = pow(diff_x, -1, m)
+        recovered_a = (diff_y * inv_diff_x) % m
+        recovered_c = (x1 - recovered_a * x0) % m
+        return recovered_a, recovered_c
+    except ValueError:
+        return None, "Inverse does not exist (GCD != 1)"
+
+# --- TESTING THE ATTACK ---
+
+# Known outputs from the user's list
+outputs = [829870797, 1533044610, 1478614675]
+m_val = 2**31
+a_val = 1103515245
+
+print("--- Assignment 1: Finding C ---")
+found_c = break_lcg_find_c(outputs[0], outputs[1], a_val, m_val)
+print(f"Recovered c: {found_c}")
+
+print("\n--- Assignment 2: Finding A and C ---")
+found_a, found_c2 = break_lcg_find_a_and_c(outputs[0], outputs[1], outputs[2], m_val)
+print(f"Recovered a: {found_a}")
+print(f"Recovered c: {found_c2}")
+
+
+```
+
+
+
+
+
+
+
+
+
+
 
 
