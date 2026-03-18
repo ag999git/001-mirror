@@ -99,6 +99,36 @@ print("Using repr():", repr(pet1))  # Calls __repr__()
 ### Case : When both __str__() is not defined nut `__repr__()` is defined:
 The following script shows the output when str__() is not defined nut `__repr__()` is defined:
 
+```python
+
+class Pet:
+    def __init__(self, name, animal_type):
+        self.name = name  # This is an instance variable to store the name of the pet
+        self.animal_type = animal_type  # This is an instance variable to store the type of animal (e.g., Dog, Cat)
+
+    def __repr__(self):
+        # Developer-friendly representation
+        # This should ideally be a string that, if evaluated, would recreate the object.
+        return f"Pet(name='{self.name}', animal_type='{self.animal_type}')"
+
+
+pet1 = Pet("Tommy", "Dog")
+
+print(pet1)        # Uses __repr__()
+# Output: Pet(name='Tommy', animal_type='Dog')
+print(str(pet1))   # Also uses __repr__()
+# Output: Pet(name='Tommy', animal_type='Dog')
+print(repr(pet1))  # Uses __repr__()
+# Output: Pet(name='Tommy', animal_type='Dog')
+
+```
+
+
+
+
+
+
+
 
 
 
