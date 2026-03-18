@@ -84,8 +84,13 @@ pet1 = Pet("Tommy", "Dog")  # This creates an instance of the Pet class with nam
 
 # Calling different representations
 print("Using print():", pet1)        # Calls __str__()
+# Output: Using print(): Tommy is a Dog
 print("Using str():", str(pet1))    # Calls __str__()
+# Output: Using str(): Tommy is a Dog
 print("Using repr():", repr(pet1))  # Calls __repr__()
+# Output: Using repr(): Pet(name='Tommy', animal_type='Dog')
+
+
 
 ```
 
