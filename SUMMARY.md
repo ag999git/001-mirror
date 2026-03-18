@@ -58,6 +58,20 @@
 
 
 ## Chapter 7: Object Oriented Programming 
-* [Introduction to Chapter 6](07-oop/README.md)
+* [Introduction to Chapter 7](07-oop/README.md)
+* [id() of an object and "self" Chapter 7](07-oop/005-id-self-object.md)
+* [How del works Chapter 7](07-oop/006-ch7-how-del-works.md)
+* [Research Question 1 (Circular Reference) Chapter 7](07-oop/007-ch7-research-q1.md)
+* [Research Question 2 (Circular Reference) Chapter 7](07-oop/008-ch7-research-q2.md)
+* [Research Question 3 (Memory Leaks) Chapter 7](07-oop/009-ch7-research-q3.md)
+* [Conceptual Question/ Answers Chapter 7](07-oop/010-oop-conceptual-questions.md)
+* [Scripting Question/ Answers Chapter 7](07-oop/011-ch7-scripts.md)
+* [Pseudorandom Number Generators (PRNGs) Chapter 7](07-oop/012-ch7-prng.md)
+
+
+
+
+
+
 
 
