@@ -68,6 +68,7 @@
 * [Conceptual Question/ Answers Chapter 7](07-oop/010-oop-conceptual-questions.md)
 * [Scripting Question/ Answers Chapter 7](07-oop/011-ch7-scripts.md)
 * [Pseudorandom Number Generators (PRNGs) Chapter 7](07-oop/012-ch7-prng.md)
+* [__str__() versus __repr__() Chapter 7](07-oop/013-ch7-str-repr.md)
 
 
 
