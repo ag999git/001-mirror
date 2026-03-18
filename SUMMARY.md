@@ -59,6 +59,7 @@
 
 ## Chapter 7: Object Oriented Programming 
 * [Introduction to Chapter 7](07-oop/README.md)
+* [Google Colab OOP Chapter 7](https://github.com/ag999git/001-Python-book-2026/blob/main/colab-nb/07_ch7_oop.ipynb)
 * [id() of an object and "self" Chapter 7](07-oop/005-id-self-object.md)
 * [How del works Chapter 7](07-oop/006-ch7-how-del-works.md)
 * [Research Question 1 (Circular Reference) Chapter 7](07-oop/007-ch7-research-q1.md)
