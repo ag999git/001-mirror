@@ -56,3 +56,8 @@
 * [Chapter end Questions & Answers Chapter 6](06-functions2/008-ch6-q-a.md)
 * [Solution to Beyond Text Book problems Chapter 6](06-functions2/005-beyond-text-ch6-functions2.md)
 
+
+## Chapter 7: Object Oriented Programming 
+* [Introduction to Chapter 6](07-oop/README.md)
+
+
