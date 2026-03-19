@@ -135,6 +135,105 @@ This does the following
 -   Shows how modifying parent affects child
 
 
+### The script is as follows:
+
+```python
+
+# BASE CLASS: Pet
+
+class Pet:
+    def __init__(self, name):  # Constructor to initialize the name of the pet
+        self.name = name              # Public attribute
+        self.__secret = "Hidden"      # Encapsulation (private variable)
+        print("Pet constructor called")  # This will show when the Pet constructor is called, which will help us understand constructor chaining when we create instances of Dog and Cat.
+
+    def walk(self):  # Concrete method available to all subclasses
+        print(f"{self.name} is walking (Pet method)")   # Code reuse
+
+    def speak(self):  # Method to be overridden by subclasses
+        print(f"{self.name} makes a sound (Pet method)")  # This is a placeholder method that can be overridden by subclasses to provide specific behavior for different types of pets.
+
+    def show_secret(self):  # Method to demonstrate encapsulation
+        print("Accessing private:", self._Pet__secret)  # Encapsulation access
+
+
+# DERIVED CLASS: Dog
+class Dog(Pet):   # Is-A relationship: Dog is a Pet
+
+    def __init__(self, name, color):  # Constructor chaining + Extensibility
+        print("Dog constructor called")
+        super().__init__(name)   # super() → constructor chaining
+        self.color = color       # Extensibility (new attribute)
+
+    def speak(self):             # Overriding
+        print(f"{self.name} says Bark!")
+
+    def walk(self):              # Overriding + super()
+        print(f"{self.name} walks like a dog")
+        super().walk()           # Call parent method
+
+# DERIVED CLASS: Cat
+class Cat(Pet):   # Is-A relationship
+
+    def speak(self):             # Overriding
+        print(f"{self.name} says Meow!")
+
+# OBJECT CREATION
+d = Dog("Tommy", "Black")
+c = Cat("Kitty")
+
+# 1. Code Reuse
+d.walk()   # Uses Dog + Pet method
+c.walk()   # Uses Pet method (inherited)
+
+
+# 2. Overriding
+d.speak()  # Dog's speak() overrides Pet's speak()
+c.speak()  # Cat's speak() overrides Pet's speak()
+
+# 3. Polymorphism + Dynamic Binding
+pets = [d, c]
+
+for p in pets:
+    p.speak()   # Runtime decision (dynamic binding)
+
+# 4. Encapsulation
+d.show_secret()
+
+
+# 5. isinstance() → Is-A check
+print(isinstance(d, Dog))   # True
+print(isinstance(d, Pet))   # True → Is-A relationship
+
+
+# 6. issubclass()
+print(issubclass(Dog, Pet))  # True
+print(issubclass(Cat, Pet))  # True
+print(issubclass(Dog, Cat))  # False
+
+# 7. MRO (Method Resolution Order)
+print("Dog MRO:", Dog.__mro__)
+print("Cat MRO:", Cat.__mro__)
+
+# 8. Constructor Behavior
+# Dog constructor → calls Pet constructor via super()
+
+# 9. Maintainability
+# If we change Pet.walk(), both Dog and Cat behavior changes
+
+# 10. Extensibility
+print(d.color)   # New feature added in child
+# Note: We can also add new methods in Dog or Cat without affecting Pet, demonstrating extensibility.
+
+
+
+```
+
+
+
+
+
+
 
 
 
