@@ -65,6 +65,7 @@
 * [Research Question 1 (Circular Reference) Chapter 7](07-oop/007-ch7-research-q1.md)
 * [Research Question 2 (Shallow copy/ Deep Copy) Chapter 7](07-oop/008-ch7-research-q2.md)
 * [Research Question 3 (Memory Leaks) Chapter 7](07-oop/009-ch7-research-q3.md)
+* [Research Question (Implicit inheritence from 'object') Chapter 7](07-oop/014-ch7-object.md)
 * [Conceptual Question/ Answers Chapter 7](07-oop/010-oop-conceptual-questions.md)
 * [Scripting Question/ Answers Chapter 7](07-oop/011-ch7-scripts.md)
 * [Pseudorandom Number Generators (PRNGs) Chapter 7](07-oop/012-ch7-prng.md)
