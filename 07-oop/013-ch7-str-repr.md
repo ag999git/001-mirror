@@ -90,11 +90,7 @@ print("Using str():", str(pet1))    # Calls __str__()
 print("Using repr():", repr(pet1))  # Calls __repr__()
 # Output: Using repr(): Pet(name='Tommy', animal_type='Dog')
 
-
-
 ```
-
-
 
 ### Case : When both __str__() is not defined nut `__repr__()` is defined:
 The following script shows the output when str__() is not defined nut `__repr__()` is defined:
@@ -123,9 +119,9 @@ print(repr(pet1))  # Uses __repr__()
 
 ```
 
+#### The following figure shows how str() and repr() interact:
 
-
-
+![Figure](/resources/ch-7-oop-str-vs-repr.png)
 
 
 
