@@ -242,9 +242,28 @@ print(Dog.__mro__)  # This will show the method resolution order for the Dog cla
 
 
 
-### PART C: ANALYSIS TABLE
+### PART C: TABLE
+
+The following table analyses all the important concepts given in the script:
 
 
+  
+
+  
+
+| Property | Description | Key Idea | Syntax / Tool | Example | Output Behavior |
+| --- | --- | --- | --- | --- | --- |
+| Code Reuse | Subclass uses parent methods | No need to rewrite code | Inheritance | Dog.walk() | Uses Animal.walk() |
+| Overriding | Subclass redefines method | Child has priority | Same method name | Dog.speak() | Dog version runs |
+| Polymorphism | Same method, different behavior | Runtime decision | Same interface | pet.speak() | Different outputs |
+| super() | Calls parent method | Extend parent logic | super() | super().__init__() | Parent + child both run |
+| MRO | Method search order | Avoid ambiguity | __mro__ | Dog.__mro__ | Shows lookup chain |
+| ABC | Enforce method implementation | Blueprint class | ABC, @abstractmethod | speak() | Must override |
+| Encapsulation (Private) | Restrict access | Name mangling | __var | _Class__var | Hidden access |
+| isinstance() | Check object type | Runtime check | isinstance() | isinstance(d, Dog) | True/False |
+| issubclass() | Check class relation | Inheritance check | issubclass() | issubclass(Dog, Animal) | True/False |
+| Constructor chaining | Parent + child init | Proper initialization | super().__init__() | Dog init | Both run |
+| Dynamic Binding | Method resolved at runtime | Late decision | Polymorphism | loop pets | Correct method called |
 
 
 
