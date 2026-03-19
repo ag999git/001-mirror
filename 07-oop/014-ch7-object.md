@@ -36,6 +36,7 @@ In Python, `object` is the most humble yet powerful class. It is a built-in clas
 This script demonstrates the difference between explicit and implicit inheritance and proves that even built-in types are "objects."
 
 ```python
+
 # 1. Explicit Inheritance
 class Dog(object):
     pass
