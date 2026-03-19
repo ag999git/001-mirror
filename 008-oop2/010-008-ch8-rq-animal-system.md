@@ -141,6 +141,105 @@ Write code to demonstrate the following:
 **The following script implements all of above**
 
 
+```python
+
+
+from abc import ABC, abstractmethod
+
+# Abstract Base Class
+class Animal(ABC):
+    def __init__(self, name):
+        self.name = name
+        self.__secret = "I am hidden"   # Private variable
+
+    def walk(self):  # Concrete method available to all subclasses
+        print(f"{self.name} is walking")
+
+    @abstractmethod
+    def speak(self):  # Abstract method to be implemented by subclasses
+        pass
+
+
+# First Parent
+class Friendly:  # This is a separate parent class to demonstrate multiple inheritance
+    def nature(self):  # Method to demonstrate multiple inheritance
+        print("I am friendly and love to socialize!")
+
+
+# Derived Class
+class Dog(Animal, Friendly):  # Dog inherits from both Animal and Friendly, demonstrating multiple inheritance
+
+    def __init__(self, name, color):
+        super().__init__(name)   # Calling the constructor of the parent class (Animal) to initialize the name attribute. This is an example of constructor chaining, where the child class constructor calls the parent class constructor
+        # Constructor chaining allows us to reuse the initialization logic of the parent class, ensuring that the common attributes are properly set up without having to duplicate code in the child class.
+        self.color = color
+
+    # Overriding
+    def speak(self):  # Implementing the abstract method
+        print(f"{self.name} says Bark!")  # This is an example of method overriding, where the Dog class provides its own implementation of the speak() method defined as an abstract method in the Animal class. By overriding the speak() method, the Dog class can provide
+
+    def show_secret(self):
+        # Access private variable (name mangling)
+        print(self._Animal__secret)  # This is how we can access the private variable __secret from the Animal class using name mangling. The variable is accessed as _Animal__secret, where _Animal is the name of the class and __secret is the name of the private variable. This allows us to access the private variable even though it is not directly accessible from outside the class.
+
+
+class Cat(Animal):  # Cat inherits from Animal, demonstrating single inheritance
+
+    def speak(self):  # Implementing the abstract method
+        print(f"{self.name} says Meow!")  # This is an example of method overriding, where the Cat class provides its own implementation of the speak() method defined as an abstract method in the Animal class. By overriding the speak() method, the Cat class can provide
+
+
+
+# Demonstration of all concepts together
+
+
+d = Dog("Tommy", "Black")  # Create an instance of Dog with name "Tommy" and color "Black"
+c = Cat("Kitty")  # Create an instance of Cat with name "Kitty"
+
+# 1. Code reuse
+d.walk()  # Tommy is walking
+c.walk()  # Kitty is walking
+# Both Dog and Cat can use the walk() method defined in the Animal class, demonstrating code reuse through inheritance. This allows us to avoid duplicating the walk() method in both classes, as they can inherit it from the common parent class (Animal).
+
+# 2. Overriding
+d.speak()  # Tommy says Bark!
+c.speak()  # Kitty says Meow!
+# The speak() method is overridden in both the Dog and Cat classes to provide specific implementations for each type of animal. This allows us to have different behaviors for the same method name (speak()) based on the type of object (Dog or Cat), demonstrating method overriding.
+
+# 3. Polymorphism
+pets = [d, c]  # List of pets (Dog and Cat) demonstrating polymorphism
+for p in pets:
+    p.speak()  # This will call the appropriate speak() method for each pet, demonstrating polymorphism
+# Output: 
+    # Tommy says Bark!
+    # Kitty says Meow!
+
+
+# 4. Multiple inheritance
+d.nature()
+# The Dog class inherits from both the Animal and Friendly classes, allowing it to access methods from both parent classes. This demonstrates multiple inheritance, where a class can inherit from more than one parent class, enabling it to combine behaviors and attributes from multiple sources.
+
+# 5. Private access
+d.show_secret()
+# The show_secret() method in the Dog class accesses the private variable __secret from the Animal class using name mangling. This demonstrates how we can access private variables from a parent class in a child class, even though they are not directly accessible from outside the class.
+
+# 6. isinstance and issubclass
+print(isinstance(d, Dog))  # True, because d is an instance of Dog
+print(isinstance(d, Animal))  # True, because Dog is a subclass of Animal
+print(isinstance(c, Cat))  # True, because c is an instance of Cat
+print(issubclass(Dog, Animal)) # True, because Dog is a subclass of Animal
+
+# 7. MRO (Method Resolution Order)
+print(Dog.__mro__)  # This will show the method resolution order for the Dog class, which is the order in which Python looks for methods in the class hierarchy. The output will show that Python first looks in the Dog class, then in the Animal class, and finally in the Friendly class, demonstrating how Python resolves method calls in a multiple inheritance scenario.
+# Output: (<class '__main__.Dog'>, <class '__main__.Animal'>, <class '__main__.Friendly'>, <class 'object'>)
+
+
+
+```
+
+
+
+
 
 
 ### PART C: ANALYSIS TABLE
