@@ -265,7 +265,10 @@ The following table analyses all the important concepts given in the script:
 | Constructor chaining | Parent + child init | Proper initialization | super().__init__() | Dog init | Both run |
 | Dynamic Binding | Method resolved at runtime | Late decision | Polymorphism | loop pets | Correct method called |
 
+#### The following flowchart shows the parent and the derived classes
+It also shows the attributes and methods of each class. 
 
+![Diagram](/resources/ch8-inheritence-cat-dog.png)
 
 
 
