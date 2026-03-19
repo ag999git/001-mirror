@@ -117,7 +117,12 @@ deep_dive_ancestry(object)  # This will show that object is the root of all clas
 
 ```
 
+#### The diagram
 
+The following flowchart shows the hierarchy of some inbuilt and user created classes.
+Note:- Exceptions as a class are discussed in the chapter on exceptions
+
+![Diagram](/resources/ch-7-oop-object-base.png)
 
 
 
