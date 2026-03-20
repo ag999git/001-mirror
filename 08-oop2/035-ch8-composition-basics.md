@@ -63,11 +63,28 @@ However, not all Has-A relationships are the same. They differ based on:
 -   If Dog is removed → Collar is also removed (conceptually). So in a Strong Has-A Relationship, the object of class Collar is created inside the object of class Dog and it dies with the Dog object.
     
 
+
+#### Strong Relationship (Composition)
+
+-   Whole **controls the lifecycle** of part
+    
+-   Part has **no independent identity**
+    
+-   Tight coupling
+    
+
+Example:
+
+> Collar belongs only to one Dog
+
+
+
 ----------
 
 ##### Interpretation
 
 >“Built inside, owned completely”
+
 
 
 ----------
@@ -111,6 +128,28 @@ However, not all Has-A relationships are the same. They differ based on:
 >“Received from outside, not owned”
 
 
+
+#### Weak Relationship (Aggregation)
+
+-   Whole does **not control lifecycle**
+    
+-   Part has **independent identity**
+    
+-   Loose coupling
+    
+
+Example:
+
+> Toy can exist without Dog
+
+#### When to Use Aggregation
+
+-   When objects are **loosely related**
+    
+-   When reuse and sharing is required
+
+
+
 ----------
 
 #### 2.3 Dependency (Uses-A Relationship)
@@ -152,6 +191,13 @@ However, not all Has-A relationships are the same. They differ based on:
 “Used when needed, then forgotten”
 
 ----------
+
+
+#### When to Use Dependency
+
+-   When object is needed **only for a task**
+    
+-   Avoid unnecessary storage
 
 #### 3. Comparative Table
 
