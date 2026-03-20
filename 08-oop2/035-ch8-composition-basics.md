@@ -156,7 +156,22 @@ However, not all Has-A relationships are the same. They differ based on:
 #### 3. Comparative Table
 
 
+  
 
+  
+
+| Feature | Composition (Strong) | Aggregation (Weak) | Dependency (Very Weak) |
+| --- | --- | --- | --- |
+| Relationship type | Strong Has-A | Weak Has-A | Uses-A |
+| Ownership | Strong | Weak | None |
+| Object creation | Inside class | Outside class | Outside class |
+| Lifetime dependency | Dependent | Independent | Independent |
+| Sharing | Not shared | Can be shared | Not relevant |
+| Storage | Stored as attribute | Stored as attribute | Not stored |
+| Duration | Permanent | Long-term | Temporary |
+| Coupling | High | Medium | Low |
+| Example | Dog–Collar | Dog–Toy | Dog uses Toy |
+| Destruction effect | Part destroyed with whole | Part survives | No effect |
 
 
 
