@@ -266,13 +266,11 @@ print(d2.name, "has toy:", d2.toy.name)  # Accessing the toy of d2 (same toy as 
 #    - This is aggregation (not composition)
 #    - Because ownership is not exclusive
 
-
-
 ```
 
+### The following diagram shows the relationships between the classes for the above script
 
-
-
+![Diagram](/resources/ch8-composition.png)
 
 
 
