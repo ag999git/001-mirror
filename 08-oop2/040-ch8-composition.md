@@ -158,6 +158,19 @@ Your program should clearly demonstrate:
 
 ### **ANSWER (SOLUTION)**
 
+
+In the solution there are the following 4 classes:
+  
+
+| No. | Class | Concept |
+| --- | --- | --- |
+| -1 | Pet | Base class |
+| -2 | Dog | Main class |
+| -3 | Collar | Composition |
+| -4 | Toy | Aggregation + Dependency |
+
+#### The script is as follows:
+
 ```python
 
 # A. CLASS DEFINITIONS
