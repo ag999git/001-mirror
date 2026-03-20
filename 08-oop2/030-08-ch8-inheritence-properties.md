@@ -225,11 +225,29 @@ print("Cat MRO:", Cat.__mro__)
 print(d.color)   # New feature added in child
 # Note: We can also add new methods in Dog or Cat without affecting Pet, demonstrating extensibility.
 
-
-
 ```
 
+#### The following table summarizes important properties of inheritence
 
+
+  
+
+| Property | Simple Meaning | Technical Description | Example | Output / Behavior | Related Concept |
+| --- | --- | --- | --- | --- | --- |
+| Is-A Relationship | One class is a type of another | Establishes inheritance hierarchy | Dog(Pet) | Dog is treated as Pet | OOP Design |
+| Code Reuse | Use existing code | Child inherits methods/attributes | d.walk() | Uses Pet.walk() | DRY Principle |
+| Implicit Method Lookup | Python searches automatically | If method not in child → check parent | No __init__ in Dog | Parent constructor runs | MRO |
+| Method Resolution Order (MRO) | Search order for methods | Defined linear order of lookup | Dog.__mro__ | (Dog, Pet, object) | C3 Linearization |
+| Polymorphism | Same method, different behavior | Method overridden in subclasses | speak() | Dog → Bark, Cat → Meow | Dynamic Binding |
+| Overriding | Replace parent method | Child defines same method name | Dog.speak() | Child method runs first | Runtime Behavior |
+| super() Usage | Call parent explicitly | Used to access parent methods | super().__init__() | Parent + child both run | Constructor chaining |
+| Constructor Behavior | How objects are initialized | Depends on presence of __init__ | Dog with/without init | Different flows | Object lifecycle |
+| Dynamic Binding | Decision at runtime | Method call resolved dynamically | Loop over pets | Correct method runs | Polymorphism |
+| Extensibility | Add new features | Child adds attributes/methods | color in Dog | More functionality | Design flexibility |
+| Encapsulation Support | Protect data | Private variables inherited with name mangling | __var | Access via _Class__var | Data hiding |
+| Hierarchy Formation | Class structure | Forms tree-like structure | Pet → Dog → Puppy | Multi-level relation | System design |
+| Reusability Across Levels | Use features from any level | Child can access grandparent methods | Multi-level inheritance | Deep reuse | MRO |
+| Maintainability | Easy to update code | Change parent → affects children | Modify Pet.walk() | All subclasses updated | Clean code |
 
 
 
