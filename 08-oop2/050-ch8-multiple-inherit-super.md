@@ -130,6 +130,9 @@ d1.action()
 
 print(dog1.__mro__)  
 # Output: (<class '__main__.Dog1'>, <class '__main__.Walker'>, <class '__main__.Swimmer'>, <class '__main__.Pet'>, <class 'object'>)
+# MRO is Dog1 → Walker → Swimmer → Pet → object, which is different from Dog2 due to the different order of inheritance.
+# Note: The order of method calls in action() for Dog1 and Dog2 is different due to the different MRO caused by the order of inheritance.
+
 
 # TESTING Dog2
 print("<---- Dog2 Execution ---->")
@@ -152,6 +155,8 @@ d2.action()  # Expected Output:
 
 print(d2.__mro__)  
 # Output: (<class '__main__.Dog2'>, <class '__main__.Swimmer'>, <class '__main__.Walker'>, <class '__main__.Pet'>, <class 'object'>)
+# MRO is Dog2 → Swimmer → Walker → Pet → object, which is different from Dog1 due to the different order of inheritance.
+# Note: The order of method calls in action() for Dog1 and Dog2 is different due to the different MRO caused by the order of inheritance.   
 
 ```
 
