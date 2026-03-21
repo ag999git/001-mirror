@@ -119,7 +119,128 @@ Do instead (Good):
 
 ----------
 
-#### Script (Highly Important)
+
+<details>
+
+<summary> Problem statement and solution to use of `super() and MRO in Multiple Inheritance </summary>
+
+
+
+### Understanding `super()` and MRO in Multiple Inheritance
+
+----------
+
+### Problem Statement
+
+You are required to design a Python program to demonstrate how `super()` works in **multiple inheritance**, and how Python uses **Method Resolution Order (MRO)** to control execution.
+
+----------
+
+#### Part A: Class Design
+
+Create the following class hierarchy:
+
+1.  A base class `Pet` with:
+    
+    -   A constructor that prints: `"Pet constructor"`
+        
+    -   A method `action()` that prints: `"Pet action"`
+        
+
+----------
+
+2.  Two parent classes:
+    
+
+#### (a) `Walker`
+
+-   Inherits from `Pet`
+    
+-   Constructor should:
+    
+    -   Print `"Walker constructor"`
+        
+    -   Call parent constructor using `super()`
+        
+-   Method `action()`:
+    
+    -   Print `"Walking..."`
+        
+    -   Call next method using `super()`
+        
+
+----------
+
+#### (b) `Swimmer`
+
+-   Same structure as `Walker`
+    
+-   Replace output with `"Swimming..."`
+    
+
+----------
+
+### Part B: Multiple Inheritance
+
+Create two child classes:
+
+#### (a) `Dog1`
+
+-   Inherits from `Walker, Swimmer`
+    
+-   Constructor:
+    
+    -   Print `"Dog1 constructor"`
+        
+    -   Call `super()`
+        
+-   Method `action()`:
+    
+    -   Print `"Dog1 action"`
+        
+    -   Call `super()`
+        
+
+----------
+
+#### (b) `Dog2`
+
+-   Inherits from `Swimmer, Walker`
+    
+-   Same structure as `Dog1`
+    
+
+----------
+
+### Part C: Execution
+
+Write code to:
+
+1.  Print MRO of both classes:
+    
+    Dog1.__mro__  
+    Dog2.__mro__
+    
+2.  Create objects:
+    
+    -   `d1 = Dog1()`
+        
+    -   `d2 = Dog2()`
+        
+3.  Call:
+    
+    d1.action()  
+    d2.action()
+
+</details>
+
+
+
+
+
+----------
+
+#### Script 
 
 
 ```python
