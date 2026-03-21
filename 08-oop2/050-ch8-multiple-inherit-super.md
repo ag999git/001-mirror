@@ -12,7 +12,7 @@
 
 In single inheritance:
 
-> `super()` → calls the immediate parent
+>In single inheritance, `super()` usually calls the immediate parent, because the MRO is simple.
 
 In multiple inheritance:
 
@@ -28,6 +28,9 @@ In multiple inheritance:
     
 -   Enables **cooperative inheritance**
     
+
+
+**Cooperative inheritance** means every class participates in the chain by calling `super()` so that all classes get executed exactly once.
 
 ----------
 
@@ -71,7 +74,12 @@ If one class skips → chain breaks
 
 #### Rule 3: Method should exist in all classes (if chaining)
 
->If you are using super() to chain method calls, then every class in the MRO chain must either define that method OR safely pass the call forward.
+If a method uses `super()` for chaining, then every class in the MRO should either:
+
+-  implement that method, OR
+
+-  safely allow the chain to continue (by calling `super(`))
+
 
 Otherwise:
 
@@ -216,6 +224,9 @@ print(d2.__mro__)
 # Note: The order of method calls in action() for Dog1 and Dog2 is different due to the different MRO caused by the order of inheritance.   
 
 ```
+
+>Key Insight:
+>super() does NOT mean “go to parent” — it means “go to next class in MRO”.
 
 
 ### Constructor Flow for `Dog1`
