@@ -189,7 +189,7 @@ d1.action()
 # Swimming...
 # Pet action
 
-print(dog1.__mro__)  
+print(Dog1.__mro__)  
 # Output: (<class '__main__.Dog1'>, <class '__main__.Walker'>, <class '__main__.Swimmer'>, <class '__main__.Pet'>, <class 'object'>)
 # MRO is Dog1 → Walker → Swimmer → Pet → object, which is different from Dog2 due to the different order of inheritance.
 # Note: The order of method calls in action() for Dog1 and Dog2 is different due to the different MRO caused by the order of inheritance.
