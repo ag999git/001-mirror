@@ -122,11 +122,11 @@ Do instead (Good):
 
 <details>
 
-<summary> Problem statement and solution to use of `super() and MRO in Multiple Inheritance </summary>
+<summary> Problem statement and solution to use of `super()` and MRO in Multiple Inheritance </summary>
 
 
 
-### Understanding `super()` and MRO in Multiple Inheritance
+### Problem statement and solution to use of `super()` and MRO in Multiple Inheritance 
 
 ----------
 
