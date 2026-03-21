@@ -46,7 +46,68 @@ Both `Walker` and `Swimmer` inherit from `Pet`
 
 ----------
 
+
 ### Correct Way Using `super()` (Cooperative Design)
+
+**Key Rules of `super()` in Multiple Inheritance**
+
+----------
+
+#### Rule 1: It follows MRO, not hierarchy tree
+
+Not “parent” → but **next in line**
+
+----------
+
+#### Rule 2: All classes must cooperate
+
+Every class must call:
+
+`super().__init__()`
+
+If one class skips → chain breaks
+
+----------
+
+#### Rule 3: Method should exist in all classes (if chaining)
+
+>If you are using super() to chain method calls, then every class in the MRO chain must either define that method OR safely pass the call forward.
+
+Otherwise:
+
+`AttributeError`
+
+**Why does this rule exist?**
+
+Because `super()` keeps doing: "Call the next class in MRO"
+
+-  It does NOT check whether the method exists later
+-  It simply tries to call it
+
+**What happens if method is missing?**
+
+If at any step you call: `super().action()`
+
+and the next class does NOT have `action()`
+
+Python raises:
+
+`AttributeError: 'super' object has no attribute 'action'`
+
+
+----------
+
+#### Rule 4: Avoid direct parent calls
+
+Don't do (Bad):
+
+`Pet.__init__(self)`
+
+Do instead (Good):
+
+`super().__init__()`
+
+
 
 ----------
 
