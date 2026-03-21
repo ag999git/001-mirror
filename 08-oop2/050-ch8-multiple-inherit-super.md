@@ -148,13 +148,21 @@ d2.action()  # Expected Output:
 # Walking...
 # Pet action
 
-
-
-
 ```
 
 
+### Constructor Flow for `Dog1`
 
+ - Dog1 constructor   
+ - Walker constructor   
+ - Swimmer constructor   
+ - Pet constructor
+
+#### Why this order?
+
+Because MRO is:
+
+Dog  →  Walker  →  Swimmer  →  Pet  →  object
 
 
 
