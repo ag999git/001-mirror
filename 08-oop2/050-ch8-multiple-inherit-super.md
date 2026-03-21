@@ -172,8 +172,6 @@ class Dog2(Swimmer, Walker):
 # TESTING Dog1
 print("<---- Dog1 Execution ---->")
 
-print("MRO of Dog1:->", Dog1.__mro__)
-
 d1 = Dog1()  # Constructor chaining: Dog1 → Walker → Swimmer → Pet
 # Expected Output: on object creation:
 # Dog1 constructor
@@ -197,8 +195,6 @@ print(Dog1.__mro__)
 
 # TESTING Dog2
 print("<---- Dog2 Execution ---->")
-
-print("MRO of Dog2:->", Dog2.__mro__)
 
 d2 = Dog2()  # Constructor chaining: Dog2 → Swimmer → Walker → Pet
 # Expected Output: on object creation:
