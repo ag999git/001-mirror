@@ -246,7 +246,10 @@ Dog  →  Walker  →  Swimmer  →  Pet  →  object
 Each class contributes once → **no duplication**
 
 
+### Flow chart
+**The following diagram shows how the MRO works for `__init__()` and `super()`
 
+![Diagram](/resources/ch8-multiple-inherit-super2.png)
 
 
 
