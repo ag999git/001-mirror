@@ -53,7 +53,105 @@ Both `Walker` and `Swimmer` inherit from `Pet`
 #### Script (Highly Important)
 
 
+```python
 
+# BASE CLASS
+class Pet:  # Base class for all pets
+    def __init__(self):  # Constructor of Pet class is called when any subclass is instantiated
+        print("Pet constructor")  
+
+    def action(self):  # Common method that can be called by all subclasses
+        print("Pet action")  
+
+# FIRST PARENT
+class Walker(Pet):  # Walker inherits from Pet
+    def __init__(self):  # Constructor of Walker class is called when Walker object is instantiated
+        print("Walker constructor") 
+        super().__init__()   # Calls next class in MRO
+
+    def action(self):  # Overrides Pet's action() and calls it using super()
+        print("Walking...")
+        super().action()     # Continue MRO chain
+
+# SECOND PARENT
+class Swimmer(Pet):  # Swimmer inherits from Pet
+    def __init__(self):  # Constructor of Swimmer class is called when Swimmer object is instantiated
+        print("Swimmer constructor")  
+        super().__init__()   # Calls next class in MRO
+
+    def action(self):  # Overrides Pet's action() and calls it using super()
+        print("Swimming...")
+        super().action()     # Continue MRO chain
+
+# CHILD CLASS 1 (Walker first)
+class Dog1(Walker, Swimmer):
+    def __init__(self):  # Constructor of Dog1 class is called when Dog1 object is instantiated
+        print("Dog1 constructor")  
+        super().__init__()  
+        # MRO: Dog1 → Walker → Swimmer → Pet → object
+
+    def action(self):  # Overrides Walker's action() and calls it using super()
+        print("Dog1 action")  # Method of Dog1 class is called when action() is invoked on Dog1 object
+        super().action()
+        # Flow follows MRO step-by-step
+
+# CHILD CLASS 2 (Swimmer first)
+class Dog2(Swimmer, Walker):
+    def __init__(self):  # Constructor of Dog2 class is called when Dog2 object is instantiated
+        print("Dog2 constructor")  
+        super().__init__()
+        # MRO: Dog2 → Swimmer → Walker → Pet → object
+
+    def action(self):  # Overrides Swimmer's action() and calls it using super()
+        print("Dog2 action")  # Method of Dog2 class is called when action() is invoked on Dog2 object
+        super().action()
+        # Flow follows MRO step-by-step
+
+
+# TESTING Dog1
+print("<---- Dog1 Execution ---->")
+
+print("MRO of Dog1:->", Dog1.__mro__)
+
+d1 = Dog1()  # Constructor chaining: Dog1 → Walker → Swimmer → Pet
+# Expected Output: on object creation:
+# Dog1 constructor
+# Walker constructor
+# Swimmer constructor
+# Pet constructor
+
+print("--- Calling action() ---")
+d1.action()  
+# Expected Output:
+# Dog1 action
+# Walking...
+# Swimming...
+# Pet action
+
+
+# TESTING Dog2
+print("<---- Dog2 Execution ---->")
+
+print("MRO of Dog2:->", Dog2.__mro__)
+
+d2 = Dog2()  # Constructor chaining: Dog2 → Swimmer → Walker → Pet
+# Expected Output: on object creation:
+# Dog2 constructor
+# Swimmer constructor
+# Walker constructor
+# Pet constructor
+
+print("--- Calling action() ---")
+d2.action()  # Expected Output:
+# Dog2 action
+# Swimming...
+# Walking...
+# Pet action
+
+
+
+
+```
 
 
 
