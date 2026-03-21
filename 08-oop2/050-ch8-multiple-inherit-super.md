@@ -128,6 +128,8 @@ d1.action()
 # Swimming...
 # Pet action
 
+print(dog1.__mro__)  
+# Output: (<class '__main__.Dog1'>, <class '__main__.Walker'>, <class '__main__.Swimmer'>, <class '__main__.Pet'>, <class 'object'>)
 
 # TESTING Dog2
 print("<---- Dog2 Execution ---->")
@@ -148,6 +150,9 @@ d2.action()  # Expected Output:
 # Walking...
 # Pet action
 
+print(d2.__mro__)  
+# Output: (<class '__main__.Dog2'>, <class '__main__.Swimmer'>, <class '__main__.Walker'>, <class '__main__.Pet'>, <class 'object'>)
+
 ```
 
 
@@ -165,7 +170,14 @@ Because MRO is:
 Dog  →  Walker  →  Swimmer  →  Pet  →  object
 
 
+### Method Flow for `Dog1`
 
+ - Dog1 action   
+ - Walking...   
+ - Swimming...   
+ - Pet action
+
+Each class contributes once → **no duplication**
 
 
 
