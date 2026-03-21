@@ -225,8 +225,7 @@ print(d2.__mro__)
 
 ```
 
->Key Insight:
->super() does NOT mean “go to parent” — it means “go to next class in MRO”.
+>Key Insight: `super()` does not mean “go to parent” — it means “go to next class in MRO”.
 
 
 ### Constructor Flow for `Dog1`
