@@ -137,6 +137,83 @@ print(p)  # p is None because __new__() returned None, so no object was created 
 
 
 
+### Using `__new__()` to ensure that only 1 instance of a class can be created
+
+-   This script demonstrates how `__new__()` can be used to **control object creation**
+    
+-   Normally:
+    
+    -   Every call to a class creates a **new object**
+        
+-   But in some cases, we want:
+    
+    > Only **one object** of a class to exist (Singleton pattern)
+    
+
+----------
+
+#### How This Script Ensures Only One Object
+
+-   A class variable `_instance` stores the created object
+    
+-   In `__new__()`:
+    
+    -   If `_instance` is `None` → create a new object
+        
+    -   If `_instance` already exists → return the same object
+        
+-   Since `__new__()` controls object creation:
+    
+    -   No new object is created after the first one
+        
+
+----------
+
+#### Key Idea
+
+> `__new__()` decides whether to create a new object or reuse an existing one
+
+
+### Script implementing singleton design pattern
+
+
+```python
+
+# Singleton using __new__()
+
+class SingletonPet:
+    _instance = None                              # (class attribute to store single object)
+
+    def __new__(cls):                             # (object creation method)
+        if cls._instance is None:                 # Check if object already exists
+            print("Creating object")
+            cls._instance = super().__new__(cls)  # Create object using super() to ensure proper object creation. This is crucial for the singleton pattern to work correctly, as it allows us to control the instantiation process and ensure that only one instance of the class is created throughout the program.
+        else:  # If object already exists, return existing object
+            print("Using existing object")
+        return cls._instance
+
+    def __init__(self):                            # (initializer method)
+        print("Initializing object")
+
+# Test the singleton implementation
+
+s1 = SingletonPet()  # This will create a new object since _instance is initially None
+# Output:
+# Creating object
+s2 = SingletonPet()  # s2 won't create a new object, it will return the existing object s1
+# Output:
+# Using existing object
+
+print("Are both objects same?", s1 is s2)
+# Output:
+# Are both objects same? True
+
+
+```
+
+
+
+
 
 
 ### The Lifecycle of Object Creation: `__new__()` vs `__init__()`
