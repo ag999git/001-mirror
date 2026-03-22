@@ -87,8 +87,66 @@ p = Pet()
 # Step 1: __new__() called
 # Step 2: __init__() called
 
+```
+
+
+### Important Concept
+
+-   `__new__()` creates object → returns it
+    
+-   That returned object becomes `self` in `__init__()`
+    
+
+----------
+
+### Very Important Rule
+
+> If `__new__()` does not return an object → `__init__()` will not run
+
+----------
+
+### Script in which `super()` is not called
+In the following script, the line of script with `super()` is commented out.
+As a result, `__init__()` is not called and object is not created.
+>If you want to override `__new__()`, you must call super() on `__new__(cls)` using the `cls` attribute.
+
+
+```python
+
+class Pet:
+
+    def __new__(cls):
+        print("__new__ called")
+        # super() not called → no object created
+        # obj = super().__new__(cls)  # No object created because super() is not called, so __init__() will not be called either, and the object will not be initialized properly.
+        # return obj  
+        return None
+
+    def __init__(self):
+        print("__init__ called")
+
+p = Pet()
+# Output:
+# __new__ called
+
+print(p)  # p is None because __new__() returned None, so no object was created and initialized, resulting in p being assigned the value None.
+# Output: None
+
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
