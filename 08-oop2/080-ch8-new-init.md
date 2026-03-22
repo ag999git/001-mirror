@@ -139,6 +139,38 @@ print(p)  # p is None because __new__() returned None, so no object was created 
 
 
 
+### The Lifecycle of Object Creation: `__new__` vs `__init__`
+
+1.  **The Two-Step Process:** Object creation is a dual-stage sequence: first **`__new__`** (Allocation) and then **`__init__`** (Initialization).
+    
+2.  **Creation vs. Setup:** `__new__` is the **constructor** that creates and returns a raw, empty instance; `__init__` is the **initializer** that populates that instance with data.
+    
+3.  **Arguments:** `__new__` receives `cls` (the class itself) as its first argument, while `__init__` receives `self` (the instance created by `__new__`).
+    
+4.  **The Silent Ancestor:** Every class inherits a default `__new__` from the base `object` class, which handles the low-level memory allocation.
+    
+5.  **The Return Requirement:** If you override `__new__`, you **must** return an instance, typically by calling `super().__new__(cls)`.
+    
+6.  **The Dependency:** `__init__` is only triggered if `__new__` returns an instance of that specific class (or a subclass).
+    
+7.  **Return Types:** `__new__` must return the instance; conversely, `__init__` must always return `None`.
+    
+8.  **The Orchestrator:** Classes are "callable" because their metaclass (`type`) implements `__call__`.
+    
+9.  **The Hidden Sequence:** When you call `MyClass()`, `type.__call__` is what actually executes the `__new__` → `__init__` sequence behind the scenes.
+    
+10.  **Immutable Types:** `__new__` is the only way to customize the creation of immutable types (like `tuple`, `str`, or `int`), because by the time `__init__` runs, the object is already "frozen."
+    
+11.  **Use Cases for `__new__`:** Use it for advanced patterns like **Singletons**, Intercepting object creation in **Metaclasses**, or inheriting from **Immutable built-ins**.
+    
+12.  **Use Cases for `__init__`:** Use it for **99% of tasks**, such as setting instance attributes and initial state.
+
+
+
+
+
+
+
 
 
 
