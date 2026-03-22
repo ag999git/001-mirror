@@ -143,6 +143,7 @@ All three approaches aim to:
 
 ```python
 
+# A. Manual registration of pet classes in a registry
 class PetRegistryManual:  # Manual registration of pet classes
     registry = {}  # This is a class attribute that will hold the mapping of pet names to their corresponding classes. It is shared across all instances of the PetRegistryManual class.
 
@@ -150,27 +151,34 @@ class PetRegistryManual:  # Manual registration of pet classes
     def register(cls, name, pet_class):  # (class method) This is a class method that allows us to register a pet class with a specific name. The cls parameter refers to the class itself (PetRegistryManual), and it is used to access the class attribute registry.
         cls.registry[name] = pet_class
 
-
+# B. Define pet classes to be registered
 class Dog:
     def speak(self):  # This is an instance method that defines the behavior of the Dog class when the speak() method is called. It will print "Dog barks" to indicate that the dog is barking.
         print("Dog barks")
 
-
+# C. Define another pet class
 class Cat:
     def speak(self):  # This is an instance method that defines the behavior of the Cat class when the speak() method is called. It will print "Cat meows" to indicate that the cat is meowing.
         print("Cat meows")
 
 
-# Manual registration of pet classes in the registry
+# D. Manual registration of pet classes in the registry
 PetRegistryManual.register("dog", Dog)  # This line registers the Dog class with the name "dog" in the PetRegistryManual registry. It allows us to later retrieve the Dog class using the name "dog" from the registry.
 PetRegistryManual.register("cat", Cat)  # This line registers the Cat class with the name "cat" in the PetRegistryManual registry. It allows us to later retrieve the Cat class using the name "cat" from the registry.
 
-# Dynamic usage of the registry to create pet objects and call their speak() method
-
+# E. Dynamic usage of the registry to create pet objects and call their speak() method
+# E1. Create Dog object using registry
 PetClass = PetRegistryManual.registry["dog"]  # This line retrieves the Dog class from the PetRegistryManual registry using the name "dog" and assigns it to the variable PetClass. Now, PetClass holds a reference to the Dog class, and we can use it to create an instance of the Dog class.
 pet = PetClass() # This line creates an instance of the Dog class by calling the constructor of the Dog class (which is now referenced by PetClass). The parentheses () indicate that we are calling the constructor to create an object of the Dog class, and the resulting object is assigned to the variable pet.    
-
 pet.speak()  # This line calls the speak() method on the pet object, which is an instance of the Dog class. It will print "Dog barks" to indicate that the dog is barking.
+
+# E2. Create Cat object using registry
+PetClass = PetRegistryManual.registry["cat"]  # This line retrieves the Cat class from the PetRegistryManual registry using the name "cat" and assigns it to the variable PetClass. Now, PetClass holds a reference to the Cat class, and we can use it to create an instance of the Cat class.
+pet = PetClass() # This line creates an instance of the Cat class by calling the constructor of the Cat class (which is now referenced by PetClass). The parentheses () indicate that we are calling the constructor to create an object of the Cat class, and the resulting object is assigned to the variable pet.
+pet.speak()  # This line calls the speak() method on the pet object, which is an instance of the Cat class. It will print "Cat meows" to indicate that the cat is meowing.
+
+
+
 
 
 ```
