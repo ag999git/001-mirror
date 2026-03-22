@@ -28,7 +28,7 @@
 
   
 
-| Feature | __new__() | __init__() |
+| Feature | `__new__()` | `__init__()` |
 | --- | --- | --- |
 | Purpose | Creates object | Initializes object |
 | Type | Static-like method | Instance method |
@@ -37,7 +37,7 @@
 | Return value | Must return object | Must return None |
 | Controls | Object creation | Object customization |
 | Called first? | Yes | No |
-| Can skip next step? | Yes | No |
+| Can skip next step? | Yes. Calling `__new__()` can skip calling `__init__()` | No. Since `__init__()` is called after `__new__()`, so cannot skip it |
 
 
 
