@@ -40,9 +40,19 @@
 | Can skip next step? | Yes. Calling `__new__()` can skip calling `__init__()` | No. Since `__init__()` is called after `__new__()`, so cannot skip it |
 
 
+### Flow of Execution
 
+```python
 
+(1) Call ClassName()
+      ↓
+(2) __new__(cls)
+      ↓
+(3) returns object
+      ↓
+(4) __init__(self)
 
+```
 
 
 
