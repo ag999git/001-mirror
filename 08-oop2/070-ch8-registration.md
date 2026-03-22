@@ -178,14 +178,49 @@ pet = PetClass() # This line creates an instance of the Cat class by calling the
 pet.speak()  # This line calls the speak() method on the pet object, which is an instance of the Cat class. It will print "Cat meows" to indicate that the cat is meowing.
 
 
+```
 
+### 2. Decorator Registration
+
+```python
+
+# A. Define a pet registry class with a class attribute and a class method for registration
+class PetRegistryDecorator:
+    registry = {}                           # This is a class attribute that will hold the mapping of pet names to their corresponding classes. It is shared across all instances of the PetRegistryDecorator class.
+
+    # B. Define a class method that acts as a decorator for registering pet classes
+    @classmethod                            
+    def register(cls, name):                # This is a class method that allows us to register a pet class with a specific name. The cls parameter refers to the class itself (PetRegistryDecorator), and it is used to access the class attribute registry. The name parameter is the name under which the pet class will be registered in the registry.
+        def wrapper(pet_class):             # This is a closure function that takes the pet class as an argument, registers it in the registry, and returns the pet class.
+            cls.registry[name] = pet_class  # This line registers the pet class in the registry under the specified name. It adds an entry to the registry dictionary where the key is the name and the value is the pet class.
+            return pet_class                # This line returns the pet class after registering it. This allows us to use the decorator syntax to register the pet class while defining it, making the registration process more elegant and concise.
+        return wrapper                      # This line returns the wrapper function, which is the actual decorator that will be applied to the pet classes when they are defined. The wrapper function will handle the registration of the pet class in the registry when the decorator is used.
+
+# C. Define pet classes to be registered using the decorator syntax
+@PetRegistryDecorator.register("bird")      # This line uses the decorator syntax to register the Bird class under the name "bird" in the PetRegistryDecorator registry. When the Bird class is defined, it will be automatically registered in the registry with the name "bird".
+class Bird:                                 # This is the definition of the Bird class, which will be registered in the PetRegistryDecorator registry under the name "bird" due to the use of the @PetRegistryDecorator.register("bird") decorator. The Bird class has a speak() method that defines its behavior when the speak() method is called.
+    def speak(self):                        # This is an instance method that defines the behavior of the Bird class when the speak() method is called. It will print "Bird chirps" to indicate that the bird is chirping, which is a common behavior of birds.
+        print("Bird chirps")                # This line prints "Bird chirps" to indicate that the bird is making a chirping sound, which is a characteristic behavior of birds.
+
+# D. Define another pet class using the decorator syntax
+@PetRegistryDecorator.register("fish")      # This line uses the decorator syntax to register the Fish class under the name "fish" in the PetRegistryDecorator registry. When the Fish class is defined, it will be automatically registered in the registry with the name "fish".
+class Fish:                                 # This is the definition of the Fish class, which will be registered in the PetRegistryDecorator registry under the name "fish" due to the use of the @PetRegistryDecorator.register("fish") decorator. The Fish class has a speak() method that defines its behavior when the speak() method is called.
+    def speak(self):                        # This is an instance method that defines the behavior of the Fish class when the speak() method is called. It will print "Fish bubbles" to indicate that the fish is making bubbles, which is a common behavior of fish in water.
+        print("Fish bubbles")               # This line prints "Fish bubbles" to indicate that the fish is making bubbles, which is a characteristic behavior of fish.
+
+# E. Dynamic usage of the registry to create pet objects and call their speak() method
+# E1. Create Bird object using registry
+PetClass = PetRegistryDecorator.registry["bird"]  # This line retrieves the Bird class from the PetRegistryDecorator registry using the name "bird" and assigns it to the variable PetClass. Now, PetClass holds a reference to the Bird class, and we can use it to create an instance of the Bird class.
+pet = PetClass()                                  # This line creates an instance of the Bird class using the PetClass variable, which holds a reference to the Bird class.
+pet.speak()                                       # This line calls the speak() method on the pet object, which is an instance of the Bird class. It will print "Bird chirps" to indicate that the bird is chirping.
+
+# E2. Create Fish object using registry
+PetClass = PetRegistryDecorator.registry["fish"]  # This line retrieves the Fish class from the PetRegistryDecorator registry using the name "fish" and assigns it to the variable PetClass. Now, PetClass holds a reference to the Fish class, and we can use it to create an instance of the Fish class.
+pet = PetClass()                                  # This line creates an instance of the Fish class using the PetClass variable, which holds a reference to the Fish class.
+pet.speak()                                       # This line calls the speak() method on the pet object, which is an instance of the Fish class. It will print "Fish bubbles" to indicate that the fish is making bubbles, which is a characteristic behavior of fish.
 
 
 ```
-
-
-
-
 
 
 
