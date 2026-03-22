@@ -252,6 +252,26 @@ for cls in Pet.registry:
 
 ```
 
+### Comparison Table
+
+  
+
+| Feature | Manual | Decorator | Auto (__init_subclass__) |
+| --- | --- | --- | --- |
+| Registration | Explicit | Automatic | Fully automatic |
+| Ease | Easy | Medium | Medium |
+| Flexibility | Low | High | Medium |
+| Risk of error | High | Low | Very Low |
+| Best use | Small scripts | Apps | Frameworks |
+
+
+
+
+
+
+
+
+
 
 
 
