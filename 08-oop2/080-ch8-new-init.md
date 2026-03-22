@@ -54,5 +54,46 @@
 
 ```
 
+### The following script shows the use of `__new__()` and `__init__()`
+
+```python
+
+# Basic demonstration of __new__ and __init__
+
+class Pet:
+
+    # __init__() always gets called after an object is created. It is responsible for initializing the attributes of the object. 
+    # If __new__() does not return an instance of the class, then __init__() will not be called, and the object will not be initialized properly. 
+    # Therefore, it is crucial to call super().__new__(cls) within the __new__() method to ensure that an object is created before any initialization logic is executed in __init__(). This allows us to have control over the object creation process while still ensuring that the necessary initialization steps are performed correctly.
+    
+    def __init__(self):  # (initializer method)
+        print("Step 2: __init__() called")
+        self.name = "Default Pet"
+    
+    # __new__() always gets called before __init__() when an object is created. 
+    # It is responsible for creating and returning a new instance of the class. If __new__() does not return an instance of the class, then __init__() will not be called, and the object will not be initialized properly. Therefore, it is crucial to call super().__new__(cls) within the __new__() method to ensure that an object is created before any initialization logic is executed in __init__(). This allows us to have control over the object creation process while still ensuring that the necessary initialization steps are performed correctly.
+    
+    def __new__(cls):  # (object creation method)
+        print("Step 1: __new__() called")
+        # If you want to create an object, you must call the __new__() method of the parent class (object) to actually create the object. 
+        # This is done using super().__new__(cls), which ensures that the object is created properly according to the class hierarchy and memory management rules of Python. 
+        # If you do not call super().__new__(cls), no object will be created, and you will not be able to initialize it with __init__() or use it in any meaningful way.
+        obj = super().__new__(cls)  # Create object. 
+        return obj  # Must return object
+
+# Create object
+p = Pet()  
+# Output:
+# Step 1: __new__() called
+# Step 2: __init__() called
+
+
+```
+
+
+
+
+
+
 
 
