@@ -219,8 +219,39 @@ PetClass = PetRegistryDecorator.registry["fish"]  # This line retrieves the Fish
 pet = PetClass()                                  # This line creates an instance of the Fish class using the PetClass variable, which holds a reference to the Fish class.
 pet.speak()                                       # This line calls the speak() method on the pet object, which is an instance of the Fish class. It will print "Fish bubbles" to indicate that the fish is making bubbles, which is a characteristic behavior of fish.
 
+```
+
+### 3. Automatic Registration
+
+```python
+
+# A. Define a registry class to hold pet classes
+class Pet:
+    registry = []                         # This is a class attribute that will hold a list of pet classes. It is shared across all instances of the Pet class, and it will be used to store references to all subclasses of Pet that are defined in the code. This allows us to keep track of all pet classes in one place, making it easier to manage and use them dynamically later on.
+
+    # B. Define a special class hook to automatically register subclasses
+    def __init_subclass__(cls):           # (special class hook)  This is a special class method that is called whenever a new subclass of Pet is defined. The cls parameter refers to the subclass that is being created. By overriding this method, we can automatically register any new pet class that inherits from Pet into the registry list without having to manually add it. This allows for a more elegant and automated way of keeping track of all pet classes as they are defined.
+        super().__init_subclass__()       # This line calls the __init_subclass__ method of the parent class (which is object in this case) to ensure that any necessary initialization logic defined in the parent class is executed
+        Pet.registry.append(cls)          # This line adds the newly created subclass (cls) to the Pet.registry list. This means that every time a new pet class is defined that inherits from Pet, it will automatically be added to the registry, allowing us to easily access and manage all pet classes in one place.
+
+# C. Define pet classes that will be automatically registered in the Pet registry
+class Horse(Pet):
+    def speak(self):                      # This is an instance method that defines the behavior of the Horse class when the speak() method is called. It will print "Horse neighs" to indicate that the horse is making a neighing sound, which is a characteristic behavior of horses.
+        print("Horse neighs")             # This line prints "Horse neighs" to indicate that the horse is making a neighing sound, which is a characteristic behavior of horses.
+
+# D. Define another pet class
+class Cow(Pet):
+    def speak(self):                      # This is an instance method that defines the behavior of the Cow class when the speak() method is called. It will print "Cow moos" to indicate that the cow is making a mooing sound, which is a characteristic behavior of cows.
+        print("Cow moos")                 # This line prints "Cow moos" to indicate that the cow is making a mooing sound, which is a characteristic behavior of cows.
+
+# E. Dynamic usage of the registry to create pet objects and call their speak() method
+for cls in Pet.registry:
+    obj = cls()                           # This line creates an instance of the pet class represented by cls, which is a subclass of Pet.
+    obj.speak()                           # This line calls the speak() method on the created object, which will execute the specific implementation of the speak() method defined in each pet class (Horse and Cow in this case), demonstrating polymorphism as the same method name (speak()) can have different behaviors based on the type of pet object created.
+
 
 ```
+
 
 
 
