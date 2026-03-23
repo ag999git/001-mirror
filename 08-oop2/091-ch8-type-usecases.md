@@ -42,6 +42,10 @@ class Cat(metaclass=PetMeta):
 
 
 ### Use Case 2: Automatic Registration
+Used in: 
+-  Plugins
+-  Frameworks
+-  Django models
 
 ```python
 
