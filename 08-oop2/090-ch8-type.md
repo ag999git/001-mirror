@@ -167,6 +167,10 @@ print(dog_instance.speak())  # Output: Woof!
 
 ```
 
+### Diagram showing the flow of execution of above script
+
+
+![Diagram](/resources/ch-8-type-explain.png)
 
 
 ### What does the above script do?
