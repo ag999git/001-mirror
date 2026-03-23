@@ -197,10 +197,7 @@ print(dog_instance.speak())  # Output: Woof!
 
 > Both approaches create **exactly the same kind of class object**
 
-```python
-X
 
-```
 
 
 
