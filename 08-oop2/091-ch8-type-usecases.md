@@ -118,7 +118,60 @@ for cls in registry:
 
 ### Use Case 3: Automatically Add Methods/Attributes
 
+```python
 
+# Use Case 3: Automatically Add Methods/Attributes
+# In this example, we have defined a metaclass called PetMeta that automatically adds a new attribute called 
+# "category" with the value "Animal" to any class that uses it as a metaclass. This means that any class that 
+# uses PetMeta as its metaclass will automatically have this category attribute set to "Animal", allowing us 
+# to easily categorize all pet classes without having to manually add this attribute to each class definition.
+
+# A. Define a metaclass that automatically adds a new attribute to classes that use it as a metaclass
+class PetMeta(type):
+    def __new__(mcs, name, bases, dct):  
+        # The above line is the __new__ method of the PetMeta metaclass. 
+        # It is called when a new class is being created that uses PetMeta as its metaclass. 
+        # The parameters are:
+        # 1. mcs: This is the metaclass itself (PetMeta in this case).
+        # 2. name: This is the name of the class being created.
+        # 3. bases: This is a tuple containing the base classes of the class being created.
+        # 4. dct: This is a dictionary containing the attributes and methods of the class being created.
+
+        dct["category"] = "Animal"  
+        # The above line adds a new attribute called "category" with the value "Animal" to the class being created. 
+        # This means that any class that uses PetMeta as its metaclass will automatically have this category attribute set to "Animal", 
+        # allowing us to easily categorize all pet classes without having to manually add this attribute to each class definition.
+        return super().__new__(mcs, name, bases, dct)  # This line calls the __new__ method of the parent class (which is type in this case) to create the class using the standard class creation process. It passes the modified dictionary (dct) that now includes the category attribute, ensuring that the new class is created with all the necessary attributes and behaviors defined in the metaclass.
+
+# B. Define a pet class that uses the PetMeta metaclass
+class Dog(metaclass=PetMeta):
+    def speak(self):
+        print("Bark")
+
+# C. Create an object of the Dog class and access the category attribute added by the PetMeta metaclass
+dog = Dog()  # This line creates an instance of the Dog class, which uses PetMeta as its metaclass
+print("Dog category:->", Dog.category)  # Output: Dog category:-> Animal
+# The above line accesses the category attribute of the Dog class, which was automatically added by 
+# the PetMeta metaclass.  
+
+# D. Access the category attribute through the dog instance as well
+# Dog and dog both can be used to access the category attribute because it is defined at the class level 
+# by the PetMeta metaclass,
+print(f"Dog category through instance: {dog.category} ->", dog.category)  # Output: Dog category through instance: Animal ->
+# The above line accesses the category attribute of the dog instance. Since the category attribute is defined 
+# at the class level by the PetMeta metaclass, it is inherited by all instances of the Dog class, 
+# allowing us to access it through the instance as well.    
+
+# E. Creating Cat class that does not implement speak() method but uses PetMeta as its metaclass
+# Following if uncommented will give error because Cat does not implement speak() method, 
+# so we cannot create an object of Cat class.
+#class Cat(metaclass=PetMeta):  # Uncommenting gives error.
+    #pass   # Uncommenting gives TypeError: Cat must implement speak() because our PetMeta metaclass checks for the presence of the speak() method in any class that uses it as a metaclass.    
+
+
+
+
+```
 
 
 
