@@ -4,18 +4,6 @@
 ### Use Case 1: Enforce Rules on Classes
 
 
-
-
-
-
-
-
-
-
-
-
-### Use Case 2: Automatic Registration
-
 Example: The following script shows a use case where every `Pet` class must have a `speak()` method
 It creates 2 classes `Dog` and `Cat`. The `Dog` class implements `speak()` so it works. But the `Cat` class does not implement `speak()` so it doesnt work and throws an error
 
@@ -50,12 +38,10 @@ class Cat(metaclass=PetMeta):
     pass   #  TypeError: Cat must implement speak() 
 
 
-
-
-
-
-
 ```
+
+
+### Use Case 2: Automatic Registration
 
 
 
