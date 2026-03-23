@@ -176,8 +176,6 @@ print(f"Dog category through instance: {dog.category} ->", dog.category)  # Outp
 
 
 
-### Use Case 4: Framework-Level Magic. Example: Django ORM
-
 
 
 
