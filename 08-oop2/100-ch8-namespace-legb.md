@@ -27,7 +27,7 @@ Both refer to the same data.
 
 ----------
 
-### Example 1: Instance Namespace**
+### Example 1: Instance Namespace
 
 ```python
 
@@ -57,6 +57,8 @@ print(p.__dict__)
 
 
 
+
+### LEGB
 
  - While the idea of a namespace as a dictionary is very useful for
    understanding, it is important to note that Python does not simply
