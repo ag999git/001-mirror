@@ -224,10 +224,206 @@ print("Modified name:->", d.name)  # Modified name:-> Bruno
 
 
 
-#### Script
+### Script
 
 
+```python
 
+# LEGB RULE DEMONSTRATION
+# L → Local, E → Enclosing, G → Global, B → Built-in
+# Python looks for variable in this order:
+# 1. Local: inside current function
+# 2. Enclosing: in any enclosing function (if nested)
+# 3. Global: at module level
+# 4. Built-in: Python's built-in names (like len, print)
+
+# (1) GLOBAL SCOPE
+# This variable is defined at the top level (module level)
+# It is accessible everywhere unless shadowed
+
+pet = "Global Pet"  # This variable belongs to the GLOBAL scope
+
+
+# (2) BUILT-IN SCOPE
+# Built-in functions like len() and print() are always available
+# These names exist in Python's built-in namespace
+
+print("Built-in len():", len([1, 2, 3]))  # This uses the built-in len() function to get the length of the list [1, 2, 3], which returns 3. The print() function is also a built-in that outputs the result to the console.
+
+# (3) ENCLOSING + LOCAL SCOPE
+# This demonstrates Local and Enclosing scopes
+
+def outer_function():  # This is the outer function that defines an enclosing scope for the inner function.
+    # This variable belongs to ENCLOSING scope
+    pet = "Enclosing Pet"
+
+    def inner_function():  # This is the inner function that defines a local scope. It can access variables from its own local scope, the enclosing scope (outer_function), and the global scope.
+        # This variable belongs to LOCAL scope
+        pet = "Local Pet"  # This variable shadows the 'pet' variable in the enclosing scope. When we refer to 'pet' inside this inner function, it will use this local variable instead of the one in the enclosing scope.
+h
+        # LEGB: Local → Enclosing → Global → Built-in
+        # Python finds 'pet' in LOCAL first
+        print("Inner (Local):", pet)  # Output: Inner (Local): Local Pet
+
+    inner_function()  # This line calls the inner_function, which will execute the code inside it and print the value of 'pet' from the local scope.
+
+    # Here LOCAL (inner) is gone → Enclosing is used
+    print("Outer (Enclosing):", pet)  # Output: Outer (Enclosing): Enclosing Pet
+
+
+outer_function()  # This line calls the outer_function, which will execute the code inside it, including the call to inner_function, and print the values of 'pet' from both the local and enclosing scopes.
+
+# (4) ACCESS PRIORITY (LEGB RULE)
+# If a variable is not found in Local or Enclosing,
+# Python searches Global
+
+def check_legb():  # This function demonstrates the LEGB rule by trying to access the variable 'pet'. Since there is no local variable named 'pet' in this function, and there is no enclosing function with a variable named 'pet', Python will look for 'pet' in the global scope. It will find the global variable 'pet' that we defined at the beginning of the code, which has the value "Global Pet", and print it.
+    # No local 'pet', no enclosing 'pet'
+    # So Python uses GLOBAL 'pet'
+    print("LEGB uses Global:", pet)
+
+check_legb()  # This line calls the check_legb function, which will execute the code inside it and print the value of 'pet' from the global scope, demonstrating the LEGB rule.
+
+# (5) SHADOWING (VERY IMPORTANT CONCEPT)
+# A variable in inner scope can "hide" (shadow) outer variable
+
+pet = "Global Dog"  # This variable is defined in the global scope and will be shadowed by any local variable named 'pet' in a function.
+
+def shadow_test():  # This function demonstrates variable shadowing. Inside this function, we define a local variable named 'pet' that has the same name as the global variable 'pet'. This local variable will shadow the global variable within the scope of this function, meaning that any reference to 'pet' inside this function will refer to the local variable instead of the global one.
+    pet = "Local Cat"   # This shadows global 'pet'
+    print("Inside function (Local):", pet)  # Output: Inside function (Local): Local Cat
+
+shadow_test()  # This line calls the shadow_test function, which will execute the code inside it and print the value of 'pet' from the local scope, demonstrating variable shadowing.
+
+# Global variable is NOT changed
+print("Outside function (Global):", pet)  # Output: Outside function (Global): Global Dog
+
+# (6) MODIFYING GLOBAL VARIABLE
+# By default, assignment creates LOCAL variable
+# To modify global variable → use 'global'
+
+def modify_global():  # This function demonstrates how to modify a global variable from within a function. By using the 'global' keyword, we tell Python that we want to use the global variable 'pet' instead of creating a new local variable. This allows us to change the value of the global variable 'pet' from inside this function.
+    global pet   # Tell Python: use global variable
+    pet = "Modified Global Pet"  # This line modifies the global variable 'pet' to have the new value "Modified Global Pet".
+
+modify_global()  # This line calls the modify_global function, which will execute the code inside it and modify the global variable 'pet'.
+
+print("After global modification:", pet)  # Output: After global modification: Modified Global Pet
+# This line prints the value of 'pet' after it has been modified by the modify_global function, demonstrating that the global variable has been successfully changed.
+
+# (7) ERROR CASE: MODIFY WITHOUT 'global'
+# Uncomment to see error
+
+"""
+def wrong_modify_global():  # This function demonstrates what happens when you try to modify a global variable without using the 'global' keyword. In this case, Python will treat 'pet' as a local variable because we are assigning a new value to it. However, since there is no local variable named 'pet' defined before the assignment, Python will raise an UnboundLocalError when it tries to read the value of 'pet' before it has been assigned in the local scope.
+    pet = "Modified Global Pet"  # This line attempts to assign a new value to 'pet', but since 'pet' is not declared as global, Python treats it as a local variable. When the function tries to execute this line, it will raise an UnboundLocalError because it tries to read the value of 'pet' before it has been assigned in the local scope.
+    # ERROR: Python thinks 'pet' is local (due to assignment)
+    # But we are trying to read it before assignment → UnboundLocalError
+
+wrong_modify_global()  # This line calls the wrong_modify_global function, which will execute the code inside it and raise an UnboundLocalError due to the attempt to modify a global variable without using the 'global' keyword.
+"""
+
+# (8) MODIFYING ENCLOSING VARIABLE
+# To modify enclosing variable → use 'nonlocal'
+
+def outer_modify():
+    pet = "Outer Pet"
+
+    def inner_modify():
+        nonlocal pet   # Refers to enclosing variable
+        pet = "Modified Enclosing Pet"
+
+    inner_modify()
+    print("After nonlocal modification:", pet)
+
+outer_modify()
+
+
+# (9) ERROR CASE: MODIFY ENCLOSING WITHOUT 'nonlocal'
+# Uncomment to see behavior
+
+"""
+def wrong_enclosing():
+    pet = "Outer Pet"
+
+    def inner():
+        pet = "New Value"  
+        # This creates a NEW LOCAL variable
+        # It does NOT modify enclosing variable
+
+    inner()
+    print("Still Outer:", pet)  # Output remains unchanged
+
+wrong_enclosing()
+"""
+
+
+# (10) BUILT-IN SHADOWING (DANGEROUS)
+# You can override built-in names, but it is a BAD practice
+
+len_backup = len   # Save original function
+
+len = 100  # Shadowing built-in function
+
+# Uncomment below to see error
+# print(len([1,2,3]))
+# ERROR: 'int' object is not callable
+# Because len is now an integer, not a function
+
+# Restore built-in
+len = len_backup
+
+# (11) ERROR IF VARIABLE NOT FOUND
+# If Python cannot find variable in LEGB → NameError
+
+def error_demo():
+    try:
+        print(unknown_variable)
+    except NameError as e:
+        print("NameError occurred:", e)
+
+error_demo()
+
+# (12) LOCALS() AND GLOBALS()
+# These functions show namespace dictionaries
+
+def show_namespaces():
+    local_var = "I am local"
+
+    # locals() → dictionary of local variables
+    print("locals():", locals())
+
+show_namespaces()
+
+# globals() → dictionary of global variables
+print("Sample globals keys:", list(globals().keys())[:5])
+
+# (13) BUILT-IN NAMESPACE ACCESS
+# Built-ins are stored in __builtins__
+
+print("Type of __builtins__:", type(__builtins__))
+
+# (14) FINAL SUMMARY DEMO
+# This shows full LEGB chain clearly
+
+pet = "Global Final"
+
+def outer_final():
+    pet = "Enclosing Final"
+
+    def inner_final():
+        pet = "Local Final"
+        print("Local:", pet)   # Local
+
+    inner_final()
+    print("Enclosing:", pet)   # Enclosing
+
+outer_final()
+
+print("Global:", pet)  # Global
+
+
+```
 
 
 
