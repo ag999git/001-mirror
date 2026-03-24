@@ -422,8 +422,21 @@ outer_final()
 
 print("Global:", pet)  # Global
 
-
 ```
+
+#### Explanation of the script
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
