@@ -426,7 +426,163 @@ print("Global:", pet)  # Global
 
 #### Explanation of the script
 
+#### Explanatory Note: Understanding LEGB Rule through the Script
 
+-   This script demonstrates how Python **resolves variable names** using the **LEGB rule**:
+    -   **L → Local**
+    -   **E → Enclosing**
+    -   **G → Global**
+    -   **B → Built-in**
+
+Whenever a variable is used, Python **searches step-by-step in this order** and stops when it finds the variable.
+
+----------
+
+#### 1. Global and Built-in Scope
+
+-   The script begins by defining a **global variable** `pet = "Global Pet"`.
+-   It also demonstrates **built-in functions** like `len()` and `print()`.
+
+**Points to be noted**
+
+-   Built-in names are always available.
+-   Global variables are accessible unless **shadowed**.
+
+
+
+#### Enclosing and Local Scope (Nested Functions)
+
+-   The function `outer_function()` creates an **enclosing scope**.
+-   Inside it, `inner_function()` creates a **local scope**.
+
+**Important behavior:**
+
+-   The variable `pet` exists in **three levels**:
+    -   Local → `"Local Pet"`
+    -   Enclosing → `"Enclosing Pet"`
+    -   Global → `"Global Pet"`
+
+**The Python Interpreter chooses:**
+
+-   **Local first**, then **Enclosing**, then **Global**
+
+----------
+
+#### 3. LEGB Search in Action
+
+-   In `check_legb()`:
+    -   No local or enclosing variable exists
+    -   So Python uses the **global variable**
+
+**This shows:**
+
+> If a name is not found, Python moves outward step-by-step
+
+----------
+
+#### 4. Shadowing Concept
+
+-   Inside `shadow_test()`:
+    -   A local variable `pet` hides the global variable
+
+**Note**
+
+-   Shadowing does **not modify** the outer variable
+-   It only **hides it temporarily**
+
+
+
+#### 5. Modifying Global Variables
+
+-   By default, assignment inside a function creates a **local variable**
+-   To modify a global variable, we must use: `global  pet`
+
+Without `global`, Python assumes a new local variable
+
+----------
+
+#### 6. Common Error: UnboundLocalError
+
+-   If we try to modify a global variable **without `global`**, Python:
+    -   Treats it as `local`
+    -   But tries to read it before assignment
+
+**This causes:**
+
+`UnboundLocalError`
+
+
+#### 7. Modifying Enclosing Variables
+
+-   To modify a variable in an enclosing function, we use: `nonlocal  pet`
+
+This allows inner functions to modify outer variables
+
+----------
+
+#### 8. Common Behavior without `nonlocal`
+
+-   Without `nonlocal`:
+    -   A new local variable is created
+    -   Enclosing variable remains unchanged
+
+----------
+
+#### 9. Built-in Shadowing (Dangerous)
+
+-   The script shows that built-in names like `len` can be overridden:
+
+`len  =  100`
+
+This breaks normal behavior:
+
+-   `len()` stops working
+
+**Note:- Always avoid using built-in names as variables**
+
+----------
+
+#### 10. Name Resolution Failure
+
+-   If a variable is not found in any scope (L → E → G → B):
+
+**Python raises:**  `NameError`
+
+
+
+#### 11. Namespace Inspection
+
+-   The script uses:
+    -   `locals()` → shows local variables
+    -   `globals()` → shows global variables
+
+These return **`dictionaries (namespaces)`**
+
+----------
+
+#### 12. Built-in Namespace Access
+
+-   Built-in names are stored in: `__builtins__`
+
+
+
+#### 13. Final Demonstration
+
+-   The last part shows all three scopes together:
+    -   Local → used inside inner function
+    -   Enclosing → used in outer function
+    -   Global → used outside
+
+This clearly shows the **complete LEGB chain**
+
+----------
+
+#### Conclusion
+
+-   Python does **not search all variables at once**
+-   It follows a **strict order (LEGB)**
+-   Inner scopes can access outer scopes, but not vice versa
+-   Assignment rules are different from access rules
 
 
 
