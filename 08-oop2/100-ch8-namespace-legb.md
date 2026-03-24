@@ -52,7 +52,38 @@ print(p.__dict__)
 ```
 
 
+#### Example 2 script
 
+
+```python
+
+# A. CLASS DEFINITION
+class Dog:
+    species = "Pet"  # Class attribute 
+
+    def __init__(self, name):
+        self.name = name  # Instance attribute
+
+# B. OBJECT CREATION
+d = Dog("Tommy")  
+
+# C. NAMESPACE DISPLAY
+print("Class Namespace:->", Dog.__dict__)
+# Output: Class Namespace:-> {'__module__': '__main__', 'species': 'Pet',....}
+print("Instance Namespace:->", d.__dict__)
+# Output: Instance Namespace:-> {'name': 'Tommy'}
+
+# D. ADD NEW ATTRIBUTE by directly modifying the instance's __dict__
+d.__dict__["color"] = "Brown"
+print("Added attribute 'color':->", d.color)  # Added attribute 'color':-> Brown
+
+# E. MODIFY ATTRIBUTE by directly modifying the instance's __dict__
+d.__dict__["name"] = "Bruno"  # Modifying the 'name' attribute using __dict__
+print("Modified name:->", d.name)  # Modified name:-> Bruno
+
+
+
+```
 
 
 
