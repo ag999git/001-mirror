@@ -199,6 +199,37 @@ print("Modified name:->", d.name)  # Modified name:-> Bruno
  - Understanding this dynamic lookup and binding mechanism is crucial, because it explains many subtle behaviors in Python such as variable scope errors, closures, and function behavior.
 
 
+#### Summary table
+
+
+  
+
+|  | Feature | Local (L) | Enclosing (E) | Global (G) | Built-in (B) |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Where defined? | Inside a function | Inside outer (enclosing) function | At module (file) level | Inside Python (predefined) |
+| 2 | Created when? | Function is called | Outer function is called | Script starts | Python interpreter starts |
+| 3 | Scope visibility | Only within that function | Available to inner functions | Available everywhere in module | Available everywhere |
+| 4 | Access priority | 1st (highest) | 2nd | 3rd | 4th (lowest) |
+| 5 | Lifetime | Till function execution ends | Till outer function exists | Entire program execution | Entire Python session |
+| 6 | Stored in | Local namespace (locals()) | Enclosing namespace | Global namespace (globals()) | Built-in namespace (__builtins__) |
+| 7 | Example (Pet) | pet = "Local Pet" | pet = "Enclosing Pet" | pet = "Global Pet" | len(), print() (Functions are also objects) |
+| 8 | Accessed from inner function? | Yes | Yes | Yes | Yes |
+| 9 | Accessed from outer function? | No | No | Yes | Yes |
+| 10 | Can modify directly? | Yes | No (use nonlocal). | No (use global) | No |
+| 11 | Keyword required to modify | No | nonlocal | global | Not allowed |
+| 12 | Common use | Temporary variables | Closures, nested functions | Shared data/config | Standard functions |
+| 13 | Shadowing possible? | Yes | Yes | Yes | Yes (dangerous) |
+| 14 | Common mistake | Assuming it affects global | Forgetting nonlocal | Forgetting global | Overriding built-ins |
+| 15 | Error if not found? | Checks next scope | Checks next scope | Checks next scope | NameError |
+
+
+
+#### Script
+
+
+
+
+
 
 
 
