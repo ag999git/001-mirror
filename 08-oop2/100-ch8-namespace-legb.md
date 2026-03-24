@@ -87,6 +87,99 @@ print("Modified name:->", d.name)  # Modified name:-> Bruno
 
 
 
+### Explanatory Note: Understanding `__dict__` using Class and Object
+
+-   This script demonstrates how Python internally stores attributes of a **class** and its **objects (instances)** using the special attribute `__dict__`.
+
+#### 1. Class Definition
+
+-   The class `Dog` contains:
+    -   A **class attribute** → `species = "Pet"`
+    -   An **instance attribute** → `name` (created inside `__init__()`)
+
+**Important idea:**
+
+-   Class attributes belong to the **class namespace**
+-   Instance attributes belong to the **object (instance) namespace**
+
+
+#### 2. Object Creation
+
+`d  =  Dog("Tommy")`
+
+-   When the object `d` is created:
+    -   Python first creates the object
+    -   Then calls `__init__()`
+    -   The attribute `name = "Tommy"` is stored in the **instance namespace**
+
+#### 3. Viewing Namespaces using `__dict__`
+
+`Dog.__dict__`
+
+-   Shows the **class namespace**
+-   Contains:
+    -   Class variables (`species`)
+    -   Methods (`__init__`)
+    -   Other built-in attributes
+
+`d.__dict__`
+
+-   Shows the **instance namespace**
+-   Contains only:
+    -   `{'name': 'Tommy'}`
+
+**Point to be noted:**
+
+> Class and instance maintain **separate namespaces**
+
+
+#### 4. Adding Attribute using `__dict__`
+
+`d.__dict__["color"] =  "Brown"`
+
+-   Adds a new attribute `color` to the object `d`
+-   This attribute is stored in the **instance namespace**
+
+**The above statement is equivalent to:**
+
+`d.color =  "Brown"`
+
+#### 5. Modifying Attribute using `__dict__`
+
+`d.__dict__["name"] =  "Bruno"`
+
+-   Updates the existing attribute `name`
+-   Since `name` is in the instance namespace, it gets modified there
+
+**The Output confirms:**
+
+`Bruno`
+
+
+
+#### 6. Key Concepts Demonstrated by the script
+
+-   `__dict__` is a **dictionary representing namespace**
+-   Class and instance have **different `__dict__`**
+-   Attributes can be:
+    -   **Added dynamically**
+    -   **Modified dynamically**
+-   Attribute access:
+    
+   ` d.name ⇔  d.__dict__['name']`
+    
+
+----------
+
+#### Conclusion
+
+> The `__dict__` attribute is the internal storage mechanism that Python uses to manage attributes of classes and objects. By accessing it directly, we can see and even manipulate how Python stores data inside objects.
+
+
+
+
+
+
 
 
 ### LEGB
