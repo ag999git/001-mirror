@@ -260,7 +260,7 @@ def outer_function():  # This is the outer function that defines an enclosing sc
     def inner_function():  # This is the inner function that defines a local scope. It can access variables from its own local scope, the enclosing scope (outer_function), and the global scope.
         # This variable belongs to LOCAL scope
         pet = "Local Pet"  # This variable shadows the 'pet' variable in the enclosing scope. When we refer to 'pet' inside this inner function, it will use this local variable instead of the one in the enclosing scope.
-h
+
         # LEGB: Local → Enclosing → Global → Built-in
         # Python finds 'pet' in LOCAL first
         print("Inner (Local):", pet)  # Output: Inner (Local): Local Pet
