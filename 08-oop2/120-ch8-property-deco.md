@@ -4,8 +4,144 @@
 
 # PROJECT 2: Property Decorators (`@property`)
 
+<details>
 
-## Discussion on `@property` and `@age.setter`
+<summary>Understanding the three attributes `fget`, `fset` and `fdel` (Which all property objects have)</summary>
+
+
+### Before we proceed further, we need to understand `fget`, `fset` and `fdel` 
+#### What is fset in `Pet.age.fset(p, 10)`?
+
+
+
+#### Answer:
+
+`fset` is the **setter function** associated with the property.
+
+So:
+
+`Pet.age.fset(p, 10)`
+
+means:
+
+“Call the setter function of the property `age` manually”
+
+
+
+### Step-by-Step Understanding
+
+#### 1. What is `Pet.age` actually?
+
+When you write:
+
+```python
+
+class  Pet:  
+  @property  
+  def  age(self):  
+  return  self._age
+  ```
+
+-    `age` is **not a normal method**
+- It becomes a **property object**
+
+So:
+
+`print(type(Pet.age))`
+
+Output:
+
+`<class 'property'>`
+
+
+
+#### 2. What does a property object contain?
+
+A property internally stores 3 important functions:
+
+  
+
+  
+
+| Attribute | Meaning |
+| --- | --- |
+| fget | Getter function |
+| fset | Setter function |
+| fdel | Deleter function |
+
+
+#### 3. Your class internally becomes
+
+**Your code:**
+
+```python
+
+class Pet:
+    @property
+    def age(self):
+        return self._age
+
+    @age.setter
+    def age(self, value):
+        self._age = value
+
+```
+
+**Is Internally equivalent to:**
+
+```python
+
+class Pet:
+    def get_age(self):
+        return self._age
+
+    def set_age(self, value):
+        self._age = value
+
+    age = property(get_age, set_age)
+
+```
+
+
+
+
+#### What happens in:
+
+`Pet.age.fset(p, 10)`
+
+Step-by-step:
+
+1.  `Pet.age` → property object
+2.  `.fset` → setter function
+3.  `(p, 10)` → call setter with:
+    -   `self = p`
+    -   `value = 10`
+
+So it executes:
+
+`p._age =  10`
+
+
+Key Takeaways
+-    Every property has fget, fset, fdel
+-    They may be None if not defined
+-    They are not dunder methods
+-    They belong to the property object, not the class directly
+-    They store the actual functions used for attribute control
+
+
+
+### End of collapsable section on the three attributes `fget`, `fset` and `fdel`
+
+</details>
+
+
+
+
+
+
+<details>
+<summary>Discussion on `@property` and `@age.setter`</summary>summary
 Before we take up the project, it is important to understand how `@property` and `@age.setter` work.
 
 
@@ -57,6 +193,9 @@ It defines **what should happen when you assign a value**
 Which calls:
 
 `def  age(self, value):`
+
+
+</details>
 
 
 <details>
