@@ -58,8 +58,8 @@ Modify a `Pet` class to implement **encapsulation using property decorators**.
 
 | Feature | Traditional | Property |
 | --- | --- | --- |
-| Access | get_age() | obj.age |
-| Modify | set_age() | obj.age = value |
+| Access | `get_age()` | `obj.age` |
+| Modify | `set_age()` | `obj.age = value` |
 | Validation | Manual | Built-in |
 
 
