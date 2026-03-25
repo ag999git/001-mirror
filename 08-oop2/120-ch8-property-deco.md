@@ -322,6 +322,62 @@ Modify a `Pet` class to implement **encapsulation using property decorators**.
 | Validation | Manual | Built-in |
 
 
+### Solution script
+
+
+```python
+
+# This script defines the Pet class with instance attributes "name" and "age", and a property for age with validation. 
+# The @property decorator is used to create a getter for the age attribute, allowing us to access it as if it were a regular attribute. 
+# The @age.setter decorator is used to define a setter for the age property, which includes validation to ensure 
+# that the age cannot be set to a negative value. # If an attempt is made to set a negative age, a ValueError 
+# is raised with the message "Invalid age". # Finally, we test the class by creating an instance of Pet, 
+# accessing the age property, and setting a new valid age. We also demonstrate that setting an invalid age raises an error.  
+
+
+# A. Define the Pet class.
+class Pet:
+    def __init__(self, name, age):
+        self.name = name
+        self._age = age
+    
+    # B. @property for age with validation. 
+    # The @property decorator is used to create a getter for the age attribute, allowing us to access it as 
+    # if it were a regular attribute. The method simply returns the value of the private attribute _age, 
+    # which is where we store the actual age value. By using @property, we can add validation logic in 
+    # the setter method while still allowing users to access the age attribute in a natural way.
+    
+    @property
+    def age(self):  
+        return self._age
+    
+    # C. Setter for age with validation
+    # The @age.setter decorator allows us to define a setter method for the age property. This means that when 
+    # we assign a value to pet_instance.age, this setter method will be called with the new value. 
+    # Inside the setter, we can add validation logic to ensure that the age being set is 
+    # valid (in this case, non-negative). If the value is less than 0, we raise a ValueError to indicate 
+    # that the age is invalid. If the value is valid, we assign it to the private attribute _age. 
+    # This way, we can control how the age attribute is set and ensure that it always contains a valid value.   
+    
+    @age.setter
+    def age(self, value):  
+        if value < 0:
+            raise ValueError("Invalid age")
+        self._age = value
+
+
+# C. Testing
+p = Pet("Tommy", 5)
+print(p.age)  # Output: 5. 
+
+p.age = 10
+print(p.age)  # Output: 10.
+
+# p.age = -5  # Error: Invalid age
+
+
+```
+
 
 
 
