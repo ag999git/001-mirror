@@ -263,7 +263,7 @@ No import needed.
 
 
 
-### Task
+## Project/ Assignment Task is as follows
 
 Modify a `Pet` class to implement **encapsulation using property decorators**.
 
@@ -320,7 +320,7 @@ Modify a `Pet` class to implement **encapsulation using property decorators**.
 | Validation | Manual | Built-in |
 
 
-### Solution script
+## Solution script
 
 
 ```python
