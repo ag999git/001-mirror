@@ -199,6 +199,25 @@ print(dog_instance.speak())  # Output: Woof!
 
 
 
+### The following table summarizes the two different routes followed 
+
+
+  
+
+| Step No. | Step Name | Normal Route (Default type) | Metaclass Route (PetMeta) | Key Insight |
+| --- | --- | --- | --- | --- |
+| 1 | Class Definition Encountered | Python sees class Dog: | Python sees class Dog(metaclass=PetMeta): | This is where the path diverges |
+| 2 | Decide Class Creator | Uses default metaclass → type | Uses custom metaclass → PetMeta | Every class is created by a metaclass |
+| 3 | Prepare Class Components | Collects name, bases, and dictionary (__dict__) | Same: name, bases, dct collected | Both routes start identically |
+| 4 | Call Class Constructor | type(name, bases, dct) is called | PetMeta(name, bases, dct) is called | Metaclass replaces type |
+| 5 | Execute __new__() of Metaclass | type.__new__() runs silently | PetMeta.__new__() runs (custom logic) | Control point for customization |
+| 6 | Modify Class (Optional) | No modification (default behavior) | Can modify dct (e.g., add category) | This is where "magic" happens |
+| 7 | Create Class Object | Class Dog is created normally | Class Dog is created with modifications | Output is still a class object |
+| 8 | Class Ready | Dog has only defined attributes | Dog has auto-added attributes | Behavior difference appears here |
+| 9 | Object Creation | dog = Dog() | dog = Dog() | Object creation is SAME in both |
+| 10 | Call __new__() (instance) | Dog.__new__() runs | Same | Metaclass does NOT affect instance creation directly |
+| 11 | Call __init__() | Initializes object | Same | Object-level logic unchanged |
+| 12 | Final Object | Normal object | Object of modified class | Difference comes from class design |
 
 
 
