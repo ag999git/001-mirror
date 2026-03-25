@@ -5,6 +5,16 @@
 ## PROJECT 2: Property Decorators (`@property`)
 
 
+### Discussion on `@property`
+Before we take up the project, it is important to understand how `@property` works
+
+
+
+
+
+
+
+
 
 ### Task
 
