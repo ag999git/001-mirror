@@ -129,11 +129,18 @@ p2.show()  # Output: Bruno, 3, Animal. This line calls the show() method on the 
 print(Pet.is_valid_age(5))  # Output: True. This line calls the static method is_valid_age on the Pet class, passing the age 5 as an argument. The method checks if 5 is a valid age (non-negative) and returns True, which is then printed to the console.
 print(Pet.is_valid_age(-1))  # Output: False. This line calls the static method is_valid_age on the Pet class, passing the age -1 as an argument. The method checks if -1 is a valid age (non-negative) and returns False, which is then printed to the console.
 
-
 ```
 
 
+#### Step by Step explanation
 
+1.  Constructor initializes object
+2.  Instance method accesses object data
+3.  Class method:
+    -   Parses string
+    -   Creates object using `cls`
+4.  Static method:
+    -   Validates age independently
 
 
 
