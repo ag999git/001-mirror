@@ -102,7 +102,7 @@ Student must explain:
 
 ----------
 
-### DOs and DON’Ts
+### 8. DOs and DON’Ts
 
 #### DO:
 
@@ -118,7 +118,7 @@ Student must explain:
 
 ----------
 
-### HINTS (Very Important)
+### 9. HINTS (Very Important)
 
 -   `__slots__` → **removes instance `__dict__`**
 -   Without `__dict__` → no dynamic attributes
