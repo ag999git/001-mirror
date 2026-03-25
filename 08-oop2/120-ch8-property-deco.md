@@ -6,7 +6,7 @@
 
 <details>
 
-<summary>Understanding the three attributes `fget`, `fset` and `fdel` (Which all property objects have)</summary>
+<summary>Understanding the three attributes `fget`, `fset` and `fdel` (Which all property objects have) (Click ► to expand)</summary>
 
 
 ### Before we proceed further, we need to understand `fget`, `fset` and `fdel` 
@@ -141,7 +141,7 @@ Key Takeaways
 
 
 <details>
-<summary>Discussion on `@property` and `@age.setter`</summary>summary
+<summary>Discussion on `@property` and `@age.setter` (Click ► to expand)</summary>
 Before we take up the project, it is important to understand how `@property` and `@age.setter` work.
 
 
