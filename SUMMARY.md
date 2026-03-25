@@ -72,6 +72,16 @@
 * [__str__() versus __repr__() Chapter 7](07-oop/013-ch7-str-repr.md)
 
 
+## Chapter 8: Object Oriented Programming Part 2
+* [Introduction to Chapter 8](08-oop2/README.md)
+* [Demonstrate inheritance in OOP](08-oop2/010-08-ch8-rq-animal-system.md)
+
+
+
+
+
+
+
 
 
 
