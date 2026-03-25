@@ -1,8 +1,9 @@
 
 
 
-Part 2: 20 Programming Script Questions & Answers
-1. Create a Vehicle parent class and a Car child class. Use the pass keyword to demonstrate "Implicit Is-A" inheritance.
+## Part 2: 20 Programming Script Questions & Answers
+
+1. Create a `Vehicle` parent class and a `Car` child class. Use the pass keyword to demonstrate "Implicit Is-A" inheritance.
 ```python
 class Vehicle:
     def move(self):
@@ -16,7 +17,7 @@ c = Car()
 c.move() # Output: This vehicle is moving
 ```
 
-2. Write a script that uses isinstance() to check if a Puppy object is an instance of Dog and an instance of Pet.
+2. Write a script that uses `isinstance()` to check if a `Puppy` object is an instance of `Dog` and an instance of `Pet`.
 
 ```python
 class Pet: pass
@@ -30,7 +31,7 @@ print(f"Is p a Pet? {isinstance(p, Pet)}")  # True
 
 ```
 
-3. Demonstrate the __mro__ attribute by creating a three-level hierarchy: Animal -> Mammal -> Cat.
+3. Demonstrate the `__mro__` attribute by creating a three-level hierarchy: `Animal -> Mammal -> Cat`.
 
 ```python
 
@@ -43,7 +44,7 @@ print(Cat.__mro__)
 
 ```
 
-4. Create a class where the __init__ method of the child class explicitly calls the __init__ method of the parent class using super().
+4. Create a class where the `__init__` method of the child class explicitly calls the `__init__` method of the parent class using `super()`.
 
 ```python
 
@@ -61,7 +62,7 @@ p = Parrot("Parrot", "Green")
 print(p.species, p.color)
 ```
 
-5. Write a script that creates a class attribute and an instance attribute, then prints the __dict__ of both the class and the instance.
+5. Write a script that creates a class attribute and an instance attribute, then prints the `__dict__` of both the class and the instance.
 
 ```python
 
@@ -76,7 +77,7 @@ print("Class Dict:", Robot.__dict__)
 print("Instance Dict:", r.__dict__)
 ```
 
-6. Use multiple inheritance to create a FlyingFish class that inherits from both Bird (for flying) and Fish (for swimming).
+6. Use multiple inheritance to create a `FlyingFish` class that inherits from both `Bird` (for flying) and `Fish` (for swimming).
 
 ```python
 
@@ -95,7 +96,7 @@ ff.fly()
 ff.swim()
 ```
 
-7. Demonstrate "Method Overriding" by creating a parent class Shape with a draw() method and a child class Circle that changes the draw() message.
+7. Demonstrate "Method Overriding" by creating a parent class `Shape` with a `draw()` method and a child class `Circle` that changes the `draw()` message.
 
 ```python
 
@@ -112,7 +113,7 @@ c = Circle()
 c.draw()
 ```
 
-8. Write a script showing "Cooperative Inheritance" where a child method calls super().speak() and then adds its own text.
+8. Write a script showing "Cooperative Inheritance" where a child method calls `super().speak()` and then adds its own text.
 
 ```python
 
@@ -129,7 +130,7 @@ s = Student()
 s.speak()
 ```
 
-9. Create a "Has-A" relationship (Composition) between a CPU class and a Computer class.
+9. Create a "Has-A" relationship (Composition) between a CPU class and a `Computer` class.
 
 ```python
 
@@ -147,7 +148,7 @@ pc = Computer("MyPC", "Intel")
 print(f"{pc.name} has an {pc.processor.brand} CPU")
 ```
 
-10. Implement an abstract method using NotImplementedError in a class ElectronicDevice and implement it in a Phone class.
+10. Implement an abstract method using `NotImplementedError` in a class ElectronicDevice and implement it in a `Phone` class.
 
 ```python
 
@@ -164,7 +165,7 @@ p = Phone()
 p.power_on()
 ```
 
-11. Write a script that uses locals() inside a function to show the names and values of local variables.
+11. Write a script that uses `locals()` inside a function to show the names and values of local variables.
 
 ```python
 
@@ -190,7 +191,7 @@ class D(B, C): pass
 print(D.__mro__)
 ```
 
-13. Create a class Account and manually add an attribute to its instance using the __dict__ dictionary.
+13. Create a class `Account` and manually add an attribute to its instance using the `__dict__` dictionary.
 
 ```python
 
@@ -204,7 +205,7 @@ acc.__dict__['balance'] = 5000
 print(f"Owner: {acc.owner}, Balance: {acc.balance}")
 ```
 
-14. Write a script that defines a global variable and a function, then uses globals() to check if they exist in the global namespace.
+14. Write a script that defines a global variable and a function, then uses `globals()` to check if they exist in the global namespace.
 
 ```python
 
@@ -217,7 +218,7 @@ print('top_score' in globals())
 print('play' in globals())
 ```
 
-15. Create a Manager class that inherits from Employee and adds a list of subordinates. Use super() in the constructor.
+15. Create a `Manager` class that inherits from `Employee` and adds a list of subordinates. Use `super()` in the constructor.
 
 ```python
 
@@ -234,7 +235,7 @@ m = Manager("Gupta", ["Alice", "Bob"])
 print(m.name, "manages", m.subordinates)
 ```
 
-16. Demonstrate "Replacement Is-A" where a SilentPet class overrides speak() to do absolutely nothing.
+16. Demonstrate "Replacement Is-A" where a `SilentPet` class overrides `speak()` to do absolutely nothing.
 
 ```python
 
@@ -251,7 +252,7 @@ s = SilentPet()
 s.speak() # Nothing is printed
 ```
 
-17. Use the @property decorator to create a "getter" for a Circle class that calculates area based on radius.
+17. Use the `@property` decorator to create a "getter" for a `Circle` class that calculates area based on radius.
 
 ```python
 
@@ -270,7 +271,7 @@ c = Circle(5)
 print(f"Area: {c.area:.2f}")
 ```
 
-18. Implement a "Custom Container" using __getitem__ to allow square bracket access to a PetBox class.
+18. Implement a "Custom Container" using `__getitem__` to allow square bracket access to a `PetBox` class.
 
 ```python
 
@@ -287,7 +288,7 @@ print(box[1]) # Output: Cat
 ```
 
 
-19. Create a script that shows "Hierarchical Inheritance" with one parent Weapon and two children Sword and Bow.
+19. Create a script that shows "Hierarchical Inheritance" with one parent `Weapon` and two children `Sword` and `Bow`.
 
 ```python
 
@@ -303,7 +304,7 @@ s.attack()
 b.attack()
 ```
 
-20. Use __slots__ to restrict a Point class to only have x and y attributes, preventing the creation of __dict__.
+20. Use `__slots__` to restrict a `Point` class to only have `x` and `y` attributes, preventing the creation of `__dict__`.
 
 ```python
 
