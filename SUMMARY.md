@@ -74,6 +74,7 @@
 
 ## Chapter 8: Object Oriented Programming Part 2
 * [Introduction to Chapter 8](08-oop2/README.md)
+* [Google Colab NB Chapter 8](https://github.com/ag999git/001-Python-book-2026/blob/main/colab-nb/08_ch8_oop2.ipynb)
 * [Demonstrate inheritance in OOP](08-oop2/010-08-ch8-rq-animal-system.md)
 * [Listing all attributes and methods available in the object class ](08-oop2/020-08-ch8-object-methods.md)
 * [Demonstrating all major properties of inheritance,](08-oop2/030-08-ch8-inheritence-properties.md)
