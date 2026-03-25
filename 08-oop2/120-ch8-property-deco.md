@@ -185,7 +185,7 @@ Key Takeaways
 
 
 
-******** 
+### End of collapsable section on the three attributes `fget`, `fset` and `fdel`
 
 </details>
 
