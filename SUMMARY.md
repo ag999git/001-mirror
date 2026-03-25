@@ -75,6 +75,23 @@
 ## Chapter 8: Object Oriented Programming Part 2
 * [Introduction to Chapter 8](08-oop2/README.md)
 * [Demonstrate inheritance in OOP](08-oop2/010-08-ch8-rq-animal-system.md)
+* [Listing all attributes and methods available in the object class ](08-oop2/020-08-ch8-object-methods.md)
+* [Demonstrating all major properties of inheritance,](08-oop2/030-08-ch8-inheritence-properties.md)
+* [Has-A Relationships (Composition, Aggregation, Dependency)](08-oop2/035-ch8-composition-basics.md)
+* [Exploring Advanced “Has-A” Relationships in Python (Composition, Aggregation, Dependency)](08-oop2/040-ch8-composition.md)
+* [super() in Multiple Inheritance](08-oop2/050-ch8-multiple-inherit-super.md)
+* [PROJECT: Designing a Robust Pet System Using Abstract Classes](08-oop2/060-ch8-abstract.md)
+* [PROJECT:- Design a Pet Registration System Using 3 Approaches](08-oop2/070-ch8-registration.md)
+* [__new__() versus __init__()](08-oop2/080-ch8-new-init.md)
+* [PART 1: Basic concepts of metaclasses](08-oop2/090-ch8-type.md)
+* [What is __dict__?](08-oop2/100-ch8-namespace-legb.md)
+* [Using @classmethod and @staticmethod](08-oop2/110-ch8-deco-class-static.md)
+* [PROJECT 2: Property Decorators (@property)](08-oop2/120-ch8-property-deco.md)
+* [PROJECT TASK — __slots__ (Memory Optimization)](08-oop2/130-ch8-slots.md)
+* [Part 1: 30 Conceptual Questions & Answers](08-oop2/140-ch8-conceptual-q.md)
+* [More Conceptual Questions & Answers](08-oop2/145-ch8-more-conceptual-q.md)
+* [Part 2: 20 Programming Script Questions & Answers](08-oop2/150-ch8-scripts-q.md)
+* [More Scripting Questions with Answers](08-oop2/155-ch8-more-scripts.md)
 
 
 
