@@ -138,6 +138,87 @@ Student must explain:
 | Flexibility | High | Low |
 
 
+### Script
+
+
+```python
+
+
+# STEP 1: NORMAL CLASS
+
+class PetNormal:  # Normal class without __slots__
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+# STEP 2: CLASS WITH __slots__
+
+class PetSlots:  # Class with __slots__
+    __slots__ = ['name', 'age']  # __slots__ restricts attributes to only 'name' and 'age'. 
+    # This means that instances of PetSlots can only have these two attributes, and they will 
+    # not have a __dict__ to store attributes dynamically.
+
+    def __init__(self, name, age):  # The __init__ method initializes the name and age attributes for instances of PetSlots.
+        self.name = name
+        self.age = age
+
+# STEP 3: OBJECT CREATION
+
+p1 = PetNormal("Tommy", 5)  # This line creates an instance of the PetNormal class with the name "Tommy" and age 5. Since PetNormal does not use __slots__, it has a __dict__ that can store attributes dynamically.
+p2 = PetSlots("Bruno", 3)
+
+
+# STEP 4: NAMESPACE COMPARISON
+
+print("PetNormal __dict__:", p1.__dict__)  
+# Output: PetNormal __dict__: {'name': 'Tommy', 'age': 5}. 
+# This line prints the __dict__ of p1 instance, which shows the attributes and their values in a dictionary 
+# format. Since PetNormal does not use __slots__, it has a __dict__ that can store attributes dynamically.
+
+try:  # This block attempts to access the __dict__ attribute of the p2 instance, which is an instance of 
+    # PetSlots. Since PetSlots uses __slots__, it does not have a __dict__ attribute, and trying to access 
+    # it will raise an AttributeError. The except block catches this error and prints a message indicating 
+    # that PetSlots has no __dict__.
+    print("PetSlots __dict__:", p2.__dict__)
+except AttributeError as e:
+    print("PetSlots has no __dict__:", e)  # error message in e indicates 'PetSlots' object has no attribute '__dict__'. 
+
+
+# STEP 5: DYNAMIC ATTRIBUTE ADDITION
+
+# This Works because PetNormal allows dynamic attributes due to the presence of __dict__. When we add a new attribute 'color' to the p1 instance, it is stored in the __dict__ and can be accessed without any issues.
+p1.color = "Brown"
+print("PetNormal new attribute:", p1.color)
+
+# This Fails because PetSlots does not allow dynamic attributes due to the use of __slots__. When we try to add a new attribute 'color' to the p2 instance, it raises an AttributeError. The except block catches this error and prints a message indicating that we cannot add new attributes to PetSlots.
+try:
+    p2.color = "Black"
+except AttributeError as e:
+    print("Cannot add new attribute to PetSlots:", e)
+
+# STEP 6: MEMORY COMPARISON. Using __slots__ can save memory by preventing the creation of a __dict__ for each instance, which can be beneficial when creating many instances of a class. The sys.getsizeof() function is used to compare the memory usage of instances of PetNormal and PetSlots. We expect that the instance of PetSlots will use less memory than the instance of PetNormal due to the absence of a __dict__.
+
+from shutil import which
+from shutil import which
+import sys
+
+print("Memory (PetNormal):", sys.getsizeof(p1)) 
+# Output: Memory (PetNormal): 48. 
+# This line prints the memory size of the p1 instance, which is an instance of PetNormal. 
+# The memory size includes the __dict__ that allows for dynamic attributes, which contributes 
+# to a larger memory footprint.
+
+print("Memory (PetSlots):", sys.getsizeof(p2))  
+# Output: Memory (PetSlots): 48. 
+# This line prints the memory size of the p2 instance, which is an instance of PetSlots. 
+# The memory size may be smaller than that of PetNormal due to the use of __slots__, which prevents 
+# the creation of a __dict__ and thus reduces memory usage. However, the actual memory size can 
+# vary based on the implementation and may not always be smaller than PetNormal, but it 
+# generally allows for more efficient memory usage when creating many instances.
+
+
+```
+
 
 
 
