@@ -57,7 +57,63 @@
 
 ## Part 3: Script
 
+```python
 
+
+import urllib.request
+import urllib.error
+
+# Function to read content from an online file and demonstrate multiple except blocks
+def read_online_file(url):  
+    try:
+        response = urllib.request.urlopen(url)  # may raise URLError if URL is invalid or server is unreachable
+
+        print("2. Reading data...")
+        data = response.read()  # may raise HTTPError for HTTP errors (e.g., 404) or URLError if connection issues occur
+
+        print("3. Decoding data...")
+        content = data.decode('utf-8')  # may raise UnicodeDecodeError if decoding fails
+
+    except urllib.error.HTTPError as e:  # Handle HTTP errors (e.g., 404, 500)
+        print("HTTP Error:", e.code)
+
+    except urllib.error.URLError:  # Handle URL errors (e.g., invalid URL, server unreachable)
+        print("URL Error: Cannot reach server")
+
+    except UnicodeDecodeError:  # Handle decoding errors
+        print("Error: Cannot decode content")
+
+    except Exception as e:  # Generic except for any other unforeseen exceptions
+        print("Other Error:", e)
+
+    else:
+        print("4. Success! Showing first 1000 characters:\n")  # Show first 1000 characters of content if no exceptions occur
+        print(content[:1000])
+
+    finally:
+        print("5. Operation completed")
+
+# Case 1: Correct URL
+print("Case 1: Valid URL")
+read_online_file("https://raw.githubusercontent.com/gvanrossum/peps/refs/heads/master/pep-0020.txt")
+
+# Case 2: Invalid URL
+print("Case 2: Invalid URL")
+read_online_file("https://invalid-url.com/file.txt")
+
+# Case 3: HTTP Error (404)
+print("Case 3: HTTP Error (404)")
+read_online_file("https://raw.githubusercontent.com/python/cpython/main/NOFILE.txt")
+
+# Case 4: Encoding issue (rare but possible)
+print("Case 4: Encoding issue (rare but possible)")
+read_online_file("https://example.com/binaryfile")
+
+
+
+
+
+```
 
 
 
