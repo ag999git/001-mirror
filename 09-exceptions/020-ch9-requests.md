@@ -123,10 +123,21 @@ print("Case 4: Timeout simulation (very slow site)")
 read_online_file("https://httpstat.us/200?sleep=7000")
 # Output: try → except(Timeout) → finally
 
-
 ```
 
+## Error Comparison Table
 
+
+  
+
+  
+
+| Exception Type | Cause | Handling |
+| --- | --- | --- |
+| HTTPError | 404, 500 errors | Specific except |
+| ConnectionError | Network failure | Specific except |
+| Timeout | Slow response | Specific except |
+| RequestException | Base class (all errors) | Generic except |
 
 
 
