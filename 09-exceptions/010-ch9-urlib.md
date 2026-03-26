@@ -109,13 +109,18 @@ read_online_file("https://raw.githubusercontent.com/python/cpython/main/NOFILE.t
 print("Case 4: Encoding issue (rare but possible)")
 read_online_file("https://example.com/binaryfile")
 
-
-
-
-
 ```
 
+## Part 4: Error Comparison Table
 
+  
+
+| Error Type | Cause | Handling |
+| --- | --- | --- |
+| HTTPError | File not found (404) | Specific except |
+| URLError | Network failure | Specific except |
+| UnicodeDecodeError | Encoding mismatch | Specific except |
+| Exception | Any other issue | Generic except |
 
 
 
