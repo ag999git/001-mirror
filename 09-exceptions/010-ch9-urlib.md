@@ -123,6 +123,29 @@ read_online_file("https://example.com/binaryfile")
 | Exception | Any other issue | Generic except |
 
 
+## Part 5: Exception Hierarchy
+
+```python
+
+Exception
+│
+├── URLError
+│     └── HTTPError
+│
+├── UnicodeDecodeError
+│
+└── Other Exceptions
+
+```
+
+
+
+
+
+
+
+
+
 
 
 
