@@ -139,7 +139,14 @@ Exception
 ```
 
 
+### Important Note
 
+HTTPError is a subclass of URLError
+So order matters:
+
+`except HTTPError:` (More specific) should come before `except URLError`
+
+Correct order (specific → general)
 
 
 
