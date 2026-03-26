@@ -125,7 +125,7 @@ read_online_file("https://httpstat.us/200?sleep=7000")
 
 ```
 
-## Error Comparison Table
+## Part 3:Error Comparison Table
 
 
   
@@ -140,6 +140,16 @@ read_online_file("https://httpstat.us/200?sleep=7000")
 | RequestException | Base class (all errors) | Generic except |
 
 
+## Part 4: Exception Hierarchy
 
+```python
 
+RequestException
+│
+├── HTTPError
+├── ConnectionError
+├── Timeout
+├── TooManyRedirects
+
+```
 
