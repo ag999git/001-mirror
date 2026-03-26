@@ -153,3 +153,18 @@ RequestException
 
 ```
 
+## Part 5:  Comparison of urllib with requests
+
+
+  
+
+| Feature | urllib | requests |
+| --- | --- | --- |
+| Ease of use | Moderate | Very easy |
+| Readability | Low | High |
+| Built-in | Yes | No |
+| Error handling | Complex | Cleaner |
+
+
+
+
