@@ -110,7 +110,7 @@ with SafeFileHandler(fileName, "r") as f:
 
 
 
-## Explanatory Notes for the Script**
+## Explanatory Notes for the Script
 
 
 
