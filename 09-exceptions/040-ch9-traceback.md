@@ -118,6 +118,74 @@
 
 ## SCRIPT (ANSWER)
 
+```python
+
+import sys
+import traceback
+
+# Function 1 calls Function 2, which calls Function 3 where the error occurs.
+def level1():
+    print("1. Inside level1()")
+    level2()
+
+# Function 2
+def level2():
+    print("2. Inside level2()")
+    level3()
+
+# Function 3 (Error occurs here)
+def level3():
+    print("3. Inside level3()")
+    x = 10 / 0   # ZeroDivisionError
+
+# Main execution
+try:
+    print("1. Starting program")
+    level1()
+
+except Exception as e:
+    print("4. Exception caught in except block")
+
+    # Get exception details using sys.exc_info()
+    e_type, e_value, e_tb = sys.exc_info()
+
+    print("Type:", e_type)  # Output: <class 'ZeroDivisionError'>
+    print("Message:", e_value)  # Output: division by zero
+
+    # -------- Structured Traceback --------
+    print("5. Extracted Traceback Details:")
+    # traceback.extract_tb() returns a list of FrameSummary objects 
+    # representing the call stack at the point where the exception occurred.
+    tb_list = traceback.extract_tb(e_tb)  
+    print("6. Printing traceback details for each frame:")
+    for frame in tb_list:  # Each frame contains details about the file, line number, function name, and code text
+        filename, lineno, func_name, text = frame
+        print("File:", filename)  # Output: the file name where the error occurred
+        print("Line:", lineno)  # Output: the line number where the error occurred
+        print("Function:", func_name)  # Output: the function name where the error occurred
+        print("Code:", text)  # Output: the line of code that caused the error
+        print("-" * 40)
+
+    # -------- Full Traceback --------
+    print("7. Full Traceback:")
+    print(traceback.format_exc())  # Output: full traceback as a string
+
+finally:
+    print("8. Program continues after exception handling")
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 
