@@ -61,6 +61,68 @@
 
 
 
+### 3. traceback Module
+
+-   It is used to extract and format stack traces
+
+### Important Functions of traceback module are:
+
+  
+
+| Function | Purpose |
+| --- | --- |
+| extract_tb() | Structured traceback |
+| format_exc() | Full formatted string |
+| print_exc() | Print traceback |
+
+
+### 4. Stack Trace Concept
+
+-   A stack trace shows:
+    -   Sequence of function calls
+    -   Where error occurred
+
+
+
+### 5. Basic vs Detailed Error
+`str(e)` cannot give as much details as the `traceback` module. The difference beyween the two is shown in table below:
+  
+
+| Feature | str(e) | traceback |
+| --- | --- | --- |
+| Detail level | Low | High |
+| Shows location | No | Yes |
+| Shows call stack | No | Yes |
+
+## PART 2: SCRIPT QUESTION
+
+> Write a Python program that:
+> 
+> 1.  Defines at least **two nested functions**
+> 2.  Intentionally generates an exception (e.g., division by zero)
+> 3.  Uses:
+>     -   `try-except`
+>     -   `sys.exc_info()`
+>     -   `traceback.extract_tb()`
+> 4.  Prints:
+>     -   Exception type
+>     -   Exception message
+>     -   File name
+>     -   Line number
+>     -   Function name
+>     -   Code line causing error
+> 5.  Also prints the **full formatted traceback**
+> 6.  Ensures program continues after handling the exception
+
+
+
+## SCRIPT (ANSWER)
+
+
+
+
+
+
 
 
 
