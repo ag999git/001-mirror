@@ -199,8 +199,73 @@ except Exception as e:
 finally:
     print("8. Program continues after exception handling")
 
-
 ```
+
+
+
+## PART 5: EXPLANATION OF KEY STEPS
+
+
+
+### 1. Nested Functions
+
+-   Create a **call stack**
+-   Helps demonstrate traceback clearly
+
+----------
+
+### 2. Exception Object
+
+`except  Exception  as  e:`
+
+-   `e` stores everything
+
+----------
+
+### 3. traceback
+
+`tb  =  e.__traceback__`
+
+-   Raw traceback object
+
+----------
+
+### 4. `extract_tb()`
+
+-   Converts `__traceback__` into readable structure
+
+----------
+
+### 5. `format_exc()`
+
+-   Gives full error trace (like Python error screen)
+
+----------
+
+## PART 6: Comparison Tables
+
+----------
+
+### Three Levels of Exception Handling
+
+  
+
+  
+
+| Level | Tool | Output |
+| --- | --- | --- |
+| Basic | str(e) | Message |
+| Intermediate | e.__traceback__ | Raw traceback |
+| Advanced | traceback module | Structured + formatted |
+
+
+### traceback Functions Comparison
+
+| Function | Output | Use Case |
+| --- | --- | --- |
+| extract_tb() | Structured list | Analysis |
+| format_exc() | Full string | Logging |
+| print_exc() | Direct print | Quick debugging |
 
 
 
