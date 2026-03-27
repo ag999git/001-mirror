@@ -139,7 +139,68 @@ Structured stack trace
 
 ## PART 4: Script Answer
 
+```python
 
+import traceback
+
+# Nested functions to create stack trace
+def level1():  # Function 1 calls Function 2, which calls Function 3 where the error occurs.
+    print("1. Inside level1()")
+    level2()
+
+def level2():
+    print("2. Inside level2()")
+    level3()
+
+def level3():
+    print("3. Inside level3()")
+    return 10 / 0   # ZeroDivisionError
+
+
+# Main program
+try:
+    print("0. Starting program")
+    level1()
+
+except Exception as e:
+    print("4. Exception caught")
+
+    # -------- Basic Info --------
+    print("Type:", type(e))  # Output: <class 'ZeroDivisionError'>
+    print("Message:", str(e))  # Output: division by zero
+
+    # -------- Using __traceback__ --------
+    tb = e.__traceback__  # Get the traceback object from the exception instance
+    print("5. Extracted Traceback Details:")
+
+    tb_list = traceback.extract_tb(tb)  # Extracts the traceback details into a list of FrameSummary objects
+
+    # Loop through each frame in the traceback and print details
+    # Each frame contains details about the file, line number, function name, 
+    # and code text where the error occurred.   
+    print("6. Printing traceback details for each frame:")
+    for frame in tb_list:
+        filename, lineno, func_name, text = frame  # Unpack the frame details
+
+        print("File:", filename)  # Output: the file name where the error occurred
+        print("Line:", lineno)  # Output: the line number where the error occurred
+        print("Function:", func_name)  # Output: the function name where the error occurred
+        print("Code:", text)  # Output: the line of code that caused the error
+        print("-" * 40)
+
+    # -------- Full Traceback --------
+    # traceback.format_exc() returns the full traceback as a string, which can be printed or logged.
+    # It provides a complete traceback including all the frames and the error message, similar to what 
+    # you see when an unhandled exception occurs.
+    # This is useful for debugging and logging purposes, as it gives you the full context of the error.
+    print("7. Full Traceback:")
+    print(traceback.format_exc())  # Output: full traceback as a string
+
+finally:
+    print("8. Program continues after exception handling")
+
+
+```
 
 
 
