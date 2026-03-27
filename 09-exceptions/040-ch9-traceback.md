@@ -46,11 +46,17 @@
 ----------
 
 ### 2. sys.exc_info()
-
+`sys.exc_info()` gives a tuple of 3 components in form of a tuple as shown below:
 `(type, value, traceback) =  sys.exc_info()`
 
 
+  The meaning of each component is shown in table below:
 
+| Component | Meaning |
+| --- | --- |
+| Type | Exception class |
+| Value | Exception object |
+| Traceback | Call stack info |
 
 
 
