@@ -100,7 +100,7 @@
 * [Project 2:  Study the Python requests library ](/09-exceptions/020-ch9-requests.md)
 * [Context Manager](/09-exceptions/030-ch9-context-manager.md)
 * [Study of Exceptions using sys and traceback](/09-exceptions/040-ch9-traceback.md)
-* [Using __traceback__ attribute along with the traceback module](/09-exceptions/041-ch9-traceback.md)
+* [Using `__traceback__` attribute along with the traceback module](/09-exceptions/041-ch9-traceback.md)
 * [Conceptual Question & Answers](/09-exceptions/050-ch9-conceptual-q.md)
 * [40 script-based Questions & Answers on exceptions](/09-exceptions/060-ch9-scripts-q.md)
 
