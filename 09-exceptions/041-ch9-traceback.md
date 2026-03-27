@@ -138,6 +138,31 @@ Structured stack trace
 ----------
 
 ## PART 4: Script Answer
+**Before we write the script, it is helpful to see the flow of execution and the steps involved**
+The following flow shows how the script works:-
+
+```python
+
+Error occurs
+    ↓
+Exception object (e) created
+    ↓
+e.__traceback__  → raw traceback object
+    ↓
+traceback.extract_tb()
+    ↓
+List of frames (tb_list)
+    ↓
+Loop through frames
+    ↓
+Extract file, line, function, code
+    ↓
+(Optional) traceback.format_exc() → full string
+```
+
+
+
+### The actual script is as follows:
 
 ```python
 
