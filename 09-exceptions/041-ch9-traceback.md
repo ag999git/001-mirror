@@ -112,6 +112,41 @@ Structured stack trace
 
 ```
 
+
+
+## Script Question
+
+> Write a Python program that:
+> 
+> 1.  Creates at least **two nested function calls**
+> 2.  Generates an exception intentionally
+> 3.  Uses `except Exception as e`
+> 4.  Uses:
+>     -   `e.__traceback__`
+>     -   `traceback.extract_tb()`
+>     -   `traceback.format_exc()`
+> 5.  Displays:
+>     -   Exception type
+>     -   Message
+>     -   File name
+>     -   Line number
+>     -   Function name
+>     -   Code causing error
+> 6.  Prints full formatted traceback
+> 7.  Ensures program continues after handling
+
+----------
+
+## PART 4: Script Answer
+
+
+
+
+
+
+
+
+
 #### Key Insight
 
 `__traceback__` gives the raw path,
