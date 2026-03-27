@@ -9,7 +9,7 @@
 
 ### Sub-Questions
 
-Students must explore:
+Explore:
 
 1.  What is a **context manager**?
 2.  What is the **context management protocol**?
@@ -39,8 +39,6 @@ Students must explore:
 ----------
 
 ## PART 2: Project / Coding Task
-
-
 
 > _Design a custom context manager class named `SafeFileHandler` that:_
 > 
