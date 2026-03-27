@@ -3,7 +3,7 @@
 
 
 
-## PROJECT: Study of Exceptions using `sys` and `traceback`**
+## PROJECT: Study of Exceptions using `sys` and `traceback`
 
 
 
