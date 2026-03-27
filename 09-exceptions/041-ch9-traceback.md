@@ -227,6 +227,7 @@ finally:
 `tb  =  e.__traceback__`
 
 -   Raw traceback object
+-   `__traceback__` is an attribute of the exception object referenced by `e`
 
 ----------
 
