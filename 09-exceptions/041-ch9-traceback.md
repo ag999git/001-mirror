@@ -149,8 +149,8 @@ Structured stack trace
 
 #### Key Insight
 
-`__traceback__` gives the raw path,
-`traceback` module makes it readable.
+-    `__traceback__` gives the raw path,
+-    `traceback` module makes it readable.
 
 
 
