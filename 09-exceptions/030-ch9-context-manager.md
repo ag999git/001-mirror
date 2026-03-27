@@ -60,9 +60,54 @@ Explore:
 
 
 ## 1. Custom Context Manager**
+The following script shows the use of custom context manager
+
+```python
+
+# Custom Context Manager
+
+class SafeFileHandler:
+    def __init__(self, filename, mode):
+        self.filename = filename
+        self.mode = mode
+        self.file = None
+
+    def __enter__(self):
+        # Resource acquisition
+        print("1. __enter__(): Opening file")
+        self.file = open(self.filename, self.mode)
+        return self.file
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        # Cleanup (always executed)
+        print("3. __exit__(): Closing file")
+
+        if self.file:
+            self.file.close()
+
+        # Exception handling behavior
+        if exc_type:
+            print("Exception occurred:", exc_type.__name__)
+
+            # Example: suppress ValueError only
+            if exc_type == ValueError:  # Handle ValueError and suppress it
+                print("ValueError handled inside __exit__")
+                return True   # suppress exception
+
+        return False   # propagate exceptions other than ValueError
+
+# Example usage of the custom context manager
+fileName = r"example.txt"  # Make sure this file exists for the test    
+with SafeFileHandler(fileName, "r") as f:
+    content = f.read()  # This will read the file content. If the file does not exist, it will raise FileNotFoundError which will be handled by __exit__.
+    print(content)  
+    # Uncomment the next line to simulate an exception inside the with block
+    # raise ValueError("Simulated ValueError")  # This will be handled by __exit__  
+    # Uncomment the next line to simulate an exception that is not handled by __exit__
+    # raise KeyError("Simulated KeyError")  # This will propagate and not be handled by __exit__
 
 
-
+```
 
 
 
