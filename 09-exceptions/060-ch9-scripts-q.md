@@ -63,7 +63,7 @@ else:
     print(f"Division successful! The result is: {ans}")
 
 ```
-5. Create a script that tries to access a non-existent file. Handle both FileNotFoundError and PermissionError separately.
+5. Create a script that tries to access a non-existent file. Handle both `FileNotFoundError` and `PermissionError` separately.
 
 ```python
 
@@ -79,7 +79,7 @@ except PermissionError:
     print("You do not have the required permissions to read this file.")
 
 ```
-6. Write a script that uses a finally block to ensure a "Cleanup Complete" message prints regardless of whether a ValueError occurs during a string-to-int conversion.
+6. Write a script that uses a `finally` block to ensure a "Cleanup Complete" message prints regardless of whether a `ValueError` occurs during a string-to-int conversion.
 
 ```python
 
@@ -93,7 +93,7 @@ finally:
     print("Cleanup Complete: Releasing resources and closing sessions.")
 
 ```
-7. Demonstrate the "Generic Exception" safety net. Write a script with a specific except for IndexError and a generic except Exception as e for any other unforeseen errors.
+7. Demonstrate the "Generic Exception" safety net. Write a script with a specific except for `IndexError` and a generic except Exception as `e` for any other unforeseen errors.
 
 ```python
 
@@ -108,7 +108,7 @@ except Exception as e:
     print(f"An unexpected error occurred: {e}")
 
 ```
-8. Explain the risk of a "bare" except: clause. Write a script that uses one, and add a comment explaining why catching KeyboardInterrupt accidentally is bad.
+8. Explain the risk of a "bare" except: clause. Write a script that uses one, and add a comment explaining why catching `KeyboardInterrupt` accidentally is bad.
 
 ```python
 
@@ -123,7 +123,7 @@ except:
     print("Caught something, but I don't know what. This is bad practice!")
 
 ```
-9. Write a script that demonstrates the as keyword. Catch a ZeroDivisionError and use the alias to print the arguments (args) stored inside the exception object.
+9. Write a script that demonstrates the as keyword. Catch a `ZeroDivisionError` and use the alias to print the arguments (args) stored inside the exception object.
 
 ```python
 
@@ -136,7 +136,7 @@ except ZeroDivisionError as e:
     print(f"Arguments provided to exception: {e.args}")
 
 ```
-10. Use the with statement (Context Manager) to open a file. Write a comment explaining why this is safer than manual f.close() in terms of exceptions.
+10. Use the with statement (Context Manager) to open a file. Write a comment explaining why this is safer than manual `f.close()` in terms of exceptions.
 
 ```python
 
@@ -150,7 +150,7 @@ except IOError as e:
     print(f"File error: {e}")
 
 ```
-11. Create a dictionary and attempt to access a missing key. Catch the KeyError and use the else block to confirm the data was found.
+11. Create a dictionary and attempt to access a missing key. Catch the `KeyError` and use the else block to confirm the data was found.
 
 ```python
 
@@ -165,7 +165,7 @@ else:
     print(f"Data retrieved: {user_id}")
 
 ```
-12. Demonstrate handling multiple exceptions in a single tuple. Catch ValueError and TypeError in one block for a script that processes user input.
+12. Demonstrate handling multiple exceptions in a single tuple. Catch ValueError and `TypeError` in one block for a script that processes user input.
 
 ```python
 
@@ -182,7 +182,7 @@ process_input(None)
 process_input("xyz")
 
 ```
-13. Show the correct order of handling a Parent and Child exception. Define a custom ParentError and a ChildError, then catch them in the correct sequence.
+13. Show the correct order of handling a Parent and Child exception. Define a custom ParentError and a `ChildError`, then catch them in the correct sequence.
 
 ```python
 
@@ -199,7 +199,7 @@ except ParentError:
     print("Caught a general ParentError.")
 
 ```
-14. Show the "Incorrect" order of Parent/Child handling and explain via comments why the ChildError block becomes unreachable.
+14. Show the "Incorrect" order of Parent/Child handling and explain via comments why the `ChildError` block becomes unreachable.
 
 ```python
 
@@ -216,7 +216,7 @@ except ChildError:
     print("Caught by Child block.")
 
 ```
-15. Write a script that defines a custom exception InsufficientFundsError that takes balance and amount in its __init__ method.
+15. Write a script that defines a custom exception `InsufficientFundsError` that takes balance and amount in its `__init__` method.
 
 ```python
 
@@ -252,7 +252,7 @@ except NetworkError as e:
     print(e)
 
 ```
-17. Write a script that demonstrates ImportError by trying to import a non-existent module. Handle ModuleNotFoundError specifically.
+17. Write a script that demonstrates `ImportError` by trying to import a non-existent module. Handle `ModuleNotFoundError` specifically.
 
 ```python
 
@@ -265,7 +265,7 @@ except ImportError:
     print("Error: A general import error occurred.")
 
 ```
-18. Illustrate AttributeError by attempting to call a method that does not exist on a string object.
+18.` Illustrate AttributeError` by attempting to call a method that does not exist on a string object.
 
 ```python
 
@@ -277,7 +277,7 @@ except AttributeError as e:
     print(f"Object Error: {e}")
 
 ```
-19. Demonstrate NameError by trying to print a variable that hasn't been defined yet.
+19. Demonstrate `NameError` by trying to print a variable that hasn't been defined yet.
 
 ```python
 
@@ -288,7 +288,7 @@ except NameError as e:
     print(f"Variable Error: {e}. Ensure variables are defined before use.")
 
 ```
-20. Write a script that catches IndexError when iterating through a list and trying to access an element beyond its length.
+20. Write a script that catches `IndexError` when iterating through a list and trying to access an element beyond its length.
 
 ```python
 
@@ -300,7 +300,7 @@ except IndexError:
     print("List Error: You are trying to access a position that doesn't exist.")
 
 ```
-21. Use raise to re-raise an exception after logging it locally.
+21. Use `raise` to re-raise an exception after logging it locally.
 
 ```python
 
@@ -312,7 +312,7 @@ except ZeroDivisionError as e:
     raise 
 
 ```
-22. Create a script that uses EOFError to handle a situation where input() is interrupted (e.g., by pressing Ctrl+D).
+22. Create a script that uses `EOFError` to handle a situation where `input()` is interrupted (e.g., by pressing Ctrl+D).
 
 ```python
 
@@ -324,7 +324,7 @@ except EOFError:
     print("\nEnd of file reached. Exiting program gracefully.")
 
 ```
-23. Write a function that calculates a square root. Raise a ValueError if the input is negative, and catch it in the calling code.
+23. Write a function that calculates a square root. Raise a `ValueError` if the input is negative, and catch it in the calling code.
 
 ```python
 
@@ -341,7 +341,7 @@ except ValueError as e:
     print(f"Math Error: {e}")
 
 ```
-24. Demonstrate the hierarchy of ArithmeticError. Catch ZeroDivisionError specifically and then catch ArithmeticError as a fallback.
+24. Demonstrate the hierarchy of `ArithmeticError`. Catch `ZeroDivisionError` specifically and then catch `ArithmeticError` as a fallback.
 
 ```python
 
@@ -355,7 +355,7 @@ except ArithmeticError:
     print("General: An arithmetic error occurred.")
 
 ```
-25. Write a script that checks if a directory exists using OSError.
+25. Write a script that checks if a directory exists using `OSError`.
 
 ```python
 
@@ -382,7 +382,7 @@ except TypeError:
     print("Type Error: Numbers are not iterable. Convert to string first.")
 
 ```
-27. Write a script that demonstrates that finally runs even if a return statement is executed in the try block.
+27. Write a script that demonstrates that `finally` runs even if a `return` statement is executed in the try block.
 
 ```python
 
@@ -398,7 +398,7 @@ result = check_finally()
 print(result)
 
 ```
-28. Use a generic except to catch a KeyboardInterrupt and print "User aborted", but add a comment explaining why this is usually avoided.
+28. Use a generic except to catch a `KeyboardInterrupt` and print "User aborted", but add a comment explaining why this is usually avoided.
 
 ```python
 
@@ -411,7 +411,7 @@ except KeyboardInterrupt:
     print("User aborted the process.")
 
 ```
-29. Illustrate IndentationError logic. Explain via comments why this cannot be caught with try-except.
+29. Illustrate `IndentationError` logic. Explain via comments why this cannot be caught with `try-except`.
 
 ```python
 
@@ -427,7 +427,7 @@ except KeyboardInterrupt:
 # Because the script can't even be parsed, the try-except never gets to run.
 
 ```
-30. Create a script that retrieves the name of the exception class dynamically using type(e).__name__.
+30. Create a script that retrieves the name of the exception class dynamically using `type(e).__name__`.
 
 ```python
 
@@ -439,7 +439,7 @@ except Exception as e:
     print(f"Caught an error of type: {error_type}")
 
 ```
-31. (Advanced) Use Python 3.11’s ExceptionGroup to raise multiple exceptions at once.
+31. (Advanced) Use Python 3.11’s `ExceptionGroup` to raise multiple exceptions at once.
 
 ```python
 
@@ -457,7 +457,7 @@ except ExceptionGroup as eg:
         print(f" - Sub-error: {e}")
 
 ```
-32. (Advanced) Demonstrate the except* syntax () to handle specific errors within an ExceptionGroup.
+32. (Advanced) Demonstrate the `except*` syntax to handle specific errors within an ExceptionGroup.
 
 ```python
 
@@ -470,7 +470,7 @@ except* TypeError as eg:
     print("Handled the TypeErrors from the group.")
 
 ```
-33. (Advanced) Use the add_note() method () to attach extra debugging information to an exception.
+33. (Advanced) Use the `add_note()` method to attach extra debugging information to an exception.
 
 ```python
 
@@ -482,7 +482,7 @@ except ValueError as e:
     raise # Re-raising will now show the note in the traceback
 
 ```
-34. (Advanced) Demonstrate "Exception Chaining" using raise ... from.
+34. (Advanced) Demonstrate "Exception Chaining" using `raise ... from`.
 
 ```python
 
@@ -495,7 +495,7 @@ except ZeroDivisionError as e:
     raise RuntimeError("Application failed to process data") from e
 
 ```
-35. (Advanced) Use raise ... from None to suppress the context of a previous exception.
+35. (Advanced) Use `raise ...` from None to suppress the context of a previous exception.
 
 ```python
 
@@ -543,7 +543,7 @@ with MyResource():
     raise ValueError("Work failed")
 
 ```
-38. (Advanced) Use contextlib.suppress to ignore a specific exception silently.
+38. (Advanced) Use `contextlib.suppress` to ignore a specific exception silently.
 
 ```python
 
@@ -556,7 +556,7 @@ with suppress(FileNotFoundError):
     print("This line runs, but nothing happens if the file is missing.")
 
 ```
-39. (Advanced) Demonstrate how to handle nested try-except blocks where an inner exception is caught and a different one is raised.
+39. (Advanced) Demonstrate how to handle nested `try-except` blocks where an inner exception is caught and a different one is raised.
 
 ```python
 
@@ -586,7 +586,7 @@ except CustomError as e:
     print(f"Exception Class Hierarchy: {CustomError.mro()}")
     print("Custom Error caught successfully.")
 
-
+```
 
 
 
