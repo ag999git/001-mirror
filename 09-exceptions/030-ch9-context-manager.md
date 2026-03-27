@@ -106,8 +106,144 @@ with SafeFileHandler(fileName, "r") as f:
     # Uncomment the next line to simulate an exception that is not handled by __exit__
     # raise KeyError("Simulated KeyError")  # This will propagate and not be handled by __exit__
 
-
 ```
+
+
+
+## Explanatory Notes for the Script**
+
+
+
+### 1. Purpose of the Script
+
+-   This script demonstrates:
+    -   How a **custom context manager** works
+    -   How `with` uses:
+        -   `__enter__()` → to acquire resource
+        -   `__exit__()` → to release resource
+    -   How **exceptions are handled and optionally suppressed**
+
+----------
+
+### 2. Role of `__enter__()`
+
+-   The `__enter__()` method:
+    -   Is called **automatically** when the `with` statement begins
+    -   Opens the file using `open()`
+    -   Returns the file object
+
+with ` SafeFileHandler(fileName, "r") as  f:`
+Here:
+
+-   `f` receives the value returned by `__enter__()`
+
+
+
+### 3. Role of `__exit__()`
+
+-   The `__exit__()` method:
+    -   Is called **automatically** when the `with` block ends
+    -   Executes **even if an exception occurs**
+    -   Closes the file (cleanup)
+
+----------
+
+### 4. Parameters of `__exit__()`
+
+`def  __exit__(self, exc_type, exc_value, traceback):`
+
+-   `exc_type` → type of exception (e.g., `ValueError`)
+-   `exc_value` → actual exception object
+-   `traceback` → details of where error occurred
+
+If **no exception occurs**, all three are `None`
+
+
+
+### 5. Exception Handling in This Script
+
+-   If an exception occurs inside the `with` block:
+    -   `__exit__()` receives the exception details
+    -   The type of exception is printed
+
+
+
+### Special Handling for `ValueError`
+
+```python
+
+if  exc_type  ==  ValueError:  
+  return  True
+```
+
+-   This means:
+    -   `ValueError` is **handled and suppressed**
+    -   Program **does not crash**
+
+----------
+
+### Other Exceptions
+For other exceptions
+`return  False`
+
+-   Any exception other than `ValueError`:
+    -   Is **not suppressed**
+    -   Will **propagate** and may terminate the program
+
+
+
+### 6. Important Limitation
+
+> The context manager can only handle exceptions that occur **inside the `with` block**, not during file opening.
+
+So:
+
+`self.file =  open(self.filename, self.mode)`
+
+-   If file does not exist:
+    -   `FileNotFoundError` occurs in `__enter__()`
+    -   `__exit__()` is **not called**
+
+----------
+
+### 7. Flow of Execution**
+
+#### Case 1: No Exception
+
+`__enter__() → read file → __exit__()` → program continues
+
+----------
+
+#### Case 2: V`alueError`
+
+`__enter__() → error → __exit__()` → ValueError suppressed → program continues
+
+----------
+
+#### Case 3: Other Error (e.g., `KeyError`)**
+
+`__enter__() → error → __exit__()` → error propagates → program may stop
+
+----------
+
+### 8. Key Learning Points
+
+-   `with` ensures **automatic resource cleanup**
+-   `__exit__()` is always executed (if `__enter__()` succeeds)
+-   Exceptions can be:
+    -   **suppressed** (`return True`)
+    -   **propagated** (`return False`)
+-   Context managers improve:
+    -   Code safety
+    -   Readability
+    -   Structure
+
+----------
+
+### Conclusion
+
+> A context manager uses `__enter__()` to acquire a resource and `__exit__()` to release it, while also providing controlled handling of exceptions occurring inside the `with` block.
+
 
 
 
