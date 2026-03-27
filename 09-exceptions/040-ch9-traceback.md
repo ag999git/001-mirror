@@ -5,11 +5,11 @@
 
 ## PROJECT: Study of Exceptions using `sys` and `traceback`**
 
-----------
+
 
 ### RESEARCH QUESTION: “How does Python internally represent exceptions, and how can the `sys` and `traceback` modules be used to extract, analyze, and present detailed information about errors?”
 
-----------
+
 
 ### Details of the problem:
 
