@@ -240,6 +240,13 @@ So:
 
 ----------
 
+
+### Flowchart
+The following flowchart shows the flow of execution of the given script
+
+![Diagram](/resources/ch9-exceptions-context-manager.png)
+
+
 ### Conclusion
 
 > A context manager uses `__enter__()` to acquire a resource and `__exit__()` to release it, while also providing controlled handling of exceptions occurring inside the `with` block.
