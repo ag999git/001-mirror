@@ -173,8 +173,85 @@ except Exception as e:
 finally:
     print("8. Program continues after exception handling")
 
-
 ```
+
+
+
+## PART 3: EXPLANATION OF SCRIPT**
+
+----------
+
+### Execution Flow
+
+1.  `level1()` → calls `level2()`
+2.  `level2()` → calls `level3()`
+3.  `level3()` → error occurs
+4.  Control jumps to `except`
+5.  Exception info is extracted and displayed
+
+
+### Key Concepts Explained
+
+#### A. Nested Calls
+
+-   Creates a **call stack**
+-   Helps demonstrate traceback clearly
+
+----------
+
+#### B. `sys.exc_info()`
+
+-   Captures:
+    -   Type → `ZeroDivisionError`
+    -   Value → message
+    -   Traceback → execution path
+
+----------
+
+#### C.  `traceback.extract_tb()`
+
+-   Breaks traceback into:
+    -   File
+    -   Line
+    -   Function
+    -   Code
+
+----------
+
+#### D. `traceback.format_exc()`
+
+-   Gives **complete formatted traceback**
+
+----------
+
+### PART 4: COMPARISON TABLES
+
+----------
+
+### **`sys` vs `traceback`**
+
+  
+
+| Feature | sys.exc_info() | traceback |
+| --- | --- | --- |
+| Output type | Tuple | Structured / formatted |
+| Detail level | Medium | High |
+| Ease of use | Moderate | Easy to display |
+| Use case | Internal inspection | Debugging |
+
+
+**Types of Exception Information**
+
+  
+
+| Level | Tool | Output |
+| --- | --- | --- |
+| Basic | `str(e)` | Message |
+| Medium | `sys.exc_info()` | Type + object |
+| Detailed | `traceback` | Full call stack |
+
+
+
 
 
 
