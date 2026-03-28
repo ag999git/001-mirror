@@ -92,6 +92,82 @@ Most disk files return `True`.
 
 
 
+  ### Key Insight: These methods help **avoid errors before they occur**
+
+| Mode | readable() | writable() |
+| --- | --- | --- |
+| r' | True | False |
+| w' | False | True |
+| a' | False | True |
+| r+' | True | True |
+
+### Script
+
+```python
+
+# Study: File Capability Methods
+# readable(), writable(), seekable()
+
+# STEP 1: Create a sample file
+with open("cap_demo.txt", "w") as f:
+    f.write("Hello File Handling\n")
+
+# STEP 2: Test different modes
+modes = ["r", "w", "a", "r+", "rb"]
+
+for mode in modes:
+    print(f"\n--- Opening file in mode: {mode} ---")
+    
+    with open("cap_demo.txt", mode) as f:
+        
+        # Check capabilities
+        print("Readable?:", f.readable())  # True for 'r' and 'r+', False for 'w', 'a', 'rb'
+        print("Writable?:", f.writable())  # True for 'w', 'a', 'r+', False for 'r', 'rb'
+        print("Seekable?:", f.seekable())  # True for all modes except some special files
+        
+        # Safe operations based on capability
+        
+        # Read only if allowed
+        if f.readable():  # Only attempt to read if the file is opened in a mode that allows reading
+            print("Reading content:", f.read(10))
+        else:
+            print("Read not allowed in this mode")
+        
+        # Write only if allowed
+        if f.writable():  # Only attempt to write if the file is opened in a mode that allows writing
+            f.write("Test\n")
+            print("Write operation performed")
+        else:
+            print("Write not allowed in this mode")
+        
+        # Seek only if allowed
+        if f.seekable():  # Only attempt to seek if the file is opened in a mode that allows seeking
+            f.seek(0)
+            print("Pointer reset using seek()")
+
+
+# STEP 3: Demonstrating errors (commented)
+
+# ERROR: Reading from write-only file
+# with open("cap_demo.txt", "w") as f:  # Opened in write mode
+#     f.read()   # UnsupportedOperation: not readable
+
+# ERROR: Writing to read-only file
+# with open("cap_demo.txt", "r") as f:  # Opened in read mode
+#     f.write("Hello")   # UnsupportedOperation: not writable
+
+
+# STEP 4: Conclusion message
+print("\nProgram completed safely using capability checks.")
+
+
+```
+
+
+
+
+
+
 
 
 
