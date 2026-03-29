@@ -125,7 +125,6 @@ Compare both approaches based on:
 
 ----------
 
-----------
 
 ## 2. Algorithm 1: Temporary File Approach**
 
@@ -145,6 +144,88 @@ Compare both approaches based on:
 ### Script (Method 1: Memory Efficient)
 
 
+```python
+
+import os
+
+def insert_line_temp(src_file, dest_file, new_line, line_no):  # Define a function to insert a line into a file using a temporary file approach
+    """
+    Inserts a line into a file using a temporary file approach.
+    Suitable for large files (memory efficient).
+    """
+
+    # STEP 1: Open source (read) and destination (write)
+    with open(src_file, 'r') as f1, open(dest_file, 'w') as f2:  # Open source file for reading and destination file for writing
+        
+        current_line = 1  # Track current line number
+        
+        # STEP 2: Read file line-by-line
+        for line in f1:  # Iterate through each line in the source file
+            
+            # STEP 3: Insert new line at desired position
+            if current_line == line_no:  # Check if current line number matches the desired line number for insertion
+                f2.write(new_line + '\n')   # Insert new content
+                print(f"Inserted at line {line_no}: {new_line}")
+            
+            # STEP 4: Copy existing line
+            f2.write(line)  # Write the current line from source to destination
+            print(f"Copied line {current_line}: {line.strip()}")
+            
+            current_line += 1  # Increment line number for next iteration
+
+        # STEP 5: If line_no is beyond file length → append
+        if line_no >= current_line:  # Check if desired line number is greater than or equal to total lines in source file
+            f2.write(new_line + '\n')  # Append new content at the end of destination file
+            print(f"Appended at end: {new_line}")
+
+    # OPTIONAL: Replace original file
+    # os.replace(dest_file, src_file)  # Uncomment to replace original file with modified file (be cautious with this step)
+
+"""
+Create a sample source.txt file with following content for testing:
+11111111
+22222222
+33333333
+44444444
+55555555
+
+Insert:
+
+0000000
+
+at line number 2
+"""
+
+# Example usage
+# Define source and destination file paths, new content, and line number to insert at 
+# Note: Ensure 'source.txt' exists with enough lines for testing
+# print source.txt content before running this code to see the effect of insertion
+print("Before insertion:")
+with open("source.txt", "r") as f:  # Open source file in read mode to display its content before insertion
+    print(f.read())
+    
+src = "source.txt"  # Source file to read from
+dest = "destination.txt"  # Destination file to write to
+new_content = "00000000"  # New line to insert
+line_number = 2  # Line number to insert at (1-based index)
+insert_line_temp(src, dest, new_content, line_number)  # Call the function to perform the line insertion using a temporary file approach
+
+# After running the code, check 'destination.txt' to see the inserted line and copied content
+print("\nAfter insertion:")
+with open(dest, "r") as f:  # Open destination file in read mode to display its content after insertion
+    print(f.read())
+    # Output will show the new line inserted at the specified line number, with existing lines copied over. If line_number is greater than the total lines in source.txt, the new line will be appended at the end of destination.txt.
+    # Note: The original 'source.txt' remains unchanged. The new content is in 'destination.txt'.
+    
+
+
+
+```
+
+
+
+
+
 
 ## Algorithm 2: List-Based Approach
 
@@ -160,6 +241,11 @@ Compare both approaches based on:
 
 ### Script (Method 2: Simple but Memory Heavy)
 
+```python
+
+
+
+```
 
 
 
