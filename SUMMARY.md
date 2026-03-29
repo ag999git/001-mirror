@@ -104,7 +104,28 @@
 * [Conceptual Question & Answers](/09-exceptions/050-ch9-conceptual-q.md)
 * [40 script-based Questions & Answers on exceptions](/09-exceptions/060-ch9-scripts-q.md)
 
-
+## Chapter 10: Files Operations in Python
+* [Introduction to Chapter 10](/10-file-handling/README.md)
+* [Google Colab Notebook Chapter 10](/colab-nb/10_ch10_files.ipynb
+)
+* [Comprehensive File Handling Concepts Table](/10-file-handling/010-ch10-concepts.md)
+* [Comparison table of (1) Text files and (2) Binary files](/10-file-handling/020-ch10-text-binary.md)
+* [“Comprehensive Study of Python File Opening Mechanism and File Object Behavior”](/10-file-handling/030-ch10-file-open.md)
+* [Study of seek(offset, whence) in Python and Its Behavior in Text vs Binary Files](/10-file-handling/040-ch10-seek.md)
+* [Investigation of File Capability Methods in Python: readable(), writable(), and seekable()](/10-file-handling/050-ch10-file-capability.md)
+* [Study Extended Concepts & Additional Methods of the os module](/10-file-handling/060-ch10-os-module.md)
+* [Investigating Standard Streams in Python.](/10-file-handling/070-ch10-standard-streams.md
+)
+* [Study of Object Serialization in Python using Pickle: Features, Limitations, and Security Concerns](/10-file-handling/080-ch10-pickling.md)
+* [Comparative Study of JSON and Pickle for Data Serialization in Python with Real-World Applications](/10-file-handling/090-ch10-json-pickle.md)
+* [Design and Comparison of Algorithms for Inserting Data at Arbitrary Positions in a File in Python](/10-file-handling/100-ch10-file-insertion.md)
+* [Part 1: Conceptual Questions](/10-file-handling/110-ch10-conceptual.md)
+* [Script Questions Based](/10-file-handling/120-ch10-scripts.md
+)
+* [LBYL Versus EAPF](/10-file-handling/130-ch10-lbyl-eafp.md)
+* [Study of `os.walk()`](/10-file-handling/140-ch10-oswalk.md)
+* [](/10-file-handling/XX)
+* [](/10-file-handling/XX)
 
 
 
