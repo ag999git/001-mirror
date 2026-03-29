@@ -295,21 +295,16 @@ with open(dest, "r") as f:  # Open destination file in read mode to display its 
 
 ### Comparison table (For the two algorithms)
 
+
+| Feature | JSON | Pickle | Use Case |
+| --- | --- | --- | --- |
+| Portability | High | Low | APIs |
+| Security | High | Low | Web |
+| Object Support | Limited | Full | Python apps |
+| Speed | Medium | High | Internal storage |
+
+
   
-
-| Feature | Temp File Method | List Method |
-| --- | --- | --- |
-| Memory Usage | Low | High |
-| --- | --- | --- |
-| Speed (Large Files) | Fast | Slow |
-| --- | --- | --- |
-| Ease of Coding | Moderate | Easy |
-| --- | --- | --- |
-| Risk of Crash | Low | Higher (memory) |
-| --- | --- | --- |
-| Best Use Case | Large files | Small files |
-| --- | --- | --- |
-
 
 
 
