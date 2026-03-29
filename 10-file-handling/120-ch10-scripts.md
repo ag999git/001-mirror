@@ -1,7 +1,9 @@
 
 
 
-Part 1: Script Questions Based on Chapter 10 (20 Questions)
+## Part 1: Script Questions Based on Chapter 10 (20 Questions)
+
+
 **1. Write a script that uses the with statement to create a file named practice.txt, writes three separate lines of text to it, and then attempts to print the closed attribute both inside and outside the block. Explain the result.**
 
 ```python
@@ -269,7 +271,7 @@ with open("intro.txt", "r") as f:
 The seek(offset) method moves the file pointer to the absolute index provided as the argument. By moving to 5, the script skips the first 5 characters of the file. When read() is called thereafter, it begins capturing data starting from that new position until it hits the end of the file. This is a fundamental technique for "skipping headers" or reading specific records within a fixed-width data file.
 
 
-**Part 2: Advanced Topics & Best Practices (10 Questions)**
+## Part 2: Advanced Topics & Best Practices (10 Questions)
 
 
 **21. How does the pathlib module simplify path joining compared to traditional string concatenation? Show a script example.**
