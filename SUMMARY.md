@@ -124,8 +124,6 @@
 )
 * [LBYL Versus EAPF](/10-file-handling/130-ch10-lbyl-eafp.md)
 * [Study of `os.walk()`](/10-file-handling/140-ch10-oswalk.md)
-* [](/10-file-handling/XX)
-* [](/10-file-handling/XX)
 
 
 
