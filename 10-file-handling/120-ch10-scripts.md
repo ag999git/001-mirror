@@ -356,7 +356,7 @@ with open("users.csv", "r") as f:
 ```
 
 DictReader maps the information in each row to a dictionary, using the first line of the CSV as the "keys." This is much more robust than readlines() because if the order of columns in the CSV changes (e.g., "username" moves from the 1st column to the 3rd), your script will still work correctly by looking up the name instead of a position index.
-•	Further Study: Real Python: Reading and Writing CSV Files
+•	Further Study: Real Python: [Reading and Writing CSV Files](https://realpython.com/python-csv/)
 
 
 **27. Demonstrate how to compress a file into a ZIP archive using the zipfile module.**
@@ -369,7 +369,7 @@ with zipfile.ZipFile("archive.zip", "w") as myzip:
 ```
 
 The zipfile module allows Python to interact with compressed archives. This is a common requirement for software that needs to package multiple reports together or reduce the size of data before sending it over a network. It supports various compression methods like ZIP_DEFLATED to ensure the final file size is as small as possible.
-•	Further Study: Python Docs: zipfile module
+•	Further Study: [Python Docs: zipfile module](https://docs.python.org/3/library/zipfile.html)
 
 **28. Use the os.path.getsize() function to check the size of a file before opening it. Why is this a good practice?**
 
@@ -382,7 +382,7 @@ if size > 1024**3: # If larger than 1GB
 ```
 
 Checking the file size before opening it is a form of "Defensive Programming." It allows the script to decide if it has enough RAM to process the file or if it should switch to a "chunking" method. This prevents the program from hanging or crashing when a user accidentally tries to open a massive file that the script wasn't designed to handle all at once.
-•	Further Study: Python Docs: os.path
+•	Further Study: [Python Docs: os.path](https://docs.python.org/3/library/os.path.html)
 
 **29. What is mmap (Memory Mapping), and why is it used for high-performance file access?**
 
@@ -406,7 +406,7 @@ shutil.copytree("my_project", "project_backup")
 ```
 
 While the built-in open() methods work on individual files, the shutil (Shell Utilities) module is used for high-level operations on files and folders. copytree is particularly powerful because it recursively copies all files, subfolders, and metadata, allowing a programmer to perform complex "backup" or "deployment" tasks with a single line of code.
-•	Further Study: Python Docs: shutil module
+•	Further Study: [Python Docs: shutil module](https://docs.python.org/3/library/shutil.html)
 
 
 
