@@ -13,10 +13,10 @@ with open("practice.txt", "w") as f:
     print("Inside block, is closed?:", f.closed)
 print("Outside block, is closed?:", f.closed)
 ```
-The with statement acts as a Context Manager that automatically triggers the .close() method once the indented block is exited. Inside the block, the closed attribute returns False because the file handle is active and available for I/O operations. Once the indentation ends, Python guarantees the file is closed, so the second print statement returns True. This pattern prevents resource leaks and ensures data is flushed to the disk safely even if an error occurs.
+The with statement acts as a Context Manager that automatically triggers the `.close()` method once the indented block is exited. Inside the block, the closed attribute returns False because the file handle is active and available for I/O operations. Once the indentation ends, Python guarantees the file is closed, so the second print statement returns True. This pattern prevents resource leaks and ensures data is flushed to the disk safely even if an error occurs.
 
 
-**2. A student writes f.write(["Hello", "World"]) and receives a TypeError. Rewrite this script using the correct method to write a list of strings to a file named list_data.txt.**
+**2. A student writes `f.write(["Hello", "World"])` and receives a `TypeError`. Rewrite this script using the correct method to write a list of strings to a file named list_data.txt.**
 
 ```python
 
@@ -25,10 +25,10 @@ with open("list_data.txt", "w") as f:
     f.writelines(data_list)
 
 ```
-The write() method only accepts a single str (or bytes in binary mode) as its argument, which is why passing a list causes a TypeError. To handle a sequence of strings, Python provides the writelines() method. It is important to remember that writelines() does not automatically add newline characters; therefore, each element in the list must explicitly include \n to prevent the words from being joined together on a single line in the output file.
+The `write()` method only accepts a single str (or bytes in binary mode) as its argument, which is why passing a list causes a TypeError. To handle a sequence of strings, Python provides the `writelines()` method. It is important to remember that writelines() does not automatically add newline characters; therefore, each element in the list must explicitly include \n to prevent the words from being joined together on a single line in the output file.
 
 
-**3. Develop a script that opens a text file, reads exactly 10 characters, and then uses tell() to report the pointer position. Finally, use seek(0) to return to the start and read the first line.**
+**3. Develop a script that opens a text file, reads exactly 10 characters, and then uses `tell()` to report the pointer position. Finally, use seek(0) to return to the start and read the first line.**
 
 ```python
 
@@ -40,7 +40,7 @@ with open("sample.txt", "r") as f:
     print("Back at start, first line is:", f.readline())
 ```
 
-The tell() method provides the current byte offset of the file pointer; after reading 10 characters in a standard encoding, the pointer moves from 0 to 10. The seek(0) method is then used to manually reset the "cursor" back to the beginning of the file. This allows the script to call readline(), which starts its scan from the absolute beginning of the file rather than from where the previous read(10) left off.
+The `tell()` method provides the current byte offset of the file pointer; after reading 10 characters in a standard encoding, the pointer moves from 0 to 10. The seek(0) method is then used to manually reset the "cursor" back to the beginning of the file. This allows the script to call `readline()`, which starts its scan from the absolute beginning of the file rather than from where the previous read(10) left off.
 
 
 **4. Create a script that demonstrates the "Exclusive Creation" mode. What happens if you run the script twice in a row?**
@@ -54,7 +54,7 @@ except FileExistsError:
     print("Error: The file already exists!")
 ```
 
-The 'x' mode is designed for safety, ensuring that a file is only created if it does not already exist on the disk. On the first run, the script creates unique_log.txt and writes to it successfully. On the second run, Python detects the existing file and raises a FileExistsError instead of overwriting it like the 'w' mode would. This is a best practice for preventing accidental data loss in applications that generate unique session reports.
+The 'x' mode is designed for safety, ensuring that a file is only created if it does not already exist on the disk. On the first run, the script creates unique_log.txt and writes to it successfully. On the second run, Python detects the existing file and raises a `FileExistsError` instead of overwriting it like the 'w' mode would. This is a best practice for preventing accidental data loss in applications that generate unique session reports.
 
 
 **5. Write a memory-efficient script to count the total number of lines in a 1GB text file without crashing the computer.**
@@ -68,10 +68,10 @@ with open("large_data.txt", "r") as f:
 print("Total Lines:", line_count)
 ```
 
-Using readlines() or read() on a 1GB file would attempt to load the entire content into RAM, likely causing a "Memory Error" or system freeze. Instead, iterating directly over the file object (the f handle) utilizes a "lazy loading" approach where Python only loads one line into memory at a time. As the loop moves to the next line, the previous one is discarded from RAM, allowing the script to process files of virtually any size with minimal memory consumption.
+Using `readlines()` or `read()` on a 1GB file would attempt to load the entire content into RAM, likely causing a "Memory Error" or system freeze. Instead, iterating directly over the file object (the f handle) utilizes a "lazy loading" approach where Python only loads one line into memory at a time. As the loop moves to the next line, the previous one is discarded from RAM, allowing the script to process files of virtually any size with minimal memory consumption.
 
 
-**6. Provide a script that opens an image file called photo.jpg for reading and a new file called backup.jpg for writing. What specific mode suffixes must be used?**
+**6. Provide a script that opens an image file called `photo.jpg` for reading and a new file called `backup.jpg` for writing. What specific mode suffixes must be used?**
 
 ```python
 
@@ -83,7 +83,7 @@ with open("photo.jpg", "rb") as source, open("backup.jpg", "wb") as dest:
 Because images are binary data, the mode must include the 'b' suffix (e.g., 'rb' for read-binary and 'wb' for write-binary). Using standard text modes would cause the interpreter to attempt to decode the image bytes into Unicode characters, leading to a UnicodeDecodeError or a corrupted copy. Binary mode ensures that the raw bytes are copied exactly as they exist on the disk, preserving the integrity of the image data.
 
 
-**7. Write a script that uses truncate(20) on a file. Explain what happens to the content that existed at character 21 and beyond.**
+**7. Write a script that uses `truncate(20)` on a file. Explain what happens to the content that existed at character 21 and beyond.**
 
 ```python
 
@@ -91,10 +91,10 @@ with open("test.txt", "r+") as f:
     f.truncate(20)
 ```
 
-The truncate() method resizes the file to the exact number of bytes specified in the argument. If the file originally contained 100 characters, calling truncate(20) will keep the first 20 bytes and immediately delete everything else. This operation is irreversible; the data from position 21 to 100 is permanently removed from the storage medium. If no argument is provided, the file is truncated at the current pointer position as determined by tell().
+The `truncate()` method resizes the file to the exact number of bytes specified in the argument. If the file originally contained 100 characters, calling `truncate(20)` will keep the first 20 bytes and immediately delete everything else. This operation is irreversible; the data from position 21 to 100 is permanently removed from the storage medium. If no argument is provided, the file is truncated at the current pointer position as determined by `tell()`.
 
 
-**8. Construct a script that demonstrates how to handle a FileNotFoundError using a try...except block when opening config.json.**
+**8. Construct a script that demonstrates how to handle a FileNotFoundError using a `try...except` block when opening `config.json`.**
 
 ```python
 
@@ -105,10 +105,10 @@ except FileNotFoundError:
     print("The configuration file is missing. Please check the directory.")
 ```
 
-In Python, attempting to open a non-existent file in read mode results in a FileNotFoundError. By wrapping the open() call in a try block, the programmer can catch this specific exception and provide a user-friendly message or trigger a fallback mechanism (like creating a default config). This prevents the entire program from crashing and allows for "graceful degradation" of the software's functionality.
+In Python, attempting to open a non-existent file in read mode results in a `FileNotFoundError`. By wrapping the `open()` call in a try block, the programmer can catch this specific exception and provide a user-friendly message or trigger a fallback mechanism (like creating a default config). This prevents the entire program from crashing and allows for "graceful degradation" of the software's functionality.
 
 
-**9. Show a script that uses f.seek(0, 2) to move to the end of a file and then prints the total size of the file in bytes.**
+**9. Show a script that uses `f.seek(0, 2)` to move to the end of a file and then prints the total size of the file in bytes.**
 
 ```python
 
@@ -118,10 +118,10 @@ with open("data.bin", "rb") as f:
     print(f"The file size is {file_size} bytes.")
 ```
 
-In binary mode, the seek() method's second argument (whence) allows for relative movement. Passing 2 as the reference point tells Python to move the pointer relative to the end of the file. By using an offset of 0, the pointer lands exactly on the last byte. Calling tell() immediately afterward returns the offset from the beginning, which effectively gives the total byte count (size) of the file without having to read any of its content.
+In binary mode, the `seek()` method's second argument (`whence`) allows for relative movement. Passing 2 as the reference point tells Python to move the pointer relative to the end of the file. By using an offset of 0, the pointer lands exactly on the last byte. Calling `tell()` immediately afterward returns the offset from the beginning, which effectively gives the total byte count (size) of the file without having to read any of its content.
 
 
-**10. Write a script to replace all occurrences of the word "Python" with "Java" in a file called notes.txt using the "Read-then-Write" approach.**
+**10. Write a script to replace all occurrences of the word "Python" with "Java" in a file called `notes.txt` using the "Read-then-Write" approach.**
 
 ```python
 
@@ -134,7 +134,7 @@ with open("notes.txt", "w") as f:
     f.write(new_content)
 ```
 
-This script follows a two-step process: first, it opens the file in read mode to load the content into a variable. It then uses the string .replace() method to modify the data in memory. Finally, it re-opens the same file in write mode ('w'), which clears the old content, and writes the updated string back to the disk. While simple, this approach should only be used for smaller files, as loading the entire file into a string can be memory-intensive.
+This script follows a two-step process: first, it opens the file in read mode to load the content into a variable. It then uses the string `.replace()` method to modify the data in memory. Finally, it re-opens the same file in write mode ('w'), which clears the old content, and writes the updated string back to the disk. While simple, this approach should only be used for smaller files, as loading the entire file into a string can be memory-intensive.
 
 
 **11. Create a script that prints the name, mode, and encoding attributes of an open file object.**
@@ -148,7 +148,7 @@ print(f"Encoding Used: {f.encoding}")
 f.close()
 ```
 
-File object attributes provide metadata about the stream rather than the data itself. The name attribute returns the path provided during the open() call, mode confirms the permissions (like 'r'), and encoding shows how the bytes are being translated into text. These attributes are highly useful for debugging purposes, ensuring that a function receiving a file handle is working with the correct file and character set.
+File object attributes provide metadata about the stream rather than the data itself. The name attribute returns the path provided during the `open()` call, mode confirms the permissions (like 'r'), and encoding shows how the bytes are being translated into text. These attributes are highly useful for debugging purposes, ensuring that a function receiving a file handle is working with the correct file and character set.
 
 
 **12. Write a script that opens a file in a+ mode, writes a new log entry, and then reads the entire file from the beginning.**
@@ -161,7 +161,7 @@ with open("log.txt", "a+") as f:
     print(f.read())
 ```
 
-The a+ (Append and Read) mode is unique because it allows for both operations. However, after the write() call, the file pointer is automatically moved to the end of the file. If the programmer immediately calls read(), they will receive an empty string because there is no data "after" the end. To see the content, f.seek(0) must be used to manually move the pointer back to the start of the file before reading.
+The a+ (Append and Read) mode is unique because it allows for both operations. However, after the `write()` call, the file pointer is automatically moved to the end of the file. If the programmer immediately calls `read()`, they will receive an empty string because there is no data "after" the end. To see the content, `f.seek(0)` must be used to manually move the pointer back to the start of the file before reading.
 
 
 **13. A user wants to write the string "© 2024" to a file. Write a script that specifies the encoding as 'utf-8' to ensure the symbol is saved correctly.**
