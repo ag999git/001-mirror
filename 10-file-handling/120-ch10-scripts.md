@@ -298,7 +298,7 @@ os.replace("temp.txt", "original.txt")
 ```
 
 An atomic write involves writing to a temporary file first. If the program crashes during the write, the original.txt remains safe and untouched. The os.replace() call is an atomic operation at the OS level, meaning it either succeeds completely or fails completely, ensuring that you never end up with a half-written or corrupted file.
-•	Further Study: StackOverflow: Atomic File Writes in Python.
+•	Further Study: StackOverflow: Atomic File Writes in Python. [stackoverflow](https://stackoverflow.com/questions/2333872/atomic-writing-to-file-with-python)
 
 
 **23. Create a script to save a dictionary using json.dump(). What are the advantages of JSON over a standard text file?**
@@ -312,7 +312,7 @@ with open("config.json", "w") as f:
 ```
 
 JSON (JavaScript Object Notation) allows you to save complex data structures (like lists and dictionaries) in a human-readable format that can be read by almost any programming language. Unlike standard text files, JSON preserves the "data types"—when you load it back, strings remain strings and integers remain integers, which saves the programmer from manually parsing text.
-•	Further Study: Python Docs: json module
+•	Further Study: [Python Docs: json module[(https://docs.python.org/3/library/json.html)
 
 
 **24. Write a script to "Pickle" a Python list and read it back. Why should you avoid pickle for untrusted data?**
@@ -326,7 +326,7 @@ with open("data.pkl", "wb") as f:
 ```
 
 pickle is a Python-specific serialization tool. While it is very powerful and can save almost any Python object, it is insecure because it can execute arbitrary code during the "unpickling" process. A malicious user could send you a "pickled" file that deletes your hard drive the moment you try to open it; therefore, never unpickle data from an unknown source.
-•	Further Study: Python Docs: pickle security
+•	Further Study: [Python Docs: pickle security](https://docs.python.org/3/library/pickle.html)
 
 
 **25. Use the tempfile module to create a temporary file that deletes itself automatically. When is this useful?**
@@ -341,7 +341,7 @@ with tempfile.NamedTemporaryFile(delete=True) as temp:
 ```
 
 The tempfile module is used for creating short-lived files used for intermediate calculations or processing. Because it automatically handles the creation of a unique filename and ensures the file is deleted after the with block, it prevents "cluttering" the user's hard drive with useless junk files.
-•	Further Study: Python Docs: tempfile module
+•	Further Study: [Python Docs: tempfile module](https://docs.python.org/3/library/tempfile.html)
 
 
 **26. Write a script to read a CSV file using the csv module's DictReader. How does this differ from f.readlines()?**
