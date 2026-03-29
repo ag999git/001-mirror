@@ -243,6 +243,49 @@ with open(dest, "r") as f:  # Open destination file in read mode to display its 
 
 ```python
 
+def insert_line_list(src_file, dest_file, new_line, line_no):  # Define a function to insert a line into a file using list manipulation approach
+    """
+    Inserts a line using list manipulation.
+    Suitable for small files (easy to implement).
+    """
+
+    # STEP 1: Read entire file into memory
+    with open(src_file, 'r') as f:  # Open source file in read mode to read its content
+        lines = f.readlines()  # Read all lines into a list (each line is an element in the list)
+    
+    # STEP 2: Insert or append
+    if line_no <= len(lines):  # Check if desired line number is within the range of existing lines
+        lines.insert(line_no - 1, new_line + '\n')  # Insert at position
+        print(f"Inserted at line {line_no}: {new_line}")
+    else:
+        lines.append(new_line + '\n')  # Append at end
+        print(f"Appended at end: {new_line}")
+    
+    # STEP 3: Write modified content back
+    with open(dest_file, 'w') as f:  # Open destination file in write mode to write the modified content
+        f.writelines(lines)  # Write the modified lines back to the destination file
+        
+# See source.txt content before running this code to see the effect of insertion
+print("Before insertion:")
+with open("source.txt", "r") as f:  # Open source file in read mode to display its content before insertion
+    print(f.read())
+
+# Example usage
+src = "source.txt"  # Source file to read from  
+dest = "destination.txt"  # Destination file to write to
+new_content = "00000000"  # New line to insert  
+line_number = 2  # Line number to insert at (1-based index)
+insert_line_list(src, dest, new_content, line_number)  # Call the function to perform the line insertion using list manipulation approach
+
+# After running the code, check 'destination.txt' to see the inserted line and copied content
+print("\nAfter insertion:")
+with open(dest, "r") as f:  # Open destination file in read mode to display its content after insertion
+    print(f.read())
+    # Output will show the new line inserted at the specified line number, with existing lines copied over. If line_number is greater than the total lines in source.txt, the new line will be appended at the end of destination.txt.
+    # Note: The original 'source.txt' remains unchanged. The new content is in 'destination.txt'.
+    
+    
+
 
 
 ```
