@@ -76,8 +76,117 @@ for root, dirs, files in os.walk(path):  # os.walk() generates a tuple of (root,
     if "__pycache__" in dirs:  # Check if __pycache__ directory is in the list of subdirectories
         dirs.remove("__pycache__")   # prevents traversal into __pycache__ directories
 
+```
+
+
+
+## Advanced Research Question
+
+**Q.**  
+The `os.walk()` function is implemented internally in Python’s standard library (`os.py`).
+
+You are required to:
+
+----------
+
+### PART A: Source Code Study
+
+1.  Locate and study the source code of `os.walk()`:
+    -   On local system
+    -   On official Python GitHub repository
+2.  Explain:
+    -   How recursion is implemented internally
+    -   How `topdown` affects traversal
+    -   How directory pruning works (`dirs` modification)
+
+----------
+
+### PART B: Script Development
+
+Write a Python program that:
+
+1.  Traverses a directory using `os.walk()`
+2.  Calculates:
+    -   Total size of files
+    -   Total number of files
+3.  Implements:
+    -   Directory exclusion
+    -   Error handling
+4.  Includes:
+    -   Commented (hashed) error-prone code
+5.  Demonstrates:
+    -   `topdown=True` vs `False`
+
+----------
+
+## Script (To implement the above Question/ problem)
+
+
+```python
+
+import os
+from os.path import join, getsize
+
+path = "."
+
+print("====== TOP-DOWN TRAVERSAL ======")
+
+try:
+    for root, dirs, files in os.walk(path, topdown=True):  # topdown=True (default) → traverse from top to bottom
+
+        print(f"\nDirectory: {root}")
+
+        total_size = 0  # Initialize total size variable to accumulate the size of files in the current directory
+
+        for name in files:  # Iterate through each file in the current directory
+            try:
+                file_path = join(root, name)  # Get full path of the file by joining root and file name
+                total_size += getsize(file_path)  # Get size of the file and add it to total_size
+
+            except FileNotFoundError:
+                print(f"File not found: {name}")
+
+            except PermissionError:
+                print(f"Permission denied: {name}")
+
+        print("Total size:", total_size)  # Print total size of files in the current directory
+        print("File count:", len(files))  # Print number of files in the current directory
+
+        # Directory filtering
+        if "__pycache__" in dirs:  # Check if __pycache__ directory is in the list of subdirectories
+            dirs.remove("__pycache__")  # Prevents traversal into __pycache__ directories
+
+except Exception as e:
+    print("Unexpected error:", e)
+
+# ERROR SIMULATION (Commented)
+
+# Invalid path
+# for root, dirs, files in os.walk(None):
+#     pass
+
+# Permission error (depends on system)
+# os.walk("/root")
+
+# Invalid join usage
+# join(123, "file.txt")
+
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
