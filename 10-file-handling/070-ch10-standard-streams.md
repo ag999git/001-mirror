@@ -80,7 +80,49 @@ The symbols in the Terminal/Command Prompt are:
 
 ## Part 4: Solution (Python Script)
 
+>Copy and save the script below into a file location (Eg stream_demo.py)
 
+
+```python
+
+import sys
+
+def main():
+    # 1. Handling STDIN (Standard Input)
+    # We use sys.stdin.readline() as an alternative to input()
+    # Prompt user for input (this will appear in the console)
+    # file parameter allows us to specify the stream (stdout in this case)
+    print("Please enter your name: ", file=sys.stdout, end="")  
+    
+    # Flush the output to ensure the prompt appears before we wait for input
+    # If we don't flush, the prompt might not appear before input is expected in some environments
+    sys.stdout.flush() 
+    
+    # Read user input and remove any trailing newline
+    name = sys.stdin.readline().strip()  
+
+    # 2. Logic Check
+    if len(name) < 3:
+        # 3. Handling STDERR (Standard Error)
+        # We send this specifically to the error stream
+        # This is useful for logging warnings or errors separately from normal output
+        # file parameter allows us to specify the stream (stderr in this case)
+        print(f"DEBUG-WARNING: Name '{name}' is very short!", file=sys.stderr)
+    
+    # 4. Handling STDOUT (Standard Output)
+    # This is the 'successful' result of our program because we got a valid name > 3 characters
+    if name:
+        # Greet the user with their name
+        print(f"Hello, {name}! Welcome to the Python Streams Tutorial.")
+    else:
+        # If no name was provided, we treat it as an error and write to stderr
+        print("ERROR: No name provided.", file=sys.stderr)  
+
+if __name__ == "__main__":  # This ensures that main() is called only when this script is run directly, not when imported as a module
+    main()
+
+
+```
 
 
 
