@@ -305,8 +305,14 @@ with open(dest, "r") as f:  # Open destination file in read mode to display its 
 
 
   
+### Key Observations
+Temporary file method:
+-    Preferred in real-world systems
+-    Scales well
 
-
+List method:
+-    Easier for beginners
+-    Not suitable for large files
 
 
 
