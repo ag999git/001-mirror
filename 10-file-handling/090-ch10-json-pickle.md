@@ -157,7 +157,7 @@ print("Loaded Student:", loaded_student.name, loaded_student.marks) # Output: Lo
 ### Flowchart
 The following diagram shows the flow of execution in JSON vs pickling
 
-
+![Flowchart](/resources/ch10-files-json-pickle.png)
 
 
 
