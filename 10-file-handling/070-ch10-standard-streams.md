@@ -128,23 +128,21 @@ if __name__ == "__main__":  # This ensures that main() is called only when this 
 ### Important: How to run this script
 
 
-**run this in your terminal:**
+**run this in your terminal (Assuming your script is in file named `stream_demo.py`):** Then `output.txt` will contain the greeting, and `logs.txt` will contain the warning.
 
 `python "stream_demo.py" > output.txt 2> logs.txt`
 
-#### Case 1: You generate an error using a name of less than 3 characters
+#### Case 1: You generate an error using a name of less than 3 characters (Example: You type 'Ab')
 
-If you type "Ab", output.txt will contain the greeting, and logs.txt will contain the warning.
+**Sample output in logs.txt if you type "Ab"**
 
-**Sample output in logs.txtif you type "Ab"**
+`DEBUG-WARNING: Name 'Ab' is very short!`
 
-DEBUG-WARNING: Name 'Ab' is very short!
-
-#### Case 2: You give a name of 3 or more characters then output.txt will have the message but logs.txt will not have any text.
+#### Case 2: You give a name of 3 or more characters (Example "Anurag") then output.txt will have the message but logs.txt will not have any text.
 
 **Sample output in output.txt if you type "Anurag"**
 
-Please enter your name: Hello, anurag! Welcome to the Python Streams Tutorial.
+`Please enter your name: Hello, anurag! Welcome to the Python Streams Tutorial.`
 
 
 
