@@ -106,7 +106,7 @@
 
 ## Chapter 10: Files Operations in Python
 * [Introduction to Chapter 10](/10-file-handling/README.md)
-* [Google Colab Notebook Chapter 10](/colab-nb/10_ch10_files.ipynb)
+* [Google Colab Notebook Chapter 10](https://github.com/ag999git/001-Python-book-2026/blob/main/colab-nb/10_ch10_files.ipynb)
 * [Comprehensive File Handling Concepts Table](/10-file-handling/010-ch10-concepts.md)
 * [Comparison table of (1) Text files and (2) Binary files](/10-file-handling/020-ch10-text-binary.md)
 * [“Comprehensive Study of Python File Opening Mechanism and File Object Behavior”](/10-file-handling/030-ch10-file-open.md)
