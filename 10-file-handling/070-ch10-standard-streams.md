@@ -128,7 +128,7 @@ if __name__ == "__main__":  # This ensures that main() is called only when this 
 ### Important: How to run this script
 
 
-**Assuming your script is in file named `stream_demo.py`:** Then `output.txt` will contain the greeting, and `logs.txt` will contain the warning.
+**Assuming (1) Your script is in file named `stream_demo.py` (2) The file for stdout is `output.txt` (3) The file for stderr is `logs.txt`**
 
 #### Run this in your terminal
 
