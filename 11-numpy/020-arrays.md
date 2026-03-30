@@ -588,7 +588,7 @@ print("np.random.uniform():->\n", h)
 
 ```
 
-##
+## Complete NumPy Array Creation Map
 
 ```python
 
@@ -660,78 +660,6 @@ NumPy Array Creation
 
 
 ```
-
-
-
-
-NumPy Array Creation
-│
-├── From Existing Data
-│   ├── array
-│   ├── asarray
-│   ├── asanyarray
-│   ├── fromiter
-│   ├── fromfunction
-│   ├── frombuffer
-│   ├── loadtxt
-│   ├── genfromtxt
-│
-├── Basic Arrays
-│   ├── zeros
-│   ├── ones
-│   ├── full
-│   ├── empty
-│
-├── Template-Based Arrays
-│   ├── zeros_like
-│   ├── ones_like
-│   ├── full_like
-│   ├── empty_like
-│
-├── Sequence Arrays
-│   ├── arange
-│   ├── linspace
-│   ├── logspace
-│   ├── geomspace
-│
-├── Matrix / Diagonal Arrays
-│   ├── eye
-│   ├── identity
-│   ├── diag
-│   ├── diagflat
-│   ├── tri
-│   ├── tril
-│   ├── triu
-│
-├── Grid / Coordinate Arrays
-│   ├── meshgrid
-│   ├── indices
-│   ├── mgrid
-│   ├── ogrid
-│
-├── Random Arrays
-│   ├── rand
-│   ├── randn
-│   ├── randint
-│   ├── random
-│   ├── random_sample
-│   ├── choice
-│   ├── uniform
-│   ├── normal
-│
-├── Structured / Special Arrays
-│   ├── copy
-│   ├── tile
-│   ├── repeat
-│
-└── File / External Data Arrays
-    ├── load
-    ├── savez
-    ├── savez_compressed
-    ├── fromfile
-
-
-
 
 
 
