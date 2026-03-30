@@ -30,28 +30,24 @@ By running this script, you will observe:
 
 Key functions used:
 
+
+  
+
 | Function / Attribute | Purpose |
 | --- | --- |
 | np.array() | Creates a NumPy array |
-| --- | --- |
 | np.arange() | Creates an array of evenly spaced values |
-| --- | --- |
 | np.sqrt() | Calculates square root of each element |
-| --- | --- |
 | np.sum() | Calculates total sum |
-| --- | --- |
 | np.mean() | Calculates average value |
-| --- | --- |
 | np.min() | Finds minimum value |
-| --- | --- |
 | np.max() | Finds maximum value |
-| --- | --- |
 | np.std() | Calculates standard deviation |
-| --- | --- |
 | .dtype | Shows data type of array elements |
-| --- | --- |
 | .nbytes | Shows memory used by the array |
-| --- | --- |
+
+
+
 
 
 ### 2. sys Module
