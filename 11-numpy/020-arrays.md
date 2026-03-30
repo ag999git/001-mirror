@@ -355,6 +355,68 @@ Used in image processing and matrix math.
 | 17 | np.indices() | Create index grid | np.indices((3,3)) | Shape | Index arrays | Multi-dimensional | Matrix coordinates | Image processing | Advanced indexing |
 
 
+## Script (For Intermediate)
+
+
+```python
+
+# NumPy Array Creation Examples
+# Intermediate level
+import numpy as np
+
+# 9 np.empty()  # NumPy array that is uninitialized. The values in the array will be 
+# whatever happens to already be in that memory location, which can be random and 
+# unpredictable.
+a = np.empty((3,3))   # contains garbage values
+print("np.empty():->\n", a)
+
+# 10 zeros_like  # NumPy array filled with zeros, having the same shape and type as a 
+# given array.
+b = np.zeros_like(a)
+print("np.zeros_like():->\n", b)
+
+# 11 ones_like  # NumPy array filled with ones, having the same shape and type as a 
+# given array.
+c = np.ones_like(a)
+print("np.ones_like():->\n", c)
+
+# 12 full_like  # NumPy array filled with a specified value, having the same shape 
+# and type as a given array.
+d = np.full_like(a,9)
+print("np.full_like():->\n", d)
+
+# 13 identity  # NumPy array representing an identity matrix. The argument specifies 
+# the size of the matrix.
+e = np.identity(4)
+print("np.identity():->\n", e)
+
+# 14 diag  # NumPy array with a diagonal. The argument specifies the values for the 
+# diagonal.
+f = np.diag([1,2,3])  # f will be a 3x3 array with 1, 2, and 3 on the diagonal and zeros elsewhere.
+print("np.diag():->\n", f)  # np.diag() gives diagnol elements in a list. Here [1, 2, 3]
+
+# extract diagonal. This will extract the diagonal elements from the array f and return 
+# them as a 1D array. In this case, it will return [1, 2, 3].
+print("np.diag(f):->\n", np.diag(f))  # np.diag(f) extracts the diagonal elements from the array f.
+
+# 15 logspace  # NumPy array with logarithmically spaced values. The arguments specify the start, stop, and number of values.
+g = np.logspace(1,3,5)  # 5 values from 10^1 to 10^3
+print("np.logspace():->\n", g)
+
+# 16 meshgrid  # NumPy arrays representing a grid. The arguments specify the ranges 
+# for the x and y coordinates.
+x = np.arange(3)  # This creates a 1D array with values [0, 1, 2]. It will be used as the x-coordinates for the grid.
+y = np.arange(3)  # This creates a 1D array with values [0, 1, 2]. It will be used as the y-coordinates for the grid.
+X, Y = np.meshgrid(x,y)  # This creates two 2D arrays, X and Y, that represent the grid of coordinates.
+print("np.meshgrid():->\n", X)
+print("np.meshgrid():->\n", Y)
+
+# 17 indices  # NumPy array representing the indices of a grid. The argument specifies the shape of the grid.
+print("np.indices():->\n", np.indices((2,2)))  # This will create a 3D array where the first sub-array contains the row indices and the second sub-array contains the column indices for a 2x2 grid. The output will be:
+
+
+```
+
 
 
 
