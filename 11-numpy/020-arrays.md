@@ -195,6 +195,63 @@ Random array with values between 0 and 1.
 
 
 
+## Script
+
+```python
+
+# NumPy Array Creation Examples
+# Beginner level
+import numpy as np
+
+# 1 np.array()
+# NumPy array from a Python list. All elements are of the same type (integers in this case).
+a = np.array([1,2,3])  
+print(a)
+
+# Possible error:
+# np.array([[1,2],[3,4,5]])  # This will raise a ValueError because the inner lists have different lengths, making it impossible to create a regular 2D array. NumPy expects all rows to have the same number of columns for a 2D array.
+
+# 2 np.zeros()  # NumPy array filled with zeros. The argument specifies the shape of the array. 
+# In this case, (2, 3) creates a 2D array with 2 rows and 3 columns, all initialized to zero.
+b = np.zeros((2,3))
+print(b)
+
+# 3 np.ones()  # NumPy array filled with ones. The argument specifies the shape of the array. 
+# In this case, (3, 3) creates a 2D array with 3 rows and 3 columns, all initialized to one.
+c = np.ones((3,3))
+print(c)
+
+# 4 np.full()  # NumPy array filled with a constant value. The first argument specifies the shape, 
+# and the second argument specifies the fill value.
+d = np.full((2,2),7)
+print(d)
+
+# 5 np.arange()  # NumPy array with a range of values. 
+# The arguments specify the start, stop, and step values.
+e = np.arange(0,10,2)
+print(e)
+
+# 6 np.linspace()  # NumPy array with linearly spaced values. 
+# The arguments specify the start, stop, and number of values.
+f = np.linspace(0,1,5)
+print(f)
+
+# 7 np.eye()  # NumPy array representing an identity matrix. 
+# The argument specifies the size of the matrix.
+g = np.eye(3)
+print(g)
+
+# 8 np.random.rand()  # NumPy array with random values between 0 and 1. 
+# The arguments specify the shape of the array.
+h = np.random.rand(2,2)
+print(h)
+
+
+
+
+```
+
+
 
 # INTERMEDIATE LEVEL FUNCTIONS
 
