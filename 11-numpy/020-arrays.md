@@ -499,6 +499,95 @@ Uniform distribution random numbers.
 | 25 | np.random.uniform() | Uniform distribution | np.random.uniform(0,5,10) | Range + size | Numeric array | Continuous random | Flexible distribution | Simulations | Common in statistics |
 
 
+## Script (Advanced)
+
+
+```python
+
+# NumPy Array Creation Examples
+# Advance level
+import numpy as np
+
+# 18 fromiter
+# np.fromiter() creates a NumPy array from an iterable object. 
+# The first argument is the iterable, and the second argument is the data type of 
+# the resulting array. In this example, we are creating an array from a range of 
+# integers from 0 to 4, and specifying that the data type should be integer.
+a = np.fromiter(range(5), dtype=int)
+print("np.fromiter():->\n", a)
+
+# 19 fromfunction
+# np.fromfunction() creates a NumPy array by executing a function over each coordinate.
+# The first argument is a function that takes as input the indices of the array, and 
+# the second argument is the shape of the array. In this example, we are creating 
+# a 3x3 array where each element is the sum of its row and column indices. 
+# The lambda function takes two arguments, i and j, which represent the row and 
+# column indices, respectively. The function returns the sum of i and j, which is used 
+# to populate the array.      
+b = np.fromfunction(lambda i, j: i + j, (3,3))
+print("np.fromfunction():->\n", b)
+
+# 20 asarray
+# np.asarray() converts the input to a NumPy array. If the input is already a NumPy array, it will not create a new array but will 
+# return the original array. In this example, we are converting a Python list to a NumPy array. The 
+# resulting array will have the same values as the list, but it will be of type numpy.ndarray.   
+c = np.asarray([1,2,3])
+print("np.asarray():->\n", c)
+
+# 21 asanyarray
+# np.asanyarray() is similar to np.asarray(), but it will not convert subclasses of ndarray to a base ndarray. 
+# If the input is already a NumPy array or a subclass of ndarray, it will return the original array. In this example, 
+# we are converting a NumPy array to a NumPy array using np.asanyarray(). Since the input is already a NumPy array, 
+# np.asanyarray() will simply return the original array without creating a new one. The output will be the same as 
+# the input array c. 
+d = np.asanyarray(c)
+print("np.asanyarray():->\n", d)
+
+# 22 randint
+# np.random.randint() generates random integers from a specified range. The first two arguments specify 
+# the lower and upper bounds of the range (inclusive of the lower bound and exclusive of the upper bound), 
+# and the third argument specifies the shape of the output array. In this example, we are generating 
+# a 3x3 array of random integers between 0 and 9 (inclusive of 0 and exclusive of 10). The resulting 
+# array will contain random integers in the specified range, and the shape of the array will be 
+# 3 rows and 3 columns.     
+e = np.random.randint(0,10,(3,3))
+print("np.random.randint():->\n", e)
+
+# 23 randn
+# np.random.randn() generates random numbers from a standard normal distribution (mean 0 and standard deviation 1). 
+# The arguments specify the shape of the output array. In this example, we are generating a 3x3 array of random 
+# numbers from a standard normal distribution. The resulting array will contain random floating-point numbers 
+# that are drawn from the specified distribution, and the shape of the array will be 3 rows and 3 columns. 
+# Each time you run this code, you will get different random numbers in the array. 
+f = np.random.randn(3,3)
+print("np.random.randn():->\n", f)
+
+# 24 random choice
+# np.random.choice() generates a random sample from a given 1D array of values. 
+# The first argument is the array of values to choose from, and 
+# the second argument is the number of samples to generate. 
+# In this example, we are generating an array of 5 random samples from the array [10, 20, 30]. 
+# The resulting array will contain 5 random values that are selected from the specified array, 
+# and the values will be either 10, 20, or 30. Each time you run this code, you may get a 
+# different set of random values in the output array.   
+g = np.random.choice([10,20,30],5)
+print("np.random.choice():->\n", g)
+
+# 25 uniform
+# np.random.uniform() generates random floating-point numbers from a uniform distribution over a specified range. 
+# The first two arguments specify the lower and upper bounds of the range, and 
+# the third argument specifies the shape of the output array. 
+# In this example, we are generating a 1D array of 10 random floating-point numbers 
+# between 0 and 5 (inclusive of 0 and exclusive of 5). The resulting array will contain 
+# random floating-point numbers that are uniformly distributed in the specified range, 
+# and the shape of the array will be 10 elements in a single dimension. Each time you run this code, 
+# you will get different random numbers in the array.  
+h = np.random.uniform(0,5,10)
+print("np.random.uniform():->\n", h)
+
+
+```
+
 
 
 
