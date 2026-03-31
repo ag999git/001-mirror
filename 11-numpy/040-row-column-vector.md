@@ -194,6 +194,65 @@ Rotation matrix for 90°:
 [ 1   0 ]
 ```
 
+## 8 Script for rotation bt 90 Degrees
+
+```python
+
+# Rotation Transformation Example
+
+import numpy as np
+
+# 1. Create Original point
+# We create a column vector (2D array) for the point (2, 1) and 
+# reshape it to have 2 rows and 1 column.
+point = np.array([2,1]).reshape(2,1)  # Original point as a column vector (2D array)
+
+print("Original Point:")
+print(point)
+
+# 2. Create Rotation matrix (90 degrees)
+# We create a 2x2 rotation matrix for a 90-degree rotation.
+# The rotation matrix for a 90-degree counterclockwise rotation in 2D is:
+# [ 0 -1]
+# [ 1  0]
+# because it transforms the point (x, y) to (-y, x), which corresponds 
+# to a 90-degree rotation.
+rotation_matrix = np.array([
+    [0, -1],
+    [1,  0]
+])
+
+print("\nRotation Matrix:")
+print(rotation_matrix)
+
+# 3. Perform Transformation
+# M x P = New Point rotated by 90 degrees
+# [ 0 -1][2]   = [ 0*2 + (-1)*1] = [-1]
+# [ 1  0][1]   = [ 1*2 +  0*1] = [ 2]
+
+rotated_point = rotation_matrix @ point  # The @ operator is used for matrix multiplication in Python. It multiplies the rotation matrix by the point vector to get the new coordinates of the point after rotation.
+
+print("\nRotated Point:") 
+print(rotated_point)
+# Output: [[-1]
+#          [ 2]]
+
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
