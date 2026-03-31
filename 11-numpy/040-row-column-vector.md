@@ -250,10 +250,11 @@ Scaling increases or decreases size.
 Scaling matrix:
 
 In general  if:-
-$$s_x = scaling factor on X-axis$$ 
+
+-    $$s_x = scaling  factor$$  on  X-axis 
 
 
-$$s_y = scaling factor on Y-axis$$ 
+-    $$s_y = scaling factor$$ on Y-axis 
 
 The scaling matrix is a **diagonal matrix**
 
