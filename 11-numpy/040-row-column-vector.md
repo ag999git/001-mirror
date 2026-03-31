@@ -85,7 +85,22 @@ print("Shape:", row_vector.shape)  # Output: (1, 3) - This indicates that the ar
 ```
 
 
+## 3. Column Vector
 
+A column vector is a vertical arrangement of values.
+
+Example:
+
+```python
+[3  
+ 5  
+ 7]
+```
+Shape:
+
+`(3,1)`
+
+Example:
 
 
 
