@@ -237,12 +237,24 @@ print(rotated_point)
 # Output: [[-1]
 #          [ 2]]
 
-
-
-
 ```
 
+## 9. Example: Scaling Transformation
 
+Scaling increases or decreases size.
+
+Scaling matrix:
+
+```python
+[2 0]  
+[0 3]
+```
+This means:
+
+x scaled by 2  
+y scaled by 3
+
+Example script:
 
 
 
