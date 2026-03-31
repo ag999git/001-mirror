@@ -64,6 +64,37 @@ Shape in NumPy:
 
 Example code:
 
+```python
+
+# This code demonstrates how to create a row vector using NumPy and reshape it to have a specific shape.
+# A row vector is a 1D array that has only one row and multiple columns.
+# NumPy library is used for creating and manipulating arrays in Python. 
+# The reshape method is used to change the shape of the array without changing its data. 
+# In this case, we are reshaping a 1D array into a 2D array with 1 row and 3 columns.
+
+import numpy as np  
+
+# Create a row vector (1D array) with values 3, 5, and 7, and reshape it to have 1 row and 3 columns.
+# The reshape(1, 3) method is used to change the shape of the array to a 2D array with 1 row and 3 columns.
+row_vector = np.array([3,5,7]).reshape(1,3)  
+
+print(row_vector)  # Output: [[3 5 7]]
+print("Shape:", row_vector.shape)  # Output: (1, 3) - This indicates that the array has 1 row and 3 columns.
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
