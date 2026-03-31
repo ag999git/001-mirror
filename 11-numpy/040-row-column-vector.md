@@ -243,6 +243,39 @@ print(rotated_point)
 
 Scaling increases or decreases size.
 
+## Example: Scaling Transformation
+
+Scaling increases or decreases size.
+
+Scaling matrix:
+
+In general  if:-
+$$s_x = scaling factor on X-axis$$ 
+
+
+$$s_y = scaling factor on Y-axis$$ 
+
+The scaling matrix is a **diagonal matrix**
+
+
+$$
+S = \begin{bmatrix} s_x & 0 \\\\ 0 & s_y \end{bmatrix}
+$$
+
+
+
+```python
+[2 0]  
+[0 3]
+```
+This means:
+
+x scaled by 2  
+y scaled by 3
+
+Example script:
+
+
 Scaling matrix:
 
 ```python
