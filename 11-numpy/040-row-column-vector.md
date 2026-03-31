@@ -103,7 +103,28 @@ Shape:
 Example:
 
 
+```python
 
+# This code demonstrates how to create a column vector using NumPy and check its shape.
+# A column vector is a 2D array that has multiple rows and only one column.
+# NumPy library is used for creating and manipulating arrays in Python. 
+# The reshape method is used to change the shape of the array without changing its data.
+
+import numpy as np
+
+# Create a column vector (2D array) with values 3, 5, and 7, and 
+# reshape it to have 3 rows and 1 column.
+column_vector = np.array([3,5,7]).reshape(3,1)
+
+print(column_vector) # Output: [[3]
+#                    #          [5]
+#                    #          [7]]
+                    
+print("Shape:", column_vector.shape)  
+# Output: (3, 1) - This indicates that the array has 3 rows and 1 column.
+
+
+```
 
 
 
