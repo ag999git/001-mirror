@@ -239,6 +239,11 @@ print(rotated_point)
 
 ```
 
+### The following figure shows how the vector gets rotated
+
+[2D diagram](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-final-vector-rotation.png)
+
+
 ## 9. Example: Scaling Transformation
 
 Scaling increases or decreases size.
