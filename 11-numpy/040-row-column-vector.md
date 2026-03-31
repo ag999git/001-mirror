@@ -293,7 +293,34 @@ This means:
 x scaled by 2  
 y scaled by 3
 
-Example script:
+## Example script:
+
+```python
+
+import numpy as np
+# Scaling Transformation
+
+# 1. Create Original point
+point = np.array([3,4]).reshape(2,1)
+
+# 2. Create Scaling matrix
+scaling_matrix = np.array([
+    [2,0],
+    [0,3]
+])
+
+# 3. Perform Transformation
+scaled_point = scaling_matrix @ point  # The @ operator is used for matrix multiplication in Python. It multiplies the scaling matrix by the point vector to get the new coordinates of the point after scaling.
+
+print("Scaled Point:")
+print(scaled_point)  # Output: [[ 6]
+#                    #          [12]]
+
+
+```
+
+
+
 
 
 
