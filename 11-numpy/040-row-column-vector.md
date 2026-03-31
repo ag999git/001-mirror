@@ -142,10 +142,17 @@ print("Shape:", column_vector.shape)
 
 
 
+## 5. Comparison with Python Lists
 
 
+  
 
-
+| Feature | Python List | NumPy Row Vector | NumPy Column Vector |
+| --- | --- | --- | --- |
+| Structure | Flexible | Structured | Structured |
+| Shape | Not defined | Defined | Defined |
+| Matrix math | Not supported | Supported | Supported |
+| Performance | Slower | Fast | Fast |
 
 
 
