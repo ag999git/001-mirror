@@ -176,6 +176,7 @@ Mathematically:
 Where
 
 `M = transformation matrix`
+
 `x = column vector`
 
 
