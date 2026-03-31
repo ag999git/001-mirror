@@ -156,7 +156,42 @@ print("Shape:", column_vector.shape)
 
 
 
+## 6. Why Column Vectors Are Used in Transformations
 
+In linear algebra, transformations such as:
+
+rotation
+scaling
+projection
+translation
+
+are defined using:
+
+`Matrix × Column Vector`
+
+Mathematically:
+
+`y = Mx`
+
+Where
+
+`M = transformation matrix`
+`x = column vector`
+
+
+## 7. Example: Rotation by 90 Degrees
+
+Suppose we have a point: `(2,1)`
+
+We represent it as a column vector.
+
+Rotation matrix for 90°:
+
+```python
+
+[ 0  -1 ]
+[ 1   0 ]
+```
 
 
 
