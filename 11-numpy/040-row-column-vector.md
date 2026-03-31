@@ -123,10 +123,9 @@ print(column_vector) # Output: [[3]
 print("Shape:", column_vector.shape)  
 # Output: (3, 1) - This indicates that the array has 3 rows and 1 column.
 
-
 ```
 
-
+**Interpretation: Three values stacked vertically.**
 
 
 
