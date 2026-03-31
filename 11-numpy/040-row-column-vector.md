@@ -128,6 +128,26 @@ print("Shape:", column_vector.shape)
 **Interpretation: Three values stacked vertically.**
 
 
+## Comparison Table (Row Vector | Column Vector) 
+
+  
+
+| Feature | Row Vector | Column Vector |
+| --- | --- | --- |
+| Shape | (1,n) | (n,1) |
+| Orientation | Horizontal | Vertical |
+| Common use | Represent one data record | Used in matrix transformations |
+| Machine learning | Prediction input | Model computations |
+| Linear algebra | Less common | Standard representation |
+
+
+
+
+
+
+
+
+
 
 
 
