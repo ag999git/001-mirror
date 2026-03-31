@@ -6,7 +6,7 @@
 
 ## Project Title: Row Vectors vs Column Vectors in NumPy and Linear Algebra: Concepts, Comparisons, and Transformations
 
-----------
+
 
 ## Research/ Project Question
 
