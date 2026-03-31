@@ -320,6 +320,10 @@ print(scaled_point)  # Output: [[ 6]
 ```
 
 
+## Figure showing scaling in 2D
+
+![Figure showing scaling](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-scaling-matrix.png)
+
 
 
 
