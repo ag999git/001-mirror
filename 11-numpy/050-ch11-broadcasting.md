@@ -70,14 +70,29 @@ Before diving into the rules, look at this flowchart. Every time you write `A + 
 **Simple Explanation:** Think of aligning numbers in grade school math. You align the ones column on the right, and if a number is shorter, you mentally pad it with zeros on the left. NumPy pads with `1`s.
 
 **Example:**
-
+#### Step 1:
 -   Array A shape: `(8, 1, 6, 1)` (4 dimensions)
 -   Array B shape: `(7, 1, 5)` (3 dimensions)
 
+#### Step 2:
 NumPy compares right-to-left: `1` vs `5`, `6` vs `1`, `1` vs `7`. Then it runs out of dimensions for B. It pads B with a `1` on the left.
 
 -   Effective Shape A: `(8, 1, 6, 1)`
 -   Effective Shape B: `(1, 7, 1, 5)` _(The leading 1 was padded)_
+
+#### Step 3:
+Wherever dimension is 1, Numpy stretches it to match the dimension of the other array
+-   Effective Shape A: `(8, 7, 6, 5)`
+-   Effective Shape B: `(8, 7, 6, 5)` 
+Now shape and dimensions of both arrays match and mathematical operations can take place
+
+### The following figure shows the steps in broadcasting of 
+-   Array A shape: `(8, 1, 6, 1)` (4 dimensions)
+-   Array B shape: `(7, 1, 5)` (3 dimensions)
+
+![Flow chart showing broadcasting of A (8,1,6,1) and B (7,1,5)](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-broadcast-2-matrices-different-dimensions.png)
+
+
 
 **Do's and Don'ts:**
 
