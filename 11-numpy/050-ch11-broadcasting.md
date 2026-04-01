@@ -60,7 +60,7 @@ Note: NumPy broadcasts a row vector by adding more rows and broadcasts a column 
 Before diving into the rules, look at this flowchart. Every time you write `A + B` in NumPy, the C-engine runs through this exact decision tree.
 
 
-XXXXXX
+![Broadcasting Decision Tree](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-broadcast-rule-flowchart.png)
 
 
 ## Rule 1: Right-Alignment and Left-Padding (The Prepend Rule)
