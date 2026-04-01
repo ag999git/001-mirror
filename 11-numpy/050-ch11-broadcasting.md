@@ -45,15 +45,15 @@ Note: NumPy broadcasts a row vector by adding more rows and broadcasts a column 
 
 ### The following figure shows how broadcasting was done on a scalar in the script above:
 
-
+![Broadcasting of a scalar](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-broadcast-scalar.png)
 
 ### The following figure shows how broadcasting was done on a row vector in the above script
 
-
+![Broadcasting a row vector](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-broadcast-row-vector.png)
 
 ### The following figure shows how broadcasting was done on a column vector in the above script
 
-
+![Broadcasting Column Vector](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-broadcast-column-vector.png)
 
 ## The Master Flowchart: How NumPy Decides
 
