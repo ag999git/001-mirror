@@ -1,4 +1,58 @@
 
+# Broadcasting in NumPy
+Broadcasting is a mechanism in NumPy that allows arrays of different shapes to work together during arithmetic operations. In simple terms: Broadcasting allows NumPy to automatically expand the smaller array so that operations can be performed on arrays with different sizes.
+The following script shows the way in which NumPy applies broadcasting to a scalar, a row-vector and a column vector:-
+
+```python
+
+import numpy as np
+
+# 1. Broadcasting with a scalar
+arr = np.array([1,2,3])
+result = arr + 10  # Broadcasts 10 to [10 10 10] & adds to each element of arr
+print(result)  # Output [11 12 13]
+
+# 2. Broadcasting with a matrix and a  row vector
+matrix = np.array([
+    [1,2,3],
+    [4,5,6],
+    [7,8,9]
+])
+row_vector = np.array([10,20,30])
+# Shape of row vector is (3,) & shape of matrix is (3,3). 
+# The row vector is broadcasted to (3,3) for addition.
+result3 = matrix + row_vector  
+print(result3)  # Output [[11 22 33]
+#                        [14 25 36]
+#                        [17 28 39]]
+
+# 3. Broadcasting with a matrix and a column vector
+# Shape of column vector is (3,1) & shape of matrix is (3,3). 
+# The column vector is broadcasted to (3,3) for addition.
+column_vector = np.array([
+                        [10],
+                        [20],
+                        [30]])
+
+result4 = matrix + column_vector  # Broadcasts the column vector to each column of the matrix
+print(result4)  # Output [[11 12 13]
+#                        [24 25 26]
+#                        [37 38 39]]
+```
+
+
+Note: NumPy broadcasts a row vector by adding more rows and broadcasts a column vector by adding more columns to match the shape of the matrix to which it is being added. 
+
+### The following figure shows how broadcasting was done on a scalar in the script above:
+
+
+
+### The following figure shows how broadcasting was done on a row vector in the above script
+
+
+
+### The following figure shows how broadcasting was done on a column vector in the above script
+
 
 
 ## The Master Flowchart: How NumPy Decides
