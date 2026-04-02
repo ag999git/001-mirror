@@ -340,9 +340,60 @@ Iteration 3:
 Iteration 4:
 [0,1,2] → create new array → [0,1,2,3]
 Each time → copy entire array again
+Total work becomes:
+1 + 2 + 3 + ... + n  → O(n²)
 ```
+
+
+### Why Python List is Better
+
+Python lists are dynamic (resizable).
+
+`temp = []`
+`temp.append(i)`
+
+**What happens:**
+
+>List has extra space reserved
+>No copying every time
+>Occasional resizing only
+
+### So complexity is: O(n) instead of O(n²)
+
+**Correct Approach Flow**
+
+```python
+
+temp = []          # Fast growing structure
+for i in range(5000):
+    temp.append(i)
+
+arr = np.array(temp)   # Convert once
+```
+
+### Key Idea
+-    NumPy arrays = fixed size → expensive to grow
+-    Lists = flexible → cheap to grow
+
+
   
 </details>
+
+
+<details>
+  <summary>Click to expand!</summary>
+  
+  This content is hidden by default. You can use **Markdown** here.
+</details>
+
+
+
+
+
+
+
+
+
 
 
 
