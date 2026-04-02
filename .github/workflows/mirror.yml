@@ -10,13 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v5
 
       - name: Push to Mirror
         env:
           TOKEN: ${{ secrets.MIRROR_TOKEN }}
         run: |
           git remote add mirror https://x-access-token:${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}@github.com/ag999git/001-mirror.git
-          git push mirror main --force
+          git push mirror HEAD:main --force
