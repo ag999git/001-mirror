@@ -1,0 +1,42 @@
+name: Mirror 001-Python-book-2026
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout mirror repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync content from source repository
+        run: |
+          git clone --depth 1 https://github.com/ag999git/001-Python-book-2026.git /tmp/source-repo
+          # Sync all content from source except its .git directory
+          # Use rsync to copy source content, preserving our .github/workflows/mirror.yml
+          rsync -av --delete \
+            --exclude='.git/' \
+            --exclude='.github/workflows/mirror.yml' \
+            /tmp/source-repo/ ./
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: sync from ag999git/001-Python-book-2026"
+            git push
+          fi
