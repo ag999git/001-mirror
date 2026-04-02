@@ -294,9 +294,9 @@ print("Vectorized Time:", time.time() - start)
 ```
 
 <details>
-  <summary>RULE 2: Why np.append() in a loop is BAD (Click to expand!)</summary>
+  <summary>RULE 2: Why `np.append()` in a loop is BAD (Click to expand!)</summary>
 
-### RULE 2: Why np.append() in a loop is BAD
+### RULE 2: Why `np.append()` in a loop is BAD
 First Understand What You Think is Happening
 
 When you write:
@@ -381,9 +381,62 @@ arr = np.array(temp)   # Convert once
 
 
 <details>
-  <summary>Click to expand!</summary>
+  <summary>RULE 3: Boolean Masking (Click to expand!)</summary>
   
-  This content is hidden by default. You can use **Markdown** here.
+
+### RULE 3: Boolean Masking (Most Important Concept)
+What You Are Doing in Loop
+
+```python
+
+result = []
+for x in data:
+    if x > 15:
+        result.append(x)
+
+```
+#### You are doing 2 things:
+
+-    Check condition
+-    Select elements
+
+NumPy does Both at once
+data[data > 15]
+
+Let’s break this into steps.
+
+```python
+# Step 1: Create Boolean Mask
+data = np.array([5, 15, 25, 10, 30])
+
+mask = data > 15
+
+# Result: mask = [False, False, True, False, True]
+# This is called a Boolean mask
+
+# Step 2: Use Mask to Filter Data
+data[mask]
+
+# Result: [25, 30] because 5, 15 and 10 get removed because of False
+# Combine Both Steps
+data[data > 15]
+
+# Same as:
+
+mask = data > 15
+result = data[mask]
+```
+
+### Why this is powerful  
+
+| Loop Version | NumPy Version |
+| --- | --- |
+| Check each element manually | Done internally |
+| Append manually | Done automatically |
+| Python execution | C-level execution |
+
+
+
 </details>
 
 
