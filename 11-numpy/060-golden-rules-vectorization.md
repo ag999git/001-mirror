@@ -291,10 +291,58 @@ print("np.sqrt:", result)
 print("Vectorized Time:", time.time() - start)
 # Output: Vectorized Time: 0.00001 seconds (varies based on machine)
 
-
-
 ```
 
+<details>
+  <summary>RULE 2: Why np.append() in a loop is BAD (Click to expand!)</summary>
+
+### RULE 2: Why np.append() in a loop is BAD
+First Understand What You Think is Happening
+
+When you write:
+
+```python
+
+arr = np.array([])
+for i in range(5):
+    arr = np.append(arr, i)
+```
+
+You might think: “I am just adding one element to the same array”
+
+What is Actually Happening Internally
+
+NumPy arrays are fixed-size (like a fixed container).
+
+So every time you do:
+
+`arr = np.append(arr, i)`
+
+NumPy does this:
+
+Step 1: Create a NEW array of bigger size
+Step 2: Copy ALL old elements into it
+Step 3: Add new element
+Step 4: Delete old array
+
+Step-by-Step Example
+
+Let’s simulate:
+
+```python
+
+Iteration 1:
+[] → [0]
+Iteration 2:
+[0] → create new array → [0,1]
+Iteration 3:
+[0,1] → create new array → [0,1,2]
+Iteration 4:
+[0,1,2] → create new array → [0,1,2,3]
+Each time → copy entire array again
+```
+  
+</details>
 
 
 
