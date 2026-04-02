@@ -1,6 +1,6 @@
 You can also visit my GitHub repository or the Google Colab notebooks by clicking the badges below
  
-
+ 
 
 
 | Book Repository | Interactive Labs |
