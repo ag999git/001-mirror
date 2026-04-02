@@ -186,6 +186,17 @@ np.sqrt(arr)
 | SIMD optimization | CPU-level parallelism |
 
 
+## 4. Comparison Table
+
+
+| Aspect | Loop Approach | Vectorized Approach |
+| --- | --- | --- |
+| Speed | Slow | Fast |
+| Readability | Low | High |
+| Memory | Inefficient | Efficient |
+| Code Length | Long | Short |
+
+
 
 
 
