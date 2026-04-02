@@ -466,6 +466,17 @@ Result:
 This is very powerful and not possible easily with loops
 
 
+### Final Comparison
+  
+
+| Concept | Loop Approach | NumPy Approach |
+| --- | --- | --- |
+| Building array | append repeatedly | build list → convert |
+| Filtering | if condition inside loop | boolean mask |
+| Speed | slow | very fast |
+| Code | long | short |
+
+
 </details>
 
 
