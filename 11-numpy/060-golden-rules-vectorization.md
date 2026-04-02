@@ -456,6 +456,16 @@ Because:
 -    Entire operation runs in optimized C code
 
 
+### Additional possibility with mask: Modify Data Using Mask
+`data[data > 15] = 100`
+
+Result:
+
+`[5, 15, 100, 10, 100]`
+
+This is very powerful and not possible easily with loops
+
+
 </details>
 
 
