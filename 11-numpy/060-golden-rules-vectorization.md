@@ -143,7 +143,7 @@ arr = np.array(temp)
 
 ```
 
-Rule 3: Boolean Masking
+### Rule 3: Boolean Masking
 
 ```python
 
@@ -435,6 +435,25 @@ result = data[mask]
 | Append manually | Done automatically |
 | Python execution | C-level execution |
 
+
+Visual Explanation
+
+```python
+
+data:   [ 5   15   25   10   30 ]
+mask:   [ F    F    T    F    T ]
+
+Result → pick only where mask = True
+
+Final:  [25, 30]
+```
+
+**Why Boolean Masking is Faster**
+
+Because:
+-    No Python loop
+-    No repeated append
+-    Entire operation runs in optimized C code
 
 
 </details>
