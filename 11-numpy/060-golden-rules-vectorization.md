@@ -197,7 +197,103 @@ np.sqrt(arr)
 | Code Length | Long | Short |
 
 
+## Script (Showing the rules)
 
+```python
+# SCRIPT: Golden Rules of Vectorization
+
+import numpy as np
+import time
+import math
+
+# RULE 1: AVOID LOOPS FOR ELEMENT-WISE OPERATIONS
+
+a = np.arange(1000000)  # Creates an array with 1 million elements: [0, 1, 2, ..., 999999]
+b = np.arange(1000000)  # Creates another array with 1 million elements: [0, 1, 2, ..., 999999]
+
+# Don't Loop
+start = time.time()  # Start the timer
+result = []
+for i in range(len(a)):
+    result.append(a[i] + b[i])
+print("Loop Time:", time.time() - start)  
+# Output: Loop Time: 0.1 seconds (varies based on machine)
+
+# Do Vectorize
+start = time.time()
+result = a + b
+print("Vectorized Time:", time.time() - start)  
+# Output: Vectorized Time: 0.001 seconds (varies based on machine)
+
+# RULE 2: AVOID np.append IN LOOPS
+
+# Dont do this (Bad)
+start = time.time()
+arr = np.array([])
+for i in range(5000):  # This will create a new array every time, which is inefficient
+    arr = np.append(arr, i)
+print("np.append Time:", time.time() - start)
+# Output: np.append Time: 0.5 seconds (varies based on machine)
+
+# Do this (Good)
+start = time.time()
+temp = []
+for i in range(5000):  # This will create a new list element every time, which is efficient
+    temp.append(i)
+arr = np.array(temp)
+print("List Conversion Time:", time.time() - start)
+# Output: List Conversion Time: 0.001 seconds (varies based on machine)
+
+# RULE 3: BOOLEAN MASKING
+
+data = np.array([5, 15, 25, 10, 30])  # Creates an array with 5 elements: [5, 15, 25, 10, 30]
+
+# Don't Loop
+start = time.time()
+result = []
+for x in data:  # Loop through each element in the array
+    if x > 15:
+        result.append(x)
+print("Loop Result:", result)
+# Output: Loop Result: [25, 30]
+print("Loop Time:", time.time() - start)
+# Output: Loop Time: 0.0001 seconds (varies based on machine)
+
+# Do Vectorize
+start = time.time()
+result = data[data > 15]  # Creates a boolean mask where the condition is True and returns the corresponding elements
+print("Masked Result:", result)
+print("Vectorized Time:", time.time() - start)
+# Output: Vectorized Time: 0.00001 seconds (varies based on machine)
+
+# RULE 4: USE UFUNCS
+
+data = np.array([1,4,9,16])
+
+# Don't Loop
+start = time.time()
+result = []
+for x in data:
+    result.append(math.sqrt(x))  # math.sqrt is not vectorized, so it operates on each element individually
+print("math.sqrt:", result)
+# Output: math.sqrt: [1.0, 2.0, 3.0, 4.0]
+print("Loop Time:", time.time() - start)
+# Output: Loop Time: 0.0001 seconds (varies based on machine)
+
+# Error example
+# math.sqrt(data)  # TypeError
+
+# Do Vectorize
+start = time.time()
+result = np.sqrt(data)
+print("np.sqrt:", result)
+# Output: np.sqrt: [1. 2. 3. 4.]
+print("Vectorized Time:", time.time() - start)
+# Output: Vectorized Time: 0.00001 seconds (varies based on machine)
+
+
+
+```
 
 
 
