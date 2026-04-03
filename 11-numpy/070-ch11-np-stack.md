@@ -114,11 +114,11 @@ print(result2)
 
 ### Rule
 
-axis = where the **new** dimension is inserted
+`axis` = where the **new** dimension is inserted
 
 ----------
 
-### Example: axis = 0
+### Example: `axis = 0`
 
 ```python
 
@@ -137,7 +137,7 @@ np.stack((a, b), axis=0)
 
 ----------
 
-## Example: axis = 1
+## Example: `axis = 1`
 
 ```python
 
@@ -158,7 +158,7 @@ np.stack((a, b), axis=1)
 
 ### Visual Intuition
 
-### axis = 0 → stack vertically
+### `axis = 0 → stack vertically`
 
 a → [1 2 3]  
 b → [4 5 6]  
@@ -170,7 +170,7 @@ Result:
 
 ----------
 
-### axis = 1 → stack sideways
+### `axis = 1 → stack sideways`
 
 Result:  
   
@@ -182,40 +182,39 @@ Result:
 
 ### 5. Do Arrays Need Same Shape?
 
-### YES — They MUST have the same shape
+### YES — They must have the same shape
 
 ----------
 
-## ❗ Why?
+### Why?
 
 Because `np.stack()` does **not stretch or broadcast** arrays.
 
 It simply places them along a new axis.
 
-👉 Think:
-
-You are placing identical-sized blocks on top of each other
+Think: You are placing identical-sized blocks on top of each other
 
 ----------
 
-## ❌ Example (ERROR)
+### Example (Error)
 
+```python
 a  =  np.array([1,2,3])  
 b  =  np.array([4,5])  
   
-np.stack((a,b))
+np.stack((a,b))  # Error
 
-Error:
+# Error: ValueError: all input arrays must have the same shape
 
-ValueError: all input arrays must have the same shape
+```
 
 ----------
 
-## 🧠 Reason
+### Reason for error
 
 a → length 3  
 b → length 2  
-  
+
 Cannot align element-by-element
 
 
