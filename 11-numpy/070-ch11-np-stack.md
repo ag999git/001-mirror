@@ -180,6 +180,113 @@ Result:
 
 ----------
 
+## Script which implements the stacking of 2 subjects of 2 students in 2 classes
+
+```python
+
+# SCRIPT: Understanding np.stack() with Axis
+
+import numpy as np
+
+#<-----------------ONE---------------->
+# STEP 1: Create two classes with marks in 2 subjects (Math, Science)
+# Each class has 2 students and 2 subjects, so the shape is (2, 2)
+#           Math     Science
+# Student 1: 80,     85
+# Student 2: 70,     75
+#
+class_a = np.array([[80, 85],
+                    [70, 75]])   # 2 students × 2 subjects
+#
+class_b = np.array([[95, 90],
+                    [60, 65]])
+#
+print("Shape of one class:", class_a.shape)  # (2,2)
+
+#<-----------------TWO---------------->
+# STEP 2: Stack along axis = 0
+# Stacking along axis 0 creates a new "depth" dimension at the front
+school_axis0 = np.stack((class_a, class_b), axis=0)  # Shape: (2, 2, 2) -> [Class, Student, Subject]
+print("\nStack Axis 0 Shape:", school_axis0.shape)  # Result: (2, 2, 2)
+# 
+print("\nAxis 0 (Class First)")  # Interpretation: [Class, Student, Subject]
+print(school_axis0)  # Output:
+# [[[80 85]
+#   [70 75]]
+#  [[95 90]
+#   [60 65]]]
+#
+print("Shape:", school_axis0.shape)  # Output: (2, 2, 2)
+#
+print("Class A:\n", school_axis0[0])  
+# Output: Class A:
+# [[80 85]
+#  [70 75]]
+print("Class B:\n", school_axis0[1])
+# Output: Class B:
+# [[95 90]
+#  [60 65]]
+
+
+# <-----------------THREE---------------->
+# STEP 3: Stack along axis = 1
+# Stacking along axis 1 creates a new "depth" dimension in the middle
+school_axis1 = np.stack((class_a, class_b), axis=1)  # Shape: (2, 2, 2) -> [Student, Class, Subject]
+#
+print("\nAxis 1 (Student First)")  # Interpretation: [Student, Class, Subject]
+print(school_axis1)  # Output:
+# [[[80 85] [95 90]]
+#  [[70 75] [60 65]]]
+#
+print("Shape:", school_axis1.shape)  # Output: (2, 2, 2)
+#
+print("Student 0 from both classes:\n", school_axis1[0])
+# Output: Student 0 from both classes:
+# [[80 85]
+#  [95 90]]
+print("Student 1 from both classes:\n", school_axis1[1])
+# Output: Student 1 from both classes:
+# [[70 75]
+#  [60 65]]
+
+
+# <-----------------FOUR---------------->
+# STEP 4: Stack along last axis (axis=-1)
+# Stacking along the last axis creates a new "depth" dimension at the end
+# Shape: (2, 2, 2) -> [Student, Subject, Class]
+school_last = np.stack((class_a, class_b), axis=-1)  
+#
+print("\nAxis -1 (Subject comparison)")  # Interpretation: [Student, Subject, Class]
+print(school_last)  # Output:
+# [[[80 95]
+#   [85 90]]
+#  [[70 60]
+#   [75 65]]]
+#
+print("Shape:", school_last.shape)  # Output: (2, 2, 2)
+#
+print("Student 0, Subject 0 comparison:\n", school_last[0,0])
+# Output: Student 0, Subject 0 comparison:
+# [80 95]
+print("Student 0, Subject 1 comparison:\n", school_last[0,1])
+# Output: Student 0, Subject 1 comparison:
+# [85 90]
+print("Student 1, Subject 0 comparison:\n", school_last[1,0])
+# Output: Student 1, Subject 0 comparison:
+# [70 60]
+print("Student 1, Subject 1 comparison:\n", school_last[1,1])
+# Output: Student 1, Subject 1 comparison:
+# [75 65]
+
+
+```
+
+
+
+
+
+
+
 ### 5. Do Arrays Need Same Shape?
 
 ### YES — They must have the same shape
