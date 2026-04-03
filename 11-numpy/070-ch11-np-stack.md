@@ -104,11 +104,7 @@ print(result2)
 
 
 ```
-Shape:
 
-(2, 3)
-
-Two arrays became **2 rows**
 
 ----------
 
