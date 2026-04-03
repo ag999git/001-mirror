@@ -282,7 +282,10 @@ print("Student 1, Subject 1 comparison:\n", school_last[1,1])
 ```
 
 
+## Flowchart
+#### The following flowchart visualizes the above script and shows the 3 possible ways in which np.stack() was used
 
+![Diagram](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-np-stack.png)
 
 
 
