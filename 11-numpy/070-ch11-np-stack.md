@@ -108,54 +108,55 @@ print(result2)
 
 ----------
 
-### 4. Understanding `axis`
-
-This is the MOST IMPORTANT part.
+### 4. Understanding `axis`. This is the essential part.
 
 ----------
 
 ### Rule
 
-axis = where the NEW dimension is inserted
+axis = where the **new** dimension is inserted
 
 ----------
 
-## 🔹 Example: axis = 0
+### Example: axis = 0
 
+```python
+
+# When using:
 np.stack((a, b), axis=0)
 
-Result:
+# Result:
+#  [[1 2 3]  
+ # [4 5 6]]
 
-[[1 2 3]  
- [4 5 6]]
+# Shape: (2, 3)
+# New axis added at position 0 → arrays become rows
 
-Shape:
 
-(2, 3)
-
-👉 New axis added at position 0 → arrays become rows
+```
 
 ----------
 
-## 🔹 Example: axis = 1
+## Example: axis = 1
+
+```python
 
 np.stack((a, b), axis=1)
 
-Result:
+# Result:
 
-[[1 4]  
- [2 5]  
- [3 6]]
+#  [[1 4]  
+#   [2 5]  
+#   [3 6]]
 
-Shape:
-
+# Shape: 
 (3, 2)
+# Now arrays become columns
 
-👉 Now arrays become **columns**
-
+```
 ----------
 
-# 🎯 Visual Intuition
+### Visual Intuition
 
 ### axis = 0 → stack vertically
 
@@ -179,9 +180,9 @@ Result:
 
 ----------
 
-# 🔴 5. Do Arrays Need Same Shape?
+### 5. Do Arrays Need Same Shape?
 
-## ✅ YES — They MUST have the same shape
+### YES — They MUST have the same shape
 
 ----------
 
