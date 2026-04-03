@@ -95,9 +95,16 @@ $$b = \begin{bmatrix} b_{1} & b_{2} & \dots & b_{1000} \end{bmatrix}$$
 
 Python stretches $b$ vertically to meet every row of $X$:
 
-$$X+b = \begin{bmatrix} (px_{1,1} + b_{1}) & (px_{1,2} + b_{2}) & \dots & (px_{1,1000} + b_{1000}) \\ (px_{2,1} + b_{1}) & (px_{2,2} + b_{2}) & \dots & (px_{2,1000} + b_{1000}) \\ \vdots & \vdots & \ddots & \vdots \\ (px_{128,1} + b_{1}) & (px_{128,2} + b_{2}) & \dots & (px_{128,1000} + b_{1000}) \end{bmatrix}$$
-
-
+$$
+\begin{aligned}
+X+b = \begin{bmatrix} 
+(px_{1,1} + b_{1}) & (px_{1,2} + b_{2}) & \dots & (px_{1,1000} + b_{1000}) \\
+(px_{2,1} + b_{1}) & (px_{2,2} + b_{2}) & \dots & (px_{2,1000} + b_{1000}) \\
+\vdots & \vdots & \ddots & \vdots \\
+(px_{128,1} + b_{1}) & (px_{128,2} + b_{2}) & \dots & (px_{128,1000} + b_{1000}) 
+\end{bmatrix}
+\end{aligned}
+$$
 
 
 
