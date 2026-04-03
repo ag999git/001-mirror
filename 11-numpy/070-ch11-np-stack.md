@@ -77,7 +77,32 @@ Standard joining functions (`concatenate`, `vstack`, `hstack`) work **within exi
 ### **5. Simple script explaining the concepts
 
 ```python
-XXX
+
+import numpy as np
+
+a = np.array([1,2,3])
+b = np.array([4,5,6])
+
+# 1. Stacking arrays vertically (row-wise)
+result = np.stack((a, b), axis=0)  # Stacks a and b vertically (row-wise)
+print(result.shape)  # Output: (2, 3)
+print(result)
+# Output: 
+# [[1 2 3]
+#  [4 5 6]]
+# Two arrays became 2 rows
+
+# 2. Stacking arrays horizontally (column-wise)
+result2 = np.stack((a, b), axis=1)  # Stacks a and b horizontally (column-wise)
+print(result2.shape)  # Output: (3, 2)  
+print(result2)
+# Output:
+# [[1 4]
+#  [2 5]
+#  [3 6]]
+# Two arrays became 2 columns
+
+
 ```
 Shape:
 
