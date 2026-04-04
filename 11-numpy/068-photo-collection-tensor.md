@@ -177,6 +177,97 @@ Dataset
 ### 7.(A) How a 5D Tensor with random integers is created
 Before writing the script, let us understand how a tensor can be created 
 
+
+### How `np.random.randint()` Creates a Multi-Dimensional Tensor
+
+In **NumPy**, the function:
+
+```python
+one_collection  =  np.random.randint(  
+  0, 256,  
+  size=(K, N, H, W, CH),  
+  dtype=np.uint8  
+)
+```
+is used to generate a **multi-dimensional array (tensor)** filled with random values.
+
+----------
+
+### How it Works
+
+#### 1. Range of Values
+
+`0, 256`
+
+-   Generates integers from **`0 to 255`**
+-   Suitable for **RGB pixel values**
+
+----------
+
+#### 2. Total Number of Elements
+
+The `size` parameter:
+
+`(K, N, H, W, CH)`
+
+tells NumPy how many values to generate:
+
+`Total elements = K × N × H × W × CH`
+
+**NumPy first creates these many random numbers.**
+
+----------
+
+#### 3. Reshaping into Dimensions
+
+After generating values, NumPy **organizes them into a structured tensor**:
+
+`(K, N, H, W, CH)`
+
+Where:
+
+-   **K** → categories
+-   **N** → images per category
+-   **H** → height
+-   **W** → width
+-   **CH** → channels (RGB)
+
+----------
+
+#### 4. Interpretation
+
+The resulting tensor represents:
+
+Categories → Images → Pixels → RGB values
+
+Each element at the deepest level is:
+
+`[R, G, B]`
+
+----------
+
+#### 5. Data Type
+
+`dtype=np.uint8`
+
+-   Stores values as **8-bit unsigned integers**
+-   Efficient for image data (0–255)
+
+----------
+
+####  Key Insight
+
+> `np.random.randint()` first generates a flat set of random numbers and then arranges them into the specified multi-dimensional shape.
+
+----------
+
+#### Summary
+
+> The `size` parameter defines the structure of the tensor, while `randint()` fills that structure with random integer values.
+
+
+
+
 ### 7.(B) How the 5D tensors get converted into 6D tensor
 
 Building a 6D Tensor from 5D Tensors. In **NumPy**, complex datasets are often constructed step-by-step by combining smaller tensors.
@@ -315,7 +406,12 @@ The list index becomes:
 ### 7.(C) The complete script
 
 
+```python
 
+
+
+
+```
 
 
 
