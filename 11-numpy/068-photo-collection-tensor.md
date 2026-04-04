@@ -149,6 +149,27 @@ Convert the dataset into a **6D tensor** of shape:
 
 ----------
 
+### Conceptual visualization
+
+```
+Dataset
+│
+├── Collection 1 (Wildlife)
+│   ├── Safari
+│   │   ├── lion_01
+│   │   ├── elephant_02
+│   │   └── ...
+│   └── Night Watch
+│
+├── Collection 2 (Family)
+│   ├── Wedding
+│   └── Birthday
+│
+└── Collection 3 (Urban)
+    ├── Architecture
+    └── Street Life
+```
+
 ## 7. Full Script with Explanation
 
 ### 7.(A) How a Tensor with random integers is created
