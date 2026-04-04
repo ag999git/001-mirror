@@ -378,6 +378,7 @@ dataset[0] → collection0
 dataset[1] → collection1   
 dataset[2] → collection2 
 ```
+
 The list index becomes:
 
 `axis = 0  (Collections dimension)`
@@ -408,7 +409,121 @@ The list index becomes:
 
 ```python
 
+import numpy as np
 
+# <------------------ONE---------------->
+# STEP 1: Define dataset structure
+
+# Number of collections (Wildlife, Family, Urban)
+C = 3  # Axis 0: Collections. This will be the new axis we create when we stack the collections together using np.stack. 
+# But for now, we will create each collection of 5D tensors and then stack them together later. 
+# Categories per collection (e.g., Safari, Night)
+K = 2  # Axis 1: Categories
+
+# Images per category
+N = 4  # Axis 2: Images
+
+# Image resolution
+H = 64  # Axis 3: Height
+W = 64  # Axis 4: Width
+
+# RGB channels
+CH = 3  # Axis 5: Channels
+
+
+#<------------------TWO---------------->
+# STEP 2: Create ONE collection
+
+# This simulates one collection (e.g., Wildlife)
+# Shape: (categories, images, height, width, channels)
+
+# Create a tensor of dimensions (K, N, H, W, CH) filled with random integers 
+# between 0 and 255 (inclusive) representing pixel values in RGB format.
+# Notice it has 5 dimensions corresponding to the structure we defined:
+# The 6th dimension collections (C) will be added later using stacking.
+one_collection = np.random.randint(
+    0, 256,
+    size=(K, N, H, W, CH),
+    dtype=np.uint8
+)
+
+print("One collection shape:", one_collection.shape)
+# Output: One collection shape: (2, 4, 64, 64, 3)
+print(f"Items in one collection: {one_collection.size}")  # Total number of elements
+#Output: Items in one collection: 98304 = 2 categories x 4 images x 64 height x 64 width x 3 channels
+# Interpretation:
+# 2 categories → each has 4 images → each image is 64×64×3
+
+#<-----------------THREE---------------->
+# STEP 3: Create multiple collections
+
+collection_list = []
+
+for i in range(C):
+    # Simulate a collection (e.g., Family or Urban)
+    collection = np.random.randint(
+        0, 256,
+        size=(K, N, H, W, CH),
+        dtype=np.uint8
+    )
+    # Add this collection to the list
+    collection_list.append(collection)
+
+
+print(f"Number of collections created: {len(collection_list)}")  
+# Output: Number of collections created: 3
+print(f"Shape of each collection: {collection_list[0].shape}")  
+# Output: Shape of each collection: (2, 4, 64, 64, 3)
+
+# Notice we have a list of 3 collections, each with the same shape (2, 4, 64, 64, 3).
+# Each collection is a 5D tensor representing categories, images, height, width, and channels.
+
+#<-----------------FOUR---------------->
+# STEP 4: Stack collections
+# Now we want to combine these 3 collections into a single dataset tensor.
+# We will use np.stack to combine the collections along a new axis (axis=0) 
+# which will represent the collection dimension (C).
+# This new axis will basically be the "index" of the list of collections we created.
+# We will stack along a new axis (axis=0) to create a 6D tensor with shape (C, K, N, H, W, CH).
+
+# Add a new axis → collections dimension
+
+# Stacking along axis 0 creates a new "collection" dimension at the front
+# The resulting shape will be (3, 2, 4, 64, 64, 3) which corresponds to:
+# 3 collections (C) → 2 categories (K) → 4 images (N) → 64 height (H) → 64 width (W) → 3 channels (CH)
+# The np.stack function takes a sequence of arrays (in this case, the list of collections) 
+# and stacks them along a new axis specified by the axis parameter.
+# By using axis=0, we are creating a new dimension at the front of the shape, 
+# which will represent the different collections in our dataset.
+# So the index of the list collection_list becomes the index of the new collection 
+# dimension in the resulting dataset tensor.
+dataset = np.stack(collection_list, axis=0) # axis = 0 
+
+print("Final dataset shape:", dataset.shape)
+# Output: Final dataset shape: (3, 2, 4, 64, 64, 3)
+
+#<-----------------FIVE---------------->
+# STEP 5: Verify structure
+
+print("\nDataset interpretation:")
+print(f"Collections (C): {dataset.shape[0]}")  # Output: Collections (C): 3
+print(f"Categories (K): {dataset.shape[1]}")  # Output: Categories (K): 2
+print(f"Images (N): {dataset.shape[2]}")  # Output: Images (N): 4
+print(f"Height (H): {dataset.shape[3]}")  # Output: Height (H): 64
+print(f"Width (W): {dataset.shape[4]}")  # Output: Width (W): 64
+print(f"Channels: {dataset.shape[5]}")  # Output: Channels: 3   
+
+
+#<-----------------SIX---------------->
+# STEP 6: Access a specific image
+
+# Example: First collection → first category → first image
+
+image = dataset[0, 0, 0]
+
+print("\nSingle image shape:", image.shape)  # Output: Single image shape: (64, 64, 3)
+print(f"Pixel value at (0,0) in this image: {image[0, 0]}")  
+# Output: Pixel value at (0,0) in this image: [R, G, B] values of the top-left pixel
 
 
 ```
