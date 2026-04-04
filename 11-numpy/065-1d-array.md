@@ -9,6 +9,8 @@
 -    **`hstack = horizontal (columns), vstack = vertical (rows).`**
 -    **For 1D arrays, `vstack()` adds a new dimension, while `hstack()` does not.**
 
+### So arrays behave differently in 1D scenario. The following exercise explains the difference, its how and why. It also tries to visualize the prcess
+
 ## Step-by-Step Visualization
 
 We start with two 1D arrays in **NumPy**:
