@@ -84,8 +84,9 @@ Now things change
 
 `vstack()` first converts 1D arrays into **row vectors (2D)**:
 
-x → [[1   2]]   shape (1,2)  ie 1 row and 2 columns
-y → [[3   4]]   shape (1,2) ie 1 row and 2 columns
+`x → [[1   2]]`   `shape (1,2)`  ie 1 row and 2 columns
+
+`y → [[3   4]]`   `shape (1,2)` ie 1 row and 2 columns
 
 ##### This step is **hidden but crucial**
 
