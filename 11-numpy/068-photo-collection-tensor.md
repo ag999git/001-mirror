@@ -170,12 +170,165 @@ Dataset
     └── Street Life
 ```
 
+
+
 ## 7. Full Script with Explanation
 
-### 7.(A) How a Tensor with random integers is created
+### 7.(A) How a 5D Tensor with random integers is created
 Before writing the script, let us understand how a tensor can be created 
 
-### 7.(B) The complete script
+### 7.(B) How the 5D tensors get converted into 6D tensor
+
+Building a 6D Tensor from 5D Tensors. In **NumPy**, complex datasets are often constructed step-by-step by combining smaller tensors.
+
+----------
+
+#### Step 1: Create a 5D Tensor (One Collection)
+
+We first create a tensor representing **one collection of images**:
+
+`(K, N, H, W, CH)`
+
+Where:
+
+-   **K** → number of categories
+-   **N** → number of images per category
+-   **H, W** → height and width of each image
+-   **CH** → number of channels (e.g., 3 for RGB)
+
+This tensor represents **one complete collection** (e.g., Wildlife photos).
+
+----------
+
+#### Step 2: Store Multiple Collections in a List
+
+Next, we create multiple such collections and store them in a Python list:
+
+`collection_list  = [collection1, collection2, collection3]`
+
+>Each element in the list is a **5D tensor** of shape:
+
+`(K, N, H, W, CH)`
+
+
+
+Important:
+
+-   This is still a **Python list**, of 5D Tensors, not a higher-dimensional (6D) tensor yet
+
+----------
+
+#### Step 3: Use `np.stack()` to Create a New Axis
+
+We now convert the list into a single tensor:
+
+`dataset  =  np.stack(collection_list, axis=0)`
+
+----------
+
+#### What does `np.stack()` do?
+
+-   It **takes each element of the list**
+-   Assigns it a position along a **new axis**
+-   Combines them into one tensor
+
+----------
+
+Conceptually, It is somewhat like
+
+**Before stack**
+
+```
+Collection 1 → (K,N,H,W,CH)
+Collection 2 → (K,N,H,W,CH)
+Collection 3 → (K,N,H,W,CH)
+
+```
+**After stack**
+
+```
+[  
+ Collection 1,  
+ Collection 2,  
+ Collection 3  
+]
+```
+
+
+#### Resulting Shape
+
+(C, K, N, H, W, CH)
+
+Where:
+
+-   **C** = number of collections (length of the list)
+
+----------
+
+### Key Insight
+
+> `np.stack()` uses the **index of each element in the list** to create a new dimension (axis).
+
+----------
+
+### Visual Interpretation
+
+Before stacking:
+```
+collection_list = [  
+ collection0,  
+ collection1,  
+ collection2  
+]
+```
+After stacking:
+```
+dataset[0] → collection0   
+dataset[1] → collection1   
+dataset[2] → collection2 
+```
+The list index becomes:
+
+`axis = 0  (Collections dimension)`
+
+----------
+
+#### Final Understanding
+
+-   A **5D tensor** represents one collection
+-   A **list of 5D tensors** represents multiple collections (unstructured)
+-   `np.stack(axis=0)` converts this into a **6D tensor** by introducing a new dimension
+
+----------
+
+## Summary of the process
+
+> We first construct individual 5D tensors representing separate collections. These tensors are stored in a list, and `np.stack()` is then used to introduce a new axis corresponding to the list index, thereby creating a higher-dimensional tensor that organizes all collections into a single structured dataset.
+
+
+
+
+
+
+
+
+### 7.(C) The complete script
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
