@@ -211,6 +211,40 @@ plt.show()
 
 
 
+## Part B — Task
+
+Write a program that:
+
+1.  Creates a grid using `linspace()` and `meshgrid()`
+2.  Plots two surfaces:
+
+----------
+
+### Surface 1 (Plane)
+
+$$Z=X+Y$$
+----------
+
+### Surface 2 (Cone-like surface)
+
+$$Z= \sqrt{X^2 + Y^2}$$
+
+Derived from $$Z^2 =X^2+Y^2$$
+ 
+
+----------
+
+### Hints
+
+-   Use same X and Y for both surfaces
+-   Z must have same shape as X and Y
+-   Use two different figures
+-   Keep grid symmetric (e.g., -5 to 5)
+
+
+
+
+
 
 
 
