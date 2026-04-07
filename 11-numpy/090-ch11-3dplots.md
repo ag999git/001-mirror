@@ -295,13 +295,15 @@ plt.show()  # show() renders the plots on the screen.
 # X,Y → coordinates
 # Z → height at each coordinate
 
-
 ```
 
 
+### Output Figure (Plane)
+![Figure Plane](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-numpy-matplotlib-plane.png)
 
 
-
+### Output Figure (Cone)
+![Figure Cone](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-numpy-matplotlib-cone.png)
 
 
 
