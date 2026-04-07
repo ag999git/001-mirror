@@ -241,6 +241,64 @@ Derived from $$Z^2 =X^2+Y^2$$
 -   Use two different figures
 -   Keep grid symmetric (e.g., -5 to 5)
 
+## Script
+
+
+```python
+
+# Project: Visualizing surfaces using NumPy and Matplotlib
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Step 1: Create values
+
+x = np.linspace(-5, 5, 50)   # With 50 points from -5 to 5 we get smoother surfaces
+y = np.linspace(-5, 5, 50)   # 50 points from -5 to 5
+
+# Step 2: Create grid
+# meshgrid creates 2D arrays for X and Y. Each (i,j) gives a pair (X[i,j], Y[i,j]) which is one input to f(x,y).
+X, Y = np.meshgrid(x, y)
+
+# Step 3: Define surfaces
+
+# Surface 1: Plane. It is a slanted plane where Z increases as X and Y increase. 
+Z1 = X + Y
+
+# Surface 2: Inverted Cone-like surface. It is a cone where Z increases with the distance from the origin.
+Z2 = np.sqrt(X**2 + Y**2)  #
+
+# Step 4: Plot Surface 1
+fig1 = plt.figure()  # separate figure for first surface
+ax1 = fig1.add_subplot(projection='3d')  # 3D subplot for surface plot
+ax1.plot_surface(X, Y, Z1)
+ax1.set_title("Z = X + Y (Plane)")
+ax1.set_xlabel("X")  # X-axis label
+ax1.set_ylabel("Y")  # Y-axis label
+ax1.set_zlabel("Z")  # Z-axis label
+
+# Step 5: Plot Surface 2
+fig2 = plt.figure()  # separate figure for second surface
+ax2 = fig2.add_subplot(projection='3d')  # 3D subplot for surface plot
+ax2.plot_surface(X, Y, Z2)  # cone-like surface. As the distance from origin increases, Z increases.
+ax2.set_title("Z = sqrt(X^2 + Y^2) (Cone)")  # title indicates the function being plotted
+ax2.set_xlabel("X")  # X-axis label
+ax2.set_ylabel("Y")  # Y-axis label
+ax2.set_zlabel("Z")  # Z-axis label
+
+# Step 6: Show plots
+# Displays both surface plots. Each plot is in a separate window. The first shows the plane Z=X+Y, 
+# and the second shows the cone-like surface Z=sqrt(X^2 + Y^2).
+plt.show()  # show() renders the plots on the screen.
+
+# Key Ideas:
+# X,Y → coordinates
+# Z → height at each coordinate
+
+
+```
+
+
 
 
 
