@@ -241,6 +241,9 @@ Derived from $$Z^2 =X^2+Y^2$$
 -   Use two different figures
 -   Keep grid symmetric (e.g., -5 to 5)
 
+### Flowchart of the process
+![Flowchart](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-numpy-flowchart-matplotlib.png)
+
 ## Script
 
 
