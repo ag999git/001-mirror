@@ -164,8 +164,40 @@ print("\nRotation (90°):", y5) # approx [-2, 1]
 # Each matrix changes the vector
 # → This is called transformation
 
-
 ```
+
+## The following Figures show the transformation of a 2D vector by a 2 x 2 matrix
+
+
+
+### Uniform scaling. 
+
+![Unifrom Scaling](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-uniform-scaling-matrix-vector.png)
+
+### Non-Uniform scaling
+
+![Non-Uniform scaling](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-non-uniform-scaling-matrix-vector.png)
+
+### Reflection on X-axis
+
+![Reflection on X axis[(https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-reflection-x-axis-matrix-vector.png)
+
+### Reflection on Y-axis
+
+![Reflection on Y-axis](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-reflection-y-axis-matrix-vector.png)
+
+
+### Rotation by 90 degrees
+
+![Rotation by 90 degrees](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-rotation-90-matrix-vector.png)
+
+
+
+
+
+
+
+
 
 
 
