@@ -172,9 +172,17 @@ $$
 
 To rotate a vector counter-clockwise by an angle θ, we use the standard rotation matrix. This matrix preserves the length of the vector but changes its direction.
 
-$$ R(θ) = \begin{bmatrix} cosθ & -sinθ \\ sinθ & cosθ \end{bmatrix}$$ 
+
+$$
+R(θ)=\left[\begin{array}{cc}
+cosθ & -sinθ \\
+sinθ & cosθ
+\end{array}\right]
+$$
+
 
 **Example:** Suppose we want to rotate the following pointRotating 
+
 $$x=\begin{bmatrix} 1\\2\end{bmatrix}$$
 
 by 90∘ (π/2 Radians)​
