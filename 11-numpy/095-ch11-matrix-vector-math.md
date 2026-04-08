@@ -25,6 +25,11 @@ $$
 
 
 Here, the superscript T denotes the **transpose**, effectively converting a row into a column.
+
+### The following flowchart shows the various common transformation by a matrix to a vector
+
+![Flowchart](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-matrix-vector-maths.png)
+
 ## 2. Matrix-Vector Multiplication as Transformation
 
 When an n×n square matrix A multiplies a vector x of dimension n×1 , the result is a new vector y. This operation is called a **linear transformation**.
