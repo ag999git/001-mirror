@@ -4,13 +4,25 @@
 
 In standard algebra, a vector is typically represented as a column matrix. While a 1-D array in Python is simply a list of numbers, mathematically we view it as a column vector v of dimension n×1
 
+
+
 $$
-\mathbf{v} = \begin{bmatrix} x_1 
-\\ x_2 \\ \vdots \\ x_n \end{bmatrix}
+\mathbf{v} = \begin{bmatrix} 
+x_1 \\\\ 
+x_2 \\\\ 
+\vdots \\\\ 
+x_n 
+\end{bmatrix}
 $$
 
+
+
 An alternate, convenient notation often used in textbooks is the transpose of a row vector. This saves vertical space on the page:
-$$ \mathbf{v} = \begin{bmatrix} x_1 & x_2 & \dots & x_n \end{bmatrix}^T $$
+
+$$
+\mathbf{v} = {\begin{bmatrix} x_1 & x_2 & \dots & x_n \end{bmatrix}}^{T}
+$$
+
 
 Here, the superscript T denotes the **transpose**, effectively converting a row into a column.
 ## 2. Matrix-Vector Multiplication as Transformation
@@ -21,7 +33,16 @@ y=Ax
 
 The components of the new vector y are linear combinations of the components of x. For a 2×2 system:
 
-$$ \begin{bmatrix} y_1 \\ y_2 \end{bmatrix} = \begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} a_{11}x_1 + a_{12}x_2 \\ a_{21}x_1 + a_{22}x_2 \end{bmatrix} $$
+
+
+
+$$
+\begin{bmatrix} y_1 \\\\ y_2 \end{bmatrix} = 
+\begin{bmatrix} a_{11} & a_{12} \\\\ a_{21} & a_{22} \end{bmatrix} 
+\begin{bmatrix} x_1 \\\\ x_2 \end{bmatrix} = 
+\begin{bmatrix} a_{11}x_1 + a_{12}x_2 \\\\ a_{21}x_1 + a_{22}x_2 \end{bmatrix}
+$$
+
 
 ## 3. Scaling Transformations
 
