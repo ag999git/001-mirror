@@ -147,6 +147,46 @@ $$ M = \begin{bmatrix} -1 & 0 \\ 0 & -1 \end{bmatrix}$$
 $$ M = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}$$ 
 
 
+### 6. Reflection Transformations
+
+Reflection flips the orientation of a vector across a specific axis or line.
+
+**1. Reflection in the X-axis** (Changes $y$ to $-y$):
+$$
+M = \begin{pmatrix}
+1 & 0 \\\\
+0 & -1
+\end{pmatrix}
+$$
+
+**2. Reflection in the Y-axis** (Changes $x$ to $-x$):
+$$
+M = \begin{pmatrix}
+-1 & 0 \\\\
+0 & 1
+\end{pmatrix}
+$$
+
+**3. Reflection in the Origin** (Changes $x$ and $y$ to $-x$ and $-y$):
+$$
+M = \begin{pmatrix}
+-1 & 0 \\\\
+0 & -1
+\end{pmatrix}
+$$
+
+**4. Reflection in the line $y=x$** (Swaps $x$ and $y$):
+$$
+M = \begin{pmatrix}
+0 & 1 \\\\
+1 & 0
+\end{pmatrix}
+$$
+
+
+
+
+
 ## 7. Rotation Transformations
 
 To rotate a vector counter-clockwise by an angle θ, we use the standard rotation matrix. This matrix preserves the length of the vector but changes its direction.
