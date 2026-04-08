@@ -44,36 +44,34 @@ $$
 $$
 
 
-## 3. Scaling Transformations
-
-Scaling changes the length of a vector. It is achieved using a **diagonal matrix**, where all off-diagonal elements are zero.
 
 ### Uniform Scaling
-Consider a vector x
-
-$$ \mathbf{x} = \begin{bmatrix} 1 \\ 2 \\ \end{bmatrix} $$
-
-and a scalar matrix M
-$$ \mathbf{M} = \begin{bmatrix} 3 & 0 \\ 0 & 3 \end{bmatrix}$$ 
-$$\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} a_{11}x_1 + a_{12}x_2 \\ a_{21}x_1 + a_{22}x_2 \end{bmatrix} $$
+Consider a vector $\mathbf{x}$:
 
 $$
-\mathbf{y}=\left[\begin{array}{ll}
-3 & 0 \\
-0 & 3
-\end{array}\right]\left[\begin{array}{l}
-1 \\
-2
-\end{array}\right]=\left[\begin{array}{l}
-3(1)+0(2) \\
-0(1)+3(2)
-\end{array}\right]=\left[\begin{array}{l}
-3 \\
-6
-\end{array}\right]
+\mathbf{x} = \begin{bmatrix} 1 \\\\ 2 \end{bmatrix}
+$$
+
+and a scalar matrix $\mathbf{M}$:
+
+$$
+\mathbf{M} = \begin{bmatrix} 3 & 0 \\\\ 0 & 3 \end{bmatrix}
+$$
+
+The transformation is calculated as:
+
+$$
+\mathbf{y} = \begin{bmatrix} 3 & 0 \\\\ 0 & 3 \end{bmatrix} \begin{bmatrix} 1 \\\\ 2 \end{bmatrix} = \begin{bmatrix} 3(1) + 0(2) \\\\ 0(1) + 3(2) \end{bmatrix} = \begin{bmatrix} 3 \\\\ 6 \end{bmatrix}
 $$
 
 **Here, the vector was "stretched" by a factor of 3 in all directions. The magnitude increased, but the direction remained unchanged.**
+
+
+
+
+
+
+
 
 ### 4. Non-Uniform Scaling
 
