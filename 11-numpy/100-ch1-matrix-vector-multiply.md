@@ -93,6 +93,80 @@ They are shown in the table below:-
 
 
 
+## Script
+
+The following script shows all the above mentioned transformations on a 2D Matrix
+
+
+```python
+
+# Matrix-Vector Transformations in NumPy
+
+import numpy as np
+
+# <----------One ------------->
+# Step 1: Define vector
+x = np.array([1, 2])
+print("Original vector:", x)  # Output: [1 2]
+
+# <----------Two ------------->
+# Step 2: Uniform scaling. 
+# The matrix M1 is a diagonal matrix with the scaling factor (3) on the diagonal, 
+# which means it will scale the x and y components of the vector by 3 when we perform the matrix multiplication.
+M1 = np.array([[3, 0],
+                [0, 3]])
+
+y1 = M1 @ x
+print("\nUniform scaling (×3):", y1) # [3, 6]
+
+# <----------Three ------------->
+# Step 3: Non-uniform scaling. 
+# The matrix M2 is a diagonal matrix with different scaling factors on the diagonal, 
+# which means it will scale the x component by 3 and the y component by 5 when we perform the matrix multiplication.
+M2 = np.array([[3, 0],
+                [0, 5]])
+
+y2 = M2 @ x
+print("\nNon-uniform scaling:", y2) # [3, 10]
+
+# <----------Four ------------->
+# Step 4: Reflection about X-axis. 
+# The matrix M3 will invert the y component of the vector, effectively reflecting it across the X-axis.
+M3 = np.array([[1, 0],
+                [0, -1]])
+
+y3 = M3 @ x
+print("\nReflection about X-axis:", y3) # [1, -2]
+
+# <----------Five ------------->
+# Step 5: Reflection about Y-axis
+# The matrix M4 will invert the x component of the vector, effectively reflecting it across the Y-axis.
+M4 = np.array([[-1, 0],
+                [0, 1]])
+
+y4 = M4 @ x
+print("\nReflection about Y-axis:", y4) # [-1, 2]
+
+# <----------Six ------------->
+# Step 6: Rotation (90 degrees). 
+# The matrix M5 will rotate the vector by 90 degrees counterclockwise.
+
+theta = np.pi / 2
+
+M5 = np.array([[np.cos(theta), -np.sin(theta)],
+                [np.sin(theta),  np.cos(theta)]])
+
+y5 = M5 @ x
+print("\nRotation (90°):", y5) # approx [-2, 1]
+
+
+# Interpretation:
+# Each matrix changes the vector
+# → This is called transformation
+
+
+```
+
 
 
 
