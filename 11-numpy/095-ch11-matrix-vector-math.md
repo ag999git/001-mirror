@@ -45,7 +45,7 @@ $$
 
 
 
-### Uniform Scaling
+### 3. Uniform Scaling
 Consider a vector $\mathbf{x}$:
 
 $$
@@ -67,23 +67,22 @@ $$
 **Here, the vector was "stretched" by a factor of 3 in all directions. The magnitude increased, but the direction remained unchanged.**
 
 
-
-
-
-
-
-
 ### 4. Non-Uniform Scaling
 
-If the diagonal elements differ, the scaling is different along each axis.
+If the diagonal elements of the transformation matrix differ, the scaling is applied differently along each axis. 
+
+Consider a vector $\mathbf{x} = [1, 2]^T$ being transformed by matrix $\mathbf{M}$:
+
+$$
+\mathbf{M} = \begin{bmatrix} 3 & 0 \\\\ 0 & 5 \end{bmatrix} \implies \mathbf{y} = \begin{bmatrix} 3 & 0 \\\\ 0 & 5 \end{bmatrix} \begin{bmatrix} 1 \\\\ 2 \end{bmatrix} = \begin{bmatrix} 3(1) \\\\ 5(2) \end{bmatrix} = \begin{bmatrix} 3 \\\\ 10 \end{bmatrix}
+$$
+
+The x-component stretched by a factor of 3, while the y-component stretched by a factor of 5. This changes the "aspect ratio" of the vector space, effectively turning a square into a rectangle.
 
 
 
 
-$$ M = \begin{bmatrix} 3 & 0 \\ 0 & 5 \end{bmatrix} \implies \mathbf{y} = \begin{bmatrix} 3(1) \\ 5(2) \end{bmatrix} = \begin{bmatrix} 3 \\ 10 \end{bmatrix} $$
 
-
-The x-component stretched by 3, while the y-component stretched by 5. This changes the shape of the vector space (e.g., turning a square into a rectangle).
 
 ### 5. General Form
 
