@@ -102,11 +102,17 @@ $$
 
 **So we get**
 
+
 $$
-\det \begin{bmatrix} 3-\lambda & 1 & -1 \\ 1 & 3-\lambda & -1 \\ -1 & -1 & 5-\lambda \end{bmatrix} = 0
+I=\left[\begin{array}{ccc}
+3- \lambda & 1 & -1 \\
+1 & 3-\lambda & -1 \\
+-1 & -1 & 5-\lambda
+\end{array}\right] =0
 $$
 
- Solving this cubic equation yields the eigenvalues:
+
+Solving this cubic equation yields the eigenvalues:
 
 $λ1​=6, λ2​=2, λ3​=3$
 
