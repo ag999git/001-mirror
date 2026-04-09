@@ -1,6 +1,119 @@
 
 
 
+## YY
+
+# Eigen Decomposition: A Detailed Guide
+
+> ⚠️ *Note:* The topic of eigen decomposition may appear mathematical. However, it is essential for understanding advanced topics like Singular Value Decomposition (SVD). If you are not interested in SVD, you may skip this section.
+
+---
+
+# 1. The Core Concept
+
+Previously, we established that if:
+
+- \( A \) is a square matrix  
+- \( v \) is a non-zero vector  
+- \( $\lambda\$) is a scalar  
+
+then:
+
+\[
+Av = $\lambda$ v
+\]
+
+### Interpretation
+
+- The matrix \( A \) acts on vector \( v \)
+- The result is a **scaled version of the same vector**
+
+👉 This means:
+- The **direction remains unchanged**
+- Only the **magnitude changes**
+
+---
+
+### Cases of Eigenvalues
+
+| Condition | Meaning |
+|----------|--------|
+| \( $\lambda$ = 1 \) | Vector remains unchanged |
+| \( $\lambda$ > 1 \) | Vector is stretched |
+| \( 0 < $\lambda$ < 1 \) | Vector is compressed |
+| \( $\lambda$ < 0 \) | Direction is reversed |
+
+---
+
+# 2. The Logic Behind Decomposition
+
+Why do we decompose a matrix?
+
+👉 Just like breaking a machine into parts to understand it.
+
+---
+
+## Step 1: Eigenvalues and Eigenvectors
+
+For an \( n \times n \) matrix \( A \):
+
+- Eigenvalues:  
+  \[
+  \lambda_1, \lambda_2, \dots, \lambda_n
+  \]
+
+- Eigenvectors:  
+  \[
+  v_1, v_2, \dots, v_n
+  \]
+
+---
+
+## Step 2: Construct Matrix \( Q \)
+
+\[
+Q = [v_1 \; v_2 \; \dots \; v_n]
+\]
+
+👉 Columns are eigenvectors
+
+---
+
+## Step 3: Construct Diagonal Matrix \( \Lambda \)
+
+\[
+\Lambda =
+\begin{bmatrix}
+\lambda_1 & 0 & \cdots & 0 \\
+0 & \lambda_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & \lambda_n
+\end{bmatrix}
+\]
+
+---
+
+## Step 4: Key Equation
+
+\[
+AQ = Q\Lambda
+\]
+
+If \( Q \) is invertible:
+
+\[
+A = Q \Lambda Q^{-1}
+\]
+
+---
+
+## Interpretation
+
+Eigen Decomposition represents:
+
+```text
+A = Rotation → Scaling → Rotation back
+```
 
 
 
@@ -10,8 +123,7 @@
 
 
 
-
-
+## XXX
 Common Vector Equations
 Dot Product: $\mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{n} a_i b_i$
 
