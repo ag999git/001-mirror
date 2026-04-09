@@ -1,8 +1,5 @@
 
 
-
-## YY
-
 # Eigen Decomposition: A Detailed Guide
 
 > ⚠️ *Note:* The topic of eigen decomposition may appear mathematical. However, it is essential for understanding advanced topics like Singular Value Decomposition (SVD). If you are not interested in SVD, you may skip this section.
@@ -19,13 +16,15 @@ Previously, we established that if:
 
 then:
 
+
 \[
-Av = $\lambda$ v
+$A\vec{v}$ = $\lambda$ $\vec{v}$
 \]
+
 
 ### Interpretation
 
-- The matrix \( A \) acts on vector \( v \)
+- The matrix $\( A \)$ acts on vector $\vec{v}$
 - The result is a **scaled version of the same vector**
 
 👉 This means:
@@ -55,16 +54,16 @@ Why do we decompose a matrix?
 
 ## Step 1: Eigenvalues and Eigenvectors
 
-For an \( n \times n \) matrix \( A \):
+For an $\( n \times n \)$ $matrix \( A \)$ :
 
 - Eigenvalues:  
   \[
-  \lambda_1, \lambda_2, \dots, \lambda_n
+  $\lambda_1, \lambda_2, \dots, \lambda_n$
   \]
 
 - Eigenvectors:  
   \[
-  v_1, v_2, \dots, v_n
+  $\vec{v_1}$, $\vec{v_2}$ , $\dots$, $\vec{v_n}$
   \]
 
 ---
