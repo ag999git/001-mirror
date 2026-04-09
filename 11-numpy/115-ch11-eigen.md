@@ -249,7 +249,138 @@ Why is this important?
 -   **Symmetric Matrices:** For symmetric matrices ($A=A^T$), the eigenvectors are always orthogonal (vi​⋅vj​=0). This makes decomposition stable and is the foundation for spectral clustering and graph partitioning.
 
 
+## Example script
 
+The following script does the following:-
+
+
+```python
+# Eigen Decomposition in NumPy (Clean Version)
+
+import numpy as np
+
+# Step 1: Define the matrix A
+
+A = np.array([
+    [3,  1, -1],
+    [1,  3, -1],
+    [-1, -1, 5]
+])
+
+print("--- Original Matrix A ---")
+print(A)
+
+# Step 2: Eigenvalues & Eigenvectors
+
+# np.linalg.eig returns:
+# - eigenvalues (1D array). Note: For symmetric matrices, these are real numbers.
+# - eigenvectors (columns of matrix). Each column corresponds to the eigenvector associated 
+#   with the eigenvalue at the same index.
+
+eig_vals, eig_vecs = np.linalg.eig(A)  
+# eig_vals: [4, 4, 3], eig_vecs: columns are eigenvectors corresponding to these eigenvalues.
+
+# Sort eigenvalues (descending) for clarity
+idx = np.argsort(eig_vals)[::-1]  # Get indices that would sort eigenvalues in descending order
+eig_vals = eig_vals[idx]  # Sort eigenvalues
+eig_vecs = eig_vecs[:, idx]  # Reorder eigenvectors to match sorted eigenvalues (columns are eigenvectors)
+
+print("--- Eigenvalues ---")
+print(np.round(eig_vals, 3))  # Output: [4, 4, 3] (rounded to 3 decimal places)
+# Note: The eigenvalues are repeated (4 appears twice), which indicates that there is a repeated eigenvalue.
+# In this case, the matrix has a repeated eigenvalue of 4, which means there are multiple linearly independent 
+# eigenvectors associated with that eigenvalue.
+# The presence of repeated eigenvalues can lead to a situation where the matrix is not diagonalizable, 
+# but in this case, since the matrix is symmetric, it is still diagonalizable and we can find a complete set of eigenvectors.
+
+
+print("\n--- Matrix Q (Eigenvectors as columns) ---")
+print(np.round(eig_vecs, 3))  # Output: Each column is an eigenvector corresponding to the eigenvalues in the same order.
+# Note: The eigenvectors are normalized (unit length) and are orthogonal to each other due to the symmetry of the matrix A.
+
+# Step 3: Construct Lambda (Diagonal)
+
+# np.diag places values on diagonal. 
+# Since eig_vals is a 1D array of eigenvalues, np.diag(eig_vals) creates a diagonal matrix 
+# where the diagonal elements are the eigenvalues from eig_vals, and all off-diagonal elements are zero. 
+# This matrix Lambda will have the eigenvalues on its diagonal, which is essential for reconstructing 
+# the original matrix A using the eigen decomposition formula A = Q Λ Q⁻¹ (or A = Q Λ Qᵀ for symmetric matrices).
+
+Lambda = np.diag(eig_vals)  # Lambda is a diagonal matrix with eigenvalues on the diagonal and zeros elsewhere.
+
+print("--- Matrix Lambda (Diagonal Eigenvalues) ---")
+print(np.round(Lambda, 3))  # [[4, 0, 0], [0, 4, 0], [0, 0, 3]] (rounded to 3 decimal places)
+# Note: The matrix Lambda is a diagonal matrix where the diagonal elements are the eigenvalues of A.
+# The off-diagonal elements are zero, which is a key property of the diagonal matrix in eigen decomposition.
+# The diagonal matrix Lambda is crucial for understanding how the original matrix A can be reconstructed
+# using the eigenvectors and eigenvalues, and it also plays a central role in the matrix power trick,
+# where we can compute A^n by raising the eigenvalues in Lambda to the power n and then reconstructing A 
+# using the eigenvectors.
+# The eigenvalues in Lambda are the same as those in eig_vals, but arranged in a diagonal matrix form, 
+# which is necessary for the matrix multiplication in the reconstruction step.
+
+
+# Step 4: Verify A = Q Λ Q^T (symmetric case)
+# For symmetric matrices:
+# Q⁻¹ = Qᵀ (orthogonal property). 
+# This means that the inverse of Q is equal to its transpose, which simplifies the reconstruction of A 
+# from its eigen decomposition.
+# The formula A = Q Λ Q⁻¹ can be rewritten as A = Q Λ Qᵀ for symmetric matrices,
+# which is what we will verify here.
+# We will compute Q Λ Qᵀ and check if it reconstructs the original matrix A.
+# Note: Due to floating-point precision, we may see very small numerical differences, 
+# but the reconstructed matrix should be very close to the original matrix A.
+# The matrix multiplication Q Λ Qᵀ involves:
+# 1. Multiplying Q (matrix of eigenvectors) by Λ (diagonal matrix of eigenvalues), which scales each eigenvector 
+# by its corresponding eigenvalue.
+# 2. Then multiplying the result by Qᵀ (transpose of Q), which combines the scaled eigenvectors back into the 
+# original space, reconstructing the original matrix A. 
+# The resulting matrix A_reconstructed should be equal to the original matrix A, confirming that the 
+# eigen decomposition is correct.    
+# The eigen decomposition allows us to express the original matrix A in terms of its eigenvalues and eigenvectors,
+# which is a powerful tool for understanding the properties of the matrix and for performing various operations, 
+# such as computing matrix powers, exponentials, and solving systems of linear equations.    
+
+
+Q = eig_vecs
+Q_T = Q.T
+
+A_reconstructed = Q @ Lambda @ Q_T
+
+print("--- Reconstructed Matrix A ---")
+print(np.round(A_reconstructed, 3))
+print()
+
+# ---------------------------------------
+# Step 5: Verify Matrix Power Trick
+# ---------------------------------------
+# A^n = Q Λ^n Q⁻¹
+# Here Q⁻¹ = Qᵀ (since A is symmetric)
+
+power = 3
+
+# Method 1: Direct computation
+A_direct = np.linalg.matrix_power(A, power)
+
+# Method 2: Using eigen decomposition
+Lambda_power = np.linalg.matrix_power(Lambda, power)
+A_decomp = Q @ Lambda_power @ Q_T
+
+print("--- Matrix Power A^3 ---")
+
+print("\nDirect method:")
+print(np.round(A_direct, 3))
+
+print("\nUsing decomposition (Q Λ^3 Q^T):")
+print(np.round(A_decomp, 3))
+
+# ---------------------------------------
+# Note:
+# Small numerical differences may occur
+# due to floating-point precision
+# ---------------------------------------
+
+```
 
 
 
