@@ -383,7 +383,225 @@ print(np.round(A_decomp, 3))
 ```
 
 
+<details>
+<summary>  Explanation of the script (Click to expand)   </summary>
 
+# Introductory Note (Based on This Script)
+In this script, we work with the matrix:
+
+A = [[ 3  1 -1]  
+      [ 1  3 -1]  
+      [-1 -1  5]]
+
+This is a **symmetric matrix** (i.e., $A=A^T$), which is important because:
+
+-   All eigenvalues are **real**
+-   Eigenvectors are **orthogonal**
+-   $Q^{−1}=Q^T$ (used later in the script)
+
+----------
+
+## Step 1: What does the matrix represent?
+
+The matrix $A$ represents a **linear transformation** in 3D space.
+
+When we multiply a vector $\vec{v}$ by $A$:
+
+$\vec{w}=A\vec{v}$
+
+
+we get a **new transformed vector**.
+
+----------
+
+## Step 2: What are eigenvalues and eigenvectors (in this example)?
+
+We compute:
+
+`eig_vals, eig_vecs  =  np.linalg.eig(A)`
+
+This gives:
+
+-   **Eigenvalues:** `[4, 4, 3]` (after sorting)
+-   **Eigenvectors:** columns of matrix `Q`
+
+----------
+
+### What does this mean for "this" matrix?
+
+-   The transformation stretches space by:
+    -   factor **4** in two directions
+    -   factor **3** in one direction
+
+Important observation (comment in script explained):
+
+> Eigenvalue **4 is repeated**
+
+This means:
+
+-   There are **multiple independent directions** (eigenvectors) where scaling = 4
+-   The matrix still works fine because it is **symmetric → guaranteed diagonalizable**
+
+----------
+
+## Step 3: Why do we sort eigenvalues?
+
+`idx  =  np.argsort(eig_vals)[::-1]`
+
+
+This is **not mathematically required**
+
+It is done only to:
+
+-   keep eigenvalues in a consistent order (e.g., largest first)
+-   match manual calculations
+
+----------
+
+## Step 4: What is Matrix Q?
+
+Q  =  eig_vecs
+
+Matrix QQQ contains eigenvectors as columns:
+
+$Q=[\vec{v}_1  \vec{v}_2 \vec{v}_3]$
+
+
+-   Each column corresponds to one eigenvalue
+-   Eigenvectors are **normalized (unit length)**
+-   Because matrix is symmetric → they are **orthogonal**
+
+----------
+
+## Step 5: What is Lambda?
+
+`Lambda  =  np.diag(eig_vals)`
+
+This creates:
+```
+Lambda =  
+[[4 0 0]  
+ [0 4 0]  
+ [0 0 3]]
+ ```
+
+Meaning:
+
+-   No mixing between directions
+-   Only **scaling along eigenvector directions**
+
+----------
+
+## Step 6: What does $A = Q Λ Q^T$ mean 
+
+The script explains this very well—here’s the clean interpretation:
+
+$A=Q\Lambda Q^T$
+
+
+This means:
+
+### Step-by-step meaning
+
+1.  $Q^T$: Convert vector into eigenvector coordinate system
+2.  $\Lambda$ :  Scale each component (by 4, 4, 3)
+3.  $Q$: Convert back to original coordinates
+
+----------
+
+## Key Insight 
+
+> The matrix transformation becomes “pure scaling” in the eigenvector basis.
+
+----------
+
+##  Step 7: Why reconstruction works
+
+`A_reconstructed  =  Q  @  Lambda  @  Q_T`
+
+This works because:
+
+-   Eigenvectors form a complete basis
+-   Eigenvalues store scaling information
+
+> So we can rebuild the original matrix exactly
+
+----------
+
+## Step 8: Matrix Power Trick 
+
+Instead of:
+
+$A^3=A⋅A⋅A$
+
+
+
+we use:
+
+$A^{3} =QΛ^{3}Q^{T}$
+
+
+
+----------
+
+### Why this works
+
+Because:
+
+$A =QΛQ^{−1}$
+
+
+
+
+So:
+
+$A^{n}=QΛnQ−1$
+
+
+
+
+----------
+
+##  What happens inside Lambda
+
+$\Lambda^3 =$ 
+[[4³ 0  0 ]  
+ [0  4³ 0 ]  
+ [0  0  3³]]
+
+ Only the diagonal values are raised to power (Since rest are all 0)
+
+----------
+
+## How efficiency is obtained
+
+-   Direct multiplication → expensive
+-   Eigen decomposition → much faster
+
+This is used in:
+
+-   machine learning
+-   differential equations
+-   simulations
+
+----------
+
+# Floating-Point Comment (clarified)
+
+`np.round(...)`
+
+Needed because:
+
+-   computers store numbers approximately
+-   tiny errors like:
+    
+    `1.0000000000000002`
+    
+-   rounding makes output readable
+
+
+
+</details>
 
 
 
