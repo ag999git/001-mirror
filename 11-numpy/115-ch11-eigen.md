@@ -91,10 +91,14 @@ $$
 We must solve the characteristic equation $det(A−λI)=0$.
 Where
 
+$$
+I=\left[\begin{array}{ccc}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{array}\right]
+$$
 
-$$
-I =\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
-$$
 
 **So we get**
 
