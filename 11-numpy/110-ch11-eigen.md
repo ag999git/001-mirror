@@ -70,11 +70,12 @@ For an $\( n \times n \)$ $matrix \( A \)$ :
 
 ## Step 2: Construct Matrix \( Q \)
 
-\[
+$$
 Q = [v_1 \; v_2 \; \dots \; v_n]
-\]
+$$
 
-👉 Columns are eigenvectors
+
+**Columns are eigenvectors**
 
 ---
 
@@ -89,6 +90,16 @@ Q = [v_1 \; v_2 \; \dots \; v_n]
 0 & 0 & \cdots & \lambda_n
 \end{bmatrix}
 \]
+
+$$
+\Lambda =
+\begin{bmatrix}
+\lambda_1 & 0 & \cdots & 0 \\
+0 & \lambda_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & \lambda_n
+\end{bmatrix}
+$$
 
 ---
 
