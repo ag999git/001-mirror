@@ -2,7 +2,7 @@
 
 # Eigen Decomposition: A Detailed Guide
 
-> ⚠️ *Note:* The topic of eigen decomposition may appear mathematical. However, it is essential for understanding advanced topics like Singular Value Decomposition (SVD). If you are not interested in SVD, you may skip this section.
+> *Note:* The topic of eigen decomposition may appear mathematical. However, it is essential for understanding advanced topics like Singular Value Decomposition (SVD). If you are not interested in SVD, you may skip this section.
 
 ---
 
@@ -16,10 +16,8 @@ Previously, we established that if:
 
 then:
 
-
-\[
 $A\vec{v}$ = $\lambda$ $\vec{v}$
-\]
+
 
 
 ### Interpretation
@@ -27,9 +25,9 @@ $A\vec{v}$ = $\lambda$ $\vec{v}$
 - The matrix $\( A \)$ acts on vector $\vec{v}$
 - The result is a **scaled version of the same vector**
 
-👉 This means:
+This means:
 - The **direction remains unchanged**
-- Only the **magnitude changes**
+- Only the **magnitude changes** by a factor of $\lambda$.
 
 ---
 
@@ -48,20 +46,26 @@ $A\vec{v}$ = $\lambda$ $\vec{v}$
 
 Why do we decompose a matrix?
 
-👉 Just like breaking a machine into parts to understand it.
+The logic is similar to how a machine works by taking it apart into its components.
+It is just like breaking a machine into parts to understand it.
 
 ---
 
 ## Step 1: Eigenvalues and Eigenvectors
 
-For an $\( n \times n \)$ $matrix \( A \)$ :
 
-- Eigenvalues:  
+
+
+We can arrange the eigenvectors as columns into a matrix Q:
+
+For a $matrix \( A \)$ of dimensions  $\( n \times n \)$:
+
+- Suppose the Eigenvalues are:  
   \[
   $\lambda_1, \lambda_2, \dots, \lambda_n$
   \]
 
-- Eigenvectors:  
+- And the corresponding Eigenvectors are :  
   \[
   $\vec{v_1}$, $\vec{v_2}$ , $\dots$, $\vec{v_n}$
   \]
@@ -69,6 +73,7 @@ For an $\( n \times n \)$ $matrix \( A \)$ :
 ---
 
 ## Step 2: Construct Matrix \( Q \)
+Then we can arrange the eigenvectors as columns into a matrix Q:
 
 $$
 Q = [v_1 \; v_2 \; \dots \; v_n]
@@ -79,8 +84,8 @@ $$
 
 ---
 
-## Step 3: Construct Diagonal Matrix \( \Lambda \)
-
+## Step 3: Construct Diagonal Matrix ( $\Lambda\$ )
+Next we can arrange the eigenvalues into a diagnolal matrix ( $\Lambda\$ ) as follows:
 
 
 $$
@@ -96,6 +101,7 @@ $$
 ---
 
 ## Step 4: Key Equation
+Using the definition $A\vec{v}$ = $\lambda$ $\vec{v}$ , we can write a combined matrix equation for all the eigenvalues simultaneously as follows:
 
 $$
 AQ = Q\Lambda
@@ -117,61 +123,6 @@ Eigen Decomposition represents:
 ```text
 A = Rotation → Scaling → Rotation back
 ```
-
-
-
-
-
-
-
-
-
-## XXX
-Common Vector Equations
-Dot Product: $\mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{n} a_i b_i$
-
-
-
-Euclidean Norm: $\|\mathbf{v}\| = \sqrt{\sum_{i=1}^n v_i^2}$
-
-
-Vector Addition: $\mathbf{c} = \mathbf{a} + \mathbf{b}$
-
-
-Cauchy-Schwarz Inequality: $(\sum a_k b_k)^2 \leq (\sum a_k^2)(\sum b_k^2)$ 
-GitHub Docs 
-GitHub Docs
- +4
-Common Matrix Equations
-Matrix Multiplication: $\mathbf{C} = \mathbf{A}\mathbf{B}$ where $\mathbf{C}_{ij} = \sum_{k} A_{ik} B_{kj}$
-
-
-Transpose Identity: $(\mathbf{AB})^\top = \mathbf{B}^\top \mathbf{A}^\top$
-
-
-Inverse Identity: $\mathbf{A}\mathbf{A}^{-1} = \mathbf{I}$
-
-
-Eigendecomposition: $\mathbf{A} = \mathbf{Q}\mathbf{\Lambda}\mathbf{Q}^{-1}$
-
-
-Singular Value Decomposition (SVD): $\mathbf{M} = \mathbf{U}\mathbf{\Sigma}\mathbf{V}^*$ 
-GitHub
-GitHub
- +1
-Matrix Formatting Cheat Sheet 
-To render a full matrix, use the pmatrix or bmatrix environments within a GitHub math block. 
-Feature 	LaTeX Code Example	Resulting Style
-Basic Matrix	\begin{pmatrix} a & b \\ c & d \end{pmatrix}	Parentheses ()
-Bracketed Matrix	\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}	Square Brackets []
-Vector (Column)	\begin{pmatrix} v_1 \\ v_2 \\ v_3 \end{pmatrix}	Vertical stack
-Ellipses	a_{11} & \dots & a_{1n}	Horizontal dots
-Vertical Dots	\vdots	Vertical dots
-
-
-
-
-
 
 
 
