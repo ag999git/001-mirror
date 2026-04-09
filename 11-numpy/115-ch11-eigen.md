@@ -238,7 +238,7 @@ We verify that $A=QΛQ^{−1}$. Since A is symmetric, $Q$ is orthogonal, meaning
 
 $A=QΛQ^T$ 
 
-If you perform the matrix multiplication $QΛQ^T$, you will recover the original matrix A.
+If you perform the matrix multiplication $QΛQ^T$, you will recover the original matrix $A$.
 
 ### 4. Elaborate Discussion
 
