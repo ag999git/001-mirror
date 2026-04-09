@@ -1,7 +1,5 @@
 
 
-# Draft 1
-
 
 # Eigen Decomposition: A Detailed Guide
 
@@ -71,6 +69,185 @@ Eigen Decomposition represents:
 ```text
 A = Rotation → Scaling → Rotation back
 ```
+
+
+
+
+### 3. Step-by-Step Mathematical Example
+
+Let us take a real example to understand the math. Let:
+
+$$
+A=\left[\begin{array}{ccc}
+3 & 1 & -1 \\
+1 & 3 & -1 \\
+-1 & -1 & 5
+\end{array}\right]
+$$
+
+
+**Step 1: Find the Eigenvalues**
+
+We must solve the characteristic equation $det(A−λI)=0$.
+Where
+
+
+$$
+I =\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+$$
+
+**So we get**
+
+$$
+\det \begin{bmatrix} 3-\lambda & 1 & -1 \\ 1 & 3-\lambda & -1 \\ -1 & -1 & 5-\lambda \end{bmatrix} = 0
+$$
+
+ Solving this cubic equation yields the eigenvalues:
+
+$λ1​=6, λ2​=2, λ3​=3$
+
+ **Step 2: Find the Eigenvectors**
+
+
+
+
+For each eigenvalue, we solve $(A−λI)\vec{v}_1=0$.
+
+### For $\lambda_1 ​= 6:$
+
+$$
+(A-6 I) \vec{v}=\left[\begin{array}{ccc}
+-3 & 1 & -1 \\
+1 & -3 & -1 \\
+-1 & -1 & -1
+\end{array}\right]\left[\begin{array}{l}
+x \\
+y \\
+z
+\end{array}\right]=\left[\begin{array}{l}
+0 \\
+0 \\
+0
+\end{array}\right]
+$$
+
+
+Solving this system gives the eigenvector 
+
+$$
+\text { eigenvector } \vec{v}_1=\left[\begin{array}{c}
+-1 \\
+-1 \\
+2
+\end{array}\right] .\left(\text { Normalized: } \frac{1}{\sqrt{6}}[-1,-1,2]^T\right) .
+$$
+
+
+### For λ2​=2:
+
+$$
+(A-2 I) \vec{v}=\left[\begin{array}{ccc}
+1 & 1 & -1 \\
+1 & 1 & -1 \\
+-1 & -1 & 3
+\end{array}\right]\left[\begin{array}{l}
+x \\
+y \\
+z
+\end{array}\right]=\left[\begin{array}{l}
+0 \\
+0 \\
+0
+\end{array}\right]
+$$
+
+Solving this system gives the eigenvector 
+
+$$
+\text { eigenvector } \vec{v}_2=\left[\begin{array}{c}
+-1 \\
+1 \\
+0
+\end{array}\right] .\left(\text { Normalized: } \frac{1}{\sqrt{2}}[-1,1,0]^T\right) .
+$$
+
+
+
+### For λ3​=3:
+
+$$
+(A-3 I) \vec{v}=\left[\begin{array}{ccc}
+0 & 1 & -1 \\
+1 & 0 & -1 \\
+-1 & -1 & 2
+\end{array}\right]\left[\begin{array}{l}
+x \\
+y \\
+z
+\end{array}\right]=\left[\begin{array}{l}
+0 \\
+0 \\
+0
+\end{array}\right]
+$$
+
+Solving this system gives the eigenvector 
+
+$$
+\text { eigenvector } \vec{v}_3=\left[\begin{array}{c}
+1 \\
+1 \\
+1
+\end{array}\right] .\left(\text { Normalized: } \frac{1}{\sqrt{3}}[1,1,1]^T\right) .
+$$
+
+
+
+
+
+**Step 3: Construct Matrices $Q$ and $\Lambda$**
+
+We form matrix Q with normalized eigenvectors as columns and Λ with eigenvalues on the diagonal.
+
+$$
+Q=\left[\begin{array}{ccc}
+-\frac{1}{\sqrt{6}} & -\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{3}} \\
+-\frac{1}{\sqrt{6}} & \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{3}} \\
+\frac{2}{\sqrt{6}} & 0 & \frac{1}{\sqrt{3}}
+\end{array}\right], \quad \Lambda=\left[\begin{array}{lll}
+6 & 0 & 0 \\
+0 & 2 & 0 \\
+0 & 0 & 3
+\end{array}\right]
+$$
+
+
+**Step 4: Verify Decomposition**
+
+We verify that $A=QΛQ^{−1}$. Since A is symmetric, $Q$ is orthogonal, meaning $Q^{−1}=Q^T$ (the transpose).
+
+$A=QΛQ^T$ 
+
+If you perform the matrix multiplication $QΛQ^T$, you will recover the original matrix A.
+
+### 4. Elaborate Discussion
+
+Why is this important?
+
+-   **Dimensionality Reduction:** In Principal Component Analysis (PCA), eigenvalues tell us which directions (eigenvectors) contain the most information (variance). We keep the vectors with large λ and discard those with small λ.
+-   **Matrix Powers:** Calculating $A^100$ is hard. But using decomposition: $A^{100}=(QΛQ^{−1})^{100}=QΛ^{100}Q^{−1}$. Since Λ is diagonal, $Λ^{100}$ is just raising the diagonal elements to the power of 100. This makes computation trivial.
+-   **Symmetric Matrices:** For symmetric matrices ($A=A^T$), the eigenvectors are always orthogonal (vi​⋅vj​=0). This makes decomposition stable and is the foundation for spectral clustering and graph partitioning.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
