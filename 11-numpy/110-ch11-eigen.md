@@ -81,15 +81,7 @@ $$
 
 ## Step 3: Construct Diagonal Matrix \( \Lambda \)
 
-\[
-\Lambda =
-\begin{bmatrix}
-\lambda_1 & 0 & \cdots & 0 \\
-0 & \lambda_2 & \cdots & 0 \\
-\vdots & \vdots & \ddots & \vdots \\
-0 & 0 & \cdots & \lambda_n
-\end{bmatrix}
-\]
+
 
 $$
 \Lambda =
@@ -105,15 +97,16 @@ $$
 
 ## Step 4: Key Equation
 
-\[
+$$
 AQ = Q\Lambda
-\]
+$$
 
 If \( Q \) is invertible:
 
-\[
+
+$$
 A = Q \Lambda Q^{-1}
-\]
+$$
 
 ---
 
