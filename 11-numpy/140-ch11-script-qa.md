@@ -647,7 +647,28 @@ Tasks
 
 Confirm your results by explicitly computing: $𝑀v = 𝜆v$.
 
+Solution
 
+For $$v_{1}=[-1,1,3]^{T}$$
+
+$$
+\begin{gathered}
+M v_1 \\
+=\left[\begin{array}{ccc}
+-1 & -2 & -2 \\
+1 & 2 & 1 \\
+-1 & -1 & 0
+\end{array}\right]\left[\begin{array}{c}
+-1 \\
+1 \\
+3
+\end{array}\right]=\left[\begin{array}{c}
+-5 \\
+4 \\
+0
+\end{array}\right]
+\end{gathered}
+$$
 
 
 
