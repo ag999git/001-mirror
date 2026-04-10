@@ -62,6 +62,10 @@ We have $A = Q\Lambda Q^{-1}$
 
 
 
+## Flowchart of Eigen decomposition
+
+![]Eigen Decomposition(https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-eigen-decomposition-steps.png)
+
 ## Interpretation
 
 Eigen Decomposition represents:
