@@ -2,7 +2,6 @@
 
 ## Conceptual questions (With Answers)
 
-----------
 
 **1. How does the memory management of a NumPy ndarray differ fundamentally from a standard Python list, and why does this impact performance?**
 
