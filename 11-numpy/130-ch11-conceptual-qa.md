@@ -1,9 +1,6 @@
 
 
-
-<![endif]-->
-
-**Conceptual questions (With Answers)**
+## Conceptual questions (With Answers)
 
 ----------
 
@@ -123,7 +120,7 @@ The transpose flips a matrix over its diagonal, switching rows and columns. In m
 
 np.random.rand() generates numbers from a **Uniform distribution** between 0 and 1. `np.random.randn()` generates numbers from a **Standard Normal (Gaussian) distribution** with a mean of 0 and a variance of 1. Choosing the right distribution is critical for simulating real-world phenomena accurately.
 
-**30. Describe the concept of a "Scalar" in NumPy.**
+## 30. Describe the concept of a "Scalar" in NumPy.
 
 A scalar is a single numerical value (`0D`). In NumPy, even a single number is often treated as a 0-dimensional array. When you perform an operation between a scalar and an `array` (like `arr * 5`), the scalar is broadcast across every element of the array, demonstrating the simplest form of broadcasting.
 
