@@ -608,10 +608,44 @@ data = np.array([1, 2, 3])
 print(vectorized_logic(data))
 ```
 
+## Extra question
+
+41. Problem: Consider the matrix
+
+$$
+M = \begin{bmatrix}
+-1 & -2 & -2 \\
+1 & 2 & 1 \\
+-1 & -1 & 0
+\end{bmatrix}
+$$
+
+and the vectors
 
 
+$$
+v_{1} = \begin{bmatrix}
+-1 \\
+1 \\
+3
+\end{bmatrix}
+$$
 
+and 
 
+$$
+v_{2} = \begin{bmatrix}
+-1 \\
+1 \\
+-2
+\end{bmatrix}
+$$
+
+Tasks
+1. Verify that $v_1$ and $v_2$ are eigenvectors of the matrix $M$
+2. Find the corresponding eigenvalues $𝜆_1$ and $𝜆_2$
+
+Confirm your results by explicitly computing: $𝑀v = 𝜆v$.
 
 
 
