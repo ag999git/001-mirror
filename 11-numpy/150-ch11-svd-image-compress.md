@@ -274,7 +274,18 @@ Plot 3: Compressed
 
 Display all images neatly
 
-#### Table
+#### Concept Summary Table
+
+  
+
+| Step | Operation | Purpose |
+| --- | --- | --- |
+| 1 | Load Image | Get input |
+| 2 | Grayscale | Reduce dimensions |
+| 3 | Convert to array | Mathematical processing |
+| 4 | SVD | Decompose matrix |
+| 5 | Keep k values | Compression |
+| 6 | Reconstruct | Approximate image |
 
 
 Key Concepts Students Must Understand
