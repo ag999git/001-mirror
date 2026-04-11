@@ -126,7 +126,18 @@
 * [Study of `os.walk()`](/10-file-handling/140-ch10-oswalk.md)
 
 ## Chapter 11: NumPy
-* [Introduction to Chapter ](/11-numpy/README.md)
+* [Introduction to Chapter 11](/11-numpy/README.md)
+* [Difference between Python lists and Numpy arrays](/11-numpy/010-ch11-numpy-list.md)
+* [](/11-numpy/)
+* [](/11-numpy/)
+* [](/11-numpy/)
+* [](/11-numpy/)
+* [](/11-numpy/)
+* [](/11-numpy/)
+* [](/11-numpy/)
+* [](/11-numpy/)
+* [](/11-numpy/)
+* [](/11-numpy/)
 
 
 
