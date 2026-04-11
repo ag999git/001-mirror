@@ -303,7 +303,12 @@ Keep only important features
 
 4. Trade-off
 
-#### Table
+  
+
+| k value | Result |
+| --- | --- |
+| small k | high compression, low quality |
+| large k | low compression, high quality |
 
 
 #### Flow chart
