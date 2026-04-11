@@ -125,7 +125,8 @@
 * [LBYL Versus EAPF](/10-file-handling/130-ch10-lbyl-eafp.md)
 * [Study of `os.walk()`](/10-file-handling/140-ch10-oswalk.md)
 
-
+## Chapter 11: NumPy
+* [Introduction to Chapter ](/11-numpy/README.md)
 
 
 
