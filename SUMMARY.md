@@ -138,11 +138,14 @@
 * [1D Arrays:](/11-numpy/065-1d-array.md)
 * [Project: Using np.stack](/11-numpy/070-ch11-np-stack.md)
 * [Case Study: Organizing a Large Photo Archive into a Structured Tensor](/11-numpy/080-photo-collection-tensor.md)
-* [](/11-numpy/)
-* [](/11-numpy/)
-* [](/11-numpy/)
-* [](/11-numpy/)
-* [](/11-numpy/)
+* [PROJECT: Visualizing Surfaces using NumPy and Matplotlib](/11-numpy/090-ch11-3dplots.md)
+* [Vectors and Matrices](/11-numpy/095-ch11-matrix-vector-math.md)
+* [Project: Matrix–Vector Multiplication as Transformations](/11-numpy/100-ch1-matrix-vector-multiply.md)
+* [Eigen Decomposition: A Detailed Guide](/11-numpy/115-ch11-eigen.md)
+* [Singular Value Decomposition (SVD)](/11-numpy/120-ch11-svd.md)
+* [Conceptual questions (With Answers)](/11-numpy/130-ch11-conceptual-qa.md)
+* [40 script-based exercises](/11-numpy/140-ch11-script-qa.md)
+* [Beyond Text Image Compression with SVD](/11-numpy/150-ch11-svd-image-compress.md)
 
 
 
