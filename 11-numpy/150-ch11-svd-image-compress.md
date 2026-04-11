@@ -311,9 +311,9 @@ Keep only important features
 | large k | low compression, high quality |
 
 
-#### Flow chart
+#### SVD Image Compression Flow chart
 
-
+![SVD Image Compression Flow Chart](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-svd-image-compression-2.png)
 
 
 
