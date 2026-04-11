@@ -97,6 +97,218 @@ plt.show()
 
 
 
+Introduction to the Script
+
+This script demonstrates how images can be treated as matrices and how we can use Singular Value Decomposition (SVD) to compress an image.
+
+The idea is simple:
+
+An image = a matrix of numbers
+SVD breaks this matrix into components
+We keep only the most important components
+Rebuild the image → smaller size, slight loss in quality
+
+This technique is widely used in:
+
+Image compression
+Machine learning
+Data reduction (PCA)
+📚 Libraries Used (Beginner-Friendly Explanation)
+Library	Purpose	Key Functions Used
+numpy	Numerical computations, arrays, matrices	np.asarray, np.linalg.svd, np.dot, np.diag
+matplotlib.pyplot	Display images and plots	plt.imshow, plt.subplots, plt.show
+PIL (Pillow)	Image processing	Image.open, convert
+requests	Download data from internet	requests.get
+io.BytesIO	Convert raw bytes into file-like object	BytesIO()
+
+
+Step-by-Step Explanation of the Script
+🔹 Step 0: Import Libraries
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from PIL import Image
+import requests
+from io import BytesIO
+```
+Explanation:
+We import all required tools.
+np → numerical operations
+plt → visualization
+Image → image handling
+requests → download image
+BytesIO → convert raw data to readable format
+### Step 1: Load Image
+
+```python
+url = "https://raw.githubusercontent.com/numpy/numpy/main/branding/logo/primary/numpylogo.png"
+```
+
+This is the image source.
+
+```python
+response = requests.get(url)
+```
+What happens here?
+Sends a request to the internet
+Downloads image data in binary format (bytes)
+```python
+img = Image.open(BytesIO(response.content))
+```
+Key Idea:
+`response.content` → raw bytes
+`BytesIO()` → converts bytes into file-like object
+`Image.open()` → reads it as an image
+
+Error Handling
+```python
+except:
+    print("Web link failed...")
+    img = Image.fromarray(np.uint8(np.random.rand(500,500)*255))
+```
+
+Explanation:
+If internet fails:
+
+A random grayscale image is created
+Ensures script never crashes
+`width, height = img.size`
+Extracts image dimensions
+`print(f"Width={width}, Height={height}")`
+
+### Step 2: Convert to Grayscale
+
+`img_gray = img.convert('L')`
+Explanation:
+'L' = grayscale mode
+Each pixel becomes a value from 0 to 255
+
+Why?
+
+SVD works on 2D matrices
+Color images are 3D (RGB)
+
+### Step 3: Convert Image to Matrix
+
+`img_mat = np.asarray(img_gray)`
+Key Idea:
+Converts image into NumPy array
+
+Example:
+
+Pixel image → Matrix of numbers
+### Step 4: Apply SVD
+
+`U, S, Vt = np.linalg.svd(img_mat, full_matrices=False)`
+
+What is happening?
+
+SVD breaks matrix into:
+
+1. 𝐴 = 𝑈 ⋅ Σ ⋅ 𝑉ᵀ
+Component	Meaning
+U	Row patterns
+S	Importance (singular values)
+Vᵀ	Column patterns
+
+
+Important:
+`full_matrices=False`
+Makes computation faster and memory efficient
+
+### Step 5: Compression
+`k = int(len(S) / 20)`
+
+Keep only 5% of information
+
+`img_compressed = np.dot(U[:, :k], np.dot(np.diag(S[:k]), Vt[:k, :])))`
+This is the MOST IMPORTANT LINE
+
+Let’s break it:
+
+Step 1:
+`S[:k]`
+
+Take top k singular values
+
+Step 2:
+`np.diag(S[:k])`
+
+Convert into diagonal matrix
+
+Step 3:
+`U[:, :k]`
+
+Take first k columns of U
+
+Step 4:
+```python
+
+Vt[:k, :]
+```
+
+
+Take first k rows of Vt
+Final formula:
+$𝐴_k = U_k \cdot Σ_k \cdot V_k^T$
+
+
+
+
+This reconstructs compressed image
+
+Step 6: Visualization
+`fig, axes = plt.subplots(1, 3, figsize=(15, 5))`
+
+Create 3 side-by-side plots
+
+Plot 1: Original
+`axes[0].imshow(img)`
+
+Plot 2: Grayscale
+`axes[1].imshow(img_gray, cmap='gray')`
+
+Plot 3: Compressed
+`axes[2].imshow(img_compressed, cmap='gray')`
+
+`plt.tight_layout()`
+`plt.show()`
+
+Display all images neatly
+
+#### Table
+
+
+Key Concepts Students Must Understand
+1. Image = Matrix
+
+Each pixel is a number
+
+2. SVD = Decomposition
+
+Break matrix into meaningful parts
+
+3. Compression = Information Reduction
+
+Keep only important features
+
+4. Trade-off
+
+#### Table
+
+
+#### Flow chart
+
+
+
+
+
+
+
+
+
+
+
 
 
 
