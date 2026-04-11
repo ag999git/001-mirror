@@ -94,10 +94,7 @@ plt.show()
 
 
 
-
-
-
-Introduction to the Script
+## Introduction to the Script
 
 This script demonstrates how images can be treated as matrices and how we can use Singular Value Decomposition (SVD) to compress an image.
 
@@ -123,7 +120,9 @@ io.BytesIO	Convert raw bytes into file-like object	BytesIO()
 
 
 Step-by-Step Explanation of the Script
-🔹 Step 0: Import Libraries
+
+### Step 0: Import Libraries
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -138,6 +137,7 @@ plt → visualization
 Image → image handling
 requests → download image
 BytesIO → convert raw data to readable format
+
 ### Step 1: Load Image
 
 ```python
@@ -148,6 +148,7 @@ This is the image source.
 
 ```python
 response = requests.get(url)
+# Fetch image from the internet
 ```
 What happens here?
 Sends a request to the internet
@@ -168,10 +169,7 @@ except:
 ```
 
 Explanation:
-If internet fails:
-
-A random grayscale image is created
-Ensures script never crashes
+If internet fails: Then:- A random grayscale image is created. This ensures that the script never crashes
 `width, height = img.size`
 Extracts image dimensions
 `print(f"Width={width}, Height={height}")`
