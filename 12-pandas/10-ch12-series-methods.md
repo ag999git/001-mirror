@@ -2,10 +2,33 @@
 
 
 
+## Methods of Series in Pandas
+For easy understanding and usage, I have divided the methods of Series in Pandas into "Pillars" or "macro-groups".
+The 4 "pillars" or "macro-groups" are shown in table below:
+
+| Macro-Group | What it means | Merges these old categories |
+| --- | --- | --- |
+| 1. Inspection & Retrieval | "Show me the data, or give it to me in a different format." | Accessing/Viewing, Conversion/Export |
+| 2. Analysis & Summarization | "Give me the big picture. What are the trends and totals?" | Descriptive Statistics, Counts/Unique |
+| 3. Cleaning & Manipulation | "Fix the errors, remove the bad rows, and change the values." | Missing Data, Transformation, Filtering, Sorting |
+| 4. Type-Specific Operations | "This is text/time, treat it with special tools." | String Operations (.str), DateTime Operations (.dt) |
 
 
 
+## These 4 "Pillars" or "Macro-groups" contain a number of categories which are given below
+1. Viewing & Accessing
+2. Conversion & Export
+3. Descriptive Statistics
+4. Counts & Unique Values
+5. Handling Missing Data
+6. Filtering & Conditions
+7. Transformation
+8. Sorting & Ranking
+9. String Methods (.str)
+10. DateTime Methods (.dt)
 
+
+## The Key methods of each category are given below:
 
 | Pillar | Category | Key Methods | Brief Purpose |
 | --- | --- | --- | --- |
