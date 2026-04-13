@@ -64,7 +64,12 @@ The 4 "pillars" or "macro-groups" are shown in table below:
 |  |  | .dt.strftime() | Format dates into custom string formats. |
 
 
+## Flowchart
+The following diagram shows all the key methods grouped into categories and "Pillars"
 
+![Flowchart of Methods of Series](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch12-pandas-series-methods.png)
+
+![Flowchart of Methods of Series](/resources/ch12-pandas-series-methods.png)
 
 
 
