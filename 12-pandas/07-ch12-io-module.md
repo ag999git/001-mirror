@@ -108,7 +108,17 @@ buf = io.StringIO() buf.write("Data")
 #### Note:- Always use `.seek(0)` if the buffer was populated via `.write()` before passing it to a Pandas function.
 
 
+### 7. Summary Table
 
+
+  
+
+| Step | Pandas Task | Recommended Class | Pointer Action Required |
+| --- | --- | --- | --- |
+| 1 | Load CSV from an API string | StringIO(data) | None (Pointer is at 0) |
+| 2 | Create CSV string from DataFrame | StringIO() | buf.getvalue() (Pointer position doesn't matter) |
+| 3 | Load Excel from a Binary stream | BytesIO(data) | None (Pointer is at 0) |
+| 4 | Re-read the same buffer twice | Either | buf.seek(0) between reads |
 
 
 
