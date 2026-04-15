@@ -22,8 +22,14 @@ The `io` module serves as Python’s primary interface for handling various type
 
 In the context of Pandas, choosing the correct stream type is critical. `read_csv` usually expects text streams, while `read_excel` or `read_parquet` requires binary streams.
 
+  
 
-
+| Feature | io.StringIO | io.BytesIO |
+| --- | --- | --- |
+| Data Type | Text (Unicode Strings) | Binary (Bytes) |
+| Common Format | CSV, JSON, XML | Excel (.xlsx), Parquet, HDF5 |
+| Buffer Requirement | str | bytes (prefixed with b'') |
+| Use Case | Parsing small CSV snippets or API responses. | Processing compressed files or encrypted data. |
 
 
 
