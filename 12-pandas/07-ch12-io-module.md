@@ -122,7 +122,43 @@ buf = io.StringIO() buf.write("Data")
 
 
 
+### Script
 
+
+```python
+import pandas as pd
+import io
+
+# 1. Setup the buffer
+buffer = io.StringIO()  # Creating an in-memory text buffer. This is like a virtual file that exists only in memory.
+
+# 2. Populate the buffer
+# my_csv is a multi-line string that simulates the contents of a CSV file. 
+# Each line/ row represents a row of data, and the first line/ row contains the column headers.
+my_csv = """id,name
+101,Alice
+102,Bob
+103,Charlie"""  
+
+buffer.write(my_csv)  # Writing CSV data into the buffer. Note: After this, the pointer is at the end of the buffer.
+
+# 3. THE WORKAROUND: Rewind to the beginning
+# Without this line, pd.read_csv() sees an empty file
+buffer.seek(0) # If you comment this out, you'll get an EmptyDataError or an empty DataFrame
+
+
+# 4. Load into Pandas
+# To be safe pd.read_csv() should be wrapped in a try-except block to catch potential errors if 
+# the buffer is empty or the pointer is at the end.
+try:
+    df = pd.read_csv(buffer)  # This reads from the current position of the pointer. If we didn't seek(0), 
+    #it would read nothing.
+    print("Successfully read from memory:")
+    print(df)
+except pd.errors.EmptyDataError:  # This error occurs if the buffer is empty or the pointer is at the end
+    print("Error: The buffer was empty or the pointer was at the end!")
+
+```
 
 
 
