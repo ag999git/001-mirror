@@ -89,6 +89,35 @@ Beginners often confuse `.getvalue()` with `.read()`. This distinction is the mo
 
 
 
+### 6. Advanced Logic: The Initialization "Trap"
+
+There is a specific behavior in initialization that researchers must note:
+
+1.  **If initialized with data:** `buf = io.StringIO("Data")` — The pointer starts at index `0`. A `read()` call will return `"Data"`.
+    
+2.  **If initialized empty and then written to:** 
+
+
+```python 
+buf = io.StringIO() buf.write("Data")
+# The pointer is now at the END (index 4).
+# A read() call here returns an EMPTY STRING.
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
