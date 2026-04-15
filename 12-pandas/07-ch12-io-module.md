@@ -105,7 +105,7 @@ buf = io.StringIO() buf.write("Data")
 ```
 
 
-
+#### Note:- Always use `.seek(0)` if the buffer was populated via `.write()` before passing it to a Pandas function.
 
 
 
