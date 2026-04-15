@@ -50,6 +50,33 @@ The `io.StringIO` class is a text-based buffer. It stores data as a Unicode stri
 | newline | str | Controls how line endings are handled. This is critical when processing data created on different Operating Systems (e.g., Windows \r\n vs. Linux \n). |
 
 
+#### B. The "Pointer" Mechanism
+When a StringIO object is initialized with a string, it acts like a file that has just been opened.
+
+Writing: If one writes to a StringIO object, the pointer moves forward.
+
+Reading: When Pandas calls `.read()`, it consumes data from the current pointer position to the end.
+
+#### 4. `io.BytesIO`
+The `io.BytesIO` class handles binary data. In the context of Pandas, this is the mandatory format for complex files like Excel (.xlsx), Parquet, or zipped archives.
+
+A. Initialization Analysis
+Signature: `class io.BytesIO(initial_bytes=b'')`
+
+| Parameter | Type | Functional Role |
+| --- | --- | --- |
+| initial_bytes | bytes | Sets the starting binary content. Note the b prefix (e.g., b'data'). Unlike text, binary data has no "encoding" at this level; it is a raw stream of numbers. |
+
+
+
+
+
+
+
+
+
+
+
 
 
 
