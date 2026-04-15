@@ -33,8 +33,21 @@ In the context of Pandas, choosing the correct stream type is critical. `read_cs
 
 
 
+### 3. `io.StringIO`
+
+The `io.StringIO` class is a text-based buffer. It stores data as a Unicode string, making it the perfect companion for `pd.read_csv()` and `pd.read_json()`.
+
+#### A. Initialization Analysis
+
+**Signature:** `class io.StringIO(initial_value='', newline='\n')`
 
 
+  
+
+| Parameter | Type | Functional Role |
+| --- | --- | --- |
+| initial_value | str | Sets the starting content of the buffer. If provided, the "file pointer" (cursor) is placed at the beginning of the string. |
+| newline | str | Controls how line endings are handled. This is critical when processing data created on different Operating Systems (e.g., Windows \r\n vs. Linux \n). |
 
 
 
