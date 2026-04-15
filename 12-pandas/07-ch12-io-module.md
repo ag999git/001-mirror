@@ -18,6 +18,14 @@ The `io` module serves as Python’s primary interface for handling various type
 ![Visual Hierarchy of io Module](/resources/ch12-io-module.png)
 
 
+### 2. Core Comparison: `StringIO` vs. `BytesIO`
+
+In the context of Pandas, choosing the correct stream type is critical. `read_csv` usually expects text streams, while `read_excel` or `read_parquet` requires binary streams.
+
+
+
+
+
 
 
 
