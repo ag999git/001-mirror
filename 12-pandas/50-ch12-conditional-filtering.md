@@ -151,10 +151,103 @@ heavy_penguins.head()->    species     island  bill_length_mm  bill_depth_mm  fl
 
 
 
-###
+### Step 2
+
+```python
+# STEP 2: COMBINING CONDITIONS
+
+print("\n STEP 2. COMBINING CONDITIONS")
+
+# Condition using AND (&)
+# To combine conditions, we use & for AND, | for OR, and ~ for NOT. 
+# Each condition must be enclosed in parentheses.
+cond_and = df[(df['body_mass_g'] > 4000) & (df['species'] == 'Adelie')]
+print("\nAdelie penguins with body_mass_g > 4000:")
+print("cond_and.head()->", cond_and.head())
+
+# Condition using OR (|)
+# This will filter penguins that are either Adelie OR Chinstrap, regardless of their body mass.
+cond_or = df[(df['species'] == 'Adelie') | (df['species'] == 'Chinstrap')]
+print("\nAdelie OR Chinstrap penguins:")
+print("cond_or.head()->", cond_or.head())
+
+# Condition using NOT (~)
+# This will filter penguins that are NOT Adelie.
+cond_not = df[~(df['species'] == 'Adelie')]
+print("\nPenguins that are NOT Adelie:")
+print("cond_not.head()->", cond_not.head())
+
+# IMPORTANT:
+# Always use parentheses around conditions
+
+```
 
 
-###
+**Output**
+
+```python
+ STEP 2. COMBINING CONDITIONS
+
+Adelie penguins with body_mass_g > 4000:
+cond_and.head()->    species     island  bill_length_mm  bill_depth_mm  flipper_length_mm  body_mass_g   sex
+7   Adelie  Torgersen            39.2           19.6              195.0       4675.0  Male
+9   Adelie  Torgersen            42.0           20.2              190.0       4250.0   NaN
+14  Adelie  Torgersen            34.6           21.1              198.0       4400.0  Male
+17  Adelie  Torgersen            42.5           20.7              197.0       4500.0  Male
+19  Adelie  Torgersen            46.0           21.5              194.0       4200.0  Male
+
+Adelie OR Chinstrap penguins:
+cond_or.head()->   species     island  bill_length_mm  bill_depth_mm  flipper_length_mm  body_mass_g     sex
+0  Adelie  Torgersen            39.1           18.7              181.0       3750.0    Male
+1  Adelie  Torgersen            39.5           17.4              186.0       3800.0  Female
+2  Adelie  Torgersen            40.3           18.0              195.0       3250.0  Female
+3  Adelie  Torgersen             NaN            NaN                NaN          NaN     NaN
+4  Adelie  Torgersen            36.7           19.3              193.0       3450.0  Female
+
+Penguins that are NOT Adelie:
+cond_not.head()->        species island  bill_length_mm  bill_depth_mm  flipper_length_mm  body_mass_g     sex
+152  Chinstrap  Dream            46.5           17.9              192.0       3500.0  Female
+153  Chinstrap  Dream            50.0           19.5              196.0       3900.0    Male
+154  Chinstrap  Dream            51.3           19.2              193.0       3650.0    Male
+155  Chinstrap  Dream            45.4           18.7              188.0       3525.0  Female
+156  Chinstrap  Dream            52.7           19.8              197.0       3725.0    Male
+
+```
+
+### Step 3
+
+```python
+# STEP 3: USING .isin()
+
+print("\n STEP 3. USING .isin() ================")
+# Filter multiple species
+# This will filter penguins that belong to either the 'Adelie' or 'Chinstrap' species.
+species_filter = df[df['species'].isin(['Adelie', 'Chinstrap'])]
+
+print("\nPenguins belonging to Adelie or Chinstrap:")
+print("species_filter.head()->", species_filter.head())
+
+# Explanation:
+# .isin() checks membership in a list of values
+
+```
+**Output**
+
+```python
+ STEP 3. USING .isin() ================
+
+Penguins belonging to Adelie or Chinstrap:
+species_filter.head()->   species     island  bill_length_mm  bill_depth_mm  flipper_length_mm  body_mass_g     sex
+0  Adelie  Torgersen            39.1           18.7              181.0       3750.0    Male
+1  Adelie  Torgersen            39.5           17.4              186.0       3800.0  Female
+2  Adelie  Torgersen            40.3           18.0              195.0       3250.0  Female
+3  Adelie  Torgersen             NaN            NaN                NaN          NaN     NaN
+4  Adelie  Torgersen            36.7           19.3              193.0       3450.0  Female
+
+```
+
+
+
 
 
 ###
