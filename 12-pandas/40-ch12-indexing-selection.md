@@ -126,7 +126,7 @@ df.index:-> RangeIndex(start=0, stop=344, step=1)
 """
 ```
 
-### Step 3 Selelcting columns using 3(A). Bracket notation and 3(B). Dot notation
+### Step 3 Selelcting columns using -3(A). Bracket notation and -3(B). Dot notation
 
 #### Step 3(A): Using bracket `[]` notation
 
