@@ -308,11 +308,54 @@ safe_filter.head()->   species     island  bill_length_mm  bill_depth_mm  flippe
 
 ```
 
+### Step 6
+
+```python
+# STEP 6: ERROR DEMONSTRATIONS (COMMENTED OUT)
+
+# ERROR 1: Missing parentheses
+# This will raise an error because the conditions are not properly grouped with parentheses.
+# df[df['body_mass_g'] > 4000 & df['species'] == 'Adelie']
+
+# ERROR 2: Using 'and' instead of '&'
+# This will raise an error because 'and' cannot be used for element-wise logical operations in Pandas.
+# df[(df['body_mass_g'] > 4000) and (df['species'] == 'Adelie')]
+
+# ERROR 3: .str.contains() on non-string column
+# This will raise an error because 'body_mass_g' is a numeric column, and .str.contains() cannot be applied to it.
+# df[df['body_mass_g'].str.contains('4000')]
+
+# ERROR 4: NaN issue in string filtering
+# This will raise an error because there are NaN values in the 'sex' column, and .str.contains() 
+# cannot handle NaN without the na=False parameter.
+# df[df['sex'].str.contains('male')]
+
+```
+
+### Step 7
+
+```python
+# STEP 7: SUMMARY
+print("\n STEP 7. SUMMARY")
+
+print("""
+KEY LEARNINGS:
+
+1. Boolean indexing filters rows using True/False conditions
+2. Use & (AND), | (OR), ~ (NOT) for combining conditions
+3. Use .isin() for filtering multiple values
+4. Use .str.contains() for string filtering
+5. Handle missing values using na=False
+6. Always use parentheses in conditions
+
+BEST PRACTICE:
+Use clear and well-structured conditions for readability and correctness
+""")
+
+```
 
 
 
-
-###
 
 
 
