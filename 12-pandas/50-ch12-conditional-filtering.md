@@ -41,7 +41,7 @@ You are required to:
 # Solution
 
 
-## STEP 0: Import Libraries and Load Dataset**
+## STEP 0: Import Libraries and Load Dataset
 
 #### Why this step is done
 
@@ -114,9 +114,7 @@ df.head()->   species     island  bill_length_mm  bill_depth_mm  flipper_length_
 
 
 
-## Step 1
-
-### STEP 1: Basic Boolean Indexing**
+## STEP 1: Basic Boolean Indexing**
 
 #### Why this step is done
 
