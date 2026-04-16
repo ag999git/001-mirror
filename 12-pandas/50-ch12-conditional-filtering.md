@@ -250,7 +250,30 @@ species_filter.head()->   species     island  bill_length_mm  bill_depth_mm  fli
 
 
 
-###
+### Step 4
+
+```python
+# STEP 4: STRING FILTERING USING .str.contains()
+
+print("\n STEP 4. STRING FILTERING ================")
+
+# Filter rows where island contains 'Dream'
+# This will filter penguins that are from islands whose names contain the substring 'Dream'.
+dream_island = df[df['island'].str.contains('Dream')]
+
+print("\nPenguins from Dream island:")
+print("dream_island.head()->", dream_island.head())
+
+# Case-insensitive search
+# This will filter penguins from islands that contain 'dream' in any case (e.g., 'Dream', 'dream', 'DREAM').
+dream_case_insensitive = df[df['island'].str.contains('dream', case=False)]
+
+print("\nCase-insensitive filtering:")
+print("dream_case_insensitive.head()->", dream_case_insensitive.head())
+
+```
+
+
 
 
 ###
