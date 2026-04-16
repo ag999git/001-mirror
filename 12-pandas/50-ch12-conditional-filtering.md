@@ -521,6 +521,17 @@ Understanding errors improves debugging and conceptual clarity.
 | AttributeError | Wrong method usage |
 
 
+### What to do
+
+-   Learn from errors
+-   Read error messages carefully
+
+### What not to do
+
+-   Do not ignore warnings/errors
+
+
+
 ```python
 # STEP 6: ERROR DEMONSTRATIONS (COMMENTED OUT)
 
@@ -543,7 +554,22 @@ Understanding errors improves debugging and conceptual clarity.
 
 ```
 
-### Step 7
+## STEP 7: Summary
+
+### Why this step is done
+
+To consolidate learning and reinforce key ideas.
+
+----------
+
+### Key Takeaways
+
+-   Boolean indexing is fundamental
+-   Logical operators combine conditions
+-   `.isin()` simplifies multiple comparisons
+-   `.str.contains()` handles text filtering
+-   Missing values must be handled carefully
+
 
 ```python
 # STEP 7: SUMMARY
