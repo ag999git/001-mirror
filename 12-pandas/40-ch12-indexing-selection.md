@@ -50,6 +50,7 @@ df = sns.load_dataset("penguins")
 
 ### Step 2: Understanding the Data Structure
 
+#### Step 2(A)
 ```python
 # Step 2:  Understanding the Data Structure
 # 2. A. df.info() gives us a concise summary of the DataFrame, including the number of non-null entries, 
@@ -76,9 +77,106 @@ memory usage: 18.9+ KB
 """
 # df.info():-> None. This method prints the summary information to the console but does not return any value, hence it outputs None.
 
+```
+
+#### Step 2(B)
+
+```python
+
+# 2. B. df.describe() provides a statistical summary of the numerical columns in the DataFrame, 
+# including count, mean, standard deviation, minimum, and maximum values.
+print("df.describe():->\n", df.describe())
+
+"""Output:
+df.describe():->
+        bill_length_mm  bill_depth_mm  flipper_length_mm  body_mass_g
+count     342.000000     342.000000        342.000000    342.000000
+mean       43.921930      17.151754         200.915205   4201.754386
+std         5.459584       1.974603          14.061714   801.954380
+min        32.100000      13.100000         172.000000  2700.000000
+25%        39.225000      15.600000         190.000000  3550.000000
+50%        44.450000      17.300000         197.000000  4050.000000
+75%        48.100000      18.700000         213.000000  4750.000000
+max        59.600000      21.500000         231.000000  6300.000000
+"""
+
+```
+
+#### Step 2(C)
+
+
+```python
+# 2. C. df.columns and df.index provide information about the column names and row indices of the DataFrame, respectively.
+print("df.columns:->", df.columns)
+
+"""Output:
+df.columns:-> Index(['species', 'island', 'bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g', 'sex'], dtype='object')
+"""
+
+```
+
+#### Step 2(D)
+
+```python
+# 2. D. df.index gives us the row labels of the DataFrame, which can be useful for accessing specific rows or understanding 
+# the structure of the data.
+print("df.index:->", df.index)
+"""Output:
+df.index:-> RangeIndex(start=0, stop=344, step=1)
+"""
+```
+
+### Step 3
+
+#### Step 3(A)
+
+```python
+
+# Step 3 Selelcting columns using A. Bracket notation and B. Dot notation
+
+# 3 (A) Bracket Notation: This method allows us to select one or more columns from the DataFrame using square brackets. 
+# For example, df['column_name'] will return a Series containing the data from that column
+# To select multiple columns, we can pass a list of column names inside the brackets, like df[['col1', 'col2']].
+
+# (1) Selecting single column
+species = df['species']
+print("species.head()->\n", species.head())
+"""
+species.head()->
+0    Adelie
+1    Adelie
+2    Adelie
+3    Adelie
+4    Adelie
+Name: species, dtype: object
+"""
+
+# (2) Selecting multiple columns
+subset = df[['species', 'bill_length_mm', 'body_mass_g']]
+print("subset.head()->\n", subset.head())
+
+"""Output:
+subset.head()->
+  species  bill_length_mm  body_mass_g
+0  Adelie           39.1        3750.0
+1  Adelie           39.5        3800.0
+2  Adelie           40.3        3250.0
+3  Adelie           Nan         Nan
+4  Adelie           36.7        3450.0
+
+"""
+
+# Advantages of Bracket Notation
+# - Works with any column name (even with spaces)
+# - Flexible for multiple column selection
 
 
 ```
+
+
+
+
+
 
 
 
