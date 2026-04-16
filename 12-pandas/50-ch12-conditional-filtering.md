@@ -115,7 +115,40 @@ df.head()->   species     island  bill_length_mm  bill_depth_mm  flipper_length_
 
 
 
-###
+### Step 1
+
+```python
+# STEP 1: BASIC BOOLEAN INDEXING
+print("\n STEP 1. BASIC BOOLEAN FILTERING")
+
+# Filter penguins with body mass greater than 4000 grams
+# This creates a Boolean Series where True indicates rows that satisfy the condition
+heavy_penguins = df[df['body_mass_g'] > 4000]  
+
+print("\nPenguins with body_mass_g > 4000:")
+print("heavy_penguins.head()->", heavy_penguins.head())
+
+# Explanation:
+# df['body_mass_g'] > 4000 creates a Boolean Series (True/False)
+# Pandas uses this to filter rows
+
+```
+
+**Output**
+```python
+ STEP 1. BASIC BOOLEAN FILTERING
+
+Penguins with body_mass_g > 4000:
+heavy_penguins.head()->    species     island  bill_length_mm  bill_depth_mm  flipper_length_mm  body_mass_g   sex
+7   Adelie  Torgersen            39.2           19.6              195.0       4675.0  Male
+9   Adelie  Torgersen            42.0           20.2              190.0       4250.0   NaN
+14  Adelie  Torgersen            34.6           21.1              198.0       4400.0  Male
+17  Adelie  Torgersen            42.5           20.7              197.0       4500.0  Male
+19  Adelie  Torgersen            46.0           21.5              194.0       4200.0  Male
+
+```
+
+
 
 
 ###
