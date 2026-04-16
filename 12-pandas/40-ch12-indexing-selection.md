@@ -265,10 +265,120 @@ subset_loc->
 5  Adelie       3650.0
 """
 
+```
 
+
+#### Step 4(B)
+
+```python
+
+# 4.(B) Selecting Rows using .iloc[] (Position/ Integer-based)
+# Select rows by their integer position. 
+# Selecting using .iloc (integer-based)
+# (1) Selecting first row
+row_0_iloc = df.iloc[0]
+print("row_0_iloc->\n", row_0_iloc)
+
+"""Output:
+row_0_iloc-> 
+species            Adelie
+island             Torgersen
+bill_length_mm        39.1
+bill_depth_mm         18.7
+flipper_length_mm     181.0
+body_mass_g          3750.0
+sex                  Male
+Name: 0, dtype: object
+"""
+
+
+# (2) Selecting multiple rows by integer position
+rows_iloc = df.iloc[0:5]
+print("rows_iloc->\n", rows_iloc)
+
+"""Output:
+rows_iloc->
+  species     island  bill_length_mm  bill_depth_mm  flipper_length_mm   body_mass_g      sex
+0  Adelie  Torgersen           39.1            18.7              181.0       3750.0     Male
+1  Adelie  Torgersen           39.5            17.4           186.0          3800.0   Female
+2  Adelie  Torgersen           40.3            18.0              195.0       3250.0   Female
+3  Adelie  Torgersen            NaN             NaN              NaN          NaN        NaN
+4  Adelie  Torgersen           36.7            19.3              193.0       3450.0   Female
+"""
+
+# (3) Selecting range of rows and specific columns
+subset_iloc = df.iloc[0:5, 0:3]
+print("subset_iloc->\n", subset_iloc)
+
+
+"""Output:
+subset_iloc-> 
+  species     island  bill_length_mm
+0  Adelie  Torgersen           39.1
+1  Adelie  Torgersen           39.5
+2  Adelie  Torgersen           40.3
+3  Adelie  Torgersen            NaN
+4  Adelie  Torgersen           36.7
+"""
 
 ```
 
+### Step 5
+#### Step 5(A)
+
+```python
+# 5. Slicing Rows and Columns Simultaneously
+# 5. (A) Using .loc[] for slicing by labels
+# Slicing rows and columns using .loc
+# Slice rows and columns together
+slice_loc = df.loc[10:20, ['species', 'island', 'body_mass_g']]
+print("slice_loc->\n", slice_loc)
+
+"""Output:
+slice_loc-> 
+   species     island  body_mass_g
+10  Adelie  Torgersen       3750.0
+11  Adelie  Torgersen       3800.0
+12  Adelie  Torgersen       3250.0
+13  Adelie  Torgersen          NaN
+14  Adelie  Torgersen       3450.0
+15  Adelie  Torgersen       3650.0
+16  Adelie  Torgersen       3800.0
+17  Adelie  Torgersen       3700.0
+18  Adelie  Torgersen       3600.0
+19  Adelie  Torgersen       3500.0
+20  Adelie  Torgersen       3400.0
+"""
+
+```
+
+#### Step 5(B)
+
+```python
+
+# 5. (B) Using .iloc[] for slicing by integer position
+# Slicing rows and columns using .iloc
+slice_iloc = df.iloc[10:20, 0:3]  # Slice rows 10 to 19 and columns 0 to 2
+print("slice_iloc->\n", slice_iloc)
+
+"""Output:
+slice_iloc-> 
+    species     island  bill_length_mm
+10  Adelie  Torgersen           37.8
+11  Adelie  Torgersen           37.8
+12  Adelie  Torgersen           41.1
+13  Adelie  Torgersen           38.6
+14  Adelie  Torgersen           34.6
+15  Adelie  Torgersen           36.6
+16  Adelie  Torgersen           38.7
+17  Adelie  Torgersen           42.5
+18  Adelie  Torgersen           34.4
+19  Adelie  Torgersen           46.0
+"""
+
+
+
+```
 
 
 
