@@ -374,7 +374,49 @@ species_filter.head()->   species     island  bill_length_mm  bill_depth_mm  fli
 
 
 
-### Step 4
+## STEP 4: String Filtering using `.str.contains()`
+
+### Why this step is done
+
+Used for filtering **text data and patterns**.
+
+----------
+
+### How it is done
+
+`df['column'].str.contains(pattern)`
+
+----------
+
+### What to do
+
+-   Use `case=False` when needed
+-   Use `na=False` for missing values
+
+### What not to do
+
+-   Avoid applying on non-string columns
+
+----------
+
+### Key Features
+
+-   Supports regex
+-   Case-sensitive by default
+
+----------
+
+### Method
+
+**`.str.contains(pattern, case=True, na=None)`**
+
+-   **Input:** String or regex
+-   **Output:** Boolean Series
+-   **Limitations:**
+    -   Fails with NaN unless handled
+    -   Slower than numeric filtering
+
+
 
 ```python
 # STEP 4: STRING FILTERING USING .str.contains()
