@@ -194,7 +194,46 @@ heavy_penguins.head()->    species     island  bill_length_mm  bill_depth_mm  fl
 
 
 
-### Step 2
+## STEP 2: Combining Conditions
+
+### Why this step is done
+
+Real-world filtering often requires **multiple conditions simultaneously**.
+
+----------
+
+### How it is done
+
+Using:
+
+-   `&` → AND
+-   `|` → OR
+-   `~` → NOT
+
+----------
+
+### What to do
+
+-   Always use parentheses
+-   Use vectorized operators (`&`, `|`)
+
+### What not to do
+
+-   Do NOT use `and`, `or`
+-   Do NOT skip parentheses
+
+----------
+
+### Key Features
+
+-   Supports complex filtering
+-   Works element-wise
+
+----------
+
+### Operators
+
+
 
 ```python
 # STEP 2: COMBINING CONDITIONS
