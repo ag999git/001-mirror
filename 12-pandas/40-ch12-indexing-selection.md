@@ -205,7 +205,7 @@ Name: species, dtype: object
 
 ```
 
-### Step 4 Selecting Rows using .loc[] (Label-based) and .iloc[] (Integer-based)
+### Step 4 Selecting Rows using -4(A) `.loc[]` (Label-based) and -4(B) `.iloc[]` (Integer-based)
 
 #### Step 4(A): Selecting using `.loc` (label-based)
 4. (A) `.loc[]` is used for label-based indexing, which means we can select rows and columns by their labels. For example, `df.loc[row_label, column_label]` allows us to select specific rows and columns based on their labels.
