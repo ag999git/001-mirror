@@ -337,6 +337,16 @@ subset_iloc->
 
 ```
 
+#### Comparison Table: `.loc[]` vs `.iloc[]`   
+
+| Feature | `.loc[]` | `.iloc[]` |
+| --- | --- | --- |
+| Basis | Labels (index names) | Integer positions |
+| End index | Included | Excluded |
+| Flexibility | High | High |
+| Boolean indexing | Supported | Not directly |
+
+
 ### Step 5 Slicing Rows and Columns Simultaneously
 #### Step 5(A) Using .loc[] for slicing by labels
 
