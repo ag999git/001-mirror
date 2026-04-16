@@ -298,6 +298,48 @@ cond_not.head()->        species island  bill_length_mm  bill_depth_mm  flipper_
 
 ### Step 3
 
+## STEP 3: Using `.isin()`
+
+### Why this step is done
+
+Used when filtering against **multiple values in a clean and readable way**.
+
+----------
+
+### How it is done
+
+`df['column'].isin(list_of_values)`
+
+----------
+
+### What to do
+
+-   Use for multiple value checks
+-   Pass list or iterable
+
+### What not to do
+
+-   Avoid chaining multiple OR conditions unnecessarily
+
+----------
+
+### Key Features
+
+-   Cleaner than multiple ORs
+-   Efficient
+
+----------
+
+### Method
+
+**`.isin(values)`**
+
+-   **Input:** List / iterable
+-   **Output:** Boolean Series
+-   **Limitation:** Exact match only (no partial matching)
+
+
+
 ```python
 # STEP 3: USING .isin()
 
