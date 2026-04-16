@@ -296,7 +296,7 @@ cond_not.head()->        species island  bill_length_mm  bill_depth_mm  flipper_
 
 ```
 
-### Step 3
+
 
 ## STEP 3: Using `.isin()`
 
@@ -440,9 +440,41 @@ print("dream_case_insensitive.head()->", dream_case_insensitive.head())
 ```
 
 
+## STEP 5: Handling Missing Values in String Operations**
 
+### Why this step is done
 
-### Step 5
+Real-world datasets contain **missing values**, which can break string operations.
+
+----------
+
+### How it is done
+
+`.str.contains('value', na=False)`
+
+----------
+
+### What to do
+
+-   Always handle NaN explicitly
+
+### What not to do
+
+-   Avoid ignoring missing values
+
+----------
+
+### Key Features
+
+-   Prevents errors
+-   Ensures clean filtering
+
+----------
+
+### Limitations
+
+-   May silently exclude missing data
+
 
 ```python
 # STEP 5: HANDLING MISSING VALUES IN STRING OPERATIONS
@@ -474,7 +506,20 @@ safe_filter.head()->   species     island  bill_length_mm  bill_depth_mm  flippe
 
 ```
 
-### Step 6
+## STEP 6: Error Demonstrations
+
+### Why this step is done
+
+Understanding errors improves debugging and conceptual clarity.
+
+### Common errors  
+
+| Error Type | Cause |
+| --- | --- |
+| Syntax Error | Missing parentheses |
+| ValueError | Wrong operator |
+| AttributeError | Wrong method usage |
+
 
 ```python
 # STEP 6: ERROR DEMONSTRATIONS (COMMENTED OUT)
