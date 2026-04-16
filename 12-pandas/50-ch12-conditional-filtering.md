@@ -276,7 +276,40 @@ print("dream_case_insensitive.head()->", dream_case_insensitive.head())
 
 
 
-###
+### Step 5
+
+```python
+# STEP 5: HANDLING MISSING VALUES IN STRING OPERATIONS
+
+print("\n STEP 5. HANDLING NaN IN STRING FILTERING")
+
+# Safe filtering with na=False
+# This will filter penguins whose 'sex' column contains 'male', while safely handling any NaN values 
+# in the 'sex' column by treating them as False. 
+safe_filter = df[df['sex'].str.contains('male', case=False, na=False)]
+
+print("\nFiltering 'male' safely (ignoring NaN):")
+print("safe_filter.head()->", safe_filter.head())
+
+```
+
+**Output**
+
+```python
+ STEP 5. HANDLING NaN IN STRING FILTERING
+
+Filtering 'male' safely (ignoring NaN):
+safe_filter.head()->   species     island  bill_length_mm  bill_depth_mm  flipper_length_mm  body_mass_g     sex
+0  Adelie  Torgersen            39.1           18.7              181.0       3750.0    Male
+1  Adelie  Torgersen            39.5           17.4              186.0       3800.0  Female
+2  Adelie  Torgersen            40.3           18.0              195.0       3250.0  Female
+4  Adelie  Torgersen            36.7           19.3              193.0       3450.0  Female
+5  Adelie  Torgersen            39.3           20.6              190.0       3650.0    Male
+
+```
+
+
+
 
 
 ###
