@@ -205,6 +205,19 @@ Name: species, dtype: object
 
 ```
 
+#### Table comparing bracket `[]` notation to dot `.` notation
+
+
+  
+
+| Feature | `[]` Notation | `.` Notation |
+| --- | --- | --- |
+| Multiple columns | Yes | No |
+| Special characters | Supported | Not supported |
+| Safe usage | Recommended | Risky in some cases |
+| Readability | Moderate | High |
+
+
 ### Step 4 Selecting Rows using -4(A) `.loc[]` (Label-based) and -4(B) `.iloc[]` (Integer-based)
 
 #### Step 4(A): Selecting using `.loc` (label-based)
