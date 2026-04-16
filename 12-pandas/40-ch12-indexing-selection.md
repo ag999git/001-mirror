@@ -124,9 +124,15 @@ df.index:-> RangeIndex(start=0, stop=344, step=1)
 ```
 
 
+## 3. Selecting Columns
+
+### 3(A) Using Bracket Notation `[]`
 
 
 
+
+
+### 3(B) Using Dot Notation `.`
 
 
 
