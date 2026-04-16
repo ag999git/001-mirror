@@ -126,9 +126,9 @@ df.index:-> RangeIndex(start=0, stop=344, step=1)
 """
 ```
 
-### Step 3
+### Step 3 Selelcting columns using 3(A). Bracket notation and 3(B). Dot notation
 
-#### Step 3(A)
+#### Step 3(A): Using bracket `[]` notation
 
 ```python
 
@@ -173,7 +173,7 @@ subset.head()->
 
 ```
 
-#### Step 3(B)
+#### Step 3(B): Using dot `.` notation
 
 ```python
 
@@ -205,9 +205,10 @@ Name: species, dtype: object
 
 ```
 
-### Step 4
+### Step 4 Selecting Rows using .loc[] (Label-based) and .iloc[] (Integer-based)
 
-#### Step 4(A)
+#### Step 4(A): Selecting using `.loc` (label-based)
+4. (A) `.loc[]` is used for label-based indexing, which means we can select rows and columns by their labels. For example, `df.loc[row_label, column_label]` allows us to select specific rows and columns based on their labels.
 
 ```python
 
@@ -268,7 +269,7 @@ subset_loc->
 ```
 
 
-#### Step 4(B)
+#### Step 4(B) Selecting Rows using .iloc[] (Position/ Integer-based)
 
 ```python
 
@@ -323,8 +324,8 @@ subset_iloc->
 
 ```
 
-### Step 5
-#### Step 5(A)
+### Step 5 Slicing Rows and Columns Simultaneously
+#### Step 5(A) Using .loc[] for slicing by labels
 
 ```python
 # 5. Slicing Rows and Columns Simultaneously
@@ -352,7 +353,7 @@ slice_loc->
 
 ```
 
-#### Step 5(B)
+#### Step 5(B): Using `.iloc[]` for slicing by integer position
 
 ```python
 
