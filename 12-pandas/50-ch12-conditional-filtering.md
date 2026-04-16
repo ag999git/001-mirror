@@ -1,11 +1,11 @@
 
 
 
-## Research Question
+# Research Question
 
 > **How can conditional filtering techniques in Pandas (Boolean indexing, logical operators, `.isin()`, and string-based filtering using `.str.contains()`) be used to efficiently extract meaningful subsets of data from a real-world dataset such as the Palmer Penguins dataset, and what are their comparative advantages, limitations, and common sources of error?**
 
-### PROJECT: Conditional Filtering in Pandas
+## PROJECT: Conditional Filtering in Pandas
 DATASET: Palmer Penguins
 
 >OBJECTIVE:
@@ -18,7 +18,7 @@ DATASET: Palmer Penguins
 
 ----------
 
-## Task / Project Description
+# Task / Project Description
 
 You are required to:
 
@@ -38,10 +38,10 @@ You are required to:
 
 ----------
 
-## Solution
+# Solution
 
 
-### STEP 0: Import Libraries and Load Dataset**
+## STEP 0: Import Libraries and Load Dataset**
 
 #### Why this step is done
 
@@ -81,8 +81,7 @@ This step initializes the working environment. Without loading the required libr
 -   **Output:** Pandas DataFrame
 -   **Limitation:** Requires internet (in some environments)
 
-## Script
-The script is broken up into steps to explain each step in details
+
 
 ### Script for implementing STEP 0 
 
@@ -115,7 +114,51 @@ df.head()->   species     island  bill_length_mm  bill_depth_mm  flipper_length_
 
 
 
-### Step 1
+## Step 1
+
+### STEP 1: Basic Boolean Indexing**
+
+#### Why this step is done
+
+Boolean indexing is the **foundation of filtering**. It allows selection of rows based on conditions.
+
+#### How it is done
+
+A condition is applied to a column, producing `True/False`, which filters rows.
+
+----------
+
+#### What to do
+
+-   Use clear conditions
+-   Ensure correct column names
+
+#### What not to do
+
+-   Avoid mixing data types improperly
+-   Avoid forgetting brackets
+
+----------
+
+#### Key Features
+
+-   Produces Boolean Series
+-   Filters rows directly
+
+----------
+
+#### Methods / Syntax
+
+`df[condition]`
+
+**Example:**
+
+`df[df['body_mass_g'] >  4000]`
+
+-   **Input:** Boolean Series
+-   **Output:** Filtered DataFrame
+-   **Limitation:** Cannot handle multiple conditions without operators
+### Script for Step 1
 
 ```python
 # STEP 1: BASIC BOOLEAN INDEXING
