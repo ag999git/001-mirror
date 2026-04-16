@@ -173,6 +173,40 @@ subset.head()->
 
 ```
 
+#### Step 3(B)
+
+```python
+
+# 3 (B) Dot Notation: This method allows us to access columns as attributes of the DataFrame. For example, df.column_name will return a Series containing the data from that column. 
+# However, this method only works if the column name is a valid Python identifier (no spaces, special characters, and doesn't start with a number). 
+# Selecting single column using dot notation
+species_dot = df.species
+print("species_dot.head()->\n", species_dot.head())
+
+"""Output:
+species_dot.head()->
+0    Adelie
+1    Adelie
+2    Adelie
+3    Adelie
+4    Adelie
+Name: species, dtype: object
+"""
+
+
+# Advantages of Dot Notation
+# - More concise and easier to read for simple column names
+# - Can be more convenient for quick access to columns with valid names
+
+# Limitations of Dot Notation
+# - Column name must be valid Python identifier
+# - Cannot use for multiple columns
+# - May conflict with pd.DataFrame methods
+
+
+
+```
+
 
 
 
