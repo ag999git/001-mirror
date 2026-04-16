@@ -64,7 +64,9 @@ print(df.head())
 
 ```
 
-
+From the output you can see that
+-   Dataset contains 8 columns, namely: species, island, bill dimensions, flipper length, body mass, sex
+-   Contains missing values → important for real-world handling
 
 
 
