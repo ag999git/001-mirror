@@ -400,12 +400,19 @@ slice_iloc->
 19  Adelie  Torgersen           46.0
 """
 
-
-
 ```
 
 
+#### Table: When to Use What   
 
+| Scenario | Recommended Method |
+| --- | --- |
+| Selecting one column | `df['col']` |
+| Selecting multiple columns | `df[['col1']]` |
+| Filtering by row labels | `.loc[]` |
+| Filtering by position | `.iloc[]` |
+| Complex slicing | `.loc[] / .iloc[]` |
+| Safe, production-level code | `[] + .loc[]` |
 
 
 
