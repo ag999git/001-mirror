@@ -203,9 +203,77 @@ Name: species, dtype: object
 # - Cannot use for multiple columns
 # - May conflict with pd.DataFrame methods
 
+```
+
+### Step 4
+
+#### Step 4(A)
+
+```python
+
+# Step 4. Selecting Rows using .loc[] (Label-based) and .iloc[] (Integer-based)
+
+# 4. (A) .loc[] is used for label-based indexing, which means we can select rows and columns by their labels. For example, df.loc[row_label, column_label] allows us to select specific rows and columns based on their labels.
+# Selecting using .loc (label-based)
+
+# (1) Selecting a single row by index label
+row_0 = df.loc[0]
+print("row_0->\n", row_0)
+
+"""Output:
+row_0-> 
+species            Adelie
+island             Torgersen
+bill_length_mm        39.1
+bill_depth_mm         18.7
+flipper_length_mm     181.0
+body_mass_g          3750.0
+sex                  Male
+Name: 0, dtype: object
+"""
+
+
+# (2) Selecting multiple rows by index label (note: .loc includes the end label in slicing)
+rows_0_5 = df.loc[0:5]
+print("rows_0_5->\n", rows_0_5)
+
+"""Output:
+rows_0_5->
+  species     island  bill_length_mm  bill_depth_mm  flipper_length_mm   body_mass_g    sex
+0  Adelie  Torgersen           39.1            18.7              181.0       3750.0   Male
+1  Adelie  Torgersen           39.5            17.4              186.0       3800.0 Female
+2  Adelie  Torgersen           40.3            18.0              195.0       3250.0 Female
+3  Adelie  Torgersen            NaN             NaN              NaN          NaN      NaN
+4  Adelie  Torgersen           36.7            19.3              193.0       3450.0 Female
+5  Adelie  Torgersen           39.3            20.6              190.0       3650.0   Male
+
+"""
+
+
+# (3) Selecting range of rows and specific columns
+subset_loc = df.loc[0:5, ['species', 'body_mass_g']]
+print("subset_loc->\n", subset_loc)
+
+"""Output:
+subset_loc-> 
+  species  body_mass_g
+0  Adelie       3750.0
+1  Adelie       3800.0
+2  Adelie       3250.0
+3  Adelie          NaN
+4  Adelie       3450.0
+5  Adelie       3650.0
+"""
+
 
 
 ```
+
+
+
+
+
+
 
 
 
