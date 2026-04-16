@@ -414,7 +414,11 @@ slice_iloc->
 | Complex slicing | `.loc[] / .iloc[]` |
 | Safe, production-level code | `[] + .loc[]` |
 
+### Flow chart shows how indexing is done
 
+![FlowChart](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch12-pandas-indexing.png)
+
+![FlowChart](/resources/ch12-pandas-indexing.png)
 
 
 
