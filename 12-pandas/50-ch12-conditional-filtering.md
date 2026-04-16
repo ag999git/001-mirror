@@ -589,7 +589,12 @@ Use clear and well-structured conditions for readability and correctness
 
 ```
 
+## Flowchart
+**The following flowchart shows all the steps of the above script**
 
+![Filtering Flowchart](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch12-filtering.png)
+
+![Filtering Flowchart](/resources/ch12-filtering.png)
 
 
 
