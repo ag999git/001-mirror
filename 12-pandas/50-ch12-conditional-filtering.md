@@ -589,6 +589,167 @@ Use clear and well-structured conditions for readability and correctness
 
 ```
 
+## The entire script as a single block is given below:-
+
+```python
+
+"""
+PROJECT: Conditional Filtering in Pandas
+DATASET: Palmer Penguins
+
+OBJECTIVE:
+To demonstrate:
+1. Boolean indexing
+2. Logical operators (&, |, ~)
+3. .isin() method
+4. .str.contains() for string filtering
+5. Common errors and handling
+
+NOTE:
+This script is written for teaching purposes with detailed comments.
+"""
+
+# STEP 0: IMPORT LIBRARIES AND LOAD DATASET
+print("\n STEP 0. IMPORT LIBRARIES AND LOAD DATASET")
+import pandas as pd
+import seaborn as sns
+
+df = sns.load_dataset("penguins")
+
+print("\n--- FIRST 5 ROWS ---")
+print("df.head()->", df.head())  # Display the first 5 rows of the dataset to understand its structure and columns
+
+#------------------------------------------------------------
+# STEP 1: BASIC BOOLEAN INDEXING
+print("\n STEP 1. BASIC BOOLEAN FILTERING")
+
+# Filter penguins with body mass greater than 4000 grams
+# This creates a Boolean Series where True indicates rows that satisfy the condition
+heavy_penguins = df[df['body_mass_g'] > 4000]  
+
+print("\nPenguins with body_mass_g > 4000:")
+print("heavy_penguins.head()->", heavy_penguins.head())
+
+# Explanation:
+# df['body_mass_g'] > 4000 creates a Boolean Series (True/False)
+# Pandas uses this to filter rows
+
+#------------------------------------------------------------
+# STEP 2: COMBINING CONDITIONS
+
+print("\n STEP 2. COMBINING CONDITIONS")
+
+# Condition using AND (&)
+# To combine conditions, we use & for AND, | for OR, and ~ for NOT. 
+# Each condition must be enclosed in parentheses.
+cond_and = df[(df['body_mass_g'] > 4000) & (df['species'] == 'Adelie')]
+print("\nAdelie penguins with body_mass_g > 4000:")
+print("cond_and.head()->", cond_and.head())
+
+# Condition using OR (|)
+# This will filter penguins that are either Adelie OR Chinstrap, regardless of their body mass.
+cond_or = df[(df['species'] == 'Adelie') | (df['species'] == 'Chinstrap')]
+print("\nAdelie OR Chinstrap penguins:")
+print("cond_or.head()->", cond_or.head())
+
+# Condition using NOT (~)
+# This will filter penguins that are NOT Adelie.
+cond_not = df[~(df['species'] == 'Adelie')]
+print("\nPenguins that are NOT Adelie:")
+print("cond_not.head()->", cond_not.head())
+
+# IMPORTANT:
+# Always use parentheses around conditions
+
+#------------------------------------------------------------
+# STEP 3: USING .isin()
+
+print("\n STEP 3. USING .isin() ================")
+# Filter multiple species
+# This will filter penguins that belong to either the 'Adelie' or 'Chinstrap' species.
+species_filter = df[df['species'].isin(['Adelie', 'Chinstrap'])]
+
+print("\nPenguins belonging to Adelie or Chinstrap:")
+print("species_filter.head()->", species_filter.head())
+
+# Explanation:
+# .isin() checks membership in a list of values
+
+#------------------------------------------------------------
+# STEP 4: STRING FILTERING USING .str.contains()
+
+print("\n STEP 4. STRING FILTERING ================")
+
+# Filter rows where island contains 'Dream'
+# This will filter penguins that are from islands whose names contain the substring 'Dream'.
+dream_island = df[df['island'].str.contains('Dream')]
+
+print("\nPenguins from Dream island:")
+print("dream_island.head()->", dream_island.head())
+
+# Case-insensitive search
+# This will filter penguins from islands that contain 'dream' in any case (e.g., 'Dream', 'dream', 'DREAM').
+dream_case_insensitive = df[df['island'].str.contains('dream', case=False)]
+
+print("\nCase-insensitive filtering:")
+print("dream_case_insensitive.head()->", dream_case_insensitive.head())
+
+#------------------------------------------------------------
+# STEP 5: HANDLING MISSING VALUES IN STRING OPERATIONS
+
+print("\n STEP 5. HANDLING NaN IN STRING FILTERING")
+
+# Safe filtering with na=False
+# This will filter penguins whose 'sex' column contains 'male', while safely handling any NaN values 
+# in the 'sex' column by treating them as False. 
+safe_filter = df[df['sex'].str.contains('male', case=False, na=False)]
+
+print("\nFiltering 'male' safely (ignoring NaN):")
+print("safe_filter.head()->", safe_filter.head())
+
+#------------------------------------------------------------
+# STEP 6: ERROR DEMONSTRATIONS (COMMENTED OUT)
+
+# ERROR 1: Missing parentheses
+# This will raise an error because the conditions are not properly grouped with parentheses.
+# df[df['body_mass_g'] > 4000 & df['species'] == 'Adelie']
+
+# ERROR 2: Using 'and' instead of '&'
+# This will raise an error because 'and' cannot be used for element-wise logical operations in Pandas.
+# df[(df['body_mass_g'] > 4000) and (df['species'] == 'Adelie')]
+
+# ERROR 3: .str.contains() on non-string column
+# This will raise an error because 'body_mass_g' is a numeric column, and .str.contains() cannot be applied to it.
+# df[df['body_mass_g'].str.contains('4000')]
+
+# ERROR 4: NaN issue in string filtering
+# This will raise an error because there are NaN values in the 'sex' column, and .str.contains() 
+# cannot handle NaN without the na=False parameter.
+# df[df['sex'].str.contains('male')]
+
+#------------------------------------------------------------
+# STEP 7: SUMMARY
+print("\n STEP 7. SUMMARY")
+
+print("""
+KEY LEARNINGS:
+
+1. Boolean indexing filters rows using True/False conditions
+2. Use & (AND), | (OR), ~ (NOT) for combining conditions
+3. Use .isin() for filtering multiple values
+4. Use .str.contains() for string filtering
+5. Handle missing values using na=False
+6. Always use parentheses in conditions
+
+BEST PRACTICE:
+Use clear and well-structured conditions for readability and correctness
+""")
+
+```
+
+
+
+
 ## Flowchart
 **The following flowchart shows all the steps of the above script**
 
