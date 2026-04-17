@@ -545,6 +545,40 @@ To remove incomplete data when missing values are small or insignificant.
 
 ----------
 
+### Script for Step 3(A)
+
+```python
+# 3(A) Use .dropna(axis=0) to drop ROWS with any missing value
+df_drop_rows = df.dropna(axis=0)  # axis = 0 means we are dropping rows. 
+# This will remove any row that contains at least one NaN value. 
+# If a row has missing data in any column, that row will be dropped from the resulting DataFrame.
+
+print("\nAfter dropping rows with missing values:")
+print("df_drop_rows.shape->", df_drop_rows.shape)  # (311, 7) - Earlier was (344, 7)
+# So 344-311 = 33 rows were dropped because they contained at least one missing value.
+# Shows the new shape of the DataFrame after dropping rows
+print("df_drop_rows.head()->", df_drop_rows.head())  # Displays the first 5 rows of the new DataFrame to confirm that rows with missing values have been removed
+# All rows in this new DataFrame should have complete data with no NaN values.
+
+```
+
+### Output for Step 3(A)
+
+```python
+After dropping rows with missing values:
+df_drop_rows.shape-> (333, 7)
+df_drop_rows.head()->   species     island  bill_length_mm  bill_depth_mm  flipper_length_mm  body_mass_g     sex
+0  Adelie  Torgersen            39.1           18.7              181.0       3750.0    Male
+1  Adelie  Torgersen            39.5           17.4              186.0       3800.0  Female
+2  Adelie  Torgersen            40.3           18.0              195.0       3250.0  Female
+4  Adelie  Torgersen            36.7           19.3              193.0       3450.0  Female
+5  Adelie  Torgersen            39.3           20.6              190.0       3650.0    Male
+
+```
+
+
+
+
 ## 3(B) Drop Columns → `.dropna(axis=1)`
 
 ### How
@@ -577,7 +611,40 @@ To remove incomplete data when missing values are small or insignificant.
 | thresh | Minimum non-null values required |
 
 
+### Script for Step 3(B)
 
+```python
+# 3(B) Use .dropna(axis=1) to drop COLUMNS with any missing value
+df_drop_cols = df.dropna(axis=1)  # axis = 1 means we are dropping columns. 
+# This will remove any column that contains at least one NaN value. 
+# If a column has missing data in any row, that column will be dropped from the resulting DataFrame.
+
+print("\nAfter dropping columns with missing values:")
+print("df_drop_cols.shape->", df_drop_cols.shape)  # (344, 5) - Earlier was (344, 7)
+# So 7-5 = 2 columns were dropped because they contained at least one missing value.
+# Shows the new shape of the DataFrame after dropping columns
+# The dropped columns are likely 'bill_length_mm' and 'body_mass_g' since they had missing values.
+print("df_drop_cols.head()->", df_drop_cols.head())  # Displays the first 5 rows of the new DataFrame to confirm that columns with missing values have been removed
+print("df_drop_cols.columns->", df_drop_cols.columns)  # Displays the remaining columns after dropping those with missing values
+
+
+```
+
+### Output for Step 3(B)
+
+```python
+
+After dropping columns with missing values:
+df_drop_cols.shape-> (344, 2)
+df_drop_cols.head()->   species     island
+0  Adelie  Torgersen
+1  Adelie  Torgersen
+2  Adelie  Torgersen
+3  Adelie  Torgersen
+4  Adelie  Torgersen
+df_drop_cols.columns-> Index(['species', 'island'], dtype='object')
+
+```
 
 
 
