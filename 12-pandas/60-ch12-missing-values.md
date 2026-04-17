@@ -50,6 +50,22 @@ You are required to:
 -   `how='any'` or `'all'`
 -   Returns: New DataFrame
 
+
+#### Pandas removes the entire row even if just one value in that row is missing.
+#### When you run:
+
+`df_drop_rows  =  df.dropna()`
+
+Pandas applies the default behavior:
+
+`df.dropna(axis=0, how='any')`
+
+#### Interpretation:
+
+-   `axis=0` → operate on **rows**
+-   `how='any'` → if **any column in a row has NaN**, drop that row
+
+
 ----------
 
 ### 1. (C) `.fillna()`
