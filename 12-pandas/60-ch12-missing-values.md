@@ -282,8 +282,130 @@ df.head()->   species     island  bill_length_mm  bill_depth_mm  flipper_length_
 3  Adelie  Torgersen             NaN            NaN                NaN          NaN     NaN
 4  Adelie  Torgersen            36.7           19.3              193.0       3450.0  Female
 
-
 ```
+
+
+
+## STEP 2: IDENTIFYING MISSING VALUES
+
+----------
+
+### Why this step is done
+
+Before cleaning data, it is essential to **detect and quantify missing values**. Without this step, any cleaning strategy would be uninformed and potentially harmful.
+
+----------
+
+## 2(A) `.isna()` – Detect Missing Values
+
+### What it does
+
+Creates a Boolean DataFrame:
+
+-   `True` → Missing value
+-   `False` → Present value
+
+### How it is done
+
+`df.isna()`
+
+### Output
+
+-   Same shape as original DataFrame
+-   Boolean values
+
+----------
+
+### What to do
+
+-   Use `.head()` to avoid large output
+-   Use it for visual inspection
+
+### What not to do
+
+-   Avoid printing full DataFrame for large datasets
+
+----------
+
+### Method Signature
+
+DataFrame.isna()
+
+-   **Input:** None
+-   **Output:** DataFrame (Boolean)
+-   **Limitation:** Does not give counts directly
+
+
+## 2(B) `.isna().sum()` – Count Missing Values
+
+### Why
+
+To quantify missing data per column
+
+### How
+
+`df.isna().sum()`
+
+>This is **method chaining**
+
+----------
+
+### Output
+
+-   Pandas Series
+-   Index → column names
+-   Values → count of missing values
+
+----------
+
+### Method Signatures
+
+`df.isna() # Assume df is a DataFrame`  
+
+-   Returns a **DataFrame of the same shape**
+-   Each value is:
+    -   `True` → if original value is missing (NaN)
+    -   `False` → if value is present
+
+
+
+`DataFrame.sum(axis=0)`
+This tells us:
+
+-   Method name → `sum`
+-   Parameter → `axis`
+-   Default value → `axis=0`
+
+>The default value of `axis =0`. This means that if you dont give any value for axis parameter, it will take a default of `axis =0` and therefore add/ Sum down rows (column-wise).
+>But you can override/ change this behavior by giving axis =1. This will add/ Sum across columns (row-wise). 
+
+  
+
+| Parameter | Meaning |
+| --- | --- |
+| axis=0 | Sum down rows (column-wise) |
+| axis=1 | Sum across columns (row-wise) |
+
+
+
+----------
+
+### Limitations
+
+-   Works column-wise by default
+-   Requires understanding Boolean arithmetic
+
+----------
+
+## 2(C) `.isnull()`
+
+### Why
+
+Alternative to `.isna()`
+
+### Key Point
+
+> `.isnull()` and `.isna()` are identical
 
 
 
