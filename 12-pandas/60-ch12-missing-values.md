@@ -426,6 +426,38 @@ This tells us:
 
 ----------
 
+### Script for 2(B)
+
+```python
+# 2(B) Use .isna().sum() to count missing values per column
+# We are "method chaining" .isna() with .sum() to get a count of how many missing values are in each column.
+# The result is a Series where the index is the column names and the values are the count of missing values 
+# in each column.
+print("\nMissing values count per column:->")
+print("df.isna().sum()->", df.isna().sum())
+# This shows how many missing values are in each column. For example, if 'body_mass_g' has 2 missing values, 
+# it will show 2 for that column.
+
+```
+
+### Output for Step 2(B)
+
+```python
+Missing values count per column:->
+df.isna().sum()-> species               0
+island                0
+bill_length_mm        2
+bill_depth_mm         2
+flipper_length_mm     2
+body_mass_g           2
+sex                  11
+dtype: int64
+
+```
+
+
+
+
 ## 2(C) `.isnull()`
 
 ### Why
@@ -435,6 +467,34 @@ Alternative to `.isna()`
 ### Key Point
 
 > `.isnull()` and `.isna()` are identical
+
+### Script for 2(C)
+
+```python
+# 2(C) Use .isnull() to check missing values (same as .isna())
+print("\nUsing isnull():->")
+# We are "method chaining" .isnull() with .sum() to confirm that it gives the same result as .isna().
+print("df.isnull().sum()->", df.isnull().sum())
+# Output will be the same as using isna(), confirming that both methods are interchangeable 
+# for detecting missing values.
+
+```
+
+
+### Output for Step 2(C)
+
+```python
+Using isnull():->
+df.isnull().sum()-> species               0
+island                0
+bill_length_mm        2
+bill_depth_mm         2
+flipper_length_mm     2
+body_mass_g           2
+sex                  11
+dtype: int64
+
+```
 
 
 
