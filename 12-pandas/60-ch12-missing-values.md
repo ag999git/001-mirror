@@ -807,6 +807,56 @@ The purpose of this step is to know **what not to do**, and improving debugging 
 
 Mean cannot be applied to categorical data
 
+#### The problem 
+The problem is attempting to compute the **mean** of a column (`sex`) and use it for filling missing values.
+
+----------
+
+#### Why this is wrong
+
+#### 1. Nature of Data
+
+-   `sex` is a **categorical column** (e.g., `'male'`, `'female'`)
+-   Mean requires **numeric data**
+
+----------
+
+#### 2. What “mean” actually means
+
+
+```
+$$
+Mean = \frac{Sum of Values}{Number of Values}
+$$.
+```
+
+>This only works for numbers, not text
+
+----------
+
+#### 3. What happens internally
+
+`df['sex'].mean()`
+
+Pandas tries to:
+
+-   Add values → `'male' + 'female'`  (invalid)
+-   Divide result → Error
+
+Leads to:
+
+`TypeError: Could not convert string to numeric`
+
+----------
+
+#### Correct Approach**
+
+Use **mode (most frequent value)**:
+
+`df['sex'].fillna(df['sex'].mode()[0])`
+
+
+
 ----------
 
 ### 5(B) Logical Misunderstanding
