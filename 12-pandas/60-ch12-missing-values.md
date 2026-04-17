@@ -787,7 +787,60 @@ df_mode['sex'].isna().sum()-> 0
 ```
 
 
+## STEP 5: ERROR DEMONSTRATIONS
 
+----------
+
+### Why this step is done
+
+The purpose of this step is to know **what not to do**, and improving debugging skills
+
+----------
+
+### Common Errors
+
+----------
+
+### 5(A) Wrong Imputation Type
+
+`# df['sex'].mean()`
+
+Mean cannot be applied to categorical data
+
+----------
+
+### 5(B) Logical Misunderstanding
+
+`# df.dropna(axis=1, how='all')`
+
+Beginners often misunderstand behavior
+
+----------
+
+### 5(C) Not Assigning Result
+
+`# df.fillna(0)`
+
+No change occurs
+
+
+### Script for Step 5 (Errors: Commented out)
+
+```python
+
+# STEP 5: ERROR DEMONSTRATIONS (COMMENTED OUT)
+print("\n STEP 5. ERROR DEMONSTRATIONS (COMMENTED OUT)")
+
+# 5(A) ERROR 1: Filling string column with mean
+# df['sex'].fillna(df['sex'].mean())
+
+# 5(B) ERROR 2: Dropping all data accidentally
+# df.dropna(axis=1, how='all')
+
+# 5(C) ERROR 3: Not assigning result back
+# df.fillna(0)  # No effect unless assigned
+
+```
 
 
 
