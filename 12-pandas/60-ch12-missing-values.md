@@ -647,6 +647,157 @@ df_drop_cols.columns-> Index(['species', 'island'], dtype='object')
 ```
 
 
+## STEP 4: FILLING MISSING VALUES (IMPUTATION)
+
+----------
+
+### Why this step is done
+
+To **preserve data** instead of removing it
+
+----------
+
+## 4(A) Mean Imputation
+
+### How
+
+`df['col'].fillna(df['col'].mean())`
+
+----------
+
+### Use Case
+
+-   Numeric data
+-   No extreme outliers
+
+----------
+
+### Limitation
+
+-   Affected by outliers
+
+----------
+
+### Script for Step 4(A)
+
+```python
+# 4(A) Fill numeric columns with mean
+df_mean = df.copy()  # Create a copy of the original DataFrame to avoid modifying it directly
+mean_value = df_mean['body_mass_g'].mean()  # Calculate the mean of the 'body_mass_g' column
+print("\nMean of body_mass_g:->", mean_value)  # Displays the mean value of the 'body_mass_g' column
+df_mean['body_mass_g'] = df_mean['body_mass_g'].fillna(mean_value)
+# This will replace all NaN values in the 'body_mass_g' column with the mean of that column.
+
+print("\nFilled with mean:")
+print("df_mean['body_mass_g'].isna().sum()->", df_mean['body_mass_g'].isna().sum())
+
+```
+
+### Output for Step 4(A)
+
+```python
+Mean of body_mass_g:-> 4201.754385964912
+
+Filled with mean:
+df_mean['body_mass_g'].isna().sum()-> 0
+
+```
+
+
+
+
+
+## 4(B) Median Imputation
+
+### How
+
+`df['col'].fillna(df['col'].median())`
+
+----------
+
+### Use Case
+
+-   Skewed data
+
+----------
+
+### Advantage
+
+-   Robust to outliers
+
+----------
+
+## 4(C) Mode Imputation
+
+### How
+
+`df['col'].fillna(df['col'].mode()[0])`
+
+----------
+
+### Use Case
+
+-   Categorical data
+
+----------
+
+### Limitation
+
+-   Multiple modes possible
+
+----------
+
+### Method Signature
+
+`DataFrame.fillna(value)`
+`Series.fillna(value)`
+
+-   **Input:** scalar / Series / dict
+-   **Output:** New object
+
+----------
+
+### Important Concept
+
+> `fillna()` does NOT modify original DataFrame unless assigned
+
+### Script for Step 4(C)
+
+```python
+# 4(C) Fill categorical columns with mode
+df_mode = df.copy()  # Create a copy of the original DataFrame to avoid modifying it directly
+mode_value = df_mode['sex'].mode()[0]  # Calculate the mode of the 'sex' column. mode() returns a Series, so we take the first element [0] to get the actual mode value.
+print("\nMode of sex:->", mode_value)
+df_mode['sex'] = df_mode['sex'].fillna(mode_value)
+# This will replace all NaN values in the 'sex' column with the mode of that column.
+
+print("\nFilled with mode:")
+print("df_mode['sex'].isna().sum()->", df_mode['sex'].isna().sum())
+
+```
+
+### Output for Step 4(C)
+
+```python
+Mode of sex:-> Male
+
+Filled with mode:
+df_mode['sex'].isna().sum()-> 0
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
