@@ -335,6 +335,35 @@ DataFrame.isna()
 -   **Output:** DataFrame (Boolean)
 -   **Limitation:** Does not give counts directly
 
+### Script for 2(A)
+
+```python
+# 2(A) Use .isna() to check missing values (True -> missing, False -> not missing)
+print("\nMissing values (True/False):->")
+# .isna() detects missing values in the DataFrame and returns a DataFrame of the same shape as df, where each 
+# cell contains True if the original cell in df is NaN (missing) and False otherwise.   
+print("df.isna().head()->", df.isna().head()) 
+# This allows us to quickly see which values are missing in the dataset. 
+# For example, if the 'bill_length_mm' column has a missing value in the 4th row, the corresponding cell 
+# in the output will show True for that position. 
+
+```
+### Output for Step 2(A)
+
+```python
+Missing values (True/False):->
+df.isna().head()->    species  island  bill_length_mm  bill_depth_mm  flipper_length_mm  body_mass_g    sex
+0    False   False           False          False              False        False  False
+1    False   False           False          False              False        False  False
+2    False   False           False          False              False        False  False
+3    False   False            True           True               True         True   True
+4    False   False           False          False              False        False  False
+
+```
+
+
+
+
 
 ## 2(B) `.isna().sum()` – Count Missing Values
 
