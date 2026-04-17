@@ -28,7 +28,45 @@ You are required to:
 
 
 
-## **Conceptual Understanding**
+## 1. Important Methods with Signatures
+
+----------
+
+### 1. (A) `.isna()`
+
+`df.isna()`
+
+-   Returns: Boolean DataFrame
+-   Limitation: Needs aggregation for counts
+
+----------
+
+### 1. (B) `.dropna()`
+
+`df.dropna(axis=0, how='any')`
+
+-   `axis=0` → rows
+-   `axis=1` → columns
+-   `how='any'` or `'all'`
+-   Returns: New DataFrame
+
+----------
+
+### 1. (C) `.fillna()`
+
+`df.fillna(value)`
+
+-   Input: scalar, dict, or method
+-   Returns: New DataFrame
+-   Limitation: May introduce bias
+
+
+
+
+
+
+
+## 2. Conceptual Understanding
 
 ### Identifying Missing Values
 
