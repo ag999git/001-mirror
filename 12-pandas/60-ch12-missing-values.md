@@ -497,6 +497,85 @@ dtype: int64
 ```
 
 
+## STEP 3: DROPPING MISSING VALUES
+
+### Why this step is done
+
+To remove incomplete data when missing values are small or insignificant.
+
+----------
+
+## 3(A) Drop Rows → `.dropna(axis=0)`
+
+### How
+
+`df.dropna(axis=0)`
+
+----------
+
+### Meaning
+
+-   Remove row if **any value is missing**
+
+----------
+
+### Signature
+
+`DataFrame.dropna(axis=0, how='any', subset=None)`
+
+-   **`axis=0`** → rows (This is the default value.)
+-   **`how='any'`** → default
+
+----------
+
+### Limitations
+
+-   Can remove large amount of data
+-   May introduce bias
+
+----------
+
+### What to do
+
+-   Check `.shape` before and after
+
+### What not to do
+
+-   Avoid blind usage
+
+----------
+
+## 3(B) Drop Columns → `.dropna(axis=1)`
+
+### How
+
+`df.dropna(axis=1)`
+
+----------
+
+### Meaning
+
+-   Remove column if **any value is missing**
+
+----------
+
+### Limitations
+
+-   May remove important features
+-   Very aggressive
+
+----------
+
+### Important Parameters
+
+`df.dropna(axis=1, how='all', thresh=n)`
+
+
+| Parameter | Meaning |
+| --- | --- |
+| how='all' | Drop only if all values missing |
+| thresh | Minimum non-null values required |
+
 
 
 
