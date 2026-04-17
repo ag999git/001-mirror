@@ -68,7 +68,7 @@ Pandas applies the default behavior:
 >Row is treated as a unit. If any part is incomplete, the whole row is removed.
 >You may lose a lot of data unintentionally
 >In real datasets (like penguins), many rows have at least one missing value.
->> So, you need to be careful and know the consequences of using `.dropna()`
+> So, you need to be careful and know the consequences of using `.dropna()`
 ----------
 
 ### 1. (C) `.fillna()`
