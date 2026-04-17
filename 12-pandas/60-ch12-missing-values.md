@@ -844,7 +844,46 @@ print("\n STEP 5. ERROR DEMONSTRATIONS (COMMENTED OUT)")
 
 
 
+## STEP 6: SUMMARY
 
+----------
+
+### Why this step is done
+
+To reinforce:
+
+-   Concepts
+-   Best practices
+-   Decision-making
+
+----------
+
+
+### Script for Step 6
+
+```python
+# STEP 6: SUMMARY
+print("\n STEP 6. SUMMARY")
+
+
+print("""
+KEY LEARNINGS:
+
+1. Use isna() or isnull() to detect missing values
+2. dropna() removes missing data
+3. fillna() replaces missing data
+4. Mean/Median for numeric data
+5. Mode for categorical data
+6. Always analyze before choosing method
+
+BEST PRACTICE:
+Understand the data before cleaning it
+""")
+
+```
+
+### The output of Step 6
+It is just a long print giving summary of all the steps in the script
 
 
 
