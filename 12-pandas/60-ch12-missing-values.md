@@ -248,9 +248,42 @@ Without this step, no further data inspection, cleaning, or analysis is possible
 
 > “The first step in any data analysis task is to load the dataset and understand its basic structure, as this forms the foundation for all subsequent operations.”
 
+### Script for Step 1
+
+```python
+
+# STEP 1: IMPORT LIBRARIES AND LOAD DATASET
+print("\n STEP 1. IMPORT LIBRARIES AND LOAD DATASET")
+
+import pandas as pd
+import seaborn as sns
+
+df = sns.load_dataset("penguins")
+# The dataset contains information about penguins, including their species, island, bill length, 
+# bill depth, flipper length, body mass, and sex
+
+print("\n--- FIRST 5 ROWS OF ORIGINAL DATAFRAME ---")
+print(df.shape)  # (344, 7) - 344 rows and 7 columns
+print("df.head()->", df.head())  # First 5 rows of the original DataFrame.
+
+```
+
+#### Output for Step 1
+
+```python
+STEP 1. IMPORT LIBRARIES AND LOAD DATASET
+
+--- FIRST 5 ROWS OF ORIGINAL DATAFRAME ---
+(344, 7)
+df.head()->   species     island  bill_length_mm  bill_depth_mm  flipper_length_mm  body_mass_g     sex
+0  Adelie  Torgersen            39.1           18.7              181.0       3750.0    Male
+1  Adelie  Torgersen            39.5           17.4              186.0       3800.0  Female
+2  Adelie  Torgersen            40.3           18.0              195.0       3250.0  Female
+3  Adelie  Torgersen             NaN            NaN                NaN          NaN     NaN
+4  Adelie  Torgersen            36.7           19.3              193.0       3450.0  Female
 
 
-
+```
 
 
 
