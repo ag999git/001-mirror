@@ -1041,6 +1041,271 @@ Understand the data before cleaning it
 ### The output of Step 6
 It is just a long print giving summary of all the steps in the script
 
+# The entire script in a single block:-
+
+```python
+"""
+PROJECT: Handling Missing Values in Pandas
+DATASET: Palmer Penguins
+
+OBJECTIVE:
+1. Identify missing values
+2. Drop missing values
+3. Fill missing values (mean, median, mode)
+4. Compare strategies
+
+NOTE:
+This script is written with detailed comments for teaching purposes.
+"""
+
+# STEP 1: IMPORT LIBRARIES AND LOAD DATASET
+print("\n STEP 1. IMPORT LIBRARIES AND LOAD DATASET")
+
+import pandas as pd
+import seaborn as sns
+
+df = sns.load_dataset("penguins")
+# The dataset contains information about penguins, including their species, island, bill length, 
+# bill depth, flipper length, body mass, and sex
+
+print("\n--- FIRST 5 ROWS OF ORIGINAL DATAFRAME ---")
+print(df.shape)  # (344, 7) - 344 rows and 7 columns
+print("df.head()->", df.head())  # First 5 rows of the original DataFrame.
+
+# STEP 2: IDENTIFYING MISSING VALUES
+print("\n STEP 2. IDENTIFYING MISSING VALUES")
+
+# 2(A) Use .isna() to check missing values (True -> missing, False -> not missing)
+print("\nMissing values (True/False):->")
+# .isna() detects missing values in the DataFrame and returns a DataFrame of the same shape as df, where each 
+# cell contains True if the original cell in df is NaN (missing) and False otherwise.   
+print("df.isna().head()->", df.isna().head()) 
+# This allows us to quickly see which values are missing in the dataset. 
+# For example, if the 'bill_length_mm' column has a missing value in the 4th row, the corresponding cell 
+# in the output will show True for that position. 
+
+# 2(B) Use .isna().sum() to count missing values per column
+# We are "method chaining" .isna() with .sum() to get a count of how many missing values are in each column.
+# The result is a Series where the index is the column names and the values are the count of missing values 
+# in each column.
+print("\nMissing values count per column:->")
+print("df.isna().sum()->", df.isna().sum())
+# This shows how many missing values are in each column. For example, if 'body_mass_g' has 2 missing values, 
+# it will show 2 for that column.
+
+# 2(C) Use .isnull() to check missing values (same as .isna())
+print("\nUsing isnull():->")
+# We are "method chaining" .isnull() with .sum() to confirm that it gives the same result as .isna().
+print("df.isnull().sum()->", df.isnull().sum())
+# Output will be the same as using isna(), confirming that both methods are interchangeable 
+# for detecting missing values.
+
+# STEP 3: DROPPING MISSING VALUES
+
+print("\n STEP 3. DROPPING MISSING VALUES")
+
+# 3(A) Use .dropna(axis=0) to drop ROWS with any missing value
+df_drop_rows = df.dropna(axis=0)  # axis = 0 means we are dropping rows. 
+# This will remove any row that contains at least one NaN value. 
+# If a row has missing data in any column, that row will be dropped from the resulting DataFrame.
+
+print("\nAfter dropping rows with missing values:")
+print("df_drop_rows.shape->", df_drop_rows.shape)  # (311, 7) - Earlier was (344, 7)
+# So 344-311 = 33 rows were dropped because they contained at least one missing value.
+# Shows the new shape of the DataFrame after dropping rows
+print("df_drop_rows.head()->", df_drop_rows.head())  # Displays the first 5 rows of the new DataFrame to confirm that rows with missing values have been removed
+# All rows in this new DataFrame should have complete data with no NaN values.
+
+# 3(B) Use .dropna(axis=1) to drop COLUMNS with any missing value
+df_drop_cols = df.dropna(axis=1)  # axis = 1 means we are dropping columns. 
+# This will remove any column that contains at least one NaN value. 
+# If a column has missing data in any row, that column will be dropped from the resulting DataFrame.
+
+print("\nAfter dropping columns with missing values:")
+print("df_drop_cols.shape->", df_drop_cols.shape)  # (344, 5) - Earlier was (344, 7)
+# So 7-5 = 2 columns were dropped because they contained at least one missing value.
+# Shows the new shape of the DataFrame after dropping columns
+# The dropped columns are likely 'bill_length_mm' and 'body_mass_g' since they had missing values.
+print("df_drop_cols.head()->", df_drop_cols.head())  # Displays the first 5 rows of the new DataFrame to confirm that columns with missing values have been removed
+print("df_drop_cols.columns->", df_drop_cols.columns)  # Displays the remaining columns after dropping those with missing values
+
+
+# STEP 4: FILLING MISSING VALUES (IMPUTATION)
+
+print("\n STEP 4. FILLING MISSING VALUES (IMPUTATION)")
+
+# 4(A) Fill numeric columns with mean
+df_mean = df.copy()  # Create a copy of the original DataFrame to avoid modifying it directly
+mean_value = df_mean['body_mass_g'].mean()  # Calculate the mean of the 'body_mass_g' column
+print("\nMean of body_mass_g:->", mean_value)  # Displays the mean value of the 'body_mass_g' column
+df_mean['body_mass_g'] = df_mean['body_mass_g'].fillna(mean_value)
+# This will replace all NaN values in the 'body_mass_g' column with the mean of that column.
+
+print("\nFilled with mean:")
+print("df_mean['body_mass_g'].isna().sum()->", df_mean['body_mass_g'].isna().sum())
+
+# 4(B) Fill numeric columns with median
+df_median = df.copy()  # Create a copy of the original DataFrame to avoid modifying it directly
+median_value = df_median['body_mass_g'].median()  # Calculate the median of the 'body_mass_g' column
+print("\nMedian of body_mass_g:->", median_value)  # Displays the median value of the 'body_mass_g' column
+df_median['body_mass_g'] = df_median['body_mass_g'].fillna(median_value)
+# This will replace all NaN values in the 'body_mass_g' column with the median of that column.
+print("\nFilled with median:")
+print("df_median['body_mass_g'].isna().sum()->", df_median['body_mass_g'].isna().sum())
+
+# 4(C) Fill categorical columns with mode
+df_mode = df.copy()  # Create a copy of the original DataFrame to avoid modifying it directly
+mode_value = df_mode['sex'].mode()[0]  # Calculate the mode of the 'sex' column. mode() returns a Series, so we take the first element [0] to get the actual mode value.
+print("\nMode of sex:->", mode_value)
+df_mode['sex'] = df_mode['sex'].fillna(mode_value)
+# This will replace all NaN values in the 'sex' column with the mode of that column.
+
+print("\nFilled with mode:")
+print("df_mode['sex'].isna().sum()->", df_mode['sex'].isna().sum())
+
+
+# STEP 5: ERROR DEMONSTRATIONS (COMMENTED OUT)
+print("\n STEP 5. ERROR DEMONSTRATIONS (COMMENTED OUT)")
+
+# 5(A) ERROR 1: Filling string column with mean
+# df['sex'].fillna(df['sex'].mean())
+
+# 5(B) ERROR 2: Dropping all data accidentally
+# df.dropna(axis=1, how='all')
+
+# 5(C) ERROR 3: Not assigning result back
+# df.fillna(0)  # No effect unless assigned
+
+
+# STEP 6: SUMMARY
+print("\n STEP 6. SUMMARY")
+
+
+print("""
+KEY LEARNINGS:
+
+1. Use isna() or isnull() to detect missing values
+2. dropna() removes missing data
+3. fillna() replaces missing data
+4. Mean/Median for numeric data
+5. Mode for categorical data
+6. Always analyze before choosing method
+
+BEST PRACTICE:
+Understand the data before cleaning it
+""")
+
+
+
+```
+
+## Combined output
+
+```python
+
+ STEP 1. IMPORT LIBRARIES AND LOAD DATASET
+
+--- FIRST 5 ROWS OF ORIGINAL DATAFRAME ---
+(344, 7)
+df.head()->   species     island  bill_length_mm  bill_depth_mm  flipper_length_mm  body_mass_g     sex
+0  Adelie  Torgersen            39.1           18.7              181.0       3750.0    Male
+1  Adelie  Torgersen            39.5           17.4              186.0       3800.0  Female
+2  Adelie  Torgersen            40.3           18.0              195.0       3250.0  Female
+3  Adelie  Torgersen             NaN            NaN                NaN          NaN     NaN
+4  Adelie  Torgersen            36.7           19.3              193.0       3450.0  Female
+
+ STEP 2. IDENTIFYING MISSING VALUES
+
+Missing values (True/False):->
+df.isna().head()->    species  island  bill_length_mm  bill_depth_mm  flipper_length_mm  body_mass_g    sex
+0    False   False           False          False              False        False  False
+1    False   False           False          False              False        False  False
+2    False   False           False          False              False        False  False
+3    False   False            True           True               True         True   True
+4    False   False           False          False              False        False  False
+
+Missing values count per column:->
+df.isna().sum()-> species               0
+island                0
+bill_length_mm        2
+bill_depth_mm         2
+flipper_length_mm     2
+body_mass_g           2
+sex                  11
+dtype: int64
+
+Using isnull():->
+df.isnull().sum()-> species               0
+island                0
+bill_length_mm        2
+bill_depth_mm         2
+flipper_length_mm     2
+body_mass_g           2
+sex                  11
+dtype: int64
+
+ STEP 3. DROPPING MISSING VALUES
+
+After dropping rows with missing values:
+df_drop_rows.shape-> (333, 7)
+df_drop_rows.head()->   species     island  bill_length_mm  bill_depth_mm  flipper_length_mm  body_mass_g     sex
+0  Adelie  Torgersen            39.1           18.7              181.0       3750.0    Male
+1  Adelie  Torgersen            39.5           17.4              186.0       3800.0  Female
+2  Adelie  Torgersen            40.3           18.0              195.0       3250.0  Female
+4  Adelie  Torgersen            36.7           19.3              193.0       3450.0  Female
+5  Adelie  Torgersen            39.3           20.6              190.0       3650.0    Male
+
+After dropping columns with missing values:
+df_drop_cols.shape-> (344, 2)
+df_drop_cols.head()->   species     island
+0  Adelie  Torgersen
+1  Adelie  Torgersen
+2  Adelie  Torgersen
+3  Adelie  Torgersen
+4  Adelie  Torgersen
+df_drop_cols.columns-> Index(['species', 'island'], dtype='object')
+
+ STEP 4. FILLING MISSING VALUES (IMPUTATION)
+
+Mean of body_mass_g:-> 4201.754385964912
+
+Filled with mean:
+df_mean['body_mass_g'].isna().sum()-> 0
+
+Median of body_mass_g:-> 4050.0
+
+Filled with median:
+df_median['body_mass_g'].isna().sum()-> 0
+
+Mode of sex:-> Male
+
+Filled with mode:
+df_mode['sex'].isna().sum()-> 0
+
+ STEP 5. ERROR DEMONSTRATIONS (COMMENTED OUT)
+
+ STEP 6. SUMMARY
+
+KEY LEARNINGS:
+
+1. Use isna() or isnull() to detect missing values
+2. dropna() removes missing data
+3. fillna() replaces missing data
+4. Mean/Median for numeric data
+5. Mode for categorical data
+6. Always analyze before choosing method
+
+BEST PRACTICE:
+Understand the data before cleaning it
+
+
+
+```
+
+
+
+
+
 
 
 
