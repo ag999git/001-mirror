@@ -152,6 +152,117 @@ In real datasets (like Penguins):
 | Mode | Categorical data | Works for strings | May be ambiguous |
 
 
+# Script (in steps) and explanation of each step
+
+## STEP 1: IMPORT LIBRARIES AND LOAD DATASET
+
+----------
+
+### Why this step is done
+
+This step prepares the environment for data analysis.  
+Before performing any operation on data, the required libraries must be loaded and the dataset must be brought into a Pandas DataFrame.
+
+Without this step, no further data inspection, cleaning, or analysis is possible.
+
+----------
+
+### How it is done
+
+-   The `pandas` library is imported for data manipulation
+-   The `seaborn` library is used to load the Palmer Penguins dataset
+-   The dataset is stored in a DataFrame (`df`)
+
+----------
+
+### What to do
+
+-   Use standard aliases:
+    -   `import pandas as pd`
+    -   `import seaborn as sns`
+-   Load dataset once and reuse it
+-   Display initial rows using `head()`
+-   Check shape using `.shape` to understand size
+
+----------
+
+### What not to do
+
+-   Avoid reloading dataset multiple times
+-   Avoid modifying original dataset without creating a copy
+-   Avoid skipping initial inspection
+
+----------
+
+### Important Features / Sub-steps
+
+-   Import libraries
+-   Load dataset
+-   Store in DataFrame
+-   Perform initial inspection (`head()`, `shape`)
+
+----------
+
+### Methods / Attributes
+
+----------
+
+#### `sns.load_dataset(name)`
+
+`df  =  sns.load_dataset("penguins")`
+
+-   **Input:** Dataset name (string)
+-   **Output:** Pandas DataFrame
+-   **Use:** Loads built-in dataset
+
+----------
+
+#### `df.head(n=5)`
+
+`df.head()`
+
+-   **Input:** Number of rows (optional)
+-   **Output:** First `n` rows
+-   **Use:** Quick inspection
+
+----------
+
+####  `df.shape`
+
+`df.shape`
+
+-   **Output:** Tuple `(rows, columns)`
+-   **Use:** Understand dataset size
+
+----------
+
+### Limitations
+
+-   `sns.load_dataset()` may require internet access in some environments
+-   `head()` shows only a small sample, not full dataset
+-   Initial inspection does not reveal deeper data issues
+
+----------
+
+### Role of Step 1
+
+> “The first step in any data analysis task is to load the dataset and understand its basic structure, as this forms the foundation for all subsequent operations.”
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
