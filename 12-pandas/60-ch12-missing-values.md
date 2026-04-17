@@ -865,6 +865,58 @@ Use **mode (most frequent value)**:
 
 Beginners often misunderstand behavior
 
+
+#### 5(B) Logical Misunderstanding
+
+`# df.dropna(axis=1, how='all')`
+
+----------
+
+#### The confusion is they often believe:
+
+> “This will drop all columns that have missing values”
+
+----------
+
+#### Actual meaning
+
+`df.dropna(axis=1, how='all')`
+
+>Drops a column **ONLY IF ALL values in that column are missing**
+
+----------
+
+#### Example
+
+```python
+A: [1, 2, 3] →  kept    
+B: [NaN, NaN, NaN] →  dropped    
+C: [1, NaN, 3] →  kept
+``` 
+
+## **Why confusion happens**
+
+The following table explains why confusion happens:
+
+| Parameter | Meaning |
+| --- | --- |
+| `how='any'` | Drop if ANY value missing |
+| `how='all'` | Drop if ALL values missing |
+
+
+
+If you wanted to remove columns with missing values: USE
+
+`df.dropna(axis=1) # correct for that intention`
+
+But if instead you wrote:
+
+`df.dropna(axis=1, how='all')`
+
+**Almost nothing gets removed**
+
+
+
 ----------
 
 ### 5(C) Not Assigning Result
@@ -872,6 +924,60 @@ Beginners often misunderstand behavior
 `# df.fillna(0)`
 
 No change occurs
+
+
+
+#### 5(C) Not Assigning Result
+
+`# df.fillna(0)`
+
+----------
+
+#### What you might expect
+
+You might think:
+
+> “This will replace all missing values with 0 in the DataFrame”
+
+----------
+
+#### What actually happens
+
+>Nothing changes in `df`
+
+----------
+
+#### Why?
+
+Most Pandas methods:
+
+-   Do NOT modify the original DataFrame
+-   Return a **new modified copy**
+
+----------
+
+#### Internally:
+
+`df.fillna(0)`
+
+>Creates a **new DataFrame**, but you are **not storing it**
+
+----------
+
+#### Correct Ways
+
+#### Method 1: Assign back
+
+`df  =  df.fillna(0)`
+
+----------
+
+#### Method 2: Use inplace
+
+`df.fillna(0, inplace=True)`
+
+
+
 
 
 ### Script for Step 5 (Errors: Commented out)
