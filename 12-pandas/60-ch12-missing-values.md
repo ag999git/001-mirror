@@ -28,6 +28,36 @@ You are required to:
 
 
 
+## **Conceptual Understanding**
+
+### Identifying Missing Values
+
+| Method | Description | Output |
+| --- | --- | --- |
+| .isna() | Detect missing values | Boolean DataFrame |
+| .isnull() | Same as .isna() | Boolean DataFrame |
+| .sum() | Count missing values | Series |
+
+* * *
+
+### Dropping vs Filling
+
+| Aspect | Dropping (dropna) | Filling (fillna) |
+| --- | --- | --- |
+| Data Loss | High | Low |
+| Simplicity | Easy | Moderate |
+| Bias Risk | Low | Possible |
+| Use Case | Small missing data | Large missing data |
+
+* * *
+
+### Imputation Techniques
+
+| Method | Suitable For | Advantage | Limitation |
+| --- | --- | --- | --- |
+| Mean | Numeric data | Simple | Affected by outliers |
+| Median | Numeric data | Robust | Ignores distribution |
+| Mode | Categorical data | Works for strings | May be ambiguous |
 
 
 
