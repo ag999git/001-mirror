@@ -41,7 +41,7 @@ You are required to:
 
 ----------
 
-### 1. (B) `.dropna()`
+### 1. (B) `.dropna(axis = 0)` for `axis =0`
 
 `df.dropna(axis=0, how='any')`
 
@@ -71,7 +71,42 @@ Pandas applies the default behavior:
 > So, you need to be careful and know the consequences of using `.dropna()`
 ----------
 
-### 1. (C) `.fillna()`
+### 1. (C) `.dropna(axis = 1)` for axis =1
+
+#### When you run:
+
+`df_drop_cols  =  df.dropna(axis=1)`
+
+Pandas internally treats it as:
+
+`df.dropna(axis=1, how='any')`
+
+----------
+
+#### Interpretation
+
+-   `axis=1` → operate on **columns**
+-   `how='any'` → if **any row in a column has NaN**, drop that column
+
+
+> In `.dropna(axis=1)` Column is treated as a unit. If any value is missing anywhere in that column, the whole column is removed.
+
+
+#### Why this is risky
+
+In real datasets (like Penguins):
+
+-   Many columns have at least one missing value
+-   Using this blindly may **remove most of your dataset**
+
+#### For example:
+
+-   `sex` column has missing values → will be dropped
+-   numeric columns may also be dropped if any NaN exists
+
+
+
+### 1. (D) `.fillna()`
 
 `df.fillna(value)`
 
