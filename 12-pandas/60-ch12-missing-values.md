@@ -115,11 +115,6 @@ In real datasets (like Penguins):
 -   Limitation: May introduce bias
 
 
-
-
-
-
-
 ## 2. Conceptual Understanding
 
 ### Identifying Missing Values
@@ -153,6 +148,14 @@ In real datasets (like Penguins):
 
 
 # Script (in steps) and explanation of each step
+The following script shows how these methods work.
+The script is in 6 steps.
+Each of the 6 steps are discussed below seperately and then finally a combined script of all the 6 steps is given. 
+For each step first the theoretical portion is explained and then the actual script dealing with that part is discusses.
+The flow chart of these 6 steps is as shown in the diagram below:-
+
+![Script flow chart- Missing data](/resources/ch12-handling-missing-data-script-6steps.png)
+
 
 ## STEP 1: IMPORT LIBRARIES AND LOAD DATASET
 
