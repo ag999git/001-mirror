@@ -449,7 +449,9 @@ To consolidate learning and reinforce best practices
 | Index misuse | Hard-to-read data |
 
 
+## Flowchart of the steps in the script
 
+![Flow chart Data cleaning Structural change](/resources/ch12-data-cleaning-structural-change.png)
 
 
 
