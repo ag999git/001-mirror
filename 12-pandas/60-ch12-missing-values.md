@@ -26,6 +26,16 @@ You are required to:
     -   Tables
     -   Flowcharts
 
+## How to handle missing data
+
+Data is real world is not perfect. So when you see missing values or wrong values in a dataset, you have 2 options
+-    Drop that data row/ or column containing the missing/ wrong data
+-    Fill up the missing data with some value (What you should fill would depend upon the data and your understanding of the data. It could be mean if the data is numeric or mode if the data is categorical etc)
+-    Dropping data has its consequences. Especially if you are dropping columns, you should be aware that it would reduce the "features" of your data set. Similarly dropping rows can also have consequences. It could create a "bias" in the data set
+
+The following flow chart shows how missing data may be handled depending upon whether it is small or large (Few or many):
+
+![Missing data small/ large](/resources/ch12-missing-data-small-large.png)
 
 
 ## 1. Important Methods with Signatures
