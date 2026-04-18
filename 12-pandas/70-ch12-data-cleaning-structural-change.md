@@ -439,9 +439,14 @@ To consolidate learning and reinforce best practices
 | Index | `.set_index()` | Confusion | Reset when needed |
 
 
+### Common error summary
 
-
-
+| Error | Reason |
+| --- | --- |
+| Wrong dtype conversion | Incompatible types |
+| Missing assignment | No change |
+| Wrong column name | Silent ignore |
+| Index misuse | Hard-to-read data |
 
 
 
