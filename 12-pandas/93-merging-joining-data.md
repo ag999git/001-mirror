@@ -725,9 +725,116 @@ BEST PRACTICE:
 
 
 ```
+</details>
+
+## Understanding LEFT, RIGHT, INNER and OUTER joins on rows and columns
+<details>
+
+<summary> Understanding LEFT, RIGHT, INNER and OUTER joins on rows and columns</summary>
+
+## Understanding LEFT, RIGHT, INNER and OUTER joins on rows and columns
+When joining 2 tables, 
+For rows there can be 3 possible scenarion (1) Both tables have same number of rows (2) Left > Right (3) Left < Right
+
+## Effect of Row Combinations on Different Types of Joins
+
+  <details>
+  <summary>Effect of Row Combinations on Different Types of Joins</summary>summary
+
+###  Concept Overview
+
+When two DataFrames are merged, the **number of rows in the result** depends on:
+
+1.  Number of rows in **Left table**
+2.  Number of rows in **Right table**
+3.  Type of **join used** (Inner, Left, Right, Outer)
+4.  Whether keys are **unique or repeated**
+
+### Key Principle
+
+> The merge operation works **row-wise based on matching keys**, not just total row counts.
+
+### Scenario Table: Row Behavior in Joins
+  
+
+| Scenario | Join Type | Rows in Result | Data Loss | Key Insight |
+| --- | --- | --- | --- | --- |
+| Equal | Inner | Same | None (if keys match) | Clean match |
+| Equal | Left | Same | None | LEFT preserved |
+| Equal | Right | Same | None | RIGHT preserved |
+| Equal | Outer | Same | None | Full union |
+| LEFT > RIGHT | Inner | Reduced | LEFT rows lost | Only intersection |
+| LEFT > RIGHT | Left | Same as LEFT | No LEFT loss | Best for preserving main data |
+| LEFT > RIGHT | Right | Same as RIGHT | LEFT lost | Rarely used here |
+| LEFT > RIGHT | Outer | Max(rows) | None | Missing filled with NaN |
+| LEFT < RIGHT | Inner | Reduced | RIGHT rows lost | Only intersection |
+| LEFT < RIGHT | Left | Same as LEFT | RIGHT lost | May hide extra data |
+| LEFT < RIGHT | Right | Same as RIGHT | No RIGHT loss | Use if RIGHT is important |
+| LEFT < RIGHT | Outer | Max(rows) | None | Complete union |
+
+## Special Case: Duplicate Keys
+
+| Left Matches | Right Matches | Result |
+| --- | --- | --- |
+| 1 | Many | Rows duplicate |
+| Many | 1 | Rows duplicate |
+| Many | Many | m × n explosion |
 
 
+### Formula
+
+> If key appears **m times in left** and **n times in right** → result has **$m × n$ rows**
+
+## KEY INTERPRETATION RULES
+
+### Rule 1: Control Comes from JOIN TYPE
+
+-   INNER → Intersection
+-   LEFT → Preserve LEFT
+-   RIGHT → Preserve RIGHT
+-   OUTER → Preserve BOTH
+
+### Rule 2: Size Difference ≠ Error
+
+| Situation | Reality |
+| --- | --- |
+| LEFT > RIGHT | Very common (missing auxiliary data) |
+| LEFT < RIGHT | Also valid (extra reference data) |
+| Problem arises only if | You EXPECT something else |
+
+### Rule 3: Think in Terms of “Preservation”
+
+| If you want to preserve… | Use |
+| --- | --- |
+| Main dataset | LEFT JOIN |
+| Reference dataset | RIGHT JOIN |
+| Only valid matches | INNER JOIN |
+| Everything | OUTER JOIN |
+
+## Key Takeaways
+
+-   **Inner join → intersection → possible data loss**
+-   **Left join → preserves left**
+-   **Right join → preserves right**
+-   **Outer join → preserves everything**
+-   Duplicate keys can **multiply rows unexpectedly**
+
+
+
+
+
+
+
+  </details>
 
 </details>
+
+## Effect of Column Names and Values in Joins
+
+<details>
+<summary> Effect of Column Names and Values in Joins </summary>
+
+</details>
+
 
 
