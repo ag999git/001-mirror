@@ -348,5 +348,343 @@ BEST PRACTICES:
 
 </details>
 
+## Step by step explanation of the script
+<details>
+<summary> Step by step explanation of the script</summary>
+
+
+## STEP 0: Import Libraries
+
+###  Code
+
+`import  pandas  as  pd`
+`import  seaborn  as  sns`
+
+### Purpose
+
+-   Load required libraries for:
+    -   Data manipulation → `pandas`
+    -   Dataset access → `seaborn`
+
+### Output
+
+-   No visible output
+-   Libraries loaded into memory
+
+### Do’s & Don’ts
+
+ - Import with standard aliases (`pd`, `sns`)   
+ - Avoid re-importing    multiple times unnecessarily
+
+----------
+
+### STEP 1: Load and Inspect Data
+
+----------
+
+#### STEP 1.1: Load Dataset
+
+`df  =  sns.load_dataset('flights')`
+
+#### STEP 1.2: Inspect Data
+```python
+df.head()  
+df.dtypes  
+df.shape
+```
+### STEP 2: Create Datetime Column (Robust Method)
+
+----------
+
+#### STEP 2.1: Map Month Names
+
+`df['month_num'] =  df['month'].map(month_map)`
+
+
+#### Method details
+| Feature | Description |
+| --- | --- |
+| Method | Series.map() |
+| Signature | Series.map(arg) |
+| Input | dict / function |
+| Output | Transformed Series |
+
+#### Output Hint
+
+`Jan → 1, Feb → 2 ...`
+
+#### Reason
+
+-   Converts categorical month → numeric
+-   Required for structured datetime creation
+
+#### Do’s & Don’ts
+
+ - Use mapping for categorical → numeric   
+ - Avoid manual loops
+
+----------
+
+#### STEP 2.2: Create Datetime
+
+```python
+df['date'] =  pd.to_datetime(  
+  dict(year=df['year'], month=df['month_num'], day=1)  
+)
+```
+
+#### Method Details
+
+| Feature | Description |
+| --- | --- |
+| Method | pd.to_datetime() |
+| Signature | to_datetime(arg, errors='raise', format=None, ...) |
+| Input | dict / Series / string |
+| Output | Datetime Series |
+
+
+### Output Hint
+
+1949-01-01  
+1949-02-01
+
+### Why This is BEST Method
+
+-   No string parsing
+-   No dtype issues
+-   Fully vectorized
+
+### Do’s & Don’ts
+
+DO: Prefer structured dict input  
+DONT: Avoid string concatenation with category dtype  
+DONT: Avoid `.apply()` unless necessary
+
+----------
+
+### STEP 3: Set Datetime Index
+
+----------
+
+#### STEP 3.1: Set Index
+
+`df.set_index('date', inplace=True)`
+
+#### Method Details
+| Feature | Description |
+| --- | --- |
+| Method | set_index() |
+| Signature | df.set_index(keys, drop=True, inplace=False) |
+| Output | DataFrame with new index |
+
+#### Output
+
+-   `date` becomes index
+
+----------
+
+#### STEP 3.2: Drop Columns
+
+`df.drop(columns=['year', 'month', 'month_num'], inplace=True)`
+
+#### Method details
+
+
+| Feature | Description |
+| --- | --- |
+| Method | drop() |
+| Signature | df.drop(labels, axis=1) |
+| Output | Reduced DataFrame |
+
+### ✔ Output Hint
+
+Columns → passengers only  
+Shape → (144, 1)
+
+### ✔ Reason
+
+-   Avoid redundancy
+-   Cleaner dataset
+
+----------
+
+### STEP 4: Extract Time Components
+
+----------
+
+#### Code
+
+```python
+df['Year'] =  df.index.year  
+df['Quarter'] =  df.index.quarter  
+df['Month'] =  df.index.month
+```
+
+#### Method Details
+
+| Feature | Description |
+| --- | --- |
+| Accessor | .dt / datetime index |
+| Output | Numeric columns |
+
+
+#### Output Hint
+
+Year → 1949  
+Quarter → 1  
+Month → 1
+
+#### Reason
+
+-   Enables grouping and analysis
+
+#### Do’s & Don’ts
+
+DO Use `.dt` or index attributes  
+DONT Works only on datetime dtype
+
+----------
+
+### STEP 5: Time-Based Slicing
+
+----------
+
+####  Code
+
+`fifties_data  =  df.loc['1950':'1959']`
+
+#### Method Details
+
+| Feature | Description |
+| --- | --- |
+| Method | `.loc[]` |
+| Signature | `df.loc[start:end]` |
+| Input | Date strings |
+| Output | Filtered DataFrame |
+
+#### Output Hint
+
+Rows from 1950 to 1959
+
+#### Key Feature
+
+-   Inclusive slicing
+-   Works only with DatetimeIndex
+
+----------
+
+#### Analysis
+
+sum()  
+mean()
+
+#### Methods
+
+| Method | Output |
+| --- | --- |
+| sum() | Total passengers |
+| mean() | Average passengers |
+
+### STEP 6: Resampling
+
+----------
+
+#### STEP 6.1: Quarterly Average
+
+`quarterly_avg  =  df['passengers'].resample('Q').mean()`
+
+#### Method details
+
+| Feature | Description |
+| --- | --- |
+| Method | resample() |
+| Signature | df.resample(rule) |
+| Input | Frequency string |
+| Output | Resampler object |
+
+#### Common frequencies
+
+| Code | Meaning |
+| --- | --- |
+| Q | Quarterly |
+| Y | Yearly |
+| M | Monthly |
+
+#### Output Hint
+
+Index → quarter-end dates
+
+----------
+
+### STEP 6.2: Yearly Total
+
+`yearly_total  =  df['passengers'].resample('Y').sum()`
+
+#### Output Hint
+
+`1949-12-31 → total passengers`
+
+----------
+
+####  Important Rule
+
+**`resample()` requires:**
+
+-   DatetimeIndex
+-   Sorted index
+
+----------
+
+### STEP 7: Summary Block
+
+#### Purpose
+
+-   Reinforce learning
+-   Highlight best practices
+
+## Summary table of methods used
+
+| Method | Purpose | Input | Output |
+| --- | --- | --- | --- |
+| load_dataset() | Load data | dataset name | DataFrame |
+| map() | Transform values | dict | Series |
+| to_datetime() | Create datetime | dict/series | datetime Series |
+| set_index() | Set index | column | DataFrame |
+| drop() | Remove columns | list | DataFrame |
+| .loc[] | Slice data | labels | DataFrame |
+| resample() | Change frequency | rule | Resampler |
+| sum() | Aggregate | numeric | scalar/Series |
+| mean() | Aggregate | numeric | scalar/Series |
+
+### 3. DOS AND DON’TS (IMPORTANT FOR STUDENTS)
+
+----------
+
+#### DO’s
+
+-   Use structured datetime creation
+-   Always set datetime index before resampling
+-   Check data types (`dtypes`)
+-   Use vectorized operations
+
+----------
+
+#### DON’Ts
+
+-   Avoid string concatenation with categorical data
+-   Do not use `resample()` without datetime index
+-   Avoid `.apply()` for large datasets
+-   Do not ignore missing/invalid dates
+
+
+
+
+
+
+</details>
+
+
+
+
 
 
