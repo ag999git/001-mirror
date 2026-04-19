@@ -44,7 +44,287 @@ XXXX
 
 The following script performs grouping, calculates complex aggregates, and filters out islands with insufficient data volume.
 
+```python
 
+"""
+PROJECT: Grouping and Aggregation in Pandas
+DATASET: Palmer Penguins
+
+OBJECTIVE:
+1. Understand Split–Apply–Combine
+2. Perform grouping using groupby()
+3. Apply aggregation functions using agg()
+4. Filter groups based on conditions
+
+NOTE:
+This script is written for teaching purposes.
+Each step includes explanation, purpose, and output hints.
+"""
+
+# ==========================================================
+# STEP 1: IMPORT LIBRARIES AND LOAD DATASET
+# ==========================================================
+
+print("\nSTEP 1: IMPORT LIBRARIES AND LOAD DATASET")
+
+import pandas as pd
+import seaborn as sns
+
+# Load dataset
+df = sns.load_dataset("penguins")
+
+# ----------------------------------------------------------
+# STEP 1.1: INITIAL DATA INSPECTION
+# ----------------------------------------------------------
+
+print("\n--- FIRST 5 ROWS ---")
+print(df.head())
+# OUTPUT HINT:
+# Displays first 5 rows of the dataset.
+# Helps identify column names and structure.
+# Columns include: species, island, bill_length_mm, etc.
+# Some rows may contain missing values (NaN).
+
+print("\n--- SHAPE OF DATA ---")
+print("Shape:", df.shape)
+# OUTPUT HINT:
+# Shape is (rows, columns)
+# (344, 7) → 344 rows and 7 columns
+
+
+# ==========================================================
+# STEP 2: BASIC GROUPING USING groupby()
+# ==========================================================
+
+print("\nSTEP 2: BASIC GROUPING USING groupby()")
+
+# ----------------------------------------------------------
+# STEP 2.1: SPLIT (Group the data)
+# ----------------------------------------------------------
+
+grouped_species = df.groupby("species")
+
+# Explanation:
+# The DataFrame is split into groups based on unique values in 'species'.
+# Each group represents one species (Adelie, Chinstrap, Gentoo).
+
+# grouped_species is a DataFrameGroupBy object:
+# - It does NOT store separate DataFrames explicitly
+# - It stores grouping instructions
+
+# No computation happens here → only grouping (Split step)
+
+# Example access:
+# grouped_species['body_mass_g']
+
+
+# ----------------------------------------------------------
+# STEP 2.2: APPLY + COMBINE (Calculate mean)
+# ----------------------------------------------------------
+
+mean_mass = grouped_species["body_mass_g"].mean()
+
+# Explanation:
+# Apply → mean() is applied to each group
+# Combine → results are combined into a single Series
+
+# Output:
+# Index → species
+# Values → mean body mass
+
+print("\nMean body mass by species:")
+print(mean_mass)
+
+# OUTPUT HINT:
+# species
+# Adelie       ~3700
+# Chinstrap    ~3700+
+# Gentoo       ~5000
+
+
+# ----------------------------------------------------------
+# STEP 2.3: COMMON ERROR
+# ----------------------------------------------------------
+
+# ERROR:
+# Using a non-existing column raises KeyError
+# df.groupby("wrong_column")
+
+
+# ==========================================================
+# STEP 3: MULTIPLE AGGREGATIONS USING .agg()
+# ==========================================================
+
+print("\nSTEP 3: MULTIPLE AGGREGATIONS USING .agg()")
+
+# ----------------------------------------------------------
+# STEP 3.1: APPLY MULTIPLE FUNCTIONS
+# ----------------------------------------------------------
+
+agg_results = df.groupby("species").agg({
+    "body_mass_g": ["mean", "sum", "count"],
+    "bill_length_mm": ["mean", "max"]
+})
+
+# Explanation:
+# .agg() applies multiple functions at once.
+
+# Dictionary structure:
+# Key → column name
+# Value → list of functions
+
+# Result:
+# DataFrame with MultiIndex columns:
+# Level 1 → column name
+# Level 2 → function name
+
+print("\nAggregated results:")
+print(agg_results)
+
+# OUTPUT HINT:
+# Multi-level columns:
+# body_mass_g → mean, sum, count
+# bill_length_mm → mean, max
+
+
+# ----------------------------------------------------------
+# STEP 3.2: IMPORTANT CONCEPT
+# ----------------------------------------------------------
+
+# .agg() reduces data → one row per group
+
+# Original → many rows per species
+# After agg → one row per species
+
+# Use .transform() if original shape must be preserved
+
+
+# ----------------------------------------------------------
+# STEP 3.3: COMMON ERROR
+# ----------------------------------------------------------
+
+# ERROR:
+# Invalid function name raises error
+# df.groupby("species").agg({"body_mass_g": "average"})
+
+
+# ==========================================================
+# STEP 4: GROUPING BY MULTIPLE COLUMNS
+# ==========================================================
+
+print("\nSTEP 4: GROUPING BY MULTIPLE COLUMNS")
+
+# ----------------------------------------------------------
+# STEP 4.1: MULTI-LEVEL GROUPING
+# ----------------------------------------------------------
+
+group_multi = df.groupby(["species", "island"])["body_mass_g"].mean()
+
+# Explanation:
+# Groups are formed using combinations:
+# (species, island)
+
+# Example groups:
+# (Adelie, Biscoe), (Adelie, Dream), etc.
+
+print("\nMean body mass by species and island:")
+print(group_multi)
+
+# OUTPUT HINT:
+# MultiIndex output:
+# (species, island) → mean value
+
+
+# ----------------------------------------------------------
+# STEP 4.2: IMPORTANT CONCEPT
+# ----------------------------------------------------------
+
+# Output uses MultiIndex (hierarchical index):
+# Level 1 → species
+# Level 2 → island
+
+
+# ==========================================================
+# STEP 5: FILTERING GROUPS
+# ==========================================================
+
+print("\nSTEP 5: FILTERING GROUPS")
+
+# ----------------------------------------------------------
+# STEP 5.1: DEFINE FILTER CONDITION
+# ----------------------------------------------------------
+
+filtered_groups = df.groupby("species").filter(
+    lambda x: x["body_mass_g"].mean() > 4000
+)
+
+# Explanation:
+# filter() keeps/removes entire groups
+
+# Function (lambda):
+# Input → group DataFrame
+# Output → True/False
+
+# True → keep group
+# False → remove group
+
+print("\nFiltered dataset (species with avg mass > 4000):")
+print(filtered_groups.head())
+
+# OUTPUT HINT:
+# Likely only "Gentoo" remains
+
+
+# ----------------------------------------------------------
+# STEP 5.2: IMPORTANT CONCEPT
+# ----------------------------------------------------------
+
+# filter() returns original rows (not summary)
+
+# Comparison:
+# agg() → summary
+# filter() → subset of original data
+
+
+# ----------------------------------------------------------
+# STEP 5.3: COMMON ERROR
+# ----------------------------------------------------------
+
+# ERROR:
+# filter() expects a function, not a string
+# df.groupby("species").filter("body_mass_g > 4000")
+
+
+# ==========================================================
+# STEP 6: SUMMARY
+# ==========================================================
+
+print("\nSTEP 6: SUMMARY")
+
+print("""
+KEY LEARNINGS:
+
+1. groupby() implements Split–Apply–Combine
+2. agg() computes multiple statistics
+3. groupby() + column → Series output
+4. filter() removes entire groups
+5. Multi-column grouping creates MultiIndex
+
+IMPORTANT DIFFERENCE:
+
+- groupby().agg() → REDUCES data
+- groupby().filter() → FILTERS rows
+
+BEST PRACTICES:
+
+- Inspect data before grouping
+- Handle missing values carefully
+- Use valid aggregation functions
+- Understand output structure (Series vs DataFrame vs MultiIndex)
+""")
+
+
+```
 
 
 
