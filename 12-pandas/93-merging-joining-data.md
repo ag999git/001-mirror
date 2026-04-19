@@ -734,7 +734,10 @@ BEST PRACTICE:
 
 ## Understanding LEFT, RIGHT, INNER and OUTER joins on rows and columns
 When joining 2 tables, 
-For rows there can be 3 possible scenarion (1) Both tables have same number of rows (2) Left > Right (3) Left < Right
+-    A. For rows there can be 3 possible scenarion (1) Both tables have same number of rows (2) Left > Right (3) Left < Right
+-    B. Similarly there can be many scenarios for columns. 
+
+The effects of various types of joins on rows and columns are discussed below
 
 ## Effect of Row Combinations on Different Types of Joins
 
