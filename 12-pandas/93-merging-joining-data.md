@@ -26,7 +26,7 @@ Due to a data entry error, the `df_tags` file is missing the last few penguins r
 ## 1. Conceptual Deep Dive
 <details>
 
-<summary> ## Conceptual Deep Dive </summary>summary
+<summary> Conceptual Deep Dive </summary>
 
 Data integration is handled primarily by two functions: `pd.concat()` and `pd.merge()`.
 
