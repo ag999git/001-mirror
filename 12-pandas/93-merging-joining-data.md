@@ -441,7 +441,7 @@ Without suffix: columns  overlap  but  no  suffix  specified
 
 ## Script
 <details>
-<summary> Script whichclearly explains merging and joining of tables (Left, Right, Inner, Outer) (Click to expand)
+<summary> Script whichclearly explains merging and joining of tables (Left, Right, Inner, Outer) (Click to expand) </summary>
 
 ```python
 
