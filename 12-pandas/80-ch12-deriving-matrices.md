@@ -339,7 +339,7 @@ To initialize the working environment and load the dataset into a Pandas DataFra
 
 ----------
 
-### Script foR STEP 0
+### Script for STEP 0
 
 ```python
 
@@ -362,6 +362,32 @@ print("Shape:", df.shape)  # Show the number of rows and columns in the dataset 
 
 ```
 
+### Output for Script of Phase 0
+
+```python
+STEP 0: IMPORT LIBRARIES AND LOAD DATASET
+
+Initial Data Overview:
+  species     island  bill_length_mm  bill_depth_mm  flipper_length_mm  body_mass_g     sex
+0  Adelie  Torgersen            39.1           18.7              181.0       3750.0    Male
+1  Adelie  Torgersen            39.5           17.4              186.0       3800.0  Female
+2  Adelie  Torgersen            40.3           18.0              195.0       3250.0  Female
+3  Adelie  Torgersen             NaN            NaN                NaN          NaN     NaN
+4  Adelie  Torgersen            36.7           19.3              193.0       3450.0  Female
+Data types:
+ species               object
+island                object
+bill_length_mm       float64
+bill_depth_mm        float64
+flipper_length_mm    float64
+body_mass_g          float64
+sex                   object
+dtype: object
+Shape: (344, 7)
+
+
+
+```
 
 
 
@@ -428,6 +454,19 @@ print("Missing values handled using fillna(0)")
 
 
 ```
+
+### Output for PHASE 1
+
+```python
+
+PHASE 1: DATA PREPARATION
+
+STEP 1.1: Handling Missing Values
+Missing values handled using fillna(0)
+
+```
+
+
 
 
 
@@ -500,6 +539,24 @@ print(df[['bill_length_mm', 'bill_depth_mm', 'slenderness_index']].head())
 # Shows the original bill_length_mm and bill_depth_mm along with the new slenderness_index for the first 5 rows.
 
 
+
+
+```
+
+### Output for PHASE 2
+
+```python
+PHASE 2: ADDING CALCULATED COLUMNS
+
+STEP 2.1: Creating 'slenderness_index'
+
+New column preview:
+   bill_length_mm  bill_depth_mm  slenderness_index
+0            39.1           18.7           2.090909
+1            39.5           17.4           2.270115
+2            40.3           18.0           2.238889
+3             0.0            0.0                NaN
+4            36.7           19.3           1.901554
 
 
 ```
@@ -628,6 +685,23 @@ print(f"Has column 'species' been removed using inplace? -> {'species' not in df
 
 ```
 
+### Output for PHASE 3
+
+```python
+
+PHASE 3: DELETING COLUMNS
+
+STEP 3.1: Using drop() with reassignment
+Does Original df have column for 'sex'?->: True
+Does df_reassigned have column for 'sex'?->: False
+
+STEP 3.2: Using del
+Has column 'island' been removed using del? -> True
+
+STEP 3.3: Using drop() with inplace=True
+Has column 'species' been removed using inplace? -> True
+
+```
 
 
 
@@ -740,6 +814,29 @@ print(adelies[['species', 'body_mass_g', 'island']].tail(3))
 # ERROR EXAMPLE: Sorting by a non-existing column will raise a KeyError.
 # df.sort_values(by='non_existing_column')
 
+```
+
+### Output for PHASE 4
+
+```python
+
+PHASE 4: SORTING DATA
+
+STEP 4.1: Sorting by single column
+
+Top 3 heaviest penguins:
+    species  body_mass_g
+237  Gentoo       6300.0
+253  Gentoo       6050.0
+297  Gentoo       6000.0
+
+STEP 4.2: Sorting by multiple columns
+
+Last 3 Adelie penguins (sorted by mass):
+   species  body_mass_g     island
+58  Adelie       2850.0     Biscoe
+64  Adelie       2850.0     Biscoe
+3   Adelie          0.0  Torgersen
 
 
 ```
@@ -806,7 +903,27 @@ BEST PRACTICE:
 
 ```
 
+### Output for PHASE 5
 
+
+```python
+STEP 5: SUMMARY
+
+KEY LEARNINGS:
+
+1. New columns can be derived using arithmetic operations
+2. Columns can be deleted using drop() or del
+3. inplace=True modifies the DataFrame directly
+4. Sorting helps organize and analyze data efficiently
+
+BEST PRACTICE:
+
+- Prefer reassignment over inplace for clarity
+- Always check column names before operations
+- Handle missing values thoughtfully (avoid blind fillna(0))
+
+
+```
 
 
 
