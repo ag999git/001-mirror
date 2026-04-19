@@ -24,7 +24,7 @@ Due to a data entry error, the `df_tags` file is missing the last few penguins r
 
 
 ## 1. Conceptual Deep Dive
-<describe>
+<details>
 
 <summary> ## Conceptual Deep Dive </summary>summary
 
@@ -436,6 +436,6 @@ Without suffix: columns  overlap  but  no  suffix  specified
 | duplicates | Check before merge |
 | debugging | Use indicator=True |
 
-</describe>
+</details>
 
 
