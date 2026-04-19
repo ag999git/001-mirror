@@ -225,10 +225,50 @@ df["mean_mass"] =  df.groupby("species")["body_mass_g"].transform("mean")
 
 
 
+### `.filter()` (Group Filtering)
+
+#### Description
+
+Filters entire groups based on a condition and returns **subset of original rows**.
+
+#### Key Idea
+
+> “Keep or remove entire groups”
+
+----------
+
+#### Example
+
+`df.groupby("species").filter(lambda  x: x["body_mass_g"].mean() >  4000)`
+
+----------
+
+#### Output
+
+-   DataFrame (subset of original rows)
+
+----------
+
+#### Typical Use Cases
+
+| Use Case | Example |
+| --- | --- |
+| Remove weak groups | low average |
+| Data cleaning | small groups |
+| Conditional selection | threshold-based filtering |
+
+#### Important Parameters
+
+| Parameter | Description |
+| --- | --- |
+| func | Function returning True/False |
+| dropna | Keep NaN groups |
 
 
+#### Common Errors
 
-
+**Passing string instead of function ** 
+`df.groupby("species").filter("body_mass_g > 4000")  # TypeError`
 
 
 ### Comparison of Aggregation Methods
