@@ -340,6 +340,13 @@ BEST PRACTICES:
 ```
 </details>
 
+## Flowchart of the script
+<details>
+<summary> Flowchart of the script </summary>
+
+![Flowchart of the script](/resources/ch12-timeline.png)
+
+</details>
 
 
 
