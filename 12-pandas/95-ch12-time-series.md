@@ -47,6 +47,12 @@ Resampling is the process of changing the frequency of time-series observations.
 
 ## Script implementing the research problem/ Project
 
+
+<details>
+
+<summary>Script implementing the research problem/ Project</summary>
+
+
 ```python
 
 """
@@ -332,7 +338,7 @@ BEST PRACTICES:
 """)
 
 ```
-
+</details>
 
 
 
