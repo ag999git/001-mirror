@@ -142,7 +142,96 @@ print(type(grouped))
 df["mean_mass"] =  df.groupby("species")["body_mass_g"].transform("mean")
 ```
 
-## Comparison of Aggregation Methods
+## Aggregation methods (1) `.agg()` (2) `.transform()` (3) `.filter()`
+
+
+
+
+----------
+
+###  `.agg()` (Aggregation)
+
+#### Description
+
+Applies one or more functions to each group and **returns a reduced summary**.
+
+#### Key Idea
+
+> “Give me one (or few) values per group”
+
+----------
+
+#### Example
+
+`df.groupby("species")["body_mass_g"].agg(["mean", "max"])`
+
+----------
+
+#### Output
+
+-   DataFrame (often with **MultiIndex columns**)
+-   One row per group
+
+----------
+
+####  Typical Use Cases
+| Use Case | Example |
+| --- | --- |
+| Summary statistics | mean, sum, count |
+| Reporting | group-wise KPIs |
+| Data reduction | compress dataset |
+
+#### Important parameters
+
+| Parameter | Description |
+| --- | --- |
+| func | Function or list ('mean', ['mean','sum']) |
+| **kwargs | Named aggregations |
+
+
+### `.transform()` (Same Shape Transformation)
+
+#### Description
+
+Applies a function **to each group** and returns output of **same size as original data**.
+
+#### Key Idea
+
+> “Compute something per group, but keep all rows”
+
+----------
+
+#### Example
+
+```python
+df["mean_mass"] =  df.groupby("species")["body_mass_g"].transform("mean")
+```
+
+----------
+
+#### Output
+
+-   Series or DataFrame
+-   Same length as original
+
+----------
+
+#### Typical Use Cases
+| Use Case | Example |
+| --- | --- |
+| Feature engineering | group mean column |
+| Normalization | z-score within group |
+| Comparison | row vs group average |
+
+
+
+
+
+
+
+
+
+### Comparison of Aggregation Methods
 
 | Method | Syntax | Input Type | Returns | Output Shape | Use Case | Typical Example | Affects Original Data | Common Pitfall |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
