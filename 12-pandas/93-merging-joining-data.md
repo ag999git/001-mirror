@@ -439,3 +439,295 @@ Without suffix: columns  overlap  but  no  suffix  specified
 </details>
 
 
+## Script
+<details>
+<summary> Script whichclearly explains merging and joining of tables (Left, Right, Inner, Outer) (Click to expand)
+
+```python
+
+"""
+PROJECT: Merging and Joining Data in Pandas
+DATASET: Palmer Penguins
+
+OBJECTIVE:
+1. Understand LEFT vs RIGHT tables in merge()
+2. Simulate real-world data loss
+3. Perform INNER and LEFT joins
+4. Analyze impact of row mismatch
+
+KEY IDEA:
+pd.merge(LEFT, RIGHT, ...) → FIRST argument is ALWAYS LEFT table
+"""
+
+# ==========================================================
+# STEP 0: LOAD DATA AND CREATE UNIQUE ID
+# ==========================================================
+
+print("\nSTEP 0: LOAD DATA")
+
+import pandas as pd
+import seaborn as sns
+
+# Create unique key for merging
+# We reset the index to create a new column called 'index' which will serve as a unique identifier for each row.
+df_original = sns.load_dataset('penguins').reset_index()
+# We rename the 'index' column to 'penguin_id' to make it clear that this column will be used as a unique identifier for each penguin in our dataset.
+df_original = df_original.rename(columns={'index': 'penguin_id'})
+
+print("Original Shape:", df_original.shape)
+# OUTPUT HINT: (344, 8). Rows = 344, Columns = 8 (including new 'penguin_id')
+
+
+# ==========================================================
+# STEP 1: CREATE LEFT AND RIGHT TABLES
+# ==========================================================
+
+print("\nSTEP 1: DEFINE LEFT AND RIGHT TABLES")
+
+# ----------------------------------------------------------
+# STEP 1.1: LEFT TABLE (Main Dataset → MUST BE PRESERVED)
+# ----------------------------------------------------------
+# LEFT TABLE = df_measurements
+# Reason:
+# - Contains critical numeric data
+# - We do NOT want to lose this data
+
+
+# We are selecting only the columns related to measurements and the unique identifier 'penguin_id' to create 
+# a separate DataFrame that focuses on the physical characteristics of the penguins.
+# This is the left table because it contains the main data we want to preserve. 
+# We will perform merges using this table as the base, ensuring that all rows from this table are 
+# retained in the final merged result, even if there are missing matches in the right table.
+df_measurements = df_original[
+    ['penguin_id', 'bill_length_mm', 'bill_depth_mm',
+    'flipper_length_mm', 'body_mass_g']
+]
+
+print("\nLEFT TABLE (df_measurements)")
+print("Shape:", df_measurements.shape)
+# OUTPUT HINT: (344, 5)
+
+
+# ----------------------------------------------------------
+# STEP 1.2: RIGHT TABLE (Secondary Dataset → MAY HAVE LOSS)
+# ----------------------------------------------------------
+# RIGHT TABLE = df_tags
+# We simulate data loss HERE (not in LEFT)
+# Reason:
+# - Contains categorical data (tags)
+# The resulting DataFrame will contain only the categorical attributes along with the 'penguin_id'. 
+# We will simulate data loss by dropping the last 5 rows, which means that the tags for the last 5 penguins 
+# will be missing. This will allow us to demonstrate the effects of different types of merges 
+# (inner vs left) in the next steps, as we will see how the missing tag data affects the results of the merges. 
+# By having a separate tags table with some missing data, we can illustrate the importance of choosing the 
+# right merge strategy based on the completeness of your data and the specific analysis you want to perform.   
+
+df_tags = df_original[
+    ['penguin_id', 'species', 'island', 'sex']
+].iloc[:-5]   # ❗ Remove last 5 rows
+
+print("\nRIGHT TABLE (df_tags) - AFTER DATA LOSS")
+print("Shape:", df_tags.shape)
+# OUTPUT HINT: (339, 4). Columns reduced from 8 to 4, and rows reduced from 344 to 339 due to simulated data loss.
+
+
+# ----------------------------------------------------------
+# WHY REDUCE RIGHT AND NOT LEFT?
+# ----------------------------------------------------------
+"""
+IMPORTANT TEACHING POINT:
+
+We intentionally reduced rows in RIGHT table because:
+
+1. LEFT table = MAIN data → should NOT lose rows
+2. RIGHT table = SUPPORTING data → may be incomplete
+
+Real-world analogy:
+- LEFT = Bank transaction records (critical). Loss here is catastrophic.
+- RIGHT = Customer details (may be missing). Loss here is common and can be handled.
+
+If we removed rows from LEFT:
+- We would simulate "loss of main data"
+- That is less common and less useful for teaching LEFT JOIN
+
+So:
+Reduce RIGHT → simulate missing auxiliary data
+Do NOT reduce LEFT → preserve core dataset
+"""
+
+
+# ==========================================================
+# STEP 2: UNDERSTAND LEFT vs RIGHT IN MERGE
+# ==========================================================
+
+print("\nSTEP 2: UNDERSTANDING MERGE STRUCTURE")
+
+"""
+GENERAL FORM:
+
+pd.merge(LEFT, RIGHT, on='key', how='type')
+
+IMPORTANT:
+- FIRST argument = LEFT table
+- SECOND argument = RIGHT table
+"""
+
+
+# ==========================================================
+# STEP 3: INNER JOIN. KEEPS ONLY MATCHING ROWS
+# ==========================================================
+
+print("\nSTEP 3: INNER JOIN")
+
+# Perform inner merge
+# This will keep only rows where 'penguin_id' exists in BOTH tables.
+# Inner join simulates a scenario where we only want to analyze penguins for which we have both 
+# measurements and tags.
+# Inner join is useful when we want to focus on a subset of data that has complete information across both datasets,
+# but it can lead to loss of crucial data if one of the tables has missing rows.
+# Inner join should not be used if we want to preserve all rows from the main dataset (LEFT), 
+# especially when the right dataset has missing data.
+
+df_inner = pd.merge(
+    df_measurements,   # ← LEFT TABLE
+    df_tags,           # ← RIGHT TABLE
+    on='penguin_id',
+    how='inner'
+)
+
+print("Inner Join Shape:", df_inner.shape)
+# OUTPUT HINT: (339, 8). The inner join keeps only the 339 rows where 'penguin_id' exists in both tables.
+
+"""
+EXPLANATION:
+
+- Keeps ONLY matching keys
+- Since RIGHT is missing 5 rows:
+- → Those 5 rows are DROPPED
+
+RESULT:
+LEFT (344) ∩ RIGHT (339) = 339 rows
+"""
+
+
+# ==========================================================
+# STEP 4: LEFT JOIN. PRESERVES LEFT, FILLS MISSING RIGHT WITH NaN
+# ==========================================================
+
+print("\nSTEP 4: LEFT JOIN")
+
+df_left = pd.merge(
+    df_measurements,   # ← LEFT TABLE (preserved)
+    df_tags,           # ← RIGHT TABLE
+    on='penguin_id',
+    how='left'
+)
+
+print("Left Join Shape:", df_left.shape)
+# OUTPUT HINT: (344, 8). The left join preserves all 344 rows from the LEFT table, filling missing RIGHT data with NaN.
+
+print("\nRows with missing RIGHT data:")
+print(df_left[df_left['species'].isna()])
+
+"""
+EXPLANATION:
+
+- ALL rows from LEFT are preserved (344 rows)
+- Missing matches in RIGHT → filled with NaN
+
+So:
+LEFT (344) + missing RIGHT → still 344 rows
+
+Last 5 rows:
+→ species, island, sex = NaN
+"""
+
+
+# ==========================================================
+# STEP 5: WHAT IF LEFT > RIGHT OR LEFT < RIGHT?
+# ==========================================================
+
+print("\nSTEP 5: UNDERSTANDING ROW MISMATCH CASES")
+
+"""
+CASE 1: LEFT > RIGHT  (Current Scenario)
+
+LEFT = 344 rows
+RIGHT = 339 rows
+
+INNER JOIN → 339 rows. Only rows with matching penguin_id in both tables are kept, 
+so we lose the 5 rows that are missing in the RIGHT table.
+
+LEFT JOIN  → 344 rows (NaN added). All rows from the LEFT table are preserved, and the 
+5 rows that do not have a match in the RIGHT table will have NaN values for the columns from the RIGHT table.
+
+----------------------------------------
+
+CASE 2: LEFT < RIGHT (Reverse Scenario)
+
+If RIGHT had MORE rows than LEFT:
+
+Example:
+LEFT = 300
+RIGHT = 350
+
+INNER JOIN:
+→ Only common keys (≤ 300)
+
+LEFT JOIN:
+→ Still 300 rows (LEFT preserved)
+
+RIGHT JOIN:
+→ 350 rows (RIGHT preserved)
+
+OUTER JOIN:
+→ All keys from both → up to 350+
+
+----------------------------------------
+
+KEY RULE:
+
+JOIN TYPE decides which table is preserved:
+
+INNER → Intersection
+LEFT  → Preserve LEFT
+RIGHT → Preserve RIGHT
+OUTER → Preserve BOTH
+"""
+
+
+# ==========================================================
+# STEP 6: VISUAL SUMMARY
+# ==========================================================
+
+print("\nSTEP 6: FINAL SUMMARY")
+
+print("""
+LEFT TABLE  = df_measurements (MAIN DATA)
+RIGHT TABLE = df_tags (SUPPORTING DATA)
+
+MERGE RULE:
+pd.merge(LEFT, RIGHT, ...)
+
+JOIN BEHAVIOR:
+
+INNER → Only matching rows
+LEFT  → All LEFT rows + matching RIGHT
+RIGHT → All RIGHT rows + matching LEFT
+OUTER → All rows from both
+
+BEST PRACTICE:
+
+- Put IMPORTANT dataset on LEFT
+- Use LEFT JOIN to avoid losing critical data
+- Always check shape after merge
+""")
+
+
+```
+
+
+
+</details>
+
+
