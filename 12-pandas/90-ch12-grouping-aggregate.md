@@ -81,28 +81,28 @@ DataFrame.groupby(
 
 #### 4. What Does `groupby()` Return?
 
-#####  Return Type
+####  5. Return Type
 
 `DataFrameGroupBy`  OR  `SeriesGroupBy`
 
-##### Important Insight
+#### 6. Important Insight
 
 > `groupby()` **does NOT compute anything immediately**  
 > It returns a **lazy object** (GroupBy object)
 
 ----------
 
-#####  Example
+#### 7. Example
 
 ```python
 grouped  =  df.groupby("species")  
 print(type(grouped))
 ```
-**Output:**
+#### 8. Output:
 
 `<class 'pandas.core.groupby.generic.DataFrameGroupBy'>`
 
-#### 6. Typical Usage Patterns
+#### 9. Typical Usage Patterns
 
 ##### A. Simple Aggregation
 
@@ -120,7 +120,7 @@ print(type(grouped))
 
 ----------
 
-#### C. Multi-column Grouping
+##### C. Multi-column Grouping
 
 `df.groupby(["species", "island"]).mean()`
 
