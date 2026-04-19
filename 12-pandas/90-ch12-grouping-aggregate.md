@@ -28,7 +28,7 @@ Grouping and Aggregation is the core of data analysis. It relies on the **Split-
 
 **Flowchart of Grouping:**
 
-XXXX
+![Flowchart of Grouping](/resources/ch12-grouping.png)
 
 
 ## What is `.groupby()`
