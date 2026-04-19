@@ -466,7 +466,9 @@ Missing values handled using fillna(0)
 
 ```
 
+### Output Explanation
 
+All NaN → replaced with 0
 
 
 
@@ -561,7 +563,10 @@ New column preview:
 
 ```
 
-
+### Output Explanation
+From above output you can see that the script is working correctly.
+For example in row numbered 0 we have 39.1/18.7 =  2.090909
+And in row numbered 3 we have 0.0/0.0 = NaN (Not infinity)
 
 
 
@@ -703,8 +708,14 @@ Has column 'species' been removed using inplace? -> True
 
 ```
 
+### Explanation of output
+
+STEP 3.1 -> `.drop()` does NOT modify original. Creates new DataFrame
 
 
+STEP 3.2 -> `'island'` removed from df_reassigned. Change is permanent
+
+STEP 3.3-> `.drop(inplace=True)` directly modifies df_reassigned. No new object created
 
 ## PHASE 4: SORTING DATA
 
@@ -841,8 +852,26 @@ Last 3 Adelie penguins (sorted by mass):
 
 ```
 
+### Explanation of OUTPUT
+
+STEP 4.1: Single Column Sorting. Sorted by body_mass_g (descending). Top rows = heaviest penguins
+
+STEP 4.2: Multi-Column Sorting. Sort by: 1. species (A–Z) then by 2. body_mass_g (descending)
+
+Sub-step 4.2.2: Filtering. Select only Adelie rows
+
+Sub-step 4.2.3: .tail(3). Last 3 rows → lightest Adelie penguins
 
 
+#### Important Observation
+body_mass_g = 0.0. This comes from: `fillna(0)`
+
+So: Originally missing value → now appears as lightest penguin
+
+#### Important Hidden Lesson
+Filling missing values with 0 can mislead analysis.
+
+>**Example from output: 0.0 body mass appears as lightest penguin, but is actually missing data**
 
 ----------
 
