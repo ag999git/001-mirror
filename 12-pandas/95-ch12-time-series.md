@@ -496,12 +496,12 @@ DONT: Avoid `.apply()` unless necessary
 | Signature | df.drop(labels, axis=1) |
 | Output | Reduced DataFrame |
 
-### ✔ Output Hint
+####  Output Hint
 
 Columns → passengers only  
 Shape → (144, 1)
 
-### ✔ Reason
+#### Reason
 
 -   Avoid redundancy
 -   Cleaner dataset
