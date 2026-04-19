@@ -732,6 +732,27 @@ BEST PRACTICE:
 
 <summary> Understanding LEFT, RIGHT, INNER and OUTER joins on rows and columns</summary>
 
+When two tables are joined, the operation is performed using one or more columns called **keys**.  
+The key column appears once in the result when the same column name is used for joining.
+
+ - If keys are unique, the join produces a one-to-one mapping.   
+ - If key are duplicated, the result may produce one-to-many or many-to-many relationships, leading to an increase in rows (m × n combinations).
+
+The number of rows in the result depends on the join type:
+
+-   Inner → only matching rows
+-   Left → all left rows
+-   Right → all right rows
+-   Outer → all rows from both
+
+For non-key columns:
+
+-   Different names → preserved as-is
+-   Same names → renamed with suffix `_x` and `_y`
+
+Missing matches result in NaN values depending on the join type.
+
+
 ## Understanding LEFT, RIGHT, INNER and OUTER joins on rows and columns
 When joining 2 tables, 
 -    A. For rows there can be 3 possible scenarion (1) Both tables have same number of rows (2) Left > Right (3) Left < Right
@@ -836,6 +857,180 @@ When two DataFrames are merged, the **number of rows in the result** depends on:
 
 <details>
 <summary> Effect of Column Names and Values in Joins </summary>
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Effect of Column Names and Values in Joins
+
+### Concept Overview
+
+During a merge, columns behave based on:
+
+1.  Whether column names are **same or different**
+2.  Whether they are **join keys or not**
+3.  Whether values are **same or different**
+
+### Column Behavior Rules
+
+| Case | Behavior |
+| --- | --- |
+| Join key column | Appears once |
+| Same column name (non-key) | Gets suffix _x, _y |
+| Different column names | Kept as-is |
+
+
+### When Two Tables Are Joined (Merged)
+
+When two tables are joined:
+
+-   The operation is performed using one or more **columns called keys**
+-   These keys are used to **match rows between the two tables**
+-   The final result depends on:
+    -   Type of join (**inner, left, right, outer**)
+    -   Nature of key (**unique or repeated**)
+    -   Column names (**same or different**)
+
+### A. Key Column (Join Column)
+
+#### Principle
+
+> The join key appears **only once** in the result **if the same column name is used in both tables via `on=`**
+
+**Example**
+-   If using:
+
+`pd.merge(df1, df2, on='id')`
+>The key column appears **once** with the same name (`id`)
+
+-   If using:
+
+`pd.merge(df1, df2, left_on='id1', right_on='id2')`
+
+>Both columns may appear unless handled explicitly
+
+----------
+
+### A(1). Keys Identical (1:1 Match)
+
+-   Same values
+-   Same frequency (unique keys)
+
+✔ Result:
+
+-   Clean join
+-   No duplication
+-   Rows remain same (for inner/left/right)
+
+----------
+
+### A(2). Keys Same Column but Values Differ
+
+#### Explanation:
+
+> If key values are **not perfectly matching across tables**, the result depends on join type:
+
+-   **Inner join** → keeps only matching values
+-   **Left join** → keeps all left keys, unmatched → NaN
+-   **Right join** → keeps all right keys
+-   **Outer join** → keeps all keys
+
+----------
+
+### A(3). Duplicate Keys (Most Important Case)
+
+
+> Row increase happens when **keys are duplicated**, not just because values differ.
+
+#### Cases:
+
+| Left | Right | Result |
+| --- | --- | --- |
+| Unique | Unique | 1:1 |
+| One duplicate | Unique | 1:many |
+| Unique | Many duplicate | many:1 |
+| Many duplicate | Many duplicate | many:many → row explosion (m × n) |
+
+
+
+
+### A(4). Different Number of Rows
+
+
+
+> When tables have different row counts:
+
+-   Inner join → reduces rows
+-   Left join → keeps left count
+-   Right join → keeps right count
+-   Outer join → union of both
+
+----------
+
+## B. Non-Key Columns
+
+### B(1). Columns with Different Names
+
+
+
+-   All such columns are included **unchanged**
+
+----------
+
+### B2. Columns with Same Name (Non-Key)
+
+> If two columns have the same name and are **not join keys**:
+
+-   Pandas renames them as:
+    -   `column_x` (from left)
+    -   `column_y` (from right)
+
+**Optional: You can change the suffixes from _x and _y to something else as shown below**
+
+`pd.merge(df1, df2, on='id', suffixes=('_left', '_right'))`
+
+----------
+
+### B3. Missing Case 
+
+Here is the important addition:
+
+###  B3. Missing Matches
+
+> If a row has no matching key:
+
+| Join Type | Result |
+| --- | --- |
+| Inner | Row removed |
+| Left | Right columns → NaN |
+| Right | Left columns → NaN |
+| Outer | Missing side → NaN |
+
+### Final Summary Table
+
+| Aspect | Behavior |
+| --- | --- |
+| Key column (same name) | Appears once |
+| Key column (different names) | May appear twice |
+| Duplicate keys | Row multiplication |
+| Non-key same name | _x, _y suffix |
+| Non-key different name | Kept as-is |
+| Missing match | NaN (depends on join) |
+
+
+
+
+
+
 
 </details>
 
