@@ -707,10 +707,14 @@ print("\nSTEP 0: IMPORT LIBRARIES")
 import pandas as pd
 import seaborn as sns
 
-
-
 ```
+#### EXPLANATION STEP 0: IMPORT LIBRARIES
 
+#### Output Explanation
+
+-   No visible output is produced.
+-   This step simply loads the required libraries (`pandas` and `seaborn`) into memory.
+-   It prepares the environment for data analysis.
 
 ### STEP 1 and 1.1
 
@@ -751,6 +755,22 @@ First 5 rows:
 
 ```
 
+#### EXPLANATION STEP 1: LOAD AND INSPECT DATA
+
+----------
+
+#### STEP 1.1: First 5 Rows
+
+#### Output Explanation
+
+-   Displays the first 5 rows of the dataset.
+-   Shows three columns:
+    -   `year` → numerical year
+    -   `month` → categorical month name (Jan, Feb, etc.)
+    -   `passengers` → number of airline passengers
+-   Helps verify that the dataset has loaded correctly.
+
+
 ### STEP 1.2
 
 ```python
@@ -772,7 +792,7 @@ print("\nShape:", df.shape)
 
 ```
 
-#### Output 
+#### Output STEP 1.2
 
 ```python
 Data Types:
@@ -783,9 +803,20 @@ dtype: object
 
 Shape: (144, 3)
 
-
-
 ```
+
+#### EXPLANATION: STEP 1.2: Data Types and Shape
+
+#### Output Explanation
+
+-   `dtypes` shows:
+    -   `year` → integer
+    -   `month` → category (important for later operations)
+    -   `passengers` → integer
+-   `shape` shows `(144, 3)`:
+    -   144 rows → 12 months × 12 years
+    -   3 columns → year, month, passengers
+
 
 ### STEP 2 and 2.1
 
@@ -821,7 +852,7 @@ print(df[['month', 'month_num']].head())
 
 ```
 
-#### Output 
+#### Output STEP 2 and 2.1
 
 ```python
 
@@ -836,6 +867,22 @@ Month Mapping Preview:
 4   May         5
 
 ```
+
+
+#### EXPLANATION: STEP 2: CREATE DATETIME COLUMN
+
+
+#### STEP 2.1: Month Mapping
+
+#### Output Explanation
+
+-   Shows a new column `month_num`.
+-   Each month name is converted to a numeric value:
+    -   Jan → 1, Feb → 2, etc.
+-   Confirms that categorical months have been successfully transformed into numbers.
+
+
+
 
 ### STEP 2.2
 
@@ -867,7 +914,7 @@ print(df.head(3))
 
 ```
 
-#### Output 
+#### Output STEP 2.2
 
 ```python
 
@@ -878,6 +925,18 @@ Preview with 'date' column:
 2  1949   Mar         132         3 1949-03-01
 
 ```
+
+#### EXPLANATION: STEP 2.2: Datetime Creation
+
+#### Output Explanation
+
+-   A new column `date` is created.
+-   Combines `year` and `month_num` into a proper datetime:
+    -   Example: `1949-01-01`
+-   Day is set to `1` since only month-level data exists.
+-   This column is crucial for time-series operations.
+
+
 
 
 ### STEP 3, 3.1 and 3.2
@@ -920,7 +979,7 @@ print("\nShape:", df.shape)
 
 ```
 
-#### Output 
+#### Output STEP 3, 3.1 and 3.2
 
 ```python
 
@@ -938,6 +997,24 @@ date
 Shape: (144, 1)
 
 ```
+
+#### EXPLANATION: STEP 3: SET DATETIME INDEX
+
+----------
+
+#### STEP 3.1 & 3.2 Combined
+
+#### Output Explanation
+
+-   The `date` column becomes the index of the DataFrame.
+-   Old columns (`year`, `month`, `month_num`) are removed.
+-   Now:
+    -   Index → datetime values
+    -   Column → only `passengers`
+-   Shape becomes `(144, 1)`:
+    -   Same rows, fewer columns
+-   Data is now structured as a **time series**.
+
 
 
 ### STEP 4, 4.1 and 4.2
@@ -981,7 +1058,7 @@ print(df.head())
 
 ```
 
-#### Output 
+#### Output  STEP 4, 4.1 and 4.2
 
 ```python
 
@@ -997,6 +1074,23 @@ date
 1949-05-01         121  1949        2      5
 
 ```
+#### EXPLANATION: STEP 4: EXTRACT TIME COMPONENTS
+
+----------
+
+#### Output Explanation
+
+-   New columns are added:
+    -   `Year` → extracted from index
+    -   `Quarter` → values from 1 to 4
+    -   `Month` → numeric month (1–12)
+-   The dataset now contains both:
+    -   Original data (`passengers`)
+    -   Derived time features
+-   Useful for grouping and analysis.
+
+
+
 
 
 ### STEP 5, 5.1 and 5.2
@@ -1051,6 +1145,32 @@ Average passengers: 276.075
 
 ```
 
+#### EXPLANATION: STEP 5: TIME-BASED SLICING
+
+----------
+
+#### STEP 5.1: Filtering 1950s
+
+#### Output Explanation
+
+-   Only rows from 1950 to 1959 are selected.
+-   Uses datetime index slicing (inclusive).
+-   Creates a subset DataFrame (`fifties_data`).
+
+----------
+
+#### EXPLANATION: STEP 5.2: Summary Statistics
+
+#### Output Explanation
+
+-   `Total passengers: 33129`
+    -   Sum of all passengers in the 1950s
+-   `Average passengers: 276.075`
+    -   Mean monthly passengers in that decade
+-   Indicates **growth trend** compared to earlier years.
+
+
+
 
 ### STEP 6 and 6.1
 
@@ -1100,7 +1220,30 @@ date
 
 ```
 
-## STEP 6.2
+#### EXPLANATION: STEP 6: RESAMPLING
+
+----------
+
+#### STEP 6.1: Quarterly Average
+
+#### Output Explanation
+
+-   Data is grouped into quarters (3 months each).
+-   Each value represents the **average passengers per quarter**.
+-   Index shows **quarter-end dates**:
+    -   Example: `1949-03-31`, `1949-06-30`
+-   Output is a **Series with float values**.
+
+#### Important Observation
+
+-   Warning shown:
+    -   `'Q' is deprecated → use 'QE'`
+-   This indicates newer pandas prefers updated frequency codes.
+
+
+
+
+### STEP 6.2
 
 ```python
 # ----------------------------------------------------------
@@ -1146,9 +1289,38 @@ Freq: YE-DEC, Name: passengers, dtype: int64
 
 ```
 
+#### EXPLANATION: STEP 6.2: Yearly Total
+
+#### Output Explanation
+
+-   Data is grouped by year.
+-   Each value shows **total passengers in that year**.
+-   Index shows year-end dates:
+    -   Example: `1949-12-31`
+-   Values increase over time → indicates strong upward trend.
+
+#### Warning
+
+-   `'Y' is deprecated → use 'YE'`
+-   Same reason as above (updated pandas standards)
+
+
+
 
 ## STEP 7 (It is just a summary)
 
+
+#### EXPLANATION:  STEP 7: SUMMARY
+
+#### Output Explanation
+
+-   Displays key learning points from the script.
+-   Reinforces:
+    -   Datetime creation
+    -   Importance of index
+    -   Time-based slicing
+    -   Resampling concepts
+-   Acts as a conceptual conclusion for students.
 
 </details>
 
