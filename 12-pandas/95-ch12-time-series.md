@@ -245,7 +245,8 @@ print("\nSTEP 5: TIME-BASED SLICING")
 # ----------------------------------------------------------
 
 # We can slice the DataFrame using the datetime index to focus on a specific time period, such as the 1950s.
-# When slicing by time, we can use string-based indexing with the datetime index to easily select rows that fall within a certain range of dates.
+# When slicing by time, we can use string-based indexing with the datetime index to easily select rows that fall within
+# a certain range of dates.
 # The resulting fifties_data DataFrame will contain only the rows where the date falls between January 1, 1950, and December 31, 1959.  
 # This allows us to analyze trends specifically for the 1950s, such as total passengers during that decade or average passengers per year.  
 # Note: When slicing by time, the start and end dates are inclusive, so we will include all data from the beginning of 1950 to the end of 1959. 
