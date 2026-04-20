@@ -469,8 +469,8 @@ df['date'] =  pd.to_datetime(
 ### Do’s & Don’ts
 
 DO: Prefer structured dict input  
-DONT: Avoid string concatenation with category dtype  
-DONT: Avoid `.apply()` unless necessary
+Avoid string concatenation with category dtype  
+Avoid `.apply()` unless necessary
 
 ----------
 
