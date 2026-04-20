@@ -247,13 +247,17 @@ print("\nSTEP 5: TIME-BASED SLICING")
 # We can slice the DataFrame using the datetime index to focus on a specific time period, such as the 1950s.
 # When slicing by time, we can use string-based indexing with the datetime index to easily select rows that fall within
 # a certain range of dates.
-# The resulting fifties_data DataFrame will contain only the rows where the date falls between January 1, 1950, and December 31, 1959.  
-# This allows us to analyze trends specifically for the 1950s, such as total passengers during that decade or average passengers per year.  
-# Note: When slicing by time, the start and end dates are inclusive, so we will include all data from the beginning of 1950 to the end of 1959. 
+# The resulting fifties_data DataFrame will contain only the rows where the date falls between
+# January 1, 1950, and December 31, 1959.  
+# This allows us to analyze trends specifically for the 1950s, such as total passengers during that decade or
+# average passengers per year.  
+# Note: When slicing by time, the start and end dates are inclusive, so we will include all data from the beginning of
+# 1950 to the end of 1959. 
 # We can also slice by specific years, months, or even quarters using similar string-based indexing with the datetime index.    
-# We can also use the extracted 'Year' column to filter the data for the 1950s, but slicing by the datetime index is more efficient
-# and cleaner for time-based data.    
-# We can also perform calculations on the sliced data, such as summing the total passengers in the 1950s or calculating the average passengers per year during that decade. 
+# We can also use the extracted 'Year' column to filter the data for the 1950s, but slicing by the datetime index is more
+# efficient and cleaner for time-based data.    
+# We can also perform calculations on the sliced data, such as summing the total passengers in the 1950s or calculating the
+# average passengers per year during that decade. 
 
 fifties_data = df.loc['1950':'1959']
 
