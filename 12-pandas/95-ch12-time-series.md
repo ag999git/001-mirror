@@ -689,11 +689,471 @@ Index → quarter-end dates
 -   Do not ignore missing/invalid dates
 
 
+</details>
 
 
+## Breaking up script into parts and discussing it part by part. Also analysing the output
+
+<details>
+
+<sunnary> Breaking up script into parts and discussing it part by part. Also analysing the output  </summary>
+
+
+### Part 0
+
+```python
+print("\nSTEP 0: IMPORT LIBRARIES")
+
+import pandas as pd
+import seaborn as sns
+
+
+
+```
+
+
+### STEP 1 and 1.1
+
+```python
+
+print("\nSTEP 1: LOAD DATASET")
+
+df = sns.load_dataset('flights')
+
+# ----------------------------------------------------------
+# STEP 1.1: PREVIEW DATA
+# ----------------------------------------------------------
+
+print("\nFirst 5 rows:")
+print(df.head())
+
+# OUTPUT HINT:
+# Columns → year (int), month (category), passengers (int)
+
+```
+
+#### Output 
+
+```python
+
+STEP 0: IMPORT LIBRARIES
+
+STEP 1: LOAD DATASET
+
+First 5 rows:
+   year month  passengers
+0  1949   Jan         112
+1  1949   Feb         118
+2  1949   Mar         132
+3  1949   Apr         129
+4  1949   May         121
+
+
+```
+
+### STEP 1.2
+
+```python
+# ----------------------------------------------------------
+# STEP 1.2: CHECK STRUCTURE
+# ----------------------------------------------------------
+
+print("\nData Types:")
+print(df.dtypes)
+# OUTPUT HINT:
+# year → int64
+# month → category
+# passengers → int64
+
+print("\nShape:", df.shape)
+# OUTPUT HINT:
+# (144, 3)
+
+
+```
+
+#### Output 
+
+```python
+Data Types:
+year             int64
+month         category
+passengers       int64
+dtype: object
+
+Shape: (144, 3)
+
+
+
+```
+
+### STEP 2 and 2.1
+
+```python
+# ==========================================================
+# STEP 2: CREATE DATETIME COLUMN (ROBUST METHOD)
+# ==========================================================
+
+print("\nSTEP 2: CREATE DATETIME COLUMN (ROBUST METHOD)")
+
+# ----------------------------------------------------------
+# STEP 2.1: MAP MONTH NAMES TO NUMBERS
+# ----------------------------------------------------------
+
+# We create a mapping dictionary to convert month names to their corresponding numeric values.
+month_map = {
+    'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4,
+    'May': 5, 'Jun': 6, 'Jul': 7, 'Aug': 8,
+    'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12
+}
+
+# We add a new column 'month_num' to the DataFrame by mapping the 'month' column using the month_map dictionary.
+df['month_num'] = df['month'].map(month_map)
+
+print("\nMonth Mapping Preview:")
+print(df[['month', 'month_num']].head())
+
+# OUTPUT HINT:
+# Jan → 1, Feb → 2, ...
+
+
+
+
+```
+
+#### Output 
+
+```python
+
+STEP 2: CREATE DATETIME COLUMN (ROBUST METHOD)
+
+Month Mapping Preview:
+  month month_num
+0   Jan         1
+1   Feb         2
+2   Mar         3
+3   Apr         4
+4   May         5
+
+```
+
+### STEP 2.2
+
+```python
+
+# ----------------------------------------------------------
+# STEP 2.2: CREATE DATETIME USING STRUCTURED INPUT
+# ----------------------------------------------------------
+
+# We create a new 'date' column by combining the 'year' and 'month_num' columns into a proper datetime format.
+# We set the day to 1 for all entries since we only have year and month information.
+df['date'] = pd.to_datetime(
+    dict(year=df['year'], month=df['month_num'], day=1)
+)
+
+print("\nPreview with 'date' column:")
+print(df.head(3))
+
+# OUTPUT HINT:
+# date → 1949-01-01, 1949-02-01, ...
+
+
+# ERROR EXAMPLE:
+# pd.to_datetime(df['month'])  #> Fails because month alone is not a complete date
+# → Not a complete date
+
+
+
+
+```
+
+#### Output 
+
+```python
+
+Preview with 'date' column:
+   year month  passengers month_num       date
+0  1949   Jan         112         1 1949-01-01
+1  1949   Feb         118         2 1949-02-01
+2  1949   Mar         132         3 1949-03-01
+
+```
+
+
+### STEP 3, 3.1 and 3.2
+
+```python
+
+# ==========================================================
+# STEP 3: SET DATETIME INDEX
+# ==========================================================
+
+print("\nSTEP 3: SET DATETIME INDEX")
+
+# ----------------------------------------------------------
+# STEP 3.1: SET INDEX
+# ----------------------------------------------------------
+
+# Setting the datetime column as the index allows us to easily perform time-based slicing and resampling 
+# in later phases.
+# We will drop the original 'year' and 'month' columns after setting the index, as they are now redundant.
+df.set_index('date', inplace=True)
+
+# ----------------------------------------------------------
+# STEP 3.2: DROP REDUNDANT COLUMNS
+# ----------------------------------------------------------
+
+# We use inplace=True to modify the DataFrame directly without needing to assign it back to df.
+# We drop 'year', 'month', and 'month_num' because we have already combined them into the 
+# 'date' column, which is now our index.
+df.drop(columns=['year', 'month', 'month_num'], inplace=True)
+
+print("\nData after setting index:")
+print(df.head())
+# OUTPUT HINT:
+# Index → date (datetime)
+# Columns → passengers
+
+print("\nShape:", df.shape)
+# OUTPUT HINT:
+# (144, 1) → only 'passengers' column remains
+
+```
+
+#### Output 
+
+```python
+
+STEP 3: SET DATETIME INDEX
+
+Data after setting index:
+            passengers
+date
+1949-01-01         112
+1949-02-01         118
+1949-03-01         132
+1949-04-01         129
+1949-05-01         121
+
+Shape: (144, 1)
+
+```
+
+
+### STEP 4, 4.1 and 4.2
+
+```python
+# ==========================================================
+# STEP 4: EXTRACT TIME COMPONENTS
+# ==========================================================
+
+print("\nSTEP 4: EXTRACT TIME COMPONENTS")
+
+# ----------------------------------------------------------
+# STEP 4.1: EXTRACT COMPONENTS
+# ----------------------------------------------------------
+
+# The .dt accessor allows us to extract specific components of the datetime index, such as year, month, quarter, etc.
+# This is useful if we want to analyze trends by year or quarter after setting the datetime index.
+# We can create new columns for 'Year' and 'Quarter' based on the datetime index.
+# The 'Year' column will contain the year component of the date, and the 'Quarter' column will indicate which quarter of the year each date falls into (1, 2, 3, or 4). 
+# We can use these new columns for further analysis, such as grouping by year or quarter to see trends in passenger numbers over time.
+# Note: The .dt accessor only works on datetime-like data, so it is essential that the index is set to a 
+# datetime type for this to work correctly.  
+# We can also extract other components like month, day, weekday, etc., using the .dt accessor if needed 
+# for more granular analysis.
+df['Year'] = df.index.year
+df['Quarter'] = df.index.quarter
+df['Month'] = df.index.month
+
+# ----------------------------------------------------------
+# STEP 4.2: VERIFY
+# ----------------------------------------------------------
+
+print("\nData with extracted components:")
+print(df.head())
+
+# OUTPUT HINT:
+# Columns → passengers, Year, Quarter, Month
+
+
+
+
+```
+
+#### Output 
+
+```python
+
+STEP 4: EXTRACT TIME COMPONENTS
+
+Data with extracted components:
+            passengers  Year  Quarter  Month
+date
+1949-01-01         112  1949        1      1
+1949-02-01         118  1949        1      2
+1949-03-01         132  1949        1      3
+1949-04-01         129  1949        2      4
+1949-05-01         121  1949        2      5
+
+```
+
+
+### STEP 5, 5.1 and 5.2
+
+```python
+
+# ==========================================================
+# STEP 5: TIME-BASED SLICING
+# ==========================================================
+
+print("\nSTEP 5: TIME-BASED SLICING")
+
+# ----------------------------------------------------------
+# STEP 5.1: FILTER 1950s DATA
+# ----------------------------------------------------------
+
+# We can slice the DataFrame using the datetime index to focus on a specific time period, such as the 1950s.
+# When slicing by time, we can use string-based indexing with the datetime index to easily select rows that fall within a certain range of dates.
+# The resulting fifties_data DataFrame will contain only the rows where the date falls between January 1, 1950, and December 31, 1959.  
+# This allows us to analyze trends specifically for the 1950s, such as total passengers during that decade or average passengers per year.  
+# Note: When slicing by time, the start and end dates are inclusive, so we will include all data from the beginning of 1950 to the end of 1959. 
+# We can also slice by specific years, months, or even quarters using similar string-based indexing with the datetime index.    
+# We can also use the extracted 'Year' column to filter the data for the 1950s, but slicing by the datetime index is more efficient and cleaner for time-based data.    
+# We can also perform calculations on the sliced data, such as summing the total passengers in the 1950s or calculating the average passengers per year during that decade. 
+
+fifties_data = df.loc['1950':'1959']
+
+# ----------------------------------------------------------
+# STEP 5.2: ANALYZE
+# ----------------------------------------------------------
+
+print("\n1950s Summary:")
+
+print("Total passengers:", fifties_data['passengers'].sum())
+print("Average passengers:", fifties_data['passengers'].mean())
+
+# OUTPUT HINT:
+# Large increasing trend values
+
+
+```
+
+#### Output 
+
+```python
+
+STEP 5: TIME-BASED SLICING
+
+1950s Summary:
+Total passengers: 33129
+Average passengers: 276.075
+
+```
+
+
+### STEP 6 and 6.1
+
+```python
+# ==========================================================
+# STEP 6: RESAMPLING
+# ==========================================================
+
+print("\nSTEP 6: RESAMPLING")
+
+# ----------------------------------------------------------
+# STEP 6.1: QUARTERLY AVERAGE
+# ----------------------------------------------------------
+
+# We can resample the data to change the frequency of our time series. For example, we can calculate the quarterly average number of passengers.
+# The resample() method allows us to specify a new frequency (e.g., 'Q' for quarterly) and an aggregation function (e.g., mean) to apply to the data within each new time period.   
+# The resulting quarterly_avg Series will have a DatetimeIndex with the end of each quarter as the index and the average number of passengers for that quarter as the values.   
+
+quarterly_avg = df['passengers'].resample('Q').mean()
+
+print("\nQuarterly Average:")
+print(quarterly_avg.head())
+
+# OUTPUT HINT:
+# Index → quarter-end dates
+
+
+
+
+```
+
+#### Output 
+
+```python
+
+STEP 6: RESAMPLING
+c:\python-scripts-ch12-pandas\ch12-time3.py:227: FutureWarning: 'Q' is deprecated and will be removed in a future version, please use 'QE' instead.
+  quarterly_avg = df['passengers'].resample('Q').mean()
+
+Quarterly Average:
+date
+1949-03-31    120.666667
+1949-06-30    128.333333
+1949-09-30    144.000000
+1949-12-31    113.666667
+1950-03-31    127.333333
+
+```
+
+## STEP 6.2
+
+```python
+# ----------------------------------------------------------
+# STEP 6.2: YEARLY TOTAL
+# ----------------------------------------------------------
+
+# We can also resample to calculate the yearly total number of passengers by using 'Y' for yearly frequency and sum as the aggregation function.
+# The resulting yearly_total Series will have a DatetimeIndex with the end of each year as the index and the total number of passengers for that year as the values.    
+# This allows us to see the overall trend in passenger numbers on a yearly basis, which can be useful for identifying long-term growth patterns or seasonality in the data. 
+
+yearly_total = df['passengers'].resample('Y').sum()
+
+print("\nYearly Total:")
+print(yearly_total.head())
+
+# OUTPUT HINT:
+# Increasing yearly totals
+
+
+# ERROR EXAMPLE:
+# df_reset = df.reset_index()  # This removes the datetime index and turns 'date' back into a regular column.
+# df_reset['passengers'].resample('Y').sum()  # This will raise an error because resample() requires a DatetimeIndex, and after resetting the index, we no longer have a datetime index.
+# → Error: Requires DatetimeIndex
+
+
+
+```
+
+### OUTPUT
+
+```python
+  yearly_total = df['passengers'].resample('Y').sum()
+
+Yearly Total:
+date
+1949-12-31    1520
+1950-12-31    1676
+1951-12-31    2042
+1952-12-31    2364
+1953-12-31    2700
+Freq: YE-DEC, Name: passengers, dtype: int64
+
+
+```
+
+
+## STEP 7 (It is just a summary)
 
 
 </details>
+
+
+
 
 
 
