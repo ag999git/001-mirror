@@ -212,7 +212,8 @@ print("\nSTEP 4: EXTRACT TIME COMPONENTS")
 # The .dt accessor allows us to extract specific components of the datetime index, such as year, month, quarter, etc.
 # This is useful if we want to analyze trends by year or quarter after setting the datetime index.
 # We can create new columns for 'Year' and 'Quarter' based on the datetime index.
-# The 'Year' column will contain the year component of the date, and the 'Quarter' column will indicate which quarter of the year each date falls into (1, 2, 3, or 4). 
+# The 'Year' column will contain the year component of the date, and the 'Quarter' column will indicate which quarter of the year each
+# date falls into (1, 2, 3, or 4). 
 # We can use these new columns for further analysis, such as grouping by year or quarter to see trends in passenger numbers over time.
 # Note: The .dt accessor only works on datetime-like data, so it is essential that the index is set to a 
 # datetime type for this to work correctly.  
@@ -249,7 +250,8 @@ print("\nSTEP 5: TIME-BASED SLICING")
 # This allows us to analyze trends specifically for the 1950s, such as total passengers during that decade or average passengers per year.  
 # Note: When slicing by time, the start and end dates are inclusive, so we will include all data from the beginning of 1950 to the end of 1959. 
 # We can also slice by specific years, months, or even quarters using similar string-based indexing with the datetime index.    
-# We can also use the extracted 'Year' column to filter the data for the 1950s, but slicing by the datetime index is more efficient and cleaner for time-based data.    
+# We can also use the extracted 'Year' column to filter the data for the 1950s, but slicing by the datetime index is more efficient
+# and cleaner for time-based data.    
 # We can also perform calculations on the sliced data, such as summing the total passengers in the 1950s or calculating the average passengers per year during that decade. 
 
 fifties_data = df.loc['1950':'1959']
@@ -278,8 +280,10 @@ print("\nSTEP 6: RESAMPLING")
 # ----------------------------------------------------------
 
 # We can resample the data to change the frequency of our time series. For example, we can calculate the quarterly average number of passengers.
-# The resample() method allows us to specify a new frequency (e.g., 'Q' for quarterly) and an aggregation function (e.g., mean) to apply to the data within each new time period.   
-# The resulting quarterly_avg Series will have a DatetimeIndex with the end of each quarter as the index and the average number of passengers for that quarter as the values.   
+# The resample() method allows us to specify a new frequency (e.g., 'Q' for quarterly) and an aggregation function (e.g., mean) to
+# apply to the data within each new time period.   
+# The resulting quarterly_avg Series will have a DatetimeIndex with the end of each quarter as the index and the average number of passengers
+# for that quarter as the values.   
 
 quarterly_avg = df['passengers'].resample('Q').mean()
 
@@ -295,8 +299,10 @@ print(quarterly_avg.head())
 # ----------------------------------------------------------
 
 # We can also resample to calculate the yearly total number of passengers by using 'Y' for yearly frequency and sum as the aggregation function.
-# The resulting yearly_total Series will have a DatetimeIndex with the end of each year as the index and the total number of passengers for that year as the values.    
-# This allows us to see the overall trend in passenger numbers on a yearly basis, which can be useful for identifying long-term growth patterns or seasonality in the data. 
+# The resulting yearly_total Series will have a DatetimeIndex with the end of each year as the index and the total number of passengers
+# for that year as the values.    
+# This allows us to see the overall trend in passenger numbers on a yearly basis, which can be useful for identifying long-term
+# growth patterns or seasonality in the data. 
 
 yearly_total = df['passengers'].resample('Y').sum()
 
@@ -309,7 +315,8 @@ print(yearly_total.head())
 
 # ERROR EXAMPLE:
 # df_reset = df.reset_index()  # This removes the datetime index and turns 'date' back into a regular column.
-# df_reset['passengers'].resample('Y').sum()  # This will raise an error because resample() requires a DatetimeIndex, and after resetting the index, we no longer have a datetime index.
+# df_reset['passengers'].resample('Y').sum()  # This will raise an error because resample() requires a DatetimeIndex, and after
+# resetting the index, we no longer have a datetime index.
 # → Error: Requires DatetimeIndex
 
 
