@@ -308,6 +308,17 @@ Adelie      Female       187
     -   Misunderstanding structure
 
 
+## Final Flow summary
 
+# | Step | Method | Transformation | Purpose |
+| --- | --- | --- | --- |
+| 1 | load + clean | Raw data | Start |
+| 2 | groupby | Flat → MultiIndex | Create hierarchy |
+| 3 | index/loc | Inspect | Understand structure |
+| 4 | unstack | MultiIndex → Wide | Enable comparison |
+| 5 | arithmetic | Add column | Analysis |
+| 6 | stack | Wide → MultiIndex | Reporting |
+| 7 | loc | Access data | Query |
+| 8 | errors | Conceptual | Avoid mistakes |
 
 
