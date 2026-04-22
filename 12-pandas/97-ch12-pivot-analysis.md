@@ -320,6 +320,211 @@ Adelie      Female       187
 
 ```python
 
+"""
+PROJECT: Hierarchical Analysis of Penguin Biometrics
+ROLE: Data Scientist
+DATASET: Palmer Penguins (Seaborn)
+
+GOAL:
+Analyze how flipper length varies across Species and Sex
+using MultiIndex and reshaping techniques.
+
+APPROACH:
+1. Create hierarchical aggregation
+2. Convert to comparison format
+3. Perform analysis
+4. Convert back for reporting
+
+OUTPUT HINTS are provided.
+"""
+
+# ==========================================================
+# STEP 0: IMPORT LIBRARIES
+# ==========================================================
+
+print("\nSTEP 0: IMPORT LIBRARIES")
+
+from matplotlib.pylab import float64
+import pandas as pd
+import seaborn as sns
+
+
+# ==========================================================
+# STEP 1: LOAD AND PREPARE DATA
+# ==========================================================
+
+print("\nSTEP 1: LOAD DATA")
+
+df = sns.load_dataset('penguins')
+
+# Clean dataset (important in real-world pipelines)
+df = df.dropna()
+
+print("\nPreview:")
+print(df.head())
+# OUTPUT:
+#  species     island  bill_length_mm  bill_depth_mm  flipper_length_mm  body_mass_g     sex
+# 0  Adelie  Torgersen            39.1           18.7              181.0       3750.0    Male
+# 1  Adelie  Torgersen            39.5           17.4              186.0       3800.0  Female
+# 2  Adelie  Torgersen            40.3           18.0              195.0       3250.0  Female
+# 4  Adelie  Torgersen            36.7           19.3              193.0       3450.0  Female
+# 5  Adelie  Torgersen            39.3           20.6              190.0       3650.0    Male
+
+print("\nShape:", df.shape)  # (333, 7) after dropping NaNs
+
+
+# ==========================================================
+# STEP 2: HIERARCHICAL AGGREGATION (MultiIndex)
+# ==========================================================
+
+print("\nSTEP 2: GROUPBY → CREATE MULTIINDEX")
+
+# METHOD:
+# groupby(['species','sex']).mean()
+
+biometric_summary = df.groupby(['species', 'sex'])['flipper_length_mm'].mean()
+
+print("\nMultiIndex Result:")
+print(biometric_summary)
+
+# OUTPUT HINT:
+# species   sex
+# Adelie    Male      ...
+#           Female    ...
+
+print("\nIndex Levels:", biometric_summary.index.names)
+# OUTPUT: ['species', 'sex']
+
+
+# ==========================================================
+# STEP 3: INTERPRET HIERARCHICAL DATA
+# ==========================================================
+
+print("\nSTEP 3: UNDERSTAND HIERARCHY")
+
+print("\nAdelie Group:")
+print(biometric_summary.loc['Adelie'])
+
+# OUTPUT:
+# sex
+# Female    187.794521
+# Male      192.410959
+# Name: flipper_length_mm, dtype: float64
+
+# ==========================================================
+# STEP 4: RESHAPE → COMPARISON FORMAT
+# ==========================================================
+
+print("\nSTEP 4: UNSTACK → WIDE FORMAT")
+
+# METHOD:
+# unstack(level='sex')
+
+wide_df = biometric_summary.unstack(level='sex')
+
+print("\nWide Table:")
+print(wide_df)
+
+# OUTPUT:
+# sex            Female        Male
+# species
+# Adelie     187.794521  192.410959
+# Chinstrap  191.735294  199.911765
+# Gentoo     212.706897  221.540984
+
+
+# ==========================================================
+# STEP 5: ANALYSIS (DERIVED METRIC)
+# ==========================================================
+
+print("\nSTEP 5: COMPUTE DIFFERENCE (Male - Female)")
+
+# Vectorized operation (efficient)
+wide_df['diff_M_F'] = wide_df['Male'] - wide_df['Female']
+
+print("\nAnalysis Table:")
+print(wide_df)
+
+# OUTPUT:
+# sex            Female        Male  diff_M_F
+# species
+# Adelie     187.794521  192.410959  4.616438
+# Chinstrap  191.735294  199.911765  8.176471
+# Gentoo     212.706897  221.540984  8.834087
+
+
+# ==========================================================
+# STEP 6: RESHAPE BACK → REPORTING FORMAT
+# ==========================================================
+
+print("\nSTEP 6: STACK → HIERARCHICAL FORMAT")
+
+# METHOD:
+# stack()
+
+final_series = wide_df.stack()
+
+print("\nStacked Result:")
+print(final_series.head())
+
+# OUTPUT:
+# species    sex
+# Adelie     Female      187.794521
+#            Male        192.410959
+#            diff_M_F      4.616438
+# Chinstrap  Female      191.735294
+#            Male        199.911765
+# dtype: float64
+
+# ==========================================================
+# STEP 7: ACCESS SPECIFIC INSIGHT
+# ==========================================================
+
+print("\nSTEP 7: ACCESSING RESULTS")
+
+print("\nAdelie Male:")  
+
+print(final_series.loc[('Adelie', 'Male')])  
+# OUTPUT: 192.410959 (flipper length for Adelie Males)
+
+# ==========================================================
+# STEP 8: COMMON ERRORS (COMMENTED)
+# ==========================================================
+
+# Error: No aggregation
+# df.groupby(['species','sex'])
+
+# Error: Wrong column
+# df.groupby(['species'])['wrong'].mean()
+
+# Error: Invalid unstack level
+# biometric_summary.unstack('wrong')
+
+# Error: Misuse of stack
+# wide_df.stack(level='wrong')
+
+
+# ==========================================================
+# STEP 9: SUMMARY
+# ==========================================================
+
+print("\nSTEP 9: SUMMARY")
+
+print("""
+DATA SCIENCE INSIGHTS:
+
+1. groupby() creates hierarchical summaries
+2. MultiIndex represents real-world structure
+3. unstack() → enables comparison
+4. stack() → enables structured storage
+5. Wide format → best for analysis
+6. Long format → best for pipelines
+
+KEY IDEA:
+A data scientist reshapes data depending on the task:
+- Compare → Wide
+- Store/Model → Long
+""")
 
 
 ```
