@@ -529,6 +529,9 @@ A data scientist reshapes data depending on the task:
 
 ```
 
+## Flowchart showing steps in the script
+
+![Flowchart showing steps in the script](/resources/ch12-pivot-table1.png)
 
 
 
