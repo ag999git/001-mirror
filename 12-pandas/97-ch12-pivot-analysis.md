@@ -310,7 +310,7 @@ Adelie      Female       187
 
 ## Final Flow summary
 
-# | Step | Method | Transformation | Purpose |
+| Step | Method | Transformation | Purpose |
 | --- | --- | --- | --- |
 | 1 | load + clean | Raw data | Start |
 | 2 | groupby | Flat → MultiIndex | Create hierarchy |
