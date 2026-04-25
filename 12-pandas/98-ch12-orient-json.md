@@ -43,7 +43,26 @@ The following table shows the most frequently used `orient` values with simple e
 
 This is the most frequently used orient value, especially for data from APIs:
 
+```python
 
+import pandas as pd
+from io import StringIO
+
+# JSON data as list of records. This is a common format for JSON data, especially when it comes from APIs. 
+# Each dictionary in the list represents a row of data, and the keys of the dictionaries become the column names in the DataFrame.
+json_data = '[{"Name": "Alice", "Age": 25}, {"Name": "Bob", "Age": 30}]'
+
+# Read with orient='records'. 
+# This tells Pandas that the JSON data is a list of records (dictionaries), 
+# and it should create a DataFrame where each dictionary is a row and the keys are the column names.  
+df = pd.read_json(StringIO(json_data), orient='records')
+print(df)
+# OUTPUT:
+#     Name  Age
+# 0  Alice   25
+# 1    Bob   30
+
+```
 
 
 
