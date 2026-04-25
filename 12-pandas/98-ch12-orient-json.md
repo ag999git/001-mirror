@@ -145,7 +145,7 @@ print(df)
 #             Value
 # 2023-01-01    100
 # 2023-01-02    105
-
+```
 
 The `'index'` format is ideal for time-series data or any data with unique row identifiers.
 
