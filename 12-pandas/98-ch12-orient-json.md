@@ -65,6 +65,12 @@ print(df)
 ```
 
 
+**Key Point**: Each dictionary in the list becomes one row in the DataFrame.
+
+### Example 2: Using `orient='index'` for Time Series Data
+
+When your data has unique row identifiers (like dates):
+
 
 
 
