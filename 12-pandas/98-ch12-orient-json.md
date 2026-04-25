@@ -69,6 +69,13 @@ print(df)
 
 **Key Point**: Each dictionary in the list becomes one row in the DataFrame.
 
+The `'records'` format is the most common JSON structure, especially for web APIs. Each dictionary in the list represents a single row in the resulting DataFrame.
+
+Features:
+ - Column Inference: Pandas automatically infers column names from the dictionary keys 
+ - Type Inference: Data types are automatically inferred from the values.
+ - Missing Data: Missing keys in dictionaries are handled as NaN values
+
 
 #### Example 2 (More complex)
 
