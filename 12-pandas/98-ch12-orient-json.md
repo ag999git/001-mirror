@@ -39,9 +39,11 @@ The following table shows the most frequently used `orient` values with simple e
 
 ## 1.5 Basic Examples and Expected Outputs
 
-### Example 1: Using orient='records' (Most Common)
+### Using orient='records' (Most Common)
 
 This is the most frequently used orient value, especially for data from APIs:
+
+#### Example 1 (Simple)
 
 ```python
 
@@ -66,6 +68,46 @@ print(df)
 
 
 **Key Point**: Each dictionary in the list becomes one row in the DataFrame.
+
+
+#### Example 2 (More complex)
+
+```python
+
+import pandas as pd
+from io import StringIO
+
+# Complex records with nested data and mixed types
+# This JSON string simulates a common real-world scenario where you have a list of records (like from an API), 
+# and each record contains nested structures (like the 'scores' dictionary) 
+# and various data types (strings, numbers, booleans, dates). 
+json_data = '''[
+    {
+        "id": 1,  # Unique identifier for the record
+        "name": "Alice",   # Name of the person
+        "scores": {"math": 90, "english": 85},  # Nested dictionary representing scores in different subjects
+        "active": true,  # Boolean indicating if the person is active
+        "join_date": "2023-01-15"  # Date when the person joined (as a string)
+    },
+    {
+        "id": 2,
+        "name": "Bob",
+        "scores": {"math": 80, "english": 75},
+        "active": false,
+        "join_date": "2023-02-20"
+    }
+]'''
+
+df = pd.read_json(StringIO(json_data), orient='records')
+print(df)
+# OUTPUT:
+#    id   name   scores                        active   join_date      
+# 0   1  Alice  {'math': 90, 'english': 85}    True     2023-01-15
+# 1   2    Bob  {'math': 80, 'english': 75}    False    2023-02-20 
+
+
+```
+
 
 ### Example 2: Using `orient='index'` for Time Series Data
 
