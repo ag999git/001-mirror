@@ -71,6 +71,32 @@ print(df)
 
 When your data has unique row identifiers (like dates):
 
+```python
+
+import pandas as pd
+from io import StringIO  # For simulating file-like object from a string
+# JSON data with index as primary key.
+# This JSON structure is common when the data is organized with unique identifiers (like dates, IDs, etc.) as keys, 
+# and the values are dictionaries containing the actual data for each key. 
+# In this case, the keys are dates, and the values are dictionaries with a single key "Value" 
+# that holds the corresponding value.
+json_data = '{"2023-01-01": {"Value": 100}, "2023-01-02": {"Value": 105}}'
+
+# Read with orient='index'. This tells Pandas that the keys of the JSON are the index labels.
+# If you omit orient='index', Pandas will assume the keys are column names, which will lead to a different structure.
+# Note: You must import StringIO to convert the JSON string into a file-like object that pd.read_json() can read from.
+# The resulting DataFrame will have the dates as the index and a single column named "Value" containing the corresponding values.   
+# The orient='index' parameter is crucial here because it tells Pandas how to interpret the structure of the JSON data. 
+# If you omit orient='index', Pandas will assume the keys are column names, which will lead to a different structure and likely an error since the values are not in the expected format for columns.
+df = pd.read_json(StringIO(json_data), orient='index')
+print(df)
+# OUTPUT:
+#             Value
+# 2023-01-01    100
+# 2023-01-02    105
+
+
+```
 
 
 
