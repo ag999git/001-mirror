@@ -198,10 +198,14 @@ print(df)
 ```
 
 
+**Constraints and Errors**:
 
-
-
-```
+-   **Unique Index Required**: If outer dictionary keys are not unique, pandas will raise a `ValueError`
+    
+    github
+    
+-   **Index Type Preservation**: The index type is preserved as string (can be converted with `convert_axes=True`)
+-   **Column Uniqueness**: Column names must be unique across all inner dictionaries
 
 
 
