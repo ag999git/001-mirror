@@ -116,9 +116,11 @@ print(df)
 ```
 
 
-### Example 2: Using `orient='index'` for Time Series Data
+### Using `orient='index'` for Time Series Data
 
 When your data has unique row identifiers (like dates):
+
+#### Example 3 (Simple)
 
 ```python
 
@@ -143,6 +145,60 @@ print(df)
 #             Value
 # 2023-01-01    100
 # 2023-01-02    105
+
+
+The `'index'` format is ideal for time-series data or any data with unique row identifiers.
+
+**Advanced Features**:
+
+-   **Custom Index Preservation**: Outer dictionary keys become the DataFrame index
+-   **Data Type Preservation**: Maintains the data types of index and values
+-   **Sparse Data Handling**: Efficiently handles sparse data structures
+
+#### Example 4 (Complex Example):
+
+```python
+
+# Time series data with custom index
+from io import StringIO
+from turtle import pd
+
+# Sample JSON data with date keys
+# This simulates a time series dataset where each date has associated values.
+# The JSON structure is a dictionary where keys are date strings and values are dictionaries of stock prices.
+# The 'orient' parameter in pd.read_json() is set to 'index' to indicate that the keys of the JSON should 
+# be treated as index labels in the resulting DataFrame.    
+json_data = '''{
+    "2023-01-01": {"open": 100.5, "high": 105.0, "low": 99.5, "close": 104.0},
+    "2023-01-02": {"open": 104.0, "high": 108.0, "low": 103.5, "close": 107.5},
+    "2023-01-03": {"open": 107.5, "high": 110.0, "low": 107.0, "close": 109.5}
+}'''
+
+df = pd.read_json(StringIO(json_data), orient='index')
+print(df.index)
+# OUTPUT: 
+# Index(['2023-01-01', '2023-01-02', '2023-01-03'], dtype='object') 
+
+print(df.dtypes)
+# OUTPUT:
+# open     float64
+# high     float64
+# low      float64
+# close    float64
+# dtype: object
+
+print(df)
+# OUTPUT:
+#             open     high      low      close
+# 2023-01-01  100.5    105.0     99.5     104.0
+# 2023-01-02  104.0    108.0     103.5     107.5
+# 2023-01-03  107.5    110.0     107.0     109.5  
+
+
+```
+
+
+
 
 
 ```
