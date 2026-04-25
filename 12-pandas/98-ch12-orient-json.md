@@ -409,7 +409,13 @@ print(df.dtypes)
 
 ```
 
+**Error Scenarios**:
 
+-   **Schema Mismatch**: If schema doesn't match data structure, pandas may raise errors or produce unexpected results
+    
+-   **Numeric Index Issues**: Numeric indices in 'table' format can cause `ValueError` issues
+    
+-   **Version Compatibility**: Different pandas versions may handle 'table' format differently
 
 
 
