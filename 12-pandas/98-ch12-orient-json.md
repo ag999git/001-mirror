@@ -343,7 +343,11 @@ print(df)
 
 ```
 
+**Limitations and Constraints**:
 
+-   **No Column Names**: Columns are automatically numbered (0, 1, 2...)
+-   **No Index**: Default integer index (0, 1, 2...)
+-   **Data Type Inference**: Types are inferred from the values in the arrays
 
 
 
