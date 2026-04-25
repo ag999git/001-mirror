@@ -253,9 +253,59 @@ print(df)
 # sensor2         23.1          47.1        1012.8
 # sensor3         21.8          46.5        1013.5
 
+```
+
+### `orient='split'`
+
+The `'split'` format provides the most explicit representation by separating metadata from data.
+
+**Advanced Features**:
+
+-   **Explicit Structure**: Clearly separates index, columns, and data
+-   **Type Preservation**: Can preserve exact data types when used with `to_json()`
+-   **Round-Trip Guarantees**: Perfect for saving and loading DataFrames without information loss
+
+#### Example 6:
+
+```python
+
+import pandas as pd
+from io import StringIO
+
+# Explicit split format with metadata
+# This JSON structure includes 'index', 'columns', and 'data' keys, which is the format expected 
+# when using orient='split'. 
+# The 'index' key defines the row labels, 'columns' defines the column labels, 
+# and 'data' contains the actual data in a list of lists format.   
+# The 'orient' parameter in pd.read_json() tells Pandas how to interpret the JSON structure.
+json_data = '''{
+    "index": ["row1", "row2", "row3"],
+    "columns": ["col1", "col2", "col3"],
+    "data": [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+    ]
+}'''
+
+df = pd.read_json(StringIO(json_data), orient='split')
+print(df)
+# Output:
+#       col1  col2  col3 
+# row1     1     2     3
+# row2     4     5     6
+# row3     7     8     9
 
 
 ```
+
+
+
+
+
+
+
+
 
 
 
