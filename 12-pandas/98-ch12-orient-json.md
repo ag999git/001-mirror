@@ -350,9 +350,64 @@ print(df)
 -   **Data Type Inference**: Types are inferred from the values in the arrays
 
 
+### `orient='table'` 
 
+The `'table'` format follows the JSON Table Schema specification, providing the most robust and feature-rich representation.
 
+**Advanced Features**:
 
+-   **Schema Preservation**: Maintains complete data type information
+-   **Metadata Preservation**: Can preserve field names, types, and constraints
+-   **Round-Trip Accuracy**: Ensures perfect round-trip conversion between DataFrame and JSON
+
+#### Example 8:
+
+```python
+
+import pandas as pd
+from io import StringIO
+
+# Table schema format with full metadata
+# This is a JSON string that includes both the data and its schema. 
+# The schema describes the structure of the data, including field names, data types, and other metadata.
+# The 'data' key contains a list of records, where each record is a dictionary that corresponds 
+# to a row in the resulting DataFrame.    
+# The 'orient' parameter in pd.read_json() specifies how the JSON data is structured.
+
+json_data = '''{
+    "schema": {
+        "fields": [
+            {"name": "index", "type": "string"},
+            {"name": "id", "type": "integer"},
+            {"name": "name", "type": "string"},
+            {"name": "value", "type": "number"}
+        ],
+        "primaryKey": ["index"],
+        "pandas_version": "1.4.0"
+    },
+    "data": [
+        {"index": "row1", "id": 1, "name": "Alice", "value": 100.5},
+        {"index": "row2", "id": 2, "name": "Bob", "value": 200.7},
+        {"index": "row3", "id": 3, "name": "Charlie", "value": 150.3}
+    ]
+}'''
+
+df = pd.read_json(StringIO(json_data), orient='table')
+print(df)
+# OUTPUT:
+#          id       name     value
+# index
+# row1      1      Alice     100.5
+# row2      2        Bob     200.7
+# row3      3    Charlie     150.3
+
+print(df.dtypes)
+# OUTPUT:
+# id         int64
+# name      object
+# value    float64
+
+```
 
 
 
