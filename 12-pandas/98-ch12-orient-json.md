@@ -296,11 +296,52 @@ print(df)
 # row2     4     5     6
 # row3     7     8     9
 
-
 ```
 
+**Performance Characteristics**:
+
+-   **Fastest for Large Data**: Separating metadata from data allows for optimized parsing
+-   **Memory Efficient**: Can be more memory efficient for very large datasets
+-   **Intermediate Storage**: Ideal for intermediate storage during data processing pipelines
 
 
+
+### `orient='values'` 
+
+The `'values'` format is the most minimal, storing only the data values without any metadata.
+
+**Advanced Features**:
+
+-   **Compact Storage**: Smallest file size of all orient options
+-   **Fast Parsing**: Very fast parsing due to lack of metadata
+-   **Minimal Information Loss**: Loses all structural information (index, columns)
+
+#### Example 7:
+
+```python
+
+import pandas as pd
+from io import StringIO
+
+# Minimal JSON Example
+# This JSON represents a 3x3 matrix (list of lists).
+# The 'orient' parameter is set to 'values' to indicate that the JSON data is a list of lists, 
+# not a list of records or a dictionary.
+json_data = '''[
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+]'''
+
+df = pd.read_json(StringIO(json_data), orient='values')
+print(df)
+# OUTPUT:
+#    0  1  2          # The columns are automatically named 0, 1, 2 since we didn't provide column names.
+# 0 10 20 30          # The rows are automatically indexed 0, 1, 2 since we didn't provide row index labels.
+# 1 40 50 60
+# 2 70 80 90    
+
+```
 
 
 
