@@ -201,15 +201,61 @@ print(df)
 **Constraints and Errors**:
 
 -   **Unique Index Required**: If outer dictionary keys are not unique, pandas will raise a `ValueError`
-    
-    github
-    
 -   **Index Type Preservation**: The index type is preserved as string (can be converted with `convert_axes=True`)
 -   **Column Uniqueness**: Column names must be unique across all inner dictionaries
 
 
+### orient='columns'
+
+The `'columns'` format is less common but useful for column-oriented operations.
+
+**Features**:
+
+-   **Column-Oriented**: Outer dictionary keys become column names
+-   **Index Preservation**: Inner dictionary keys become the index
+-   **Sparse Data Efficiency**: Very efficient for sparse column data
+
+#### Example 5:
+
+```python
+
+import pandas as pd
+from io import StringIO
+
+# Column-oriented data
+# The JSON structure is a dictionary where each key is a column name and the value is another dictionary
+# that contains the row labels (sensor1, sensor2, sensor3) and their corresponding values. 
+# This is a common format for JSON data that represents tabular data, and Pandas can easily convert 
+# it into a DataFrame.
+json_data = '''{
+    "temperature": {      # Column name: "temperature"
+        "sensor1": 22.5,  # Row label "sensor1" with value 22.5
+        "sensor2": 23.1,  # Row label "sensor2" with value 23.1
+        "sensor3": 21.8   # Row label "sensor3" with value 21.8
+    },
+    "humidity": {         # Column name: "humidity"
+        "sensor1": 45.2,  # Row label "sensor1" with value 45.2
+        "sensor2": 47.1,  # Row label "sensor2" with value 47.1
+        "sensor3": 46.5   # Row label "sensor3" with value 46.5
+    },
+    "pressure": {           # Column name: "pressure"
+        "sensor1": 1013.2,  # Row label "sensor1" with value 1013.2
+        "sensor2": 1012.8,  # Row label "sensor2" with value 1012.8
+        "sensor3": 1013.5   # Row label "sensor3" with value 1013.5
+    }
+}'''
+
+df = pd.read_json(StringIO(json_data), orient='columns')
+print(df)
+# OUTPUT:
+#              temperature      humidity    pressure  
+# sensor1         22.5          45.2        1013.2
+# sensor2         23.1          47.1        1012.8
+# sensor3         21.8          46.5        1013.5
 
 
+
+```
 
 
 
