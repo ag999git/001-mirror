@@ -419,3 +419,181 @@ print(df.dtypes)
 
 
 
+
+
+# Introduction to `json_normalize()`
+
+In real-world applications, JSON data is often **nested**, meaning that some fields may contain dictionaries or lists instead of simple values. While Pandas can read such data, the resulting DataFrame may contain columns with complex structures that are difficult to analyze.
+
+To address this, Pandas provides the **`json_normalize()`** function.
+
+**`json_normalize()` is used to convert (flatten) nested JSON data into a flat table (DataFrame)**, where each nested key becomes a separate column.
+
+This makes the data:
+
+-   easier to read
+-   easier to analyze
+-   compatible with standard DataFrame operations
+
+----------
+
+### Why is it needed?
+
+Without normalization:
+
+-   Nested data appears as **dictionaries inside cells**
+-   Such data cannot be directly used for calculations or filtering
+
+With `json_normalize()`:
+
+-   Nested structures are **expanded into columns**
+-   The data becomes fully **tabular**
+
+### Key Idea
+
+> **Nested JSON → Flat Table (DataFrame)**
+
+----------
+
+### To summarize
+
+> `json_normalize()` transforms semi-structured JSON data into a structured tabular format by flattening nested fields.
+
+
+
+## 1. What is “Nested JSON”?
+
+### Example JSON
+
+```python
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "Alice",
+      "grades": {"math": 90, "english": 85}
+    },
+    {
+      "id": 2,
+      "name": "Bob",
+      "grades": {"math": 80, "english": 75}
+    }
+  ]
+}
+```
+
+**Python Equivalent**
+
+```python
+{  
+"students": [  
+{"id": 1, "name": "Alice", "grades": {"math": 90, "english": 85}},  
+{"id": 2, "name": "Bob", "grades": {"math": 80, "english": 75}}  
+]  
+}
+```
+
+## 2. What happens without "normalization"
+
+```python
+
+# 2. What happens WITHOUT normalization?
+
+import pandas as pd
+import json
+
+# Example JSON data (as a string)
+json_data = '''
+{
+    "students": [
+    {
+        "id": 1,
+        "name": "Alice",
+        "grades": {"math": 90, "english": 85}
+    },
+    {
+        "id": 2,
+        "name": "Bob",
+        "grades": {"math": 80, "english": 75}
+    }
+    ]
+}
+'''
+data = json.loads(json_data)
+
+# Attempting to create a DataFrame directly from the 'students' list
+# This will not work as expected because the 'grades' column contains nested dictionaries.
+# The resulting DataFrame will have a 'grades' column where each entry is a dictionary, 
+# which is not ideal for analysis.
+# 
+df = pd.DataFrame(data['students'])
+print(df)
+# OUTPUT:
+#    id        name                   grades  
+# 0   1       Alice          {'math': 90, 'english': 85}
+# 1   2         Bob          {'math': 80, 'english': 75}
+```
+
+
+## 3. Using json_normalize()
+
+
+```python
+# 2. What happens WITHOUT normalization?
+
+import pandas as pd
+import json
+
+# Example JSON data (as a string)
+json_data = '''
+{
+    "students": [
+    {
+        "id": 1,
+        "name": "Alice",
+        "grades": {"math": 90, "english": 85}
+    },
+    {
+        "id": 2,
+        "name": "Bob",
+        "grades": {"math": 80, "english": 75}
+    }
+    ]
+}
+'''
+data = json.loads(json_data)
+
+# Using json_normalize() to flatten the nested JSON structure
+# This will create a DataFrame where the 'grades' dictionary is expanded into separate columns.
+df_normalized = pd.json_normalize(data['students'])
+print("Normalized DataFrame:")
+print(df_normalized)
+# OUTPUT:
+#    id   name  grades.math  grades.english
+# 0   1  Alice           90              85
+# 1   2    Bob           80              75
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
