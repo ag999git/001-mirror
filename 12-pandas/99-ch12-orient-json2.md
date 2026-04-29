@@ -1,31 +1,6 @@
 
 
-
-
-
-# Project: Understanding JSON Orientations in Pandas
-
-## Learning Objectives
-
-After completing this exercise, you will be able to:
-
-1.  Understand how Pandas stores data in different JSON formats
-2.  Compare various `orient` options (`records`, `columns`, `index`, `split`)
-3.  Convert DataFrame → JSON → DataFrame correctly
-4.  Interpret raw JSON structures
-5.  Understand that **data representation ≠ data content**
-
-----------
-
-## Concept Overview
-
-A Pandas DataFrame is a **tabular structure**, but JSON is **flexible**.
-
- Therefore, the same data can be stored in multiple JSON formats.
-
-> The `orient` parameter controls _how_ the DataFrame is converted into JSON.
-
-## Comparison of JSON Orientations
+# Detailed discussion on the script given in the book
 
 
 ## STEP 1: LOAD DATA FROM CSV
