@@ -48,7 +48,7 @@ total_bill   tip   sex     smoker
 16.99        1.01  Female  No  
 10.34        1.66  Male    No
 ```
-### 🔹 Concept
+### Concept
 
 This is **flat (2D) data**
 
