@@ -576,7 +576,7 @@ print(df_normalized)
 
 ```
 
-## Using Real-World JSON Datasets to explain `"orient"` parameter of `read_json()`
+
 
 
 
