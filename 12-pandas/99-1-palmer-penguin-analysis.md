@@ -203,7 +203,9 @@ ax.set_xticklabels(df_penguins.index, rotation=0)
 plt.show()
 ```
 
+## Flowchart showing flow of execution of above script
 
+![Project1](/resources/ch12-project1-palmer-penguin.png)
 
 
 
