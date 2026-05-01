@@ -70,7 +70,7 @@ Display a few sample values from this column.
 
 
 
-## Project 1
+# Project 1 (Solution)
 
 ### 1. Dataset Details
 
