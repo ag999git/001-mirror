@@ -236,6 +236,107 @@ plt.show()
 </details>
 
 
+## The entire script as a single block is given below:-
+
+```python
+
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Step 1: Load Data and Inspect Shape
+# Seaborn downloads the dataset automatically
+my_df = sns.load_dataset('penguins')  # Load Palmer Penguins dataset in DataFrame
+
+# Get shape (rows, columns)
+print(f'Shape: {my_df.shape}')  # Output: (344, 7)
+print(f'Rows: {my_df.shape[0]}')  # Output: 344
+print(f'Columns: {my_df.shape[1]}')  # Output: 7
+
+# Step 2: Rename Column and Transpose View
+# Rename the first column from 'species' to 'penguin_species'
+my_df.rename(columns={'species': 'penguin_species'}, inplace=True)
+
+# View first row transposed to see all column headers clearly
+print('\nFirst row (Transposed):')  # Column names as rows → for readability
+print(my_df.head(1).T)  # First row of data with column names as rows
+
+# Step 3: Check Data Types and Select Data
+# Check data types
+print('\nData Types:')  # Show data types of each column
+print(my_df.dtypes)
+
+# Select first 5 entries of the 'penguin_species' column
+print('\nFirst 5 entries of species:')  
+print(my_df['penguin_species'].head(5))
+
+# Step 4: Analyze Categorical Data
+
+# Count unique species
+print(f'\nUnique Species count: {my_df.penguin_species.nunique()}')
+
+# Count of each species
+print('\nSpecies distribution:')
+print(my_df.penguin_species.value_counts())  # Counts each species in dataset
+
+# Step 5: Summarize Statistics
+# Summary of ALL columns (numeric and categorical)
+# For numeric columns: gives mean, std, min, max, etc.
+# For text columns: gives unique count, top value, frequency, etc.
+print('\nSummary of all data:')
+print(my_df.describe(include='all'))
+
+# Step 6: Handle Missing Data
+# Check for NaN counts before cleaning
+print('\nNull counts before cleaning:')
+print(my_df.isnull().sum())  # Missing values (each column) before cleaning
+
+# Drop rows where 'sex' is NaN and update the dataframe
+my_df.dropna(subset=['sex'], inplace=True)  
+
+# Check that the NaN are removed
+print('\nNull counts after cleaning:')  
+print(my_df.isnull().sum()) #No of Missing values (each column) after cleaning
+
+# Step 7: Transform Data Types
+# Convert 'island' column from object to category for efficiency
+my_df['island'] = my_df['island'].astype('category')
+print('\nData types after converting island to category:')
+print(my_df.dtypes)
+
+# Step 8: Aggregate Data (Grouping)
+# Group by 'island' and count entries. Gives number of penguins on each island
+df_penguins = pd.DataFrame(my_df['island'].groupby(my_df.island).agg('count'))
+
+# Rename the count column and the index for clarity
+df_penguins.columns = ['Count']
+df_penguins.index.names = ['Island']
+
+print('\nPenguins per Island:')
+print(df_penguins)
+
+# Step 9: Visualize Data
+
+# Use a clean style (checking for compatibility with newer versions)
+try:
+    plt.style.use('seaborn-v0_8-whitegrid')
+except:
+    plt.style.use('seaborn')
+
+ax = df_penguins.plot(kind='bar', color='skyblue', edgecolor='black')
+
+# Set labels and title
+ax.set_xlabel(df_penguins.index.name)
+ax.set_ylabel('Count')
+ax.set_title('Penguin Population per Island')
+
+# Set x-tick labels to island names
+ax.set_xticklabels(df_penguins.index, rotation=0)
+
+plt.show()
+
+```
+
 
 
 
