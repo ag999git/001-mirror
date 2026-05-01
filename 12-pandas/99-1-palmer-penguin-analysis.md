@@ -337,6 +337,17 @@ plt.show()
 
 ```
 
+## The resulting plot is as follows
+
+![Plot](/resources/ch12-project1-palmer-penguin-image.png)
+
+
+
+
+
+
+
+
 
 
 
