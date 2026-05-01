@@ -77,15 +77,15 @@ Display a few sample values from this column.
 -   Source: Palmer Penguins Dataset (Gorman, Williams, Fraser 2014).
 -   Format: Excel file (**.xlsx**).
 -   License: CC0 (Public Domain).
--   Columns:
+-   Columns: (Total 7 as follows)
 
--   **species** (Categorical): The penguin species (Adelie, Chinstrap, Gentoo).
--   **island** (Categorical): Island where observed (Dream, Torgersen, Biscoe).
--   **bill_length_mm** (Numerical): Length of the bill.
--   **bill_depth_mm** (Numerical): Depth of the bill.
--   **flipper_length_mm** (Numerical): Length of flipper.
--   **body_mass_g** (Numerical): Body mass in grams.
--   **sex** (Categorical): Male or Female.
+    -  **species** (Categorical): The penguin species (Adelie, Chinstrap, Gentoo).
+    -   **island** (Categorical): Island where observed (Dream, Torgersen, Biscoe).
+    -   **bill_length_mm** (Numerical): Length of the bill.
+    -   **bill_depth_mm** (Numerical): Depth of the bill.
+    -   **flipper_length_mm** (Numerical): Length of flipper.
+    -   **body_mass_g** (Numerical): Body mass in grams.
+    -   **sex** (Categorical): Male or Female.
 
 ### 2. Learning Objectives
 
