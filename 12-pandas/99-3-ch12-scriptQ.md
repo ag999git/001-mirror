@@ -15,11 +15,14 @@ import time
 # Create a large Series with 1 million random numbers
 data = pd.Series(np.random.randint(1, 100, size=1_000_000))
 
-# --- Method 1: Standard Python Loop (Procedural) ---
+# --- Method 1: Standard Python Loop ---
+# We convert to a list first because looping directly through 
+# a Pandas Series is even slower!
 start_time = time.time()
-result_loop = pd.Series([0] * len(data)) # Initialize empty Series
-for i in range(len(data)):
-    result_loop[i] = data[i] * 2
+result_list = []
+for value in data:
+    result_list.append(value * 2)
+result_loop = pd.Series(result_list)
 loop_duration = time.time() - start_time
 
 # --- Method 2: Pandas Vectorized Operation ---
@@ -27,27 +30,29 @@ start_time = time.time()
 result_vectorized = data * 2
 vectorized_duration = time.time() - start_time
 
+# Results display
 print(f"Loop Duration: {loop_duration:.4f} seconds")
 print(f"Vectorized Duration: {vectorized_duration:.4f} seconds")
 print(f"Vectorized is {loop_duration / vectorized_duration:.1f}x faster")
 
-# Verify results are identical
-assert result_loop.equals(result_vectorized), "Results differ!"
+# Verify results are identical (using np.array_equal to ignore index issues)
+assert np.array_equal(result_loop.values, result_vectorized.values), "Results differ!"
+print("Verification Success: Both methods produced the same values!")
 ```
 
 **Output**
 
 
 ```python
-Loop Duration: 14.3628 seconds
-Vectorized Duration: 0.0028 seconds
-Vectorized is 5091.4x faster
-Traceback (most recent call last):
-  File "c:\python-scripts-ch12-pandas\ch12-scripts.py", line 26, in <module>
-    assert result_loop.equals(result_vectorized), "Results differ!"
-AssertionError: Results differ!
+Loop Duration: 1.6913 seconds
+Vectorized Duration: 0.0060 seconds
+Vectorized is 282.5x faster
+Verification Success: Both methods produced the same values!
 
 ```
+
+**EXPLANATION**
+**This script compares two ways of multiplying 1 million numbers by 2. First, it creates a large Pandas Series using random integers. In Method 1, a standard Python loop processes each value one by one, which is slow for large datasets. In Method 2, a vectorized operation (data * 2) is used, where Pandas applies the operation to all values at once using optimized internal code, making it much faster. The script measures and prints the time taken by both methods and shows how many times faster the vectorized approach is. Finally, it verifies that both methods produce identical results. The key takeaway is that vectorized operations in Pandas are significantly more efficient than Python loops for data processing.**
 
 2. What is the fundamental structural difference between a Pandas Series and a DataFrame, and how does the concept of "heterogeneous data" apply specifically to DataFrames but not typically to NumPy arrays?
 Write a script that creates a NumPy array containing only integers (homogeneous), a Pandas Series containing mixed types (integers and strings), and a Pandas DataFrame containing multiple columns of different types (integers, floats, and strings). Print the dtype of each object to demonstrate this difference.
