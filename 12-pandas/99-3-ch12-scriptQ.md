@@ -95,7 +95,24 @@ Name      object
 dtype: object
 
 ```
+**EXPLANATION**
+A Pandas Series is a one-dimensional structure (like a single column), while a DataFrame is a two-dimensional structure (like a full table with rows and columns). The key structural difference is that a DataFrame is essentially a collection of Series, where each column is its own Series.
 
+Now, regarding heterogeneous data:
+
+A NumPy array is designed to be homogeneous, meaning all elements must be of the same data type (e.g., all integers or all floats). This makes NumPy very fast but less flexible.
+A Pandas Series can hold mixed types, but when it does, it converts everything into a common type (usually object), which reduces efficiency. So, in practice, a Series is usually kept homogeneous.
+A Pandas DataFrame, however, is inherently heterogeneous. Each column can have a different data type (e.g., integers, floats, strings), because each column is a separate Series. This makes DataFrames ideal for real-world datasets where different kinds of data coexist.
+
+In the script:
+
+The NumPy array contains only integers, so its dtype is int64 (or similar), showing homogeneity.
+The Series contains both integers and strings, so Pandas assigns it a single dtype object, meaning it can hold mixed Python objects.
+The DataFrame has three columns (ID, Price, Name), each with a different dtype (int64, float64, object), clearly demonstrating heterogeneity across columns.
+
+The key takeaway is:
+
+NumPy enforces uniform data types, a Series usually behaves like a single typed column, but a DataFrame allows different data types across its columns, making it suitable for structured, real-world data.
 
 3. Explain the difference between creating a Pandas Series using a "Dictionary Approach" versus a "List Approach" regarding index assignment, and demonstrate how the dictionary keys automatically become the index labels.
 Write a script that creates two Series containing the same data values (100, 200, 300). The first Series should be created from a list (resulting in a default numeric index), and the second Series should be created from a dictionary mapping specific labels ('Q1', 'Q2', 'Q3') to those values. Print both Series to visualize the index difference.
