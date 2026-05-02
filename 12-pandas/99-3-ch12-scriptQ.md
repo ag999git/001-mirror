@@ -718,7 +718,8 @@ print(df_arrow.dtypes)
 # Note: PyArrow types often explicitly state they are nullable/arrow-backed
 ```
 
-**OUTPUT
+**OUTPUT**
+```python
 NumPy Backend Dtypes:
 total_bill     float64
 tip            float64
@@ -768,6 +769,22 @@ print(f"\nExplicit Date Type: {df_safe['Date'].dtype}")
 print(df_safe.head())
 ```
 
+**OUTPUT**
+
+```python
+Inferred Date Type: datetime64[ns]
+        Date  Value
+0 2023-01-01    100
+1 2023-02-01    200
+
+Explicit Date Type: datetime64[ns]
+        Date  Value
+0 2023-01-01    100
+1 2023-01-02    200
+
+```
+
+
 19. What is the functionality of the .stack() and .unstack() methods in relation to MultiIndex DataFrames, and how do they facilitate switching between analysis and reporting formats?
 Write a script that creates a MultiIndex DataFrame (index: Year, columns: Quarter). Use .stack() to pivot it into a Long format Series, and then use .unstack() to convert it back to the Wide format DataFrame.
 
@@ -797,6 +814,33 @@ print("\nAfter unstack() (Back to Wide Format DataFrame):")
 print(unstacked_df)
 ```
 
+**OUTPUT**
+
+```python
+Original Wide Format (MultiIndex Columns):
+Quarter  Q1  Q2  Q3  Q4
+Year                   
+2021     10  20  30  40
+2022     15  25  35  45
+
+After stack() (Long Format Series):
+Year  Quarter
+2021  Q1         10
+      Q2         20
+      Q3         30
+      Q4         40
+2022  Q1         15
+dtype: int64
+
+After unstack() (Back to Wide Format DataFrame):
+Quarter  Q1  Q2  Q3  Q4
+Year                   
+2021     10  20  30  40
+2022     15  25  35  45
+
+```
+
+### ERROR
 20. How does the inplace=True parameter affect memory management and readability in Pandas scripts, and write a script comparing chaining operations without inplace versus sequential operations with inplace?
 Write a script that performs a standard cleaning workflow: fill missing values, rename a column, and drop a duplicate. Perform this once using method chaining (no inplace) and once using sequential steps with inplace=True. Assign the final results to new variables and print them to show they are equivalent.
 
@@ -865,6 +909,24 @@ print(df.isna().sum())
 
 ```
 
+**OUTPUT**
+
+```python
+DataFrame with Standardized NaN:
+   ID  Value
+0   1  100.0
+1   2    NaN
+2   3    NaN
+3   4  200.0
+
+Check for NaN:
+ID       0
+Value    2
+dtype: int64
+
+```
+
+
 22. What is the significance of the usecols parameter in read_csv for memory efficiency when dealing with wide datasets containing hundreds of columns?
 Write a script that generates a wide DataFrame with 50 columns of random numbers. Time the reading of this dataset using read_csv (simulated via String IO) loading all columns, and then loading only 5 specific columns using usecols. Print the memory usage reduction (though simulated via shape) to demonstrate the concept.
 
@@ -887,6 +949,14 @@ print(f"Read All Columns Shape: {df_all.shape}") # 1 Row, 50 Columns
 # Only reads necessary data into RAM
 df_subset = pd.read_csv(io.StringIO(wide_csv), usecols=['Col0', 'Col1', 'Col2', 'Col3', 'Col4'])
 print(f"Read Subset Shape: {df_subset.shape}") # 1 Row, 5 Columns
+
+```
+
+**OUTPUT**
+
+```python
+Read All Columns Shape: (1, 50)
+Read Subset Shape: (1, 5)
 
 ```
 
@@ -923,6 +993,24 @@ assert filtered_bool.equals(filtered_query), "Results do not match!"
 
 ```
 
+**OUTPUT**
+
+```python
+Boolean Indexing Result:
+  Region  Sales
+0   East    600
+2   East    700
+4   East    550
+
+Query Method Result:
+  Region  Sales
+0   East    600
+2   East    700
+4   East    550
+
+```
+
+
 24. In the context of Excel I/O, how does the openpyxl engine facilitate writing Pandas DataFrames to .xlsx files, and what are the requirements for reading files with multiple sheets?
 Write a script that creates two simple DataFrames. Write both to a single Excel file using pd.ExcelWriter with two different sheet names ('Sheet1', 'Sheet2'). Then, read the file back specifying sheet_name='Sheet2' to verify only that sheet's data is loaded.
 
@@ -951,6 +1039,18 @@ print(df_loaded)
 
 ```
 
+**OUTPUT**
+
+```python
+Excel file 'multi_sheet.xlsx' created.
+Data loaded from Sheet2:
+    X   Y
+0  10  30
+1  20  40
+
+```
+
+### ERROR
 25. How does the .astype('category') data type conversion improve performance and memory usage for columns with low cardinality (few unique values repeated many times), compared to the standard object dtype?
 Write a script that creates a DataFrame with a 'Department' column containing only 3 unique values (HR, IT, Sales) repeated 1,000 times. Print the memory usage (using .info()) before and after converting the 'Department' column to category.
 
@@ -1004,6 +1104,17 @@ print(df_correct)
 
 ```
 
+**OUTPUT**
+
+```python
+Successfully Read with Correct Encoding:
+       Name       City
+0      José  São Paulo
+1  François     Zürich
+
+```
+
+
 27. How does the chunksize parameter in read_csv enable processing of datasets that are larger than the available system RAM (Out-of-Core processing), and what is the typical workflow pattern?
 Write a script that defines a generator function reading a large CSV (simulated here with a loop) in chunks of 10 rows. Aggregate the sum of a 'Value' column across all chunks to demonstrate processing data without ever holding the full dataset in memory.
 
@@ -1034,6 +1145,18 @@ print(f"\nTotal Sum of all chunks: {total_sum}")
 
 ```
 
+**OUTPUT**
+
+```python
+Processed Chunk 1: Sum = 582
+Processed Chunk 2: Sum = 387
+Processed Chunk 3: Sum = 537
+
+Total Sum of all chunks: 1506
+
+```
+
+
 28. What is the difference between the keep_default_na and na_values parameters in read_csv when customizing missing value detection?
 Write a script that creates a CSV containing "NA" (default missing) and "N/A" (custom missing). Read the CSV first with default settings (where only "NA" is detected), and then read it again providing na_values=['N/A']. Compare the count of NaN values in both DataFrames.
 
@@ -1059,6 +1182,21 @@ print(df_default.isna().sum())
 df_custom = pd.read_csv(io.StringIO(csv_data), na_values=['N/A'])
 print("\nCustom Detection (NA and N/A):")
 print(df_custom.isna().sum())
+
+```
+
+**OUTPUT**
+
+```python
+Default Detection (NA only):
+ID       0
+Score    2
+dtype: int64
+
+Custom Detection (NA and N/A):
+ID       0
+Score    2
+dtype: int64
 
 ```
 
@@ -1092,6 +1230,19 @@ print(df)
 print(f"\nPrice dtype: {df['Price'].dtype}")
 
 ```
+**OUTPUT**
+
+```python
+DataFrame with Parsed Prices:
+     Item  Price
+0   Apple   50.0
+1  Banana   20.0
+2  Cherry   35.0
+
+Price dtype: float64
+
+```
+
 
 30. What is the purpose of the skiprows parameter in read_csv when dealing with files that have metadata, header descriptions, or footer information before the actual data begins?
 Write a script that simulates a CSV file where the first 2 lines are metadata headers (e.g., "Report Generated on...") and the actual data starts on row 3 (index 2). Use skiprows=2 to ignore the metadata and load only the structured data.
@@ -1114,7 +1265,15 @@ df = pd.read_csv(io.StringIO(csv_content), skiprows=2)
 print("Data after skipping metadata rows:")
 print(df)
 ```
+**OUTPUT**
 
+```python
+Data after skipping metadata rows:
+  Product  Sales
+0  Widget    100
+1  Gadget    200
+
+```
 
 
 
