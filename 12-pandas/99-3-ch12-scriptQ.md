@@ -3,7 +3,7 @@
 
 
 Part 1: Questions Based on Chapter Topics
-1. How does the "Vectorized" nature of Pandas operations differ from standard Python loops, and why does this distinction significantly impact performance when processing large datasets?
+### 1. How does the "Vectorized" nature of Pandas operations differ from standard Python loops, and why does this distinction significantly impact performance when processing large datasets?
 Write a Python script that demonstrates the difference in execution time between iterating through a Pandas Series with a for loop to multiply values by 2, versus using the vectorized multiplication operator (*). Use the time module to measure the duration of both operations on a Series with at least 1 million elements.
 
 ```python
@@ -52,9 +52,10 @@ Verification Success: Both methods produced the same values!
 ```
 
 **EXPLANATION**
-**This script compares two ways of multiplying 1 million numbers by 2. First, it creates a large Pandas Series using random integers. In Method 1, a standard Python loop processes each value one by one, which is slow for large datasets. In Method 2, a vectorized operation (data * 2) is used, where Pandas applies the operation to all values at once using optimized internal code, making it much faster. The script measures and prints the time taken by both methods and shows how many times faster the vectorized approach is. Finally, it verifies that both methods produce identical results. The key takeaway is that vectorized operations in Pandas are significantly more efficient than Python loops for data processing.**
 
-2. What is the fundamental structural difference between a Pandas Series and a DataFrame, and how does the concept of "heterogeneous data" apply specifically to DataFrames but not typically to NumPy arrays?
+This script compares two ways of multiplying 1 million numbers by 2. First, it creates a large Pandas Series using random integers. In Method 1, a standard Python loop processes each value one by one, which is slow for large datasets. In Method 2, a vectorized operation (data * 2) is used, where Pandas applies the operation to all values at once using optimized internal code, making it much faster. The script measures and prints the time taken by both methods and shows how many times faster the vectorized approach is. Finally, it verifies that both methods produce identical results. The key takeaway is that vectorized operations in Pandas are significantly more efficient than Python loops for data processing.
+
+### 2. What is the fundamental structural difference between a Pandas Series and a DataFrame, and how does the concept of "heterogeneous data" apply specifically to DataFrames but not typically to NumPy arrays?
 Write a script that creates a NumPy array containing only integers (homogeneous), a Pandas Series containing mixed types (integers and strings), and a Pandas DataFrame containing multiple columns of different types (integers, floats, and strings). Print the dtype of each object to demonstrate this difference.
 
 ```python
@@ -114,7 +115,7 @@ The key takeaway is:
 
 NumPy enforces uniform data types, a Series usually behaves like a single typed column, but a DataFrame allows different data types across its columns, making it suitable for structured, real-world data.
 
-3. Explain the difference between creating a Pandas Series using a "Dictionary Approach" versus a "List Approach" regarding index assignment, and demonstrate how the dictionary keys automatically become the index labels.
+### 3. Explain the difference between creating a Pandas Series using a "Dictionary Approach" versus a "List Approach" regarding index assignment, and demonstrate how the dictionary keys automatically become the index labels.
 Write a script that creates two Series containing the same data values (100, 200, 300). The first Series should be created from a list (resulting in a default numeric index), and the second Series should be created from a dictionary mapping specific labels ('Q1', 'Q2', 'Q3') to those values. Print both Series to visualize the index difference.
 
 ```python
@@ -160,7 +161,7 @@ Index of List Series: [0, 1, 2]
 Index of Dict Series: ['Q1', 'Q2', 'Q3']
 
 ```
-**EXPLANATION
+**EXPLANATION**
 
 The key difference between the List Approach and the Dictionary Approach when creating a Pandas Series lies in how the index (labels) is assigned.
 
@@ -203,7 +204,7 @@ print(f"ID of new variable 'df_new': {id(df_new)}")   # New object created
 # --- Operation 2: inplace=True ---
 # This modifies 'df' directly and returns None
 df.drop(columns=['B'], inplace=True)
-print(f"\nID after drop with inplace=True: {id(df)}") # ID might change
+print(f"\nID after drop with inplace=True: {id(df)}") 
 print("Current df columns:", df.columns.tolist())
 ```
 **OUTPUT**
@@ -218,6 +219,21 @@ ID after drop with inplace=True: 1716517650384
 Current df columns: ['A', 'C']
 
 ```
+**EXPLANATION**
+
+The parameter inplace=True determines whether a DataFrame operation modifies the original object or creates a new one.
+
+With inplace=False (default), the operation returns a new DataFrame and leaves the original unchanged. In the script, df_new = df.drop(columns=['A']) creates a new object. This is confirmed by id(df_new) being different from id(df), while the original df still has all its columns.
+With inplace=True, the operation modifies the same DataFrame in memory and returns None. In the script, df.drop(columns=['B'], inplace=True) removes column 'B' directly from df. The id(df) remains the same, proving no new object was created.
+
+Understanding this is important because:
+
+It helps avoid mistakes (e.g., forgetting to assign the result when inplace=False)
+It clarifies whether memory is reused or a new object is created
+
+Key idea:
+inplace=False → new object (different id)
+inplace=True → same object modified (same id)
 
 
 5. When reading a CSV file using pd.read_csv, how does the header parameter interact with the names parameter, and what happens if header=None is used without providing custom names?
