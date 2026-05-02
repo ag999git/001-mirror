@@ -77,6 +77,21 @@ print("\nDataFrame Dtypes:")
 print(df.dtypes)
 # Output: ID(int64), Price(float64), Name(object)
 ```
+**OUTPUT**
+
+```python
+NumPy Array dtype: int64
+Series dtype (mixed): object
+
+DataFrame Dtypes:
+ID         int64
+Price    float64
+Name      object
+dtype: object
+
+```
+
+
 3. Explain the difference between creating a Pandas Series using a "Dictionary Approach" versus a "List Approach" regarding index assignment, and demonstrate how the dictionary keys automatically become the index labels.
 Write a script that creates two Series containing the same data values (100, 200, 300). The first Series should be created from a list (resulting in a default numeric index), and the second Series should be created from a dictionary mapping specific labels ('Q1', 'Q2', 'Q3') to those values. Print both Series to visualize the index difference.
 
@@ -104,6 +119,27 @@ print(s_dict)
 print("\nIndex of List Series:", s_list.index.tolist())
 print("Index of Dict Series:", s_dict.index.tolist())
 ```
+**OUTPUT**
+
+```python
+Series from List (Default Index):
+0    100
+1    200
+2    300
+dtype: int64
+
+Series from Dictionary (Custom Index):
+Q1    100
+Q2    200
+Q3    300
+dtype: int64
+
+Index of List Series: [0, 1, 2]
+Index of Dict Series: ['Q1', 'Q2', 'Q3']
+
+```
+
+
 4. How does the inplace=True parameter alter the behavior of DataFrame manipulation methods, and why is it crucial to understand whether a new object is created or the existing one is modified?
 Write a script that creates a DataFrame, drops a column using inplace=False (saving to a new variable), and drops another column using inplace=True (modifying the original). Print the id() of the DataFrames before and after operations to prove if the object identity has changed.
 
@@ -129,6 +165,20 @@ df.drop(columns=['B'], inplace=True)
 print(f"\nID after drop with inplace=True: {id(df)}") # ID might change
 print("Current df columns:", df.columns.tolist())
 ```
+**OUTPUT**
+
+
+```python
+Original ID: 1716517650384
+ID after drop with inplace=False: 1716517650384
+ID of new variable 'df_new': 1716823647680
+
+ID after drop with inplace=True: 1716517650384
+Current df columns: ['A', 'C']
+
+```
+
+
 5. When reading a CSV file using pd.read_csv, how does the header parameter interact with the names parameter, and what happens if header=None is used without providing custom names?
 Write a script that creates a temporary CSV string in memory (using io.StringIO) containing data with no header row. Read this CSV once with header=None (which generates default integer column names) and once with header=None combined with the names parameter (which assigns your custom labels). Print the columns of both resulting DataFrames.
 
@@ -154,6 +204,19 @@ df_custom = pd.read_csv(io.StringIO(csv_content), header=None, names=custom_name
 print("\nColumns with header=None AND names parameter:")
 print(df_custom.columns.tolist())
 ```
+
+**OUTPUT**
+
+```python
+Columns with header=None (Default Integers):
+[0, 1, 2]
+
+Columns with header=None AND names parameter:
+['Col_A', 'Col_B', 'Col_C']
+
+```
+
+
 6. In the context of the pd.read_json() function, explain how the orient='records' parameter structures the input JSON data compared to orient='columns', and write a script that converts a DataFrame to both formats to illustrate the structural difference.
 Write a script that loads the 'tips' dataset (using Seaborn), converts it to a JSON string with orient='records' (a list of objects), and then converts the same DataFrame to a JSON string with `orient='columns' (a dictionary of columns). Print the first 100 characters of both JSON strings to show the structural difference.
 
@@ -179,6 +242,18 @@ print(json_records[:100] + "...")
 print("\n--- orient='columns' Structure (Dict of Lists) ---")
 print(json_columns[:100] + "...")
 ```
+
+**OUTPUT**
+
+```python
+--- orient='records' Structure (List of Objects) ---
+[{"total_bill":16.99,"tip":1.01,"sex":"Female","smoker":"No","day":"Sun","time":"Dinner","size":2},{...
+
+--- orient='columns' Structure (Dict of Lists) ---
+{"total_bill":{"0":16.99,"1":10.34,"2":21.01,"3":23.68,"4":24.59,"5":25.29,"6":8.77,"7":26.88,"8":15...
+
+```
+
 7. How does the .loc[] indexer differ from .iloc[] when accessing data in a DataFrame, particularly when the DataFrame index has been customized to non-integer labels?
 Write a script that creates a DataFrame with a custom string index (e.g., fruit names). Demonstrate selecting a row using .loc[] with the string label and .iloc[] with the integer position. Explain via comments which method is safer if the row order changes but labels stay the same.
 
@@ -206,6 +281,28 @@ print(df.iloc[1])
 # Note: If we sort the DataFrame, .iloc[1] might point to a different fruit!
 # .loc['Banana'] will always point to Banana data regardless of sorting.
 ```
+**OUTPUT**
+
+```python
+Original DataFrame:
+        Quantity  Price
+Apple         10    1.5
+Banana        20    0.5
+Cherry        15    2.0
+
+Selecting 'Banana' using .loc['Banana']:
+Quantity    20.0
+Price        0.5
+Name: Banana, dtype: float64
+
+Selecting second row using .iloc[1]:
+Quantity    20.0
+Price        0.5
+Name: Banana, dtype: float64
+
+```
+
+
 8. What is the "Split-Apply-Combine" philosophy behind the groupby() operation in Pandas, and how does the .agg() function facilitate the "Apply" step for multiple statistics simultaneously?
 Write a script using the 'tips' dataset that groups the data by the 'day' column. Use the .agg() method to calculate the mean of 'total_bill' and the sum of 'tip' in a single step, rather than calculating them separately. Print the resulting summary DataFrame.
 
@@ -231,6 +328,21 @@ result = df.groupby('day')[['total_bill', 'tip']].agg(
 print("Aggregated Statistics per Day:")
 print(result)
 ```
+**OUTPUT**
+
+```python
+  result = df.groupby('day')[['total_bill', 'tip']].agg(
+Aggregated Statistics per Day:
+      total_bill     tip
+day                     
+Thur   17.682742  171.83
+Fri    17.151579   51.96
+Sat    20.441379  260.40
+Sun    21.410000  247.39
+
+```
+
+
 9. How does the .pivot_table() function transform "Long" format data into "Wide" format, and what is the specific role of the index, columns, and values parameters in this transformation?
 Write a script that converts the 'flights' dataset (which is in Long format: year, month, passengers) into a Wide format Pivot Table where 'year' is the index, 'month' is the column header, and the sum of 'passengers' is the cell value. This effectively creates a matrix of traffic over time.
 
@@ -254,6 +366,22 @@ pivot_df = df.pivot_table(
 print("Pivot Table (Wide Format - Years vs Months):")
 print(pivot_df.head())
 ```
+**OUTPUT**
+
+```python
+  pivot_df = df.pivot_table(
+Pivot Table (Wide Format - Years vs Months):
+month  Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec
+year                                                             
+1949   112  118  132  129  121  135  148  148  136  119  104  118
+1950   115  126  141  135  125  149  170  170  158  133  114  140
+1951   145  150  178  163  172  178  199  199  184  162  146  166
+1952   171  180  193  181  183  218  230  242  209  191  172  194
+1953   196  196  236  235  229  243  264  272  237  211  180  201
+
+```
+
+
 10. What is the functional difference between using .dropna() to handle missing data versus using .fillna(), and in which scenario would preserving data volume (fillna) be preferred over data quality (dropna)?
 Write a script that creates a DataFrame with missing values (NaN) in two columns. Apply .dropna() to the first column to remove rows with gaps, and apply .fillna(0) to the second column to preserve the row count but replace the gap with zero. Compare the shape of the DataFrame before and after operations.
 
@@ -286,6 +414,31 @@ print("\nResulting DataFrames:")
 print(df_dropped)
 print(df_filled)
 ```
+
+**OUTPUT**
+
+```python
+Original Shape: (5, 2)
+
+Shape after dropna on 'A': (4, 2)
+Shape after fillna(0) on 'B': (5, 2)
+
+Resulting DataFrames:
+     A     B
+0  1.0  10.0
+1  2.0   NaN
+3  4.0  40.0
+4  5.0  50.0
+     A     B
+0  1.0  10.0
+1  2.0   0.0
+2  NaN  30.0
+3  4.0  40.0
+4  5.0  50.0
+
+```
+
+
 11. How does the .str accessor allow vectorized string manipulations on a Pandas Series, and why is this more efficient than applying a Python function using .apply()?
 Write a script that creates a Series of messy email addresses (e.g., "USER@EXAMPLE.COM"). Use the .str accessor methods .lower() and .strip() to clean them. Then, compare this syntax to using .apply() with a lambda function to achieve the same result.
 
@@ -310,6 +463,19 @@ print(clean_emails_str)
 # Verify they are the same
 assert clean_emails_str.equals(clean_emails_apply), "Methods produced different results!"
 ```
+
+**OUTPUT**
+
+```python
+Resulting Clean Emails (Identical):
+0     alice@example.com
+1          bob@test.net
+2    charlie@domain.org
+dtype: object
+
+```
+
+
 12. When performing a pd.merge() operation, what distinguishes an "Inner Join" from a "Left Join," and write a script that demonstrates the data retention difference between these two methods?
 Write a script that creates two DataFrames: df_orders (Order ID and Date) and df_customers (Order ID and Customer Name). Perform an Inner Join (keep only matching IDs) and a Left Join (keep all orders, even if customer is missing). Print the length of both resulting DataFrames to show the data loss in the Inner Join.
 
@@ -347,6 +513,29 @@ print(left_join)
 print(f"\nInner Join Count: {len(inner_join)}")
 print(f"Left Join Count: {len(left_join)}")
 ```
+
+**OUTPUT**
+```python
+Inner Join Result (Strict Match):
+   Order_ID        Date Customer_Name
+0       101  2023-01-01         Alice
+1       102  2023-01-02           Bob
+2       103  2023-01-03       Charlie
+
+Left Join Result (Preserve Orders):
+   Order_ID        Date Customer_Name
+0       101  2023-01-01         Alice
+1       102  2023-01-02           Bob
+2       103  2023-01-03       Charlie
+3       104  2023-01-04           NaN
+
+Inner Join Count: 3
+Left Join Count: 4
+
+```
+
+
+### 13 giving error
 13. What is the role of the pd.to_datetime() function when working with the 'flights' dataset, and how does setting a Datetime Index unlock specific time-series slicing capabilities?
 Write a script that loads the 'flights' dataset. Create a new column 'Date' by combining the 'year' and 'month' columns using pd.to_datetime(). Set this new 'Date' column as the DataFrame Index. Demonstrate how you can now slice the data using date strings (e.g., '1950') instead of integer positions.
 
@@ -396,6 +585,34 @@ df['Month_Number'] = df.index.month      # e.g., 10
 print("\nDataFrame with Extracted Temporal Features:")
 print(df)
 ```
+
+**OUTPUT**
+
+```python
+Original DataFrame:
+            Value
+Date             
+2023-10-01      0
+2023-10-02      1
+2023-10-03      2
+2023-10-04      3
+2023-10-05      4
+2023-10-06      5
+2023-10-07      6
+
+DataFrame with Extracted Temporal Features:
+            Value Weekday_Name  Month_Number
+Date                                        
+2023-10-01      0       Sunday            10
+2023-10-02      1       Monday            10
+2023-10-03      2      Tuesday            10
+2023-10-04      3    Wednesday            10
+2023-10-05      4     Thursday            10
+2023-10-06      5       Friday            10
+2023-10-07      6     Saturday            10
+
+```
+
 15. In the context of read_html(), why does the function return a List of DataFrames rather than a single DataFrame, and how do the match and attrs parameters help in isolating a specific table from a webpage?
 Write a script that attempts to read tables from a hypothetical URL (e.g., Wikipedia). Use the match='Population' parameter to filter for a specific table and the attrs={'class': 'wikitable'} parameter to target tables with a specific CSS class. Explain how these parameters filter the list before you even access index [0].
 
@@ -458,6 +675,27 @@ print("\nReshaped Long Format:")
 print(df_long)
 ```
 
+
+**OUTPUT**
+
+```python
+Original Wide Format:
+  Product  Jan  Feb  Mar
+0       A  100  150  120
+1       B  200  250  220
+
+Reshaped Long Format:
+  Product Month  Sales
+0       A   Jan    100
+1       B   Jan    200
+2       A   Feb    150
+3       B   Feb    250
+4       A   Mar    120
+5       B   Mar    220
+
+```
+
+
 17. What is the dtype_backend='pyarrow' parameter in modern Pandas, and what specific advantages does Apache Arrow offer over the traditional NumPy backend for handling missing data?
 Write a script that loads the 'tips' dataset using both the default NumPy backend and the PyArrow backend. Print the dtypes of the 'total_bill' column in both to show how PyArrow uses dedicated nullable types (like double[pyarrow] or int64[pyarrow]) compared to standard NumPy types.
 
@@ -479,6 +717,31 @@ print(df_arrow.dtypes)
 
 # Note: PyArrow types often explicitly state they are nullable/arrow-backed
 ```
+
+**OUTPUT
+NumPy Backend Dtypes:
+total_bill     float64
+tip            float64
+sex           category
+smoker        category
+day           category
+time          category
+size             int64
+dtype: object
+
+PyArrow Backend Dtypes:
+total_bill    double[pyarrow]
+tip           double[pyarrow]
+sex                  category
+smoker               category
+day                  category
+time                 category
+size           int64[pyarrow]
+dtype: object
+
+```
+
+
 
 18. How does the parse_dates parameter in read_csv automate data cleaning, and what is the risk of relying solely on automatic date parsing without specifying a format?
 Write a script that creates a CSV string with dates in a non-standard format (DD-MM-YYYY). Attempt to read it with parse_dates=True (which tries to infer) and explicitly with dayfirst=True to guide the parser. Compare the resulting dtype of the date column.
