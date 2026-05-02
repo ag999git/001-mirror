@@ -3,7 +3,7 @@
 
 
 Part 1: Questions Based on Chapter Topics
-### 1. How does the "Vectorized" nature of Pandas operations differ from standard Python loops, and why does this distinction significantly impact performance when processing large datasets?
+## 1. How does the "Vectorized" nature of Pandas operations differ from standard Python loops, and why does this distinction significantly impact performance when processing large datasets?
 Write a Python script that demonstrates the difference in execution time between iterating through a Pandas Series with a for loop to multiply values by 2, versus using the vectorized multiplication operator (*). Use the time module to measure the duration of both operations on a Series with at least 1 million elements.
 
 ```python
@@ -55,7 +55,7 @@ Verification Success: Both methods produced the same values!
 
 This script compares two ways of multiplying 1 million numbers by 2. First, it creates a large Pandas Series using random integers. In Method 1, a standard Python loop processes each value one by one, which is slow for large datasets. In Method 2, a vectorized operation (data * 2) is used, where Pandas applies the operation to all values at once using optimized internal code, making it much faster. The script measures and prints the time taken by both methods and shows how many times faster the vectorized approach is. Finally, it verifies that both methods produce identical results. The key takeaway is that vectorized operations in Pandas are significantly more efficient than Python loops for data processing.
 
-### 2. What is the fundamental structural difference between a Pandas Series and a DataFrame, and how does the concept of "heterogeneous data" apply specifically to DataFrames but not typically to NumPy arrays?
+## 2. What is the fundamental structural difference between a Pandas Series and a DataFrame, and how does the concept of "heterogeneous data" apply specifically to DataFrames but not typically to NumPy arrays?
 Write a script that creates a NumPy array containing only integers (homogeneous), a Pandas Series containing mixed types (integers and strings), and a Pandas DataFrame containing multiple columns of different types (integers, floats, and strings). Print the dtype of each object to demonstrate this difference.
 
 ```python
@@ -115,7 +115,7 @@ The key takeaway is:
 
 NumPy enforces uniform data types, a Series usually behaves like a single typed column, but a DataFrame allows different data types across its columns, making it suitable for structured, real-world data.
 
-### 3. Explain the difference between creating a Pandas Series using a "Dictionary Approach" versus a "List Approach" regarding index assignment, and demonstrate how the dictionary keys automatically become the index labels.
+## 3. Explain the difference between creating a Pandas Series using a "Dictionary Approach" versus a "List Approach" regarding index assignment, and demonstrate how the dictionary keys automatically become the index labels.
 Write a script that creates two Series containing the same data values (100, 200, 300). The first Series should be created from a list (resulting in a default numeric index), and the second Series should be created from a dictionary mapping specific labels ('Q1', 'Q2', 'Q3') to those values. Print both Series to visualize the index difference.
 
 ```python
@@ -182,7 +182,7 @@ A dictionary provides both labels and data → Pandas uses the keys as the index
 
 This is why the dictionary approach is often preferred when you want labeled, meaningful data representation.
 
-### 4. How does the inplace=True parameter alter the behavior of DataFrame manipulation methods, and why is it crucial to understand whether a new object is created or the existing one is modified?
+## 4. How does the inplace=True parameter alter the behavior of DataFrame manipulation methods, and why is it crucial to understand whether a new object is created or the existing one is modified?
 Write a script that creates a DataFrame, drops a column using inplace=False (saving to a new variable), and drops another column using inplace=True (modifying the original). Print the id() of the DataFrames before and after operations to prove if the object identity has changed.
 
 ```python
@@ -236,7 +236,7 @@ inplace=False → new object (different id)
 inplace=True → same object modified (same id)
 
 
-### 5. When reading a CSV file using pd.read_csv, how does the header parameter interact with the names parameter, and what happens if header=None is used without providing custom names?
+## 5. When reading a CSV file using pd.read_csv, how does the header parameter interact with the names parameter, and what happens if header=None is used without providing custom names?
 Write a script that creates a temporary CSV string in memory (using io.StringIO) containing data with no header row. Read this CSV once with header=None (which generates default integer column names) and once with header=None combined with the names parameter (which assigns your custom labels). Print the columns of both resulting DataFrames.
 
 ```python
@@ -339,7 +339,7 @@ What if you **don’t use `header=None` but provide `names`?**
 > `header=None` tells Pandas “no column names in file,” and `names` lets you supply your own—otherwise default numeric labels are assigned.
 
 
-### 6. In the context of the pd.read_json() function, explain how the orient='records' parameter structures the input JSON data compared to orient='columns', and write a script that converts a DataFrame to both formats to illustrate the structural difference.
+## 6. In the context of the pd.read_json() function, explain how the orient='records' parameter structures the input JSON data compared to orient='columns', and write a script that converts a DataFrame to both formats to illustrate the structural difference.
 Write a script that loads the 'tips' dataset (using Seaborn), converts it to a JSON string with orient='records' (a list of objects), and then converts the same DataFrame to a JSON string with `orient='columns' (a dictionary of columns). Print the first 100 characters of both JSON strings to show the structural difference.
 
 ```python
@@ -442,7 +442,7 @@ Preserves index information explicitly
 | Typical usage | APIs, JSON exchange | Data storage, reconstruction |
 
 
-### 7. How does the .loc[] indexer differ from .iloc[] when accessing data in a DataFrame, particularly when the DataFrame index has been customized to non-integer labels?
+## 7. How does the .loc[] indexer differ from .iloc[] when accessing data in a DataFrame, particularly when the DataFrame index has been customized to non-integer labels?
 Write a script that creates a DataFrame with a custom string index (e.g., fruit names). Demonstrate selecting a row using .loc[] with the string label and .iloc[] with the integer position. Explain via comments which method is safer if the row order changes but labels stay the same.
 
 ```python
@@ -577,7 +577,7 @@ Banana, Apple, Cherry
 
 
 
-### 8. What is the "Split-Apply-Combine" philosophy behind the groupby() operation in Pandas, and how does the .agg() function facilitate the "Apply" step for multiple statistics simultaneously?
+## 8. What is the "Split-Apply-Combine" philosophy behind the groupby() operation in Pandas, and how does the .agg() function facilitate the "Apply" step for multiple statistics simultaneously?
 Write a script using the 'tips' dataset that groups the data by the 'day' column. Use the .agg() method to calculate the mean of 'total_bill' and the sum of 'tip' in a single step, rather than calculating them separately. Print the resulting summary DataFrame.
 
 ```python
@@ -716,7 +716,7 @@ This creates a **MultiIndex column output** with multiple statistics.
 
 
 
-### 9. How does the .pivot_table() function transform "Long" format data into "Wide" format, and what is the specific role of the index, columns, and values parameters in this transformation?
+## 9. How does the .pivot_table() function transform "Long" format data into "Wide" format, and what is the specific role of the index, columns, and values parameters in this transformation?
 Write a script that converts the 'flights' dataset (which is in Long format: year, month, passengers) into a Wide format Pivot Table where 'year' is the index, 'month' is the column header, and the sum of 'passengers' is the cell value. This effectively creates a matrix of traffic over time.
 
 ```python
@@ -896,7 +896,7 @@ year
 
 
 
-### 10. What is the functional difference between using .dropna() to handle missing data versus using .fillna(), and in which scenario would preserving data volume (fillna) be preferred over data quality (dropna)?
+## 10. What is the functional difference between using .dropna() to handle missing data versus using .fillna(), and in which scenario would preserving data volume (fillna) be preferred over data quality (dropna)?
 Write a script that creates a DataFrame with missing values (NaN) in two columns. Apply .dropna() to the first column to remove rows with gaps, and apply .fillna(0) to the second column to preserve the row count but replace the gap with zero. Compare the shape of the DataFrame before and after operations.
 
 ```python
@@ -1054,7 +1054,7 @@ NaN in B becomes 0→ all 5 rows retained
 
 
 
-### 11. How does the .str accessor allow vectorized string manipulations on a Pandas Series, and why is this more efficient than applying a Python function using .apply()?
+## 11. How does the .str accessor allow vectorized string manipulations on a Pandas Series, and why is this more efficient than applying a Python function using .apply()?
 Write a script that creates a Series of messy email addresses (e.g., "USER@EXAMPLE.COM"). Use the .str accessor methods .lower() and .strip() to clean them. Then, compare this syntax to using .apply() with a lambda function to achieve the same result.
 
 ```python
@@ -1091,7 +1091,7 @@ dtype: object
 ```
 
 
-### 12. When performing a pd.merge() operation, what distinguishes an "Inner Join" from a "Left Join," and write a script that demonstrates the data retention difference between these two methods?
+## 12. When performing a pd.merge() operation, what distinguishes an "Inner Join" from a "Left Join," and write a script that demonstrates the data retention difference between these two methods?
 Write a script that creates two DataFrames: df_orders (Order ID and Date) and df_customers (Order ID and Customer Name). Perform an Inner Join (keep only matching IDs) and a Left Join (keep all orders, even if customer is missing). Print the length of both resulting DataFrames to show the data loss in the Inner Join.
 
 ```python
@@ -1151,7 +1151,7 @@ Left Join Count: 4
 
 
 
-### 13. What is the role of the pd.to_datetime() function when working with the 'flights' dataset, and how does setting a Datetime Index unlock specific time-series slicing capabilities?
+## 13. What is the role of the pd.to_datetime() function when working with the 'flights' dataset, and how does setting a Datetime Index unlock specific time-series slicing capabilities?
 Write a script that loads the 'flights' dataset. Create a new column 'Date' by combining the 'year' and 'month' columns using pd.to_datetime(). Set this new 'Date' column as the DataFrame Index. Demonstrate how you can now slice the data using date strings (e.g., '1950') instead of integer positions.
 
 ```python
@@ -1206,7 +1206,7 @@ Date
 
 ```
 
-### 14. How does the .dt accessor differ from the .str accessor in terms of the data types they operate on, and write a script extracting the 'Day of the Week' and 'Month' from a Datetime Index?
+## 14. How does the .dt accessor differ from the .str accessor in terms of the data types they operate on, and write a script extracting the 'Day of the Week' and 'Month' from a Datetime Index?
 Write a script that generates a Datetime Index representing a full week. Use the .dt accessor to extract the name of the day (e.g., 'Monday') and the month number (e.g., 1) into new columns.
 
 ```python
@@ -1256,7 +1256,7 @@ Date
 
 ```
 
-### 15. In the context of read_html(), why does the function return a List of DataFrames rather than a single DataFrame, and how do the match and attrs parameters help in isolating a specific table from a webpage?
+## 15. In the context of read_html(), why does the function return a List of DataFrames rather than a single DataFrame, and how do the match and attrs parameters help in isolating a specific table from a webpage?
 Write a script that attempts to read tables from a hypothetical URL (e.g., Wikipedia). Use the match='Population' parameter to filter for a specific table and the attrs={'class': 'wikitable'} parameter to target tables with a specific CSS class. Explain how these parameters filter the list before you even access index [0].
 
 ```python
@@ -1285,7 +1285,7 @@ else:
 ```
 
 
-### 16. Explain the concept of "Wide" vs "Long" format data, and write a script that uses the .melt() function to convert a "Wide" DataFrame (sales per month across columns) into a "Long" DataFrame (Month and Value columns).
+## 16. Explain the concept of "Wide" vs "Long" format data, and write a script that uses the .melt() function to convert a "Wide" DataFrame (sales per month across columns) into a "Long" DataFrame (Month and Value columns).
 Write a script that creates a "Wide" DataFrame representing sales where columns are 'Jan', 'Feb', 'Mar'. Use pd.melt() to reshape this into a "Long" format with columns 'Month' and 'Sales'.
 
 ```python
@@ -1339,7 +1339,7 @@ Reshaped Long Format:
 ```
 
 
-### 17. What is the dtype_backend='pyarrow' parameter in modern Pandas, and what specific advantages does Apache Arrow offer over the traditional NumPy backend for handling missing data?
+## 17. What is the dtype_backend='pyarrow' parameter in modern Pandas, and what specific advantages does Apache Arrow offer over the traditional NumPy backend for handling missing data?
 Write a script that loads the 'tips' dataset using both the default NumPy backend and the PyArrow backend. Print the dtypes of the 'total_bill' column in both to show how PyArrow uses dedicated nullable types (like double[pyarrow] or int64[pyarrow]) compared to standard NumPy types.
 
 ```python
@@ -1387,7 +1387,7 @@ dtype: object
 
 
 
-### 18. How does the parse_dates parameter in read_csv automate data cleaning, and what is the risk of relying solely on automatic date parsing without specifying a format?
+## 18. How does the parse_dates parameter in read_csv automate data cleaning, and what is the risk of relying solely on automatic date parsing without specifying a format?
 Write a script that creates a CSV string with dates in a non-standard format (DD-MM-YYYY). Attempt to read it with parse_dates=True (which tries to infer) and explicitly with dayfirst=True to guide the parser. Compare the resulting dtype of the date column.
 
 ```python
@@ -1428,7 +1428,7 @@ Explicit Date Type: datetime64[ns]
 ```
 
 
-### 19. What is the functionality of the .stack() and .unstack() methods in relation to MultiIndex DataFrames, and how do they facilitate switching between analysis and reporting formats?
+## 19. What is the functionality of the .stack() and .unstack() methods in relation to MultiIndex DataFrames, and how do they facilitate switching between analysis and reporting formats?
 Write a script that creates a MultiIndex DataFrame (index: Year, columns: Quarter). Use .stack() to pivot it into a Long format Series, and then use .unstack() to convert it back to the Wide format DataFrame.
 
 ```python
@@ -1484,7 +1484,7 @@ Year
 ```
 
 
-### 20. How does the inplace=True parameter affect memory management and readability in Pandas scripts, and write a script comparing chaining operations without inplace versus sequential operations with inplace?
+## 20. How does the inplace=True parameter affect memory management and readability in Pandas scripts, and write a script comparing chaining operations without inplace versus sequential operations with inplace?
 Write a script that performs a standard cleaning workflow: fill missing values, rename a column, and drop a duplicate. Perform this once using method chaining (no inplace) and once using sequential steps with inplace=True. Assign the final results to new variables and print them to show they are equivalent.
 
 ```python
@@ -1542,7 +1542,7 @@ Inplace Result (Procedural):
 
 
 
-### 21. Explain the purpose of the na_values parameter in read_csv and how it allows standardizing various representations of missing data (e.g., "NA", "NULL", "-1") into the standard Pandas NaN.
+## 21. Explain the purpose of the na_values parameter in read_csv and how it allows standardizing various representations of missing data (e.g., "NA", "NULL", "-1") into the standard Pandas NaN.
 Write a script that creates a CSV string where missing values are represented by the string "MISSING" and -9999. Use read_csv with the na_values parameter to ensure both are recognized as NaN upon loading. Verify by checking if the cells contain actual NaN values.
 
 ```python
@@ -1592,7 +1592,7 @@ dtype: int64
 ```
 
 
-### 22. What is the significance of the usecols parameter in read_csv for memory efficiency when dealing with wide datasets containing hundreds of columns?
+## 22. What is the significance of the usecols parameter in read_csv for memory efficiency when dealing with wide datasets containing hundreds of columns?
 Write a script that generates a wide DataFrame with 50 columns of random numbers. Time the reading of this dataset using read_csv (simulated via String IO) loading all columns, and then loading only 5 specific columns using usecols. Print the memory usage reduction (though simulated via shape) to demonstrate the concept.
 
 ```python
@@ -1625,7 +1625,7 @@ Read Subset Shape: (1, 5)
 
 ```
 
-### 23. How does the .query() method differ from standard Boolean Indexing in terms of syntax and potential performance benefits when filtering large datasets?
+## 23. How does the .query() method differ from standard Boolean Indexing in terms of syntax and potential performance benefits when filtering large datasets?
 Write a script that creates a DataFrame with sales data. Filter this data to find sales greater than 500 in the 'East' region using both Boolean Indexing (standard df[]) and the .query() method. Print the results of both to verify they are identical.
 
 ```python
@@ -1676,7 +1676,7 @@ Query Method Result:
 ```
 
 
-### 24. In the context of Excel I/O, how does the openpyxl engine facilitate writing Pandas DataFrames to .xlsx files, and what are the requirements for reading files with multiple sheets?
+## 24. In the context of Excel I/O, how does the openpyxl engine facilitate writing Pandas DataFrames to .xlsx files, and what are the requirements for reading files with multiple sheets?
 Write a script that creates two simple DataFrames. Write both to a single Excel file using pd.ExcelWriter with two different sheet names ('Sheet1', 'Sheet2'). Then, read the file back specifying sheet_name='Sheet2' to verify only that sheet's data is loaded.
 
 ```python
@@ -1716,7 +1716,7 @@ Data loaded from Sheet2:
 ```
 
 
-### 25. How does the .astype('category') data type conversion improve performance and memory usage for columns with low cardinality (few unique values repeated many times), compared to the standard object dtype?
+## 25. How does the .astype('category') data type conversion improve performance and memory usage for columns with low cardinality (few unique values repeated many times), compared to the standard object dtype?
 Write a script that creates a DataFrame with a 'Department' column containing only 3 unique values (HR, IT, Sales) repeated 1,000 times. Print the memory usage (using .info()) before and after converting the 'Department' column to category.
 
 ```python
@@ -1775,7 +1775,7 @@ None
 
 ```
 
-### 26. What is the encoding parameter in read_csv used for, and what common error occurs if the encoding of the file (e.g., 'latin-1') does not match the default system encoding (e.g., 'utf-8')?
+## 26. What is the encoding parameter in read_csv used for, and what common error occurs if the encoding of the file (e.g., 'latin-1') does not match the default system encoding (e.g., 'utf-8')?
 Write a script that simulates reading a CSV file containing special characters (like accents) by defining a CSV string with 'latin-1' encoded text (simulated by passing raw bytes or just assuming the file exists). Use read_csv with the correct encoding to successfully read the file, demonstrating the fix for UnicodeDecodeError.
 
 ```python
@@ -1812,7 +1812,7 @@ Successfully Read with Correct Encoding:
 ```
 
 
-### 27. How does the chunksize parameter in read_csv enable processing of datasets that are larger than the available system RAM (Out-of-Core processing), and what is the typical workflow pattern?
+## 27. How does the chunksize parameter in read_csv enable processing of datasets that are larger than the available system RAM (Out-of-Core processing), and what is the typical workflow pattern?
 Write a script that defines a generator function reading a large CSV (simulated here with a loop) in chunks of 10 rows. Aggregate the sum of a 'Value' column across all chunks to demonstrate processing data without ever holding the full dataset in memory.
 
 ```python
@@ -1854,7 +1854,7 @@ Total Sum of all chunks: 1506
 ```
 
 
-### 28. What is the difference between the keep_default_na and na_values parameters in read_csv when customizing missing value detection?
+## 28. What is the difference between the keep_default_na and na_values parameters in read_csv when customizing missing value detection?
 Write a script that creates a CSV containing "NA" (default missing) and "N/A" (custom missing). Read the CSV first with default settings (where only "NA" is detected), and then read it again providing na_values=['N/A']. Compare the count of NaN values in both DataFrames.
 
 ```python
@@ -1897,7 +1897,7 @@ dtype: int64
 
 ```
 
-### 29. How does the converters parameter in read_csv allow for type coercion or custom parsing logic on specific columns during the import process?
+## 29. How does the converters parameter in read_csv allow for type coercion or custom parsing logic on specific columns during the import process?
 Write a script that creates a CSV where a 'Price' column has a currency symbol '
 ' (e.g., "$50"). Use the `converters` parameter to apply a lambda function that removes the '
 ' and converts the result to a float during the loading phase itself.
@@ -1941,7 +1941,7 @@ Price dtype: float64
 ```
 
 
-### 30. What is the purpose of the skiprows parameter in read_csv when dealing with files that have metadata, header descriptions, or footer information before the actual data begins?
+## 30. What is the purpose of the skiprows parameter in read_csv when dealing with files that have metadata, header descriptions, or footer information before the actual data begins?
 Write a script that simulates a CSV file where the first 2 lines are metadata headers (e.g., "Report Generated on...") and the actual data starts on row 3 (index 2). Use skiprows=2 to ignore the metadata and load only the structured data.
 
 ```python
