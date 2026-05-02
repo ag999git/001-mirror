@@ -1004,7 +1004,7 @@ Bad:-  Replaced value may not be “true” data
 
 ----------
 
-## 🔹 3. Key Concept: Quality vs Volume
+#### 3. Key Concept: Quality vs Volume
 
 | Method | Rows | Missing Data | Accuracy | Use Case |
 | --- | --- | --- | --- | --- |
