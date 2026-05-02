@@ -1100,7 +1100,7 @@ Data loaded from Sheet2:
 
 ```
 
-### ERROR
+
 25. How does the .astype('category') data type conversion improve performance and memory usage for columns with low cardinality (few unique values repeated many times), compared to the standard object dtype?
 Write a script that creates a DataFrame with a 'Department' column containing only 3 unique values (HR, IT, Sales) repeated 1,000 times. Print the memory usage (using .info()) before and after converting the 'Department' column to category.
 
@@ -1109,8 +1109,11 @@ Write a script that creates a DataFrame with a 'Department' column containing on
 import pandas as pd
 import numpy as np
 
-# Create data with low cardinality (few unique values, many repetitions)
-dept_list = ['HR', 'IT', 'Sales'] * 1000
+# --- Create data with low cardinality (Corrected) ---
+# FIX: We need exactly 1000 items for both columns.
+# Use np.random.choice to pick random departments for 1000 rows.
+dept_list = np.random.choice(['HR', 'IT', 'Sales'], size=1000)
+
 df = pd.DataFrame({
     'Department': dept_list,
     'Employee_ID': range(1000)
@@ -1125,6 +1128,35 @@ df['Department'] = df['Department'].astype('category')
 
 print("\n--- Memory Usage After Conversion (Category dtype) ---")
 print(df.info(memory_usage='deep'))
+
+```
+
+**OUTPUT**
+
+```python
+--- Memory Usage Before Conversion (Object dtype) ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 2 columns):
+ #   Column       Non-Null Count  Dtype 
+---  ------       --------------  ----- 
+ 0   Department   1000 non-null   object
+ 1   Employee_ID  1000 non-null   int64 
+dtypes: int64(1), object(1)
+memory usage: 66.5 KB
+None
+
+--- Memory Usage After Conversion (Category dtype) ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 2 columns):
+ #   Column       Non-Null Count  Dtype   
+---  ------       --------------  -----   
+ 0   Department   1000 non-null   category
+ 1   Employee_ID  1000 non-null   int64   
+dtypes: category(1), int64(1)
+memory usage: 9.2 KB
+None
 
 ```
 
