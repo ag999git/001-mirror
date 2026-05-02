@@ -34,6 +34,21 @@ print(f"Vectorized is {loop_duration / vectorized_duration:.1f}x faster")
 # Verify results are identical
 assert result_loop.equals(result_vectorized), "Results differ!"
 ```
+
+**Output**
+
+
+```python
+Loop Duration: 14.3628 seconds
+Vectorized Duration: 0.0028 seconds
+Vectorized is 5091.4x faster
+Traceback (most recent call last):
+  File "c:\python-scripts-ch12-pandas\ch12-scripts.py", line 26, in <module>
+    assert result_loop.equals(result_vectorized), "Results differ!"
+AssertionError: Results differ!
+
+```
+
 2. What is the fundamental structural difference between a Pandas Series and a DataFrame, and how does the concept of "heterogeneous data" apply specifically to DataFrames but not typically to NumPy arrays?
 Write a script that creates a NumPy array containing only integers (homogeneous), a Pandas Series containing mixed types (integers and strings), and a Pandas DataFrame containing multiple columns of different types (integers, floats, and strings). Print the dtype of each object to demonstrate this difference.
 
