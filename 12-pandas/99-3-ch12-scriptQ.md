@@ -868,19 +868,21 @@ Year
 
 ```
 
-### ERROR
+
 20. How does the inplace=True parameter affect memory management and readability in Pandas scripts, and write a script comparing chaining operations without inplace versus sequential operations with inplace?
 Write a script that performs a standard cleaning workflow: fill missing values, rename a column, and drop a duplicate. Perform this once using method chaining (no inplace) and once using sequential steps with inplace=True. Assign the final results to new variables and print them to show they are equivalent.
 
 ```python
-
 import pandas as pd
 import numpy as np
 
 # Setup Dummy Data
 data = {'A': [1, np.nan, 3], 'B': [4, 5, 5]}
-df1 = data.copy()
-df2 = data.copy()
+
+# --- FIX: Initialize df1 and df2 as DataFrames ---
+# Do not use data.copy() on the dictionary. Instead, wrap it in pd.DataFrame()
+df1 = pd.DataFrame(data)
+df2 = pd.DataFrame(data)
 
 # --- Method 1: Method Chaining (Functional Style) ---
 # No inplace, returns new object every time
@@ -903,7 +905,27 @@ print("\nInplace Result (Procedural):")
 print(df2)
 
 # Both produce the same data, but the 'id' of df_chain is different from df2
+
 ```
+
+**OUTPUT**
+
+```python
+Chained Result (Functional):
+   Alpha  B
+0    1.0  4
+1    0.0  5
+2    3.0  5
+
+Inplace Result (Procedural):
+   Alpha  B
+0    1.0  4
+1    0.0  5
+2    3.0  5
+
+```
+
+
 
 21. Explain the purpose of the na_values parameter in read_csv and how it allows standardizing various representations of missing data (e.g., "NA", "NULL", "-1") into the standard Pandas NaN.
 Write a script that creates a CSV string where missing values are represented by the string "MISSING" and -9999. Use read_csv with the na_values parameter to ensure both are recognized as NaN upon loading. Verify by checking if the cells contain actual NaN values.
