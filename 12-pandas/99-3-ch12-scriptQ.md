@@ -273,6 +273,71 @@ Columns with header=None AND names parameter:
 
 ```
 
+**EXPLANATION**
+
+When using `pd.read_csv()`, the **`header`** and **`names`** parameters control how column labels are assigned.
+
+-   **`header`** tells Pandas **which row (if any) contains column names**.
+-   **`names`** allows you to **manually assign column names**.
+
+----------
+
+#### Case 1: `header=None` (no names provided)
+
+```
+df_default = pd.read_csv(io.StringIO(csv_content), header=None)
+```
+
+-   Pandas is told: **“There is NO header row in the file.”**
+-   So it treats **all rows as data**
+-   Since no column names are given, Pandas assigns **default integer labels**:
+
+```
+[0, 1, 2]
+```
+
+Meaning: columns are named by position (0, 1, 2)
+
+----------
+
+#### Case 2: `header=None` with `names`
+
+```
+df_custom = pd.read_csv(io.StringIO(csv_content), header=None, names=custom_names)
+```
+
+-   Pandas is still told: **“There is NO header row.”**
+-   But now you **explicitly provide column names**
+-   These names replace the default integer labels:
+
+```
+['Col_A', 'Col_B', 'Col_C']
+```
+
+First row remains data, not header
+
+----------
+
+#### Important Concept
+
+What if you **don’t use `header=None` but provide `names`?**
+
+-   Then Pandas assumes the first row is a header and may **override or skip it**, which can lead to confusion.
+
+----------
+
+#### Key Takeaways
+
+-   `header=None` → no header in file → all rows are data
+-   No `names` → Pandas creates default column names `[0, 1, 2]`
+-   With `names` → your labels are used as column names
+
+----------
+
+#### One-line summary
+
+> `header=None` tells Pandas “no column names in file,” and `names` lets you supply your own—otherwise default numeric labels are assigned.
+
 
 ### 6. In the context of the pd.read_json() function, explain how the orient='records' parameter structures the input JSON data compared to orient='columns', and write a script that converts a DataFrame to both formats to illustrate the structural difference.
 Write a script that loads the 'tips' dataset (using Seaborn), converts it to a JSON string with orient='records' (a list of objects), and then converts the same DataFrame to a JSON string with `orient='columns' (a dictionary of columns). Print the first 100 characters of both JSON strings to show the structural difference.
@@ -310,6 +375,65 @@ print(json_columns[:100] + "...")
 {"total_bill":{"0":16.99,"1":10.34,"2":21.01,"3":23.68,"4":24.59,"5":25.29,"6":8.77,"7":26.88,"8":15...
 
 ```
+
+**EXPLANATION**
+
+The `orient` parameter in `pd.read_json()` / `to_json()` defines **how tabular data is structured inside JSON**. The same DataFrame can be represented in very different ways depending on this setting.
+
+----------
+
+#### `orient='records'` (Row-wise structure)
+
+-   Data is stored as a **list of dictionaries**
+-   Each dictionary represents **one row**
+-   Keys = column names, Values = row values
+
+```
+[  {"total_bill":16.99, "tip":1.01, "sex":"Female", ...},  {"total_bill":10.34, "tip":1.66, "sex":"Male", ...}]
+```
+
+Think: **Row-wise (record by record)**  
+
+Common in APIs and web data exchange
+
+----------
+
+#### `orient='columns'` (Column-wise structure)
+
+-   Data is stored as a **dictionary of columns**
+-   Each column is a key
+-   Values are **nested dictionaries of index:value pairs**
+
+```
+{  "total_bill": {"0":16.99, "1":10.34, ...},  "tip": {"0":1.01, "1":1.66, ...}}
+```
+
+Think: **Column-wise (column by column)**  
+
+Preserves index information explicitly
+
+----------
+
+#### What the script shows
+
+-   `json_records[:100]` begins with:
+    
+    ```
+    [{"total_bill":16.99,"tip":1.01,"sex":"Female",...}
+    ```
+    
+    Clearly a **list `[ ... ]` of row objects**
+    
+-   `json_columns[:100]` begins with:
+    
+    ```
+    {"total_bill":{"0":16.99,"1":10.34,...}
+    ```
+    
+    Clearly a **dictionary `{ ... }` of columns**
+
+
+
 
 ### 7. How does the .loc[] indexer differ from .iloc[] when accessing data in a DataFrame, particularly when the DataFrame index has been customized to non-integer labels?
 Write a script that creates a DataFrame with a custom string index (e.g., fruit names). Demonstrate selecting a row using .loc[] with the string label and .iloc[] with the integer position. Explain via comments which method is safer if the row order changes but labels stay the same.
