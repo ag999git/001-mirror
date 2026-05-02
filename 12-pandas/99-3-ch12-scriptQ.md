@@ -540,7 +540,6 @@ Left Join Count: 4
 Write a script that loads the 'flights' dataset. Create a new column 'Date' by combining the 'year' and 'month' columns using pd.to_datetime(). Set this new 'Date' column as the DataFrame Index. Demonstrate how you can now slice the data using date strings (e.g., '1950') instead of integer positions.
 
 ```python
-
 import pandas as pd
 import seaborn as sns
 
@@ -548,8 +547,9 @@ import seaborn as sns
 df = sns.load_dataset('flights')
 
 # --- Create a Datetime object ---
-# Combine year (int) and month (str) into a proper datetime object
-df['Date'] = pd.to_datetime(df['year'].astype(str) + '-' + df['month'], format='%Y-%b')
+# FIX: Explicitly convert 'month' to string to avoid the TypeError.
+# The 'year' column is int, so we convert to str. 'month' is category, so we convert to str.
+df['Date'] = pd.to_datetime(df['year'].astype(str) + '-' + df['month'].astype(str), format='%Y-%b')
 
 # --- Set Datetime as Index ---
 # This enables powerful time-series features
@@ -562,7 +562,35 @@ print(df.head())
 # We can now select data for a whole year using a string slice
 print("\nData for the year 1960:")
 print(df.loc['1960'])
+
 ```
+
+**OUTPUT**
+
+```python
+1949-02-01  1949   Feb         118
+1949-03-01  1949   Mar         132
+1949-04-01  1949   Apr         129
+1949-05-01  1949   May         121
+
+Data for the year 1960:
+            year month  passengers
+Date                              
+1960-01-01  1960   Jan         417
+1960-02-01  1960   Feb         391
+1960-03-01  1960   Mar         419
+1960-04-01  1960   Apr         461
+1960-05-01  1960   May         472
+1960-06-01  1960   Jun         535
+1960-07-01  1960   Jul         622
+1960-08-01  1960   Aug         606
+1960-09-01  1960   Sep         508
+1960-10-01  1960   Oct         461
+1960-11-01  1960   Nov         390
+1960-12-01  1960   Dec         432
+
+```
+
 14. How does the .dt accessor differ from the .str accessor in terms of the data types they operate on, and write a script extracting the 'Day of the Week' and 'Month' from a Datetime Index?
 Write a script that generates a Datetime Index representing a full week. Use the .dt accessor to extract the name of the day (e.g., 'Monday') and the month number (e.g., 1) into new columns.
 
