@@ -21,6 +21,10 @@ You will learn to:
 -   Interpret outputs meaningfully (not just run code)
 
 
+## Flowchart showing the steps of Essential Data Exploration in Pandas
+
+![Essential Data Exploration in Pandas](/resources/ch12-Essential-Data-Exploration.png)
+
 ## Script showing usage of Pandas DataFrame exploration methods such as `.head()`, `.tail()`, `.sample()`, `.info()`, `.describe()`, `.value_counts()`, and `.nunique()`
 
 ```python
