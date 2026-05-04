@@ -229,22 +229,24 @@ Given below are some common errors/ omissions in Essential Data Exploration in P
 # Always check for missing values and decide how to handle them (e.g., drop, fill, etc.).
 # df.isnull().sum()  # Check for missing values 
 
-# ERROR 5: Not checking unique values. If you have categorical data, it's important to check the unique values and their counts to understand the distribution of your data.
+# ERROR 5: Not checking unique values. If you have categorical data, it's important to check the unique values and their
+# counts to understand the distribution of your data.
 # df['species'].unique()  # Check unique values in 'species' column 
 
 # ERROR 6: Not using .to_frame() when needed. If you want to convert a Series to a DataFrame, you need to use .to_frame().
 # df['species'].value_counts().to_frame()  # Convert Series to DataFrame for better presentation    
 
-# ERROR 7: Not checking data types. If your columns have the wrong data type, it can affect your analysis and calculations. Always check and convert data types as needed.
+# ERROR 7: Not checking data types. If your columns have the wrong data type, it can affect your analysis and calculations.
+# Always check and convert data types as needed.
 # df.dtypes  # Check data types of columns  
 
-# ERROR 8: Not using .head() or .tail() for large datasets. If you print a large DataFrame without using .head() or .tail(), it can flood your console and make it hard to read. Always use these methods to preview your data.
+# ERROR 8: Not using .head() or .tail() for large datasets. If you print a large DataFrame without using .head() or .tail(),
+# it can flood your console and make it hard to read. Always use these methods to preview your data.
 # print(df)  # Avoid printing entire DataFrame for large datasets   
 
-# ERROR 9: Not using .info() for a quick overview. The .info() method provides a concise summary of the DataFrame, including the number of non-null entries and data types. Not using it can lead to missing important information about your dataset.
+# ERROR 9: Not using .info() for a quick overview. The .info() method provides a concise summary of the DataFrame,
+# including the number of non-null entries and data types. Not using it can lead to missing important information about your dataset.
 # df.info()  # Get concise summary of DataFrame 
-
-
 
 ```
 
