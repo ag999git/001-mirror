@@ -148,6 +148,9 @@
 * [Beyond Text Image Compression with SVD](/11-numpy/150-ch11-svd-image-compress.md)
 
 
+## Chapter 12: Pandas
+* [Introduction to Chapter 12](/12-pandas/README.md)
+
 
 
 
