@@ -161,12 +161,14 @@
 * [Research Topic: Deriving Metrics and Organizing Penguin Morphology](/12-pandas/80-ch12-deriving-matrices.md)
 * [Grouping and Aggregation](/12-pandas/90-ch12-grouping-aggregate.md)
 * [Merging and Joining Data](/12-pandas/93-ch12-merging-joining-data.md)
-* [](/12-pandas/)
-* [](/12-pandas/)
-* [](/12-pandas/)
-* [](/12-pandas/)
-* [](/12-pandas/)
-* [](/12-pandas/)
+* [Time Series Basics](/12-pandas/95-ch12-time-series.md)
+* [Hierarchical Data Analysis of Penguin Biometrics using Pandas MultiIndex](/12-pandas/97-ch12-pivot-analysis.md)
+* [Understanding the orient Parameter](/12-pandas/98-ch12-orient-json.md)
+* [Detailed discussion on the script given in the book](/12-pandas/99-0-ch12-orient-json2.md)
+* [Research Project: Exploring the Palmer Penguins Dataset ](/12-pandas/99-1-palmer-penguin-analysis.md)
+* [Conceptual Questions (With Answers)](/12-pandas/99-2-ch12-conceptualQ.md)
+* [30 script Questions Based on Chapter Topics](/12-pandas/99-3-ch12-scriptQ.md)
+
 
 
 
