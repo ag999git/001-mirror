@@ -150,6 +150,18 @@
 
 ## Chapter 12: Pandas
 * [Introduction to Chapter 12](/12-pandas/README.md)
+* [](/12-pandas/)
+* [](/12-pandas/)
+* [](/12-pandas/)
+* [](/12-pandas/)
+* [](/12-pandas/)
+* [](/12-pandas/)
+* [](/12-pandas/)
+* [](/12-pandas/)
+* [](/12-pandas/)
+* [](/12-pandas/)
+* [](/12-pandas/)
+* [](/12-pandas/)
 
 
 
