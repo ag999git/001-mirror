@@ -150,6 +150,7 @@
 
 ## Chapter 12: Pandas
 * [Introduction to Chapter 12](/12-pandas/README.md)
+* [Google Colab NB Ch12](https://github.com/ag999git/001-Python-book-2026/blob/main/colab-nb/12-pandas.ipynb)
 * [Methods of Series in Pandas](/12-pandas/10-ch12-series-methods.md)
 * [How DataFrames are Created](/12-pandas/20-ch12-dataframe-creation.md)
 * [Advanced Research Topic: Memory-Based I/O in Python Data Analysis](/12-pandas/30-ch12-io-module.md)
