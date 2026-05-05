@@ -150,10 +150,10 @@
 
 ## Chapter 12: Pandas
 * [Introduction to Chapter 12](/12-pandas/README.md)
-* [](/12-pandas/)
-* [](/12-pandas/)
-* [](/12-pandas/)
-* [](/12-pandas/)
+* [Methods of Series in Pandas](/12-pandas/10-ch12-series-methods.md)
+* [How DataFrames are Created](/12-pandas/20-ch12-dataframe-creation.md)
+* [Advanced Research Topic: Memory-Based I/O in Python Data Analysis](/12-pandas/30-ch12-io-module.md)
+* [Research Project: Essential Data Exploration in Pandas](/12-pandas/35-ch12-essential-data-exploration.md)
 * [](/12-pandas/)
 * [](/12-pandas/)
 * [](/12-pandas/)
