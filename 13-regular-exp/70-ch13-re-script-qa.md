@@ -6,11 +6,11 @@ import re
 # Sample string containing isolated and grouped digits
 text = "My marks are 7, 89, and 1234."
 # \d matches ONE digit at a time
-single_digits = re.findall(r"\d", text)
-print("Using \\d:", single_digits)
+single_digits = re.findall(r"\d", text)  # Finds each digit separately
+print("Using \\d:", single_digits)  # Using \d: ['7', '8', '9', '1', '2', '3', '4']
 # \d+ matches one or more consecutive digits
-number_groups = re.findall(r"\d+", text)
-print("Using \\d+:", number_groups)
+number_groups = re.findall(r"\d+", text)  # Finds groups of digits as whole numbers
+print("Using \\d+:", number_groups)  # Using \d+: ['7', '89', '1234']
 # Explanation:
 # \d finds every individual digit separately.
 # \d+ combines consecutive digits into a single match.
@@ -23,12 +23,12 @@ import re
 # Input string
 text = "Python is powerful"
 # ^ means start of string
-result = re.search(r"^Python", text)
+result = re.search(r"^Python", text)  # Checks if string starts with "Python"
 # Check whether match succeeded
 if result:
-print("String starts with Python")
+    print("String starts with Python")
 else:
-print("String does not start with Python")
+    print("String does not start with Python")
 # Explanation:
 # The caret ^ checks the beginning position.
 # It does not consume characters itself.
@@ -40,11 +40,11 @@ import re
 # Sample domain name
 text = "example.com"
 # $ checks end of string
-result = re.search(r"\.com$", text)
+result = re.search(r"\.com$", text)  # Checks if string ends with ".com"
 if result:
-print("Valid .com domain")
+    print("Valid .com domain")
 else:
-print("Does not end with .com")
+    print("Does not end with .com")
 # Explanation:
 # \. matches a literal dot.
 # $ ensures that .com appears at the end.
@@ -55,8 +55,8 @@ ________________________________________
 import re
 text = "PyThOn123abcXYZ"
 # Find all lowercase letters
-lowercase_letters = re.findall(r"[a-z]", text)
-print(lowercase_letters)
+lowercase_letters = re.findall(r"[a-z]", text)  # Character class for lowercase letters
+print(lowercase_letters)  # ['y', 'h', 'n', 'a', 'b', 'c']
 # Explanation:
 # [a-z] represents any lowercase English letter.
 # Each matching character is returned individually.
@@ -67,8 +67,8 @@ ________________________________________
 import re
 text = "Room45A7"
 # \D matches anything that is NOT a digit
-result = re.findall(r"\D", text)
-print(result)
+result = re.findall(r"\D", text)  # Finds all non-digit characters. Digits are ignored.
+print(result)  # ['R', 'o', 'o', 'm', 'A']
 # Explanation:
 # Digits are ignored.
 # Letters and symbols are matched instead.
@@ -77,13 +77,14 @@ ________________________________________
 6. Write a script that replaces all whitespace characters in a string with a single dash (-). Use re.sub().
 ```python
 import re
-text = "Python is\tvery\nuseful"
+text = "Python   is\tvery\nuseful"
 # Replace one or more whitespace characters
-cleaned = re.sub(r"\s+", "-", text)
-print(cleaned)
+cleaned = re.sub(r"\s+", "-", text)  # Replaces sequences of whitespace with a single dash
+print(cleaned) # Python-is-very-useful
 # Explanation:
 # \s matches spaces, tabs, and newlines.
 # + combines consecutive whitespace into one match.
+
 ```
 ________________________________________
 7. Write a script that validates whether a PIN code contains exactly six digits.
@@ -106,11 +107,11 @@ ________________________________________
 import re
 text = "Welcome to Python programming"
 # match() checks only at beginning
-m1 = re.match(r"Python", text)
+m1 = re.match(r"Python", text)  # This will fail because "Python" is not at the start of the string.
 # search() checks anywhere
-m2 = re.search(r"Python", text)
-print("re.match():", m1)
-print("re.search():", m2)
+m2 = re.search(r"Python", text)  # This will succeed because "Python" is found within the string.
+print("re.match():", m1)  # Output: None, because the pattern "Python" does not match the start of the string.
+print("re.search():", m2)  # Output: <re.Match object; span=(11, 17), match='Python'>, because the pattern "Python" is found starting at index 11 and ending at index 17 in the string.
 # Explanation:
 # match() fails because Python is not at start.
 # search() succeeds because it scans entire string.
@@ -121,9 +122,12 @@ ________________________________________
 import re
 text = "I have a dog at home"
 # Alternation means OR
-result = re.search(r"cat|dog", text)
+result = re.search(r"cat|dog", text)  # Checks for "cat" OR "dog" in the text
 if result:
-print("Animal found:", result.group())
+    print("Animal found:", result.group())  # Output: Animal found: dog, because "dog" is present in the text and is the first successful match found by the regex engine.
+else:
+    print("No animal found")  # Explanation:
+# The regex engine tries "cat" first, which fails, then tries "dog", which succeeds, so "dog" is returned as the match.
 # Explanation:
 # Regex tries both alternatives.
 # The first successful alternative is returned.
@@ -135,8 +139,8 @@ ________________________________________
 import re
 text = "abcabcabc"
 # Group repeated using +
-result = re.fullmatch(r"(abc)+", text)
-print(result)
+result = re.fullmatch(r"(abc)+", text)  # Checks if the entire string is one or more repetitions of "abc"
+print(result)  # Output: <re.Match object; span=(0, 9), match='abcabcabc'>, because the entire string "abcabcabc" is made up of three repetitions of the substring "abc", which matches the pattern defined by the regex.
 # Explanation:
 # Parentheses treat abc as one unit.
 # + repeats the entire group.
@@ -148,10 +152,10 @@ ________________________________________
 import re
 email = "student@gmail.com"
 # Two capturing groups
-match = re.search(r"(\w+)@(\w+\.\w+)", email)
+match = re.search(r"(\w+)@(\w+\.\w+)", email)  # Captures username and domain parts of the email
 if match:
-print("Username:", match.group(1))
-print("Domain:", match.group(2))
+    print("Username:", match.group(1))  # Output: Username: student, because the first capturing group (\w+) matches the username part of the email before the "@" symbol.
+    print("Domain:", match.group(2))  # Output: Domain: gmail.com, because the second capturing group (\w+\.\w+) matches the domain part of the email after the "@" symbol, which consists of a word followed by a dot and another word.
 # Explanation:
 # Group 1 captures username.
 # Group 2 captures domain portion.
@@ -162,12 +166,12 @@ ________________________________________
 ```python
 import re
 text = "Order number is 5678"
-match = re.search(r"\d+", text)
+match = re.search(r"\d+", text)  # Finds the first sequence of digits in the text
 if match:
-print("Matched text:", match.group())
-print("Start index:", match.start())
-print("End index:", match.end())
-print("Span:", match.span())
+    print("Matched text:", match.group())  # Output: Matched text: 5678, because the first sequence of digits found in the text is "5678".
+    print("Start index:", match.start())  # Output: Start index: 16, because the sequence "5678" starts at index 16 in the text.
+    print("End index:", match.end())  # Output: End index: 20, because the sequence "5678" ends at index 20 in the text.
+    print("Span:", match.span())  # Output: Span: (16, 20), because the span of the matched sequence "5678" is from index 16 to 20.
 # Explanation:
 # group() returns matched text.
 # start() and end() return positions.
