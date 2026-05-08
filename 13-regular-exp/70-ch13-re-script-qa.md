@@ -183,11 +183,11 @@ ________________________________________
 ```python
 import re
 text = "123 abc"
-match = re.match(r"\d+", text)
+match = re.match(r"\d+", text)  # Matches the digits at the start of the string
 if match:
-print("Matched:", match.group())
-print("Consumed span:", match.span())
-print("Remaining text:", text[match.end():])
+    print("Matched:", match.group())  # Output: Matched: 123, because the first sequence of digits found in the text is "123".
+    print("Consumed span:", match.span())  # Output: Consumed span: (0, 3), because the span of the matched sequence "123" is from index 0 to 3.
+    print("Remaining text:", text[match.end():])  # Output: Remaining text:  abc, because the remaining text after the matched sequence is " abc".
 # Explanation:
 # Only digits are consumed.
 # Remaining characters are untouched.
@@ -199,10 +199,10 @@ ________________________________________
 import re
 text = "123 abc"
 # Consume everything after digits
-match = re.match(r"\d+.*", text)
+match = re.match(r"\d+.*", text)  # Matches digits followed by any characters until the end of the string
 if match:
-print("Entire consumed text:", match.group())
-print("Span:", match.span())
+    print("Entire consumed text:", match.group())  # Output: Entire consumed text: 123 abc, because the entire string is matched.
+    print("Span:", match.span())  # Output: Span: (0, 7), because the span of the matched sequence is from index 0 to 7.
 # Explanation:
 # .* consumes remaining characters.
 # Entire string becomes part of match.
@@ -213,8 +213,8 @@ ________________________________________
 ```python
 import re
 text = "Python is fun!"
-words = re.findall(r"\w+", text)
-print(words)
+words = re.findall(r"\w+", text)  # Finds all sequences of word characters (letters, digits, underscore)
+print(words)  # Output: ['Python', 'is', 'fun'], because the regex \w+ matches sequences of word characters, which in this case are "Python", "is", and "fun". The exclamation mark is not included because it is not a word character.
 # Explanation:
 # \w matches letters, digits, and underscore.
 # + groups consecutive word characters.
@@ -226,8 +226,8 @@ ________________________________________
 import re
 text = "Apple,Orange;Banana Grape"
 # Split using comma, semicolon, or whitespace
-parts = re.split(r"[,;\s]+", text)
-print(parts)
+parts = re.split(r"[,;\s]+", text)  # Splits the text into parts based on the specified delimiters (comma, semicolon, or whitespace)
+print(parts)  # Output: ['Apple', 'Orange', 'Banana', 'Grape'], because the regex [,;\s]+ matches one or more occurrences of comma, semicolon, or whitespace.
 # Explanation:
 # Character class contains separators.
 # + combines consecutive separators.
@@ -239,11 +239,11 @@ ________________________________________
 import re
 text = "<b>Python</b><b>Java</b>"
 # Greedy match
-greedy = re.findall(r"<b>.*</b>", text)
-print("Greedy:", greedy)
+greedy = re.findall(r"<b>.*</b>", text)  # Matches from first <b> to last </b>, consuming as much as possible
+print("Greedy:", greedy)  # Output: Greedy: ['<b>Python</b><b>Java</b'], because .* matches as much as possible.
 # Non-greedy match
-nongreedy = re.findall(r"<b>.*?</b>", text)
-print("Non-greedy:", nongreedy)
+nongreedy = re.findall(r"<b>.*?</b>", text)  # Matches from first <b> to first </b>, consuming as little as possible
+print("Non-greedy:", nongreedy)  # Output: Non-greedy: ['<b>Python</b>', '<b>Java</b>'], because .*? matches as little as possible.
 # Explanation:
 # .* grabs maximum possible text.
 # .*? grabs minimum possible text.
@@ -255,8 +255,8 @@ ________________________________________
 import re
 text = "Marks: 45, 67, 89"
 # Replace numbers with #
-result = re.subn(r"\d+", "#", text)
-print(result)
+result = re.subn(r"\d+", "#", text)  # Replaces all sequences of digits with "#" and also returns the number of replacements made
+print(result)  # Output: ('Marks: #, #, #', 3), because all sequences of digits are replaced with "#" and there are 3 replacements.
 # Explanation:
 # subn() returns tuple.
 # First item = modified string.
@@ -268,22 +268,23 @@ ________________________________________
 ```python
 import re
 text = "Today's date is 08-05-2026"
-pattern = r"(?P<day>\d{2})-(?P<month>\d{2})-(?P<year>\d{4})"
-match = re.search(pattern, text)
+pattern = r"(?P<day>\d{2})-(?P<month>\d{2})-(?P<year>\d{4})"  # Named groups for day, month, year
+match = re.search(pattern, text)  # Searches for the date pattern in the text and captures day, month, and year as named groups 
 if match:
-print(match.groupdict())
+    print(match.groupdict())  # Output: {'day': '08', 'month': '05', 'year': '2026'}, because the regex pattern captures the day, month, and year from the date in the text and returns them as a dictionary with keys corresponding to the group names defined in the regex.
 # Explanation:
 # Named groups create dictionary-like access.
 # Keys become group names.
+```
 ________________________________________
 20. Write a script that uses re.escape() to safely search for the literal text a+b.
 ```python
 import re
 text = "a+b"
 # Escape special regex symbols
-safe_pattern = re.escape("a+b")
-result = re.fullmatch(safe_pattern, text)
-print(result)
+safe_pattern = re.escape("a+b")  # Escapes the special characters in the string "a+b" so that they are treated as literal characters in the regex pattern
+result = re.fullmatch(safe_pattern, text)  # Checks if the entire string matches the escaped pattern
+print(result)  # Output: <re.Match object; span=(0, 3), match='a+b'>, because the re.escape() function has escaped the special characters in the string "a+b", allowing it to be treated as a literal string in the regex pattern. The re.fullmatch() function then successfully matches the entire string "a+b" against the escaped pattern, resulting in a match object.
 # Explanation:
 # + normally means repetition.
 # re.escape() removes special meaning.
