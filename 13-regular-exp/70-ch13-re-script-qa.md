@@ -295,11 +295,11 @@ ________________________________________
 ```python
 import re
 # Compile pattern once
-pattern = re.compile(r"\d+")
+pattern = re.compile(r"\d+")  # Compiles the regex pattern for matching one or more digits, allowing it to be reused efficiently for multiple searches without recompiling the pattern each time.
 text1 = "123"
 text2 = "456"
-print(pattern.match(text1))
-print(pattern.match(text2))
+print(pattern.match(text1))  # Output: <re.Match object; span=(0, 3), match='123'>
+print(pattern.match(text2))  # Output: <re.Match object; span=(0, 3), match='456'>
 # Explanation:
 # Compiled patterns are reusable.
 # Useful for repeated matching.
@@ -309,12 +309,20 @@ ________________________________________
 22. Write a script that prints the attributes pattern, groups, and groupindex of a compiled Pattern object.
 ```python
 import re
-pattern = re.compile(r"(?P<word>\w+)-(\d+)")
-print("Pattern:", pattern.pattern)
-print("Groups:", pattern.groups)
-print("Named groups:", pattern.groupindex)
+# r"(?P<word>\w+)-(\d+)" is just a normal Python string.
+pattern = re.compile(r"(?P<word>\w+)-(\d+)")  # Pattern with named and unnamed groups
+# The re.compile() function compiles the regex pattern into a regex object, which can be used for matching operations. The pattern itself is a raw string that contains the regex syntax, including named groups (like (?P<word>\w+)) and unnamed groups (like (\d+)).
+print("Pattern:", pattern)  # Output: Pattern: re.compile('(?P<word>\\w+)-(\\d+)'), because the re.compile() function compiles the regex pattern and returns a regex object, which is displayed as re.compile('(?P<word>\\w+)-(\\d+)').
+# Double backslashes are used in the output to represent literal backslashes in the regex pattern, which is a common way Python represents strings that contain backslashes.
+
+print("Pattern:", pattern.pattern)  # Output: Pattern: (?P<word>\w+)-(\d+), because the .pattern attribute of the compiled regex object returns the original regex pattern as a string.
+# pattern.pattern gives the original regex string, which is useful for reference or debugging, while pattern itself is a compiled object that can be used for matching operations.
+
+print("Groups:", pattern.groups)  # Output: Groups: 2, because the .groups attribute of the compiled regex object returns the total number of capturing groups in the pattern.
+print("Named groups:", pattern.groupindex)  # Output: Named groups: {'word': 1}, because the .groupindex attribute of the compiled regex object returns a dictionary mapping named group names to their corresponding group numbers.
 # Explanation:
 # pattern stores regex text.
+# pattern.pattern gives original pattern string.
 # groups stores total capturing groups.
 # groupindex maps names to numbers.
 ```
@@ -325,12 +333,15 @@ ________________________________________
 import re
 password = "Python123"
 # Positive lookaheads used for validation
-pattern = r"(?=.*[A-Z])(?=.*\d).{8,}"
-result = re.fullmatch(pattern, password)
+# (?=.*[A-Z]) checks for at least one uppercase letter.
+# (?=.*\d) checks for at least one digit.
+# .{8,} ensures minimum length.
+pattern = r"(?=.*[A-Z])(?=.*\d).{8,}"  
+result = re.fullmatch(pattern, password)  # Checks if the entire password string meets the criteria defined by the regex pattern, which includes having at least one uppercase letter, at least one digit, and being at least 8 characters long.
 if result:
-print("Strong password")
+    print("Strong password")
 else:
-print("Weak password")
+    print("Weak password")
 # Explanation:
 # (?=.*[A-Z]) checks uppercase letter.
 # (?=.*\d) checks digit.
@@ -342,11 +353,16 @@ ________________________________________
 ```python
 import re
 text = "Python and Java are Programming Languages"
-result = re.findall(r"\b[A-Z]\w*", text)
+# \b ensures we match only at the start of a word, so we get whole words that start with uppercase letters.
+# [A-Z] checks that the first letter is uppercase.
+# \w* allows for any additional word characters after the first uppercase letter, so we get the full word.
+result = re.findall(r"\b[A-Z]\w*", text)  # Finds words that start with an uppercase letter, using a word boundary to ensure it matches the start of a word
 print(result)
 # Explanation:
 # \b ensures word boundary.
 # [A-Z] checks first letter uppercase.
+# \w* allows for any additional word characters after the first uppercase letter.
+
 ```
 
 ________________________________________
@@ -355,8 +371,10 @@ ________________________________________
 import re
 text = "cooool beeaautiful"
 # Find repeated vowels
+# [aeiou] matches any vowel.
+# {2,} means two or more repetitions of the preceding character class, which in this case is any vowel.
 result = re.findall(r"[aeiou]{2,}", text)
-print(result)
+print(result)  # Output: ['ooo', 'eeaa', 'uu'], because the regex pattern [aeiou]{2,} matches sequences of two or more consecutive vowels in the text, which are "ooo", "eeaa", and "uu".
 # Explanation:
 # {2,} means two or more repetitions.
 # Character class limits search to vowels.
@@ -367,21 +385,27 @@ ________________________________________
 ```python
 import re
 text = "Colors: #FFAA00 and #12BC9A"
+# # matches literal hash symbol.
+# [A-Fa-f0-9] matches any hexadecimal digit (case-insensitive).
+# {6} ensures exactly six digits.
 result = re.findall(r"#[A-Fa-f0-9]{6}", text)
-print(result)
+print(result)  # Output: ['#FFAA00', '#12BC9A'], because the regex pattern #[A-Fa-f0-9]{6} matches sequences that start with a "#" followed by exactly six hexadecimal digits (which can be uppercase A-F, lowercase a-f, or digits 0-9), resulting in the matches "#FFAA00" and "#12BC9A".
 # Explanation:
 # Hexadecimal digits include 0-9 and A-F.
 # {6} ensures exactly six digits.
+```
 ________________________________________
 27. Write a script that checks whether a string contains only alphabets and spaces.
 ```python
 import re
 text = "Python Programming"
+# [A-Za-z ] matches uppercase letters, lowercase letters, and spaces.
+# + means one or more of the preceding character class, so it matches sequences of letters and spaces that are at least one character long.
 result = re.fullmatch(r"[A-Za-z ]+", text)
 if result:
-print("Valid text")
+    print("Valid text")  # Output: Valid text, because the regex pattern [A-Za-z ]+ matches the entire string "Python Programming", which consists of uppercase letters, lowercase letters, and spaces, and is at least one character long.
 else:
-print("Contains invalid characters")
+    print("Contains invalid characters")  # 
 # Explanation:
 # Character class includes letters and spaces.
 # + ensures one or more characters.
@@ -392,8 +416,9 @@ ________________________________________
 ```python
 import re
 text = "Learning #Python and #Regex is fun"
+# #\w+ matches a literal "#" followed by one or more word characters (letters, digits, or underscores), which captures the hashtags in the text.
 hashtags = re.findall(r"#\w+", text)
-print(hashtags)
+print(hashtags)  # Output: ['#Python', '#Regex'], because the regex pattern #\w+ matches sequences that start with a "#" followed by one or more word characters (which include letters, digits, and underscores), resulting in the matches "#Python" and "#Regex".
 # Explanation:
 # # matches literal hashtag symbol.
 # \w+ captures hashtag text.
@@ -405,9 +430,10 @@ ________________________________________
 import re
 text = "cat bat rat"
 # finditer() returns iterator of Match objects
-for match in re.finditer(r"\w+", text):
-print("Word:", match.group())
-print("Position:", match.start(), match.end())
+# \w+ matches sequences of word characters (words) in the text.
+for match in re.finditer(r"\w+", text):  # Iterates over each match of the regex pattern \w+ in the text, which finds sequences of word characters (words) and returns an iterator of Match objects for each match found.
+    print("Word:", match.group())  # Output: Word: cat, Word: bat, Word: rat, because the regex pattern \w+ matches each word in the text "cat bat rat", and the finditer() function returns an iterator of Match objects for each match found. The group() method is then used to extract the matched word from each Match object, resulting in the output of each word on a separate line.
+    print("Position:", match.start(), match.end())  # Output: Position: 0 3, Position: 4 7, Position: 8 11, because the start() and end() methods of the Match object return the starting and ending indices of each matched word in the original text. For "cat", the start index is 0 and the end index is 3; for "bat", the start index is 4 and the end index is 7; for "rat", the start index is 8 and the end index is 11.
 # Explanation:
 # Each iteration produces one Match object.
 # Position information is available.
@@ -418,8 +444,12 @@ ________________________________________
 ```python
 import re
 text = "report.pdf image.png notes.txt"
+# \. matches a literal dot.
+# [A-Za-z0-9]+ matches the file extension consisting of letters and digits.
+# + means one or more of the preceding character class, so it matches file extensions that are at least one character long.
+# The regex pattern \.([A-Za-z0-9]+) captures the file extensions from the text, where the parentheses create a capturing group that extracts the extension part after the dot.
 extensions = re.findall(r"\.([A-Za-z0-9]+)", text)
-print(extensions)
+print(extensions)  # Output: ['pdf', 'png', 'txt'], because the regex pattern \.([A-Za-z0-9]+) matches a literal dot followed by one or more alphanumeric characters, capturing the file extensions.
 # Explanation:
 # \. matches literal dot.
 # Parentheses capture extension only.
@@ -432,6 +462,16 @@ Part B: Advanced and Extension Questions
 import re
 ip = "192.168.1.1"
 # Simplified IPv4 regex
+# Each octet must be between 0 and 255.
+# ^ and $ ensure the entire string matches the pattern.
+# (25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d) matches valid octet values.
+# Breakup of octet pattern:
+# (25[0-5]) matches 250-255.
+# (2[0-4]\d) matches 200-249. Because 2 followed by 0-4 and then any digit (0-9) gives us the range of 200-249.
+# (1\d\d) matches 100-199. Because 1 followed by any digit (0-9) and then another digit (0-9) gives us the range of 100-199.
+# ([1-9]?\d) matches 0-99. Because it optionally matches a digit from 1-9 (which allows for numbers 1-9) followed by any digit (0-9), which allows for numbers 0-99.
+# \. matches literal dots between octets.
+# 
 pattern = r"^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$"
 result = re.fullmatch(pattern, ip)
 if result:
@@ -441,14 +481,22 @@ else:
 # Explanation:
 # Each number must be between 0 and 255.
 # Dot-separated structure enforced.
+```
 ________________________________________
 32. Write a script that masks credit card numbers except the last four digits.
 ```python
 import re
 text = "My card number is 1234567812345678"
 # Replace first 12 digits
-masked = re.sub(r"\d(?=\d{4})", "*", text)
-print(masked)
+# \d matches a digit, and {4} means exactly four digits. 
+# So \d{4} matches the last four digits of the card number.
+# (?=\d{4}) is a positive lookahead that asserts that the preceding \d{4} (the last four digits) 
+# must be present immediately after the current position in the string, 
+# but it does not consume those digits as part of the match. 
+# This allows us to target only the digits that come before the last four digits for replacement.
+
+masked = re.sub(r"\d(?=\d{4})", "*", text)  # Replaces digits that are followed by exactly four digits with "*", effectively masking all but the last four digits of the card number.
+print(masked)  # Output: My card number is ************5678, because the regex pattern \d(?=\d{4}) matches any digit that is immediately followed by exactly four digits, and replaces it with "*". This results in all digits of the card number being replaced with "*" except for the last four digits, which remain visible.
 # Explanation:
 # Positive lookahead keeps last 4 digits visible.
 # Earlier digits are replaced.
@@ -460,6 +508,12 @@ ________________________________________
 import re
 text = "This is is a test test sentence"
 # Backreference used
+# \b ensures we match whole words.
+# (\w+) captures a word and assigns it to group 1.
+# \s+ matches the whitespace between the two occurrences of the word.
+# \1 refers back to the first capturing group, so it matches the same word again.
+# \b ensures we match the end of the word, so we only match repeated words that are whole words and not part of larger words.
+# The regex pattern \b(\w+)\s+\1\b matches any instance of a word followed by whitespace and then the same word again, effectively identifying repeated words in the text.
 cleaned = re.sub(r"\b(\w+)\s+\1\b", r"\1", text)
 print(cleaned)
 # Explanation:
@@ -473,8 +527,12 @@ ________________________________________
 import re
 html = "<html><body><h1>Title</h1></body></html>"
 # Capture tag names
+# <\/? matches either opening or closing tags.
+# ([a-zA-Z0-9]+) captures the tag name consisting of letters and digits.
+# + means one or more of the preceding character class, so it matches tag names that are at least one character long.
+# The regex pattern <\/?([a-zA-Z0-9]+) matches both opening and closing HTML tags and captures the tag names, allowing us to extract the names of the tags used in the HTML string.
 result = re.findall(r"<\/?([a-zA-Z0-9]+)", html)
-print(result)
+print(result)  # Output: ['html', 'body', 'h1', 'h1', 'body', 'html'], because the regex pattern <\/?([a-zA-Z0-9]+) matches both opening and closing HTML tags in the string, capturing the tag names "html", "body", and "h1". The pattern matches the opening tags <html>, <body>, and <h1>, as well as the closing tags </h1>, </body>, and </html>, resulting in the list of tag names extracted from the HTML string.
 # Explanation:
 # \/? optionally matches closing slash.
 # Capturing group extracts tag names.
@@ -486,6 +544,15 @@ ________________________________________
 import re
 text = "Today's date is 08/05/2026"
 # Rearrange captured groups
+# (\d{2}) captures the day, which is two digits.
+# (\d{2}) captures the month, which is also two digits.
+# (\d{4}) captures the year, which is four digits.
+# The regex pattern (\d{2})/(\d{2})/(\d{4}) captures the day, month, and year from the date in the text, and the replacement string \3-\2-\1 rearranges these captured groups into the format "year-month-day".
+# \3 refers to the third capturing group (year), 
+# \2 refers to the second capturing group (month), and 
+# \1 refers to the first capturing group (day). 
+# By rearranging these groups in the replacement string, we can reformat the date from "08/05/2026" to "2026-05-08".
+# The re.sub() function takes the regex pattern, the replacement string, and the original text, and performs the substitution based on the captured groups, resulting in the reformatted date string.
 new_text = re.sub(r"(\d{2})/(\d{2})/(\d{4})", r"\3-\2-\1", text)
 print(new_text)
 # Explanation:
@@ -499,8 +566,15 @@ ________________________________________
 import re
 text = "Hello, world! How are you?"
 # Match words OR punctuation
+# \w+ matches sequences of word characters (words) in the text.
+# [^\w\s] matches any character that is not a word character and not whitespace, 
+# which effectively captures punctuation marks.
+# The regex pattern \w+|[^\w\s] uses alternation to match either sequences of word characters (words) 
+# or individual punctuation characters, allowing us to extract both words and punctuation from the text 
+# as separate tokens. 
+
 tokens = re.findall(r"\w+|[^\w\s]", text)
-print(tokens)
+print(tokens)  # Output: ['Hello', ',', 'world', '!', 'How', 'are', 'you', '?'], because the regex pattern \w+|[^\w\s] matches sequences of word characters (which are "Hello", "world", "How", "are", and "you") as well as individual punctuation characters (which are ",", "!", and "?"), resulting in a list of tokens that includes both words and punctuation from the original text.    
 # Explanation:
 # Alternation separates words and punctuation.
 # Useful in Natural Language Processing.
@@ -510,10 +584,18 @@ ________________________________________
 37. Write a script that identifies repeated whitespace in a text file and compresses it into single spaces.
 ```python
 import re
-text = "Python is\t\tvery\n\nuseful"
+text = "Python    is\t\tvery\n\nuseful"
 # Replace repeated whitespace
+# \s+ captures all repeated whitespace characters (spaces, tabs, newlines) in the text.
+# The regex pattern \s+ matches sequences of one or more whitespace characters, and 
+# the re.sub() function replaces these sequences with a single space, effectively 
+# normalizing the whitespace in the text and making it easier to read and process.    
+# By replacing multiple whitespace characters with a single space, we can clean up the formatting 
+# of the text and ensure that there are no unnecessary spaces, tabs, or newlines that could 
+# interfere with further processing or analysis of the text.  
+
 cleaned = re.sub(r"\s+", " ", text)
-print(cleaned)
+print(cleaned)  # Output: Python is very useful, because the regex pattern \s+ matches sequences of one or more whitespace characters in the original text, which includes multiple spaces, tabs, and newlines. The re.sub() function then replaces these sequences with a single space, resulting in the cleaned-up text "Python is very useful" where all extra whitespace has been normalized to single spaces between words.
 # Explanation:
 # \s+ captures all repeated whitespace.
 # Single space normalizes formatting.
@@ -524,11 +606,21 @@ ________________________________________
 ```python
 import re
 text = "Visit https://python.org and http://example.com"
+# https? matches "http" followed by an optional "s", allowing for both "http" and "https" URLs.
+# :// matches the literal characters "://", which are part of the URL structure.
+# \S+ matches one or more non-whitespace characters, which captures the rest of the URL 
+# after "http://" or "https://", including the domain and any path or query parameters.   
+# The regex pattern https?://\S+ matches URLs that start with either "http://" or "https://", 
+# followed by any sequence of non-whitespace characters, effectively capturing the full URLs present in the text. 
+# This allows us to extract the URLs from the given string for further processing or analysis.
+
 urls = re.findall(r"https?://\S+", text)
-print(urls)
+print(urls)  # Output: ['https://python.org', 'http://example.com'], because the regex pattern https?://\S+ matches both "https://python.org" and "http://example.com" in the text. The pattern allows for both "http" and "https" URLs by making the "s" optional, and then captures the rest of the URL using \S+, which matches any sequence of non-whitespace characters following the "http://" or "https://" prefix.
+
 # Explanation:
 # s? makes 's' optional.
 # \S+ captures remaining non-space characters.
+
 ```
 
 ________________________________________
@@ -536,19 +628,30 @@ ________________________________________
 ```python
 import re
 import time
-# Poorly designed regex
+# Poorly designed regex. 
 pattern = r"(a+)+$"
+# (a+)+ means one or more groups of one or more 'a's.
+# Nested quantifiers  mean the regex engine has to try many combinations of 'a's when it encounters a long string of 'a's followed by a character that does not match the pattern (like 'X'), leading to excessive backtracking and performance issues.  
+# This regex has nested quantifiers (a+)+, which can cause excessive backtracking when the input 
+# string has many 'a's followed by a character that does not match the pattern (like 'X').   
 # Long failing string
 text = "a" * 25 + "X"
 start = time.time()
 result = re.match(pattern, text)
 end = time.time()
-print("Match:", result)
-print("Time taken:", end - start)
+print("Match:", result)  # Output: Match: None, because the regex pattern (a+)+$ does not match the input string "aaaaaaaaaaaaaaaaaaaaaaaaaX". The pattern expects one or more groups of one or more 'a's followed by the end of the string, but since the input string ends with 'X' instead of 'a', the regex engine will try many combinations of 'a's and backtrack excessively before ultimately failing to find a match, resulting in None.
+print("Time taken:", end - start)  
+# Output: Time taken: (a significant amount of time, depending on the system), 
+# because the regex pattern (a+)+$ causes excessive backtracking when processing the 
+# input string "aaaaaaaaaaaaaaaaaaaaaaaaaX". The regex engine will try many combinations of 'a's and 
+# backtrack repeatedly before ultimately failing to find a match, which can lead to a significant increase 
+# in processing time, especially as the number of 'a's increases in the input string.
+
 # Explanation:
 # Nested quantifiers can trigger excessive backtracking.
 # Regex engine tries many combinations before failing.
 # Dangerous in performance-sensitive systems.
+
 ```
 
 ________________________________________
@@ -560,19 +663,19 @@ pattern = input("Enter regex pattern: ")
 text = input("Enter test string: ")
 try:
     # Try searching pattern
-    result = re.search(pattern, text)
-        if result:
-            print("Match found:", result.group())
-            print("Span:", result.span())
-        else:
-            print("No match found")
+    result = re.search(pattern, text)  # Searches for the first occurrence of the user-provided regex pattern in the user-provided test string, and returns a match object if a match is found, or None if no match is found. The try-except block is used to catch any potential re.error exceptions that may arise from invalid regex patterns entered by the user, allowing the program to handle such errors gracefully without crashing.
+    if result:
+        print("Match found:", result.group())  # Output: Match found: (matched text), because if the regex pattern matches a portion of the input string, the result.group() method returns the matched text.
+        print("Span:", result.span())  # Output: Span: (start, end), because the result.span() method returns a tuple indicating the start and end positions of the matched text within the input string.
+    else:
+        print("No match found")  # Output: No match found, because if the regex pattern does not match any portion of the input string, the re.search() function returns None, and the else block is executed, printing "No match found".
 except re.error as e:
-    print("Invalid regex pattern:", e)
-
+    print("Invalid regex pattern:", e)  # Output: Invalid regex pattern: (error message), because if the user enters an invalid regex pattern, the re.search() function will raise a re.error exception. The except block catches this exception and prints an error message indicating that the regex pattern is invalid, along with the specific error message provided by the exception.
 # Explanation:
 # Allows experimentation with regex.
 # try-except handles invalid patterns safely.
 # Useful educational mini-project.
+
 ```
 
 
