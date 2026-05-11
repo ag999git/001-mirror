@@ -63,7 +63,7 @@ If a number **can be broken into equal-sized repeating parts**, it is **not prim
 
 ----------
 
-#### Hints (Progressive – Do Not Read All at Once)
+### Hints 
 
 #### Hint 1: Change the problem domain
 
