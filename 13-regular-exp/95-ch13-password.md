@@ -89,7 +89,9 @@ Ab1@xy?         → BAD
 
 
 
-## 1. The Anatomy of the Pattern
+## 1. Detailed explanation of the RegEx Pattern
+
+**The RegEx Pattern used is as follows**
 
 ```python
 password_pattern = (
