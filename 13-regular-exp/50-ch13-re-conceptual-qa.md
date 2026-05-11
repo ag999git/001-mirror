@@ -308,8 +308,6 @@ re.search(r"(?i)cat", "CAT")
 
 
 ### Advanced Level
-[Back to Table of Contents](#table-of-contents)
-
 
 
 #### **Q18. What is the difference between a Pattern object and a Match object?**
