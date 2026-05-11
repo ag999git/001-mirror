@@ -1,7 +1,9 @@
 
 
 ### How Does Python’s re Module Expose Pattern and Match Types Without Defining Them? 
->This is a very advanced concept and exercise and not required to be studies by beginners
+>This is a very advanced concept and exercise and not required to be studies by beginners.
+
+
 We may call this exercise as:- The Mystery of the "Missing" Classes
 
 This exercise will help you to understand how the re module of Python:-
