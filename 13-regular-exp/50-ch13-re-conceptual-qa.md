@@ -2,11 +2,7 @@
 ## Conceptual questions on Regular Expression (re)
 
 ###  Beginner Level
-[Back to Table of Contents](#table-of-contents)
 
-<details>
-
-<summary> Beginner Level Q/A (Click to Expand) </summary>
 
 
 #### **Q1. What are the similarities and differences between** `re.match()` **and** `re.search()`**?**
@@ -167,14 +163,10 @@ re.split(r"\d+", "abc123xyz456")
 
 -   More powerful than `str.split()`.
  
-</details>
+
 
 ### Intermediate Level
-[Back to Table of Contents](#table-of-contents)
 
-<details>
-
-<summary> Intermediate Level Q/A (Click to Expand)</summary>
 
 #### **Q10. What is the difference between greedy and non-greedy quantifiers?**
 
@@ -313,14 +305,12 @@ re.search(r"(?i)cat", "CAT")
 
 -   Flags modify matching behavior.
 
-</details>
+
 
 ### Advanced Level
 [Back to Table of Contents](#table-of-contents)
 
-<details>
 
-<summary> Advanced Level Q/A (Click to Expand) </summary>
 
 #### **Q18. What is the difference between a Pattern object and a Match object?**
 
@@ -386,7 +376,7 @@ re.compile(r""" \d+     # digits \s*     # optional space """, re.VERBOSE)
 
 **Learning Points:**
 
-</details>
+
 
 
 
