@@ -17,17 +17,26 @@ text = "123456"
 # +   -> one or more digits
 pattern = r"\d+"
 
-# fullmatch() checks whether the ENTIRE string satisfies the regex
-result = re.fullmatch(pattern, text)
 
-if result:
-    print("Valid numeric string")
-else:
-    print("Invalid string")
+def validate_numeric_string(s):
+    # fullmatch() checks whether the entire string satisfies the regex
+    result = re.fullmatch(pattern, s)  # Returns a match object if the entire string matches, otherwise None
 
-# Example error case
-# text = "123abc"
-# This fails because letters are not digits
+    if result:  # If result is not None, it means the entire string matches the pattern
+        return "Valid numeric string"
+    else:
+        return "Invalid string"
+
+# Test the function with a valid numeric string
+result = validate_numeric_string(text)
+print(result)
+# OUTPUT: Valid numeric string
+
+# Test the function with an invalid string (contains letters)
+invalid_text = "123abc"
+result = validate_numeric_string(invalid_text)
+print(result)
+# OUTPUT: Invalid string
 
 ```
 Question 2: Write a script to extract all email addresses from a paragraph using re.findall().
@@ -41,6 +50,8 @@ Contact us at admin@test.com or support123@company.org
 
 # Regex Explanation:
 # [a-zA-Z0-9._%+-]+  -> username part
+#     ._%+- are allowed special characters in the username
+#     + means one or more of the preceding characters
 # @                  -> literal @ symbol
 # [a-zA-Z0-9.-]+     -> domain name
 # \.                 -> literal dot
@@ -48,10 +59,9 @@ Contact us at admin@test.com or support123@company.org
 
 pattern = r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
 
-emails = re.findall(pattern, text)
+emails = re.findall(pattern, text)  # findall() returns a list of all matches in the text
 
 print(emails)
-
 # Output:
 # ['admin@test.com', 'support123@company.org']
 
@@ -61,7 +71,7 @@ Question 3: Write a script to find all words beginning with a capital letter.
 ```python
 import re
 
-text = "Ravi studies at Delhi University with Amit"
+text = "Alice, Bob and Charlie work with Donald"
 
 # Regex Explanation:
 # \b       -> word boundary
@@ -73,9 +83,8 @@ pattern = r"\b[A-Z][a-z]+"
 matches = re.findall(pattern, text)
 
 print(matches)
-
 # Output:
-# ['Ravi', 'Delhi', 'University', 'Amit']
+# ['Alice', 'Bob', 'Charlie', 'Donald']
 
 ```
 Question 4: Write a script to validate a PIN code containing exactly 6 digits.
@@ -83,29 +92,30 @@ Question 4: Write a script to validate a PIN code containing exactly 6 digits.
 ```python
 import re
 
-pin = "834001"
-
 # Regex Explanation:
 # \d{6} -> exactly 6 digits
 
 pattern = r"\d{6}"
+def is_valid_pin(pin):
+    if re.fullmatch(pattern, pin):
+        print("Valid PIN")
+    else:
+        print("Invalid PIN")
 
-if re.fullmatch(pattern, pin):
-    print("Valid PIN")
-else:
-    print("Invalid PIN")
+# Example valid PIN
+is_valid_pin("123456")  # Valid PIN
 
 # Example invalid PINs
-# "12345"      -> too short
-# "1234567"    -> too long
-# "12A456"     -> contains letter
+is_valid_pin("12345")      # Invalid PIN (too short)
+is_valid_pin("1234567")    # Invalid PIN (too long)
+is_valid_pin("12A456")     # Invalid PIN (contains letter)
+
 
 ```
 Question 5: Write a script to split a sentence wherever multiple spaces occur. Use re.split().
 
 ```python
 import re
-
 text = "Python    is   very     useful"
 
 # Regex Explanation:
@@ -113,10 +123,13 @@ text = "Python    is   very     useful"
 
 pattern = r"\s+"
 
-parts = re.split(pattern, text)
+# Use re.split() to split the text at each sequence of whitespace
+# The regex pattern \s+ matches sequences of whitespace characters, 
+# and re.split() breaks the text into parts wherever this pattern is found. 
+# The result is a list of non-whitespace substrings.
+parts = re.split(pattern, text)  # 
 
 print(parts)
-
 # Output:
 # ['Python', 'is', 'very', 'useful']
 
@@ -133,7 +146,10 @@ text = "Order 123 was shipped on 2025-05-10"
 
 pattern = r"\d"
 
-result = re.sub(pattern, "#", text)
+# Replace all digits with "#"
+# The re.sub() function takes the pattern, replacement string, and original text as arguments. 
+# It searches for all occurrences of the pattern in the text and replaces them with the specified replacement string.
+result = re.sub(pattern, "#", text)  
 
 print(result)
 
@@ -146,7 +162,17 @@ Question 7: Write a script to extract all years from a text using capturing grou
 ```python
 import re
 
-text = "India won in 1983 and again in 2011"
+text = """
+Some important battles in Indian history:
+Battle of the Hydaspes (326 BCE)
+Kalinga War (261 BCE)
+First Battle of Tarain (1191 CE)
+First Battle of Panipat (1526 CE)
+Second Battle of Panipat (1556 CE)
+Third Battle of Panipat (1761 CE)
+Battle of Buxar (1764 CE)
+
+"""
 
 # Regex Explanation:
 # (      ) -> capturing group
@@ -154,12 +180,12 @@ text = "India won in 1983 and again in 2011"
 
 pattern = r"(\d{4})"
 
+# findall() returns all matches as a list of strings (the captured groups)
 matches = re.findall(pattern, text)
 
 print(matches)
-
 # Output:
-# ['1983', '2011']
+# ['326', '261', '1191', '1526', '1556', '1761', '1764']
 
 ```
 Question 8: Write a script to find repeated words such as 'the the' using backreferences.
@@ -197,17 +223,16 @@ greedy = re.search(r"<.*>", text)
 
 print("Greedy:")
 print(greedy.group())
+# Output: <h1>Hello</h1><p>World</p>
 
 # Non-greedy matching
 # .*? consumes as little as possible
+# The pattern <.*?> matches the smallest possible substring that starts with "<" and ends with ">".
 lazy = re.search(r"<.*?>", text)
 
 print("\nNon-Greedy:")
 print(lazy.group())
-
-# Output:
-# Greedy      -> <h1>Hello</h1><p>World</p>
-# Non-Greedy  -> <h1>
+# Output: <h1>
 
 ```
 Question 10: Write a script to validate whether a password contains at least one uppercase letter and one digit.
@@ -215,43 +240,60 @@ Question 10: Write a script to validate whether a password contains at least one
 ```python
 import re
 
-password = "GoodPass1"
+
 
 # Regex Explanation:
 # (?=.*[A-Z]) -> positive lookahead for uppercase
+#         The (?=...) checks a condition without consuming text. It asserts that at the current position 
+#         in the string, there must be a match for the pattern inside the lookahead. In this case, 
+#         (?=.*[A-Z]) means that somewhere ahead in the string (after any characters, due to .*) there must 
+#         be at least one uppercase letter [A-Z].
 # (?=.*\d)    -> positive lookahead for digit
+#         Similarly, (?=.*\d) asserts that somewhere ahead in the string there must be at least one digit \d.
 # .{8,}       -> minimum 8 characters
 
 pattern = r"(?=.*[A-Z])(?=.*\d).{8,}"
 
-if re.fullmatch(pattern, password):
-    print("Valid Password")
-else:
-    print("Invalid Password")
+def validate_password(pw):
+    if re.fullmatch(pattern, pw):
+        print("Valid Password")
+    else:
+        print("Invalid Password")
 
-# Lookahead Explanation:
-# (?=...) checks a condition without consuming text
+good_password = "GoodPass1"
+validate_password(good_password)
+# OUTPUT: Valid Password
 
+bad_password = "badpass"
+validate_password(bad_password)
+# OUTPUT: Invalid Password
 ```
 Question 11: Write a script to extract hashtags from a social media post.
 
 ```python
 import re
 
-text = "Learning #Python and #DataScience is fun"
+
 
 # Regex Explanation:
+# r"#\w+" is a raw string literal that defines the regex pattern to match hashtags in the text.
 # #      -> literal hash
 # \w+    -> one or more word characters
 
 pattern = r"#\w+"
 
-hashtags = re.findall(pattern, text)
+def extract_hashtags(text):
+    return re.findall(pattern, text)
 
-print(hashtags)
+text_with_hashtags = "Learning #Python and #DataScience is fun"
+with_hashtags = extract_hashtags(text_with_hashtags)
+print(with_hashtags)
+# OUTPUT: ['#Python', '#DataScience']
 
-# Output:
-# ['#Python', '#DataScience']
+text_without_hashtags =  "A day without hashtags is like a day without sunshine"
+without_hashtags = extract_hashtags(text_without_hashtags)
+print(without_hashtags)
+# OUTPUT: []
 
 ```
 Question 12: Write a script to remove duplicate spaces from a paragraph.
