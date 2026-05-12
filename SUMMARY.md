@@ -176,7 +176,17 @@
 * [](/13-regular-exp/)
 * [Conceptual questions on Regular Expression (re)](/13-regular-exp/50-ch13-re-conceptual-qa.md)
 * [](/13-regular-exp/)
+* [Chapter Scripts in Google Colab Notebook](https://github.com/ag999git/001-Python-book-2026/blob/main/colab-nb/ch13_regex.ipynb)
+* [Capturing versus non-capturing groups](/13-regular-exp/60-ch13-re-capturing-noncapturing.md)
+* [Naming styles in Python programming](/13-regular-exp/75-ch13-naming-styles.md)
+* [Conceptual questions on Regular Expression (re)](/13-regular-exp/50-ch13-re-conceptual-qa.md)
+* [Writing scripts Questions/ Answers 1](/13-regular-exp/70-ch13-re-script-qa.md)
+* [Writing scripts Questions/ Answers 2](/13-regular-exp/98-ch13-script-qa.md)
 * [](/13-regular-exp/)
+* [Assignment: Detecting Prime Numbers Using Regular Expressions](/13-regular-exp/90-ch13-prime-numbers.md)
+* [Assignment: Regexp which places certain restrictions on a password that a user may select](/13-regular-exp/95-ch13-password.md)
+* [](/13-regular-exp/)
+* [Assignment: How Does Python’s re Module Expose Pattern and Match Types Without Defining Them?](/13-regular-exp/80-ch13-pattern-match-class-deepdive.md)
 * [](/13-regular-exp/)
 
 
