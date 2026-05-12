@@ -172,6 +172,12 @@
 
 ## Chapter 13: Regular Expressions
 * [Introduction to Chapter 13](/13-regular-exp/README.md)
+* [](/13-regular-exp/)
+* [](/13-regular-exp/)
+* [Conceptual questions on Regular Expression (re)](/13-regular-exp/50-ch13-re-conceptual-qa.md)
+* [](/13-regular-exp/)
+* [](/13-regular-exp/)
+* [](/13-regular-exp/)
 
 
 
