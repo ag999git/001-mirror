@@ -170,7 +170,8 @@
 * [Conceptual Questions (With Answers)](/12-pandas/99-2-ch12-conceptualQ.md)
 * [30 script Questions Based on Chapter Topics](/12-pandas/99-3-ch12-scriptQ.md)
 
-
+## Chapter 13: Regular Expressions
+* [Introduction to Chapter 13](/13-regular-exp/README.md)
 
 
 
