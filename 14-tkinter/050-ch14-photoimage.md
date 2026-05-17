@@ -207,6 +207,28 @@ Flower Image
 (The actual picture depends on the image file used.)
 ```
 
+## Reflection Answer
+
+If the image is not stored in a variable:
+
+>Python may remove it from memory
+
+through **garbage collection**, causing the image to disappear or fail to display.
+
+Therefore:
+
+> **Always store `PhotoImage()` in a variable before displaying it in Tkinter.**
+
+
+
+
+
+
+
+
+
+
+
 
 
 
