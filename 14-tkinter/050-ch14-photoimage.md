@@ -198,8 +198,14 @@ root.mainloop()
 ```
 
 
+## Expected Output
+A window opens displaying:
 
+```
+Flower Image
 
+(The actual picture depends on the image file used.)
+```
 
 
 
