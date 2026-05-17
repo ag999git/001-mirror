@@ -157,6 +157,56 @@ instead of something like: `img_temp1`
 
 # Model Script Solution
 
+```python
+
+import tkinter as tk
+
+# Create main window
+root = tk.Tk()
+root.title("Tkinter Image Demo")
+
+# Create a frame to hold image + caption
+# frame is like a container to group widgets together
+frame = tk.Frame(root)
+frame.pack(padx=20, pady=20)
+
+# Create tiny image in code (50 × 50)
+img = tk.PhotoImage(width=50, height=50)
+
+# Fill image with color
+img.put("lightblue", to=(0, 0, 50, 50))
+
+# Display image
+# Note: The image object (img) must be kept referenced in the code because Tkinter 
+# needs it to display the image. If we create the image inside the Label without 
+# keeping a reference, it may not show up.
+img_label = tk.Label(frame,
+                     image=img)
+
+img_label.pack()
+
+# Caption below image 
+# We ensure the caption is created after the image and is packed below it in the frame.
+caption = tk.Label(frame,
+                   text="Generated Image")
+
+caption.pack(pady=5)  # No padx needed since it's centered in the frame
+
+# Start GUI
+root.mainloop()
+
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 
