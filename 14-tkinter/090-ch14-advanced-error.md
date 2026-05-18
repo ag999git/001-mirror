@@ -173,15 +173,16 @@ Modern GUI applications should be able to:
   -  safely handle unexpected failures.
   -  Tkinter supports these features using: loggingsys.excepthooktrace_add()
 
-Part A — Theory
-Research and explain the following:
+## Part A — Theory
+### Research and explain the following:
 
 1. What is: logging and why is it used instead of: print()?
 2. What is: sys.excepthook and what is its purpose?
 3. What is: trace_add() and why is it useful with: StringVar()?
 4. Explain: live validation with one example.
 5. Why do professional applications log errors instead of only displaying them?
-Part B — Script Writing
+
+### Part B — Script Writing
 Write a Tkinter program that:
   -  Creates an Entry widget for numeric input.
   -  Validates input while typing using: trace_add()
