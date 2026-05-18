@@ -183,23 +183,16 @@ Research and explain the following:
 5. Why do professional applications log errors instead of only displaying them?
 Part B — Script Writing
 Write a Tkinter program that:
+  -  Creates an Entry widget for numeric input.
+  -  Validates input while typing using: trace_add()
+  -  Shows: Valid input or Numbers only in real time.
+  -  Logs activity into: app_log.txt
+  -  Uses: sys.excepthook for global exception handling.
+  -  Adds a button: Trigger Error to deliberately create an uncaught error.
+  -  Shows a friendly popup instead of crashing.
 
-Creates an Entry widget for numeric input.
-
-Validates input while typing using: trace_add()
-
-Shows: Valid input or Numbers only in real time.
-
-Logs activity into: app_log.txt
-
-Uses: sys.excepthook for global exception handling.
-
-Adds a button: Trigger Error to deliberately create an uncaught error.
-
-Shows a friendly popup instead of crashing.
-
-Theory Solution
-1. What is logging?
+## Theory Solution
+### 1. What is logging?
 Logging means:
 
 recording program activity and errors in a file.
@@ -217,7 +210,7 @@ print()	logging
 Temporary	Permanent
 Screen only	Saved to file
 Hard to debug later	Useful for debugging
-2. What is sys.excepthook?
+### 2. What is sys.excepthook?
 sys.excepthook is Python’s:
 
 global exception handler
@@ -246,16 +239,16 @@ Popup + log
 ```
 This improves application safety.
 
-3. What is trace_add()?
+### 3. What is trace_add()?
 trace_add() monitors a Tkinter variable.
 
 Example:
 
 `name_var.trace_add("write", validate)`
-# Meaning: Whenever variable changes,run validate()
+Meaning: Whenever variable changes,run validate()
 It is commonly used with: StringVar() because Entry widgets use variables.
 
-4. What is Live Validation?
+### 4. What is Live Validation?
 Live validation means:
 
 checking input while the user is typing.
@@ -270,7 +263,7 @@ Suppose we have correct Input: 25 we get Output: Valid input
 
 This improves user experience.
 
-5. Why Do Professional Apps Log Errors?
+### 5. Why Do Professional Apps Log Errors?
 Errors may happen unexpectedly.
 Examples of unexpected errors are:
 
