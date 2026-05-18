@@ -242,6 +242,9 @@ Error:Something went wrong.
 Please try again.
 ```
 
+## Flowchart showing the execution of the script
+![Flowchart handling global exceptions](/resources/ch14-tkinter-exceptions.png)
+
 ## Script
 
 ```python
