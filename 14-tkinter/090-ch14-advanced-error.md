@@ -195,22 +195,25 @@ Write a Tkinter program that:
 ## Theory Solution
 ### 1. What is logging?
 Logging means:
+>recording program activity and errors in a file.
 
-recording program activity and errors in a file.
+```python
+# Example:
+logging.info("User clicked") # logs remain saved after the program closes.
+# However 
+print() # logs not saved
+```
 
-Example:
-
-logging.info("User clicked")
-Unlike:
-
-print()
-logs remain saved after the program closes.
 
 Why not print()?
 print()	logging
-Temporary	Permanent
-Screen only	Saved to file
-Hard to debug later	Useful for debugging
+
+| print() | logging |
+| --- | --- |
+| Temporary | Permanent |
+| Screen only | Saved to file |
+| Hard to debug later | Useful for debugging |
+
 ### 2. What is sys.excepthook?
 sys.excepthook is Python’s:
 
