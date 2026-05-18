@@ -168,11 +168,10 @@ Logs help programmers:
 Research / Project Question
 Professional Error Handling in Tkinter
 Modern GUI applications should be able to:
-
-validate user input automatically,
-record errors for debugging,
-safely handle unexpected failures.
-Tkinter supports these features using: loggingsys.excepthooktrace_add()
+  -  validate user input automatically,
+  -  record errors for debugging,
+  -  safely handle unexpected failures.
+  -  Tkinter supports these features using: loggingsys.excepthooktrace_add()
 
 Part A — Theory
 Research and explain the following:
