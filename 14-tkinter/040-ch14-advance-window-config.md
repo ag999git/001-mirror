@@ -39,6 +39,301 @@ The following table covers the full operational spectrum of window management in
 | `window.destroy` | `window.destroy()` | Clears widget resources from memory and terminates the specific window frame immediately. | None. | N/A. | Safely disconnects the Tcl interpreter, destroys internal UI object structures, and releases operating system resources. | Assembling custom application "Exit/Close" prompts or shutting down auxiliary pop-up windows. | None | Confusing destroy() with quit(). quit() stops the mainloop but may leave the window visible; destroy() removes the window. | destroy() is the safest way to close on all platforms. quit() is legacy and should be avoided in modern scripts. |
 | `window.mainloop` | `window.mainloop()` | Starts the continuous, blocking event dispatcher pipeline keeping the interface alive. | None. | N/A (The script will execute straight through to completion and terminate without starting the GUI). | Enters an infinite listening state, blocking following terminal logic while systematically processing system inputs. | The absolute foundational command required to lock your GUI application into an active execution state. | None | Placing logic after mainloop() expecting it to run while the GUI is open. It will only run after the GUI closes. | Essential on all platforms. Without this, the script exits instantly. |
 
+### Script
+The following script shows how **Advanced Window Configuration & Lifecycle Management in Tkinter** is implemented
+
+```python
+
+import tkinter as tk
+from tkinter import messagebox
+
+class AdvancedWindowApp(tk.Tk):
+    """
+    A professional Tkinter application demonstrating advanced window management,
+    lifecycle control, and OS interaction protocols.
+    """
+    def __init__(self):
+        # ------------------------------------------------------------------
+        # 1. BASE INITIALIZATION
+        # ------------------------------------------------------------------
+        # Call the constructor of the parent class (tk.Tk). This initializes the 
+        # Tcl interpreter and creates the underlying root window object.
+        super().__init__()
+
+        # ------------------------------------------------------------------
+        # 2. VISUAL IDENTITY & BRANDING
+        # ------------------------------------------------------------------
+        # Set the text that appears in the title bar of the window and on the 
+        # taskbar/dock icon. This is the primary identifier for the user.
+        self.title("Enterprise Window Management System")
+
+        # WINDOW ICON: 
+        # In a production environment, you should always set a custom icon (.ico on Windows, 
+        # .png on Mac/Linux). This replaces the default red "Tk" feather.
+        # self.iconbitmap("path/to/your/custom_icon.ico") 
+
+        # ------------------------------------------------------------------
+        # 3. DYNAMIC GEOMETRY & POSITIONING
+        # ------------------------------------------------------------------
+        # Define the initial dimensions: Width=600, Height=450.
+        # The "+200+200" part sets the initial X,Y screen coordinates.
+        # However, we will override this with our custom centering logic below.
+        self.geometry("600x450+200+200")
+        
+        # Execute the centering logic to place the window exactly in the middle 
+        # of the user's primary monitor, regardless of screen resolution.
+        self.center_window()
+
+        # ------------------------------------------------------------------
+        # 4. SCALING CONSTRAINTS (Size Governance)
+        # ------------------------------------------------------------------
+        # minsize: Enforces a hard floor on window dimensions.
+        # This prevents the user from resizing the window so small that widgets 
+        # overlap or become truncated (unusable UI).
+        self.minsize(400, 300)
+
+        # maxsize: Enforces a hard ceiling on window dimensions.
+        # This prevents the window from expanding into an unrecognizable mess 
+        # on ultra-wide monitors, preserving the intended layout integrity.
+        self.maxsize(1000, 800)
+
+        # ------------------------------------------------------------------
+        # 5. LOW-LEVEL OS ATTRIBUTES (Visual & Layering Effects)
+        # ------------------------------------------------------------------
+        # -alpha: Controls window opacity (transparency).
+        # Value range: 0.0 (fully invisible) to 1.0 (fully opaque).
+        # 0.95 provides a modern, "glass-like" aesthetic common in Windows 11/macOS.
+        self.attributes("-alpha", 0.95)
+
+        # -topmost: Controls the Z-order layering of the window.
+        # If True, this window will float above ALL other windows, even when 
+        # you click on other applications. Useful for toolbars or countdown timers.
+        self.attributes("-topmost", False)
+        
+        # -fullscreen: Controls whether the window occupies the entire screen.
+        # We initialize to False (windowed mode). A toggle button is provided below.
+        self.attributes("-fullscreen", False)
+
+        # ------------------------------------------------------------------
+        # 6. PROTOCOL INTERCEPTION (Event Handling)
+        # ------------------------------------------------------------------
+        # WM_DELETE_WINDOW is the protocol signal sent by the OS when the user 
+        # clicks the "X" close button.
+        # By overriding this, we prevent the application from dying immediately.
+        # Instead, we route the event to our 'confirm_shutdown' method to allow 
+        # for save-checks or confirmation dialogs.
+        self.protocol("WM_DELETE_WINDOW", self.confirm_shutdown)
+
+        # ------------------------------------------------------------------
+        # 7. UI LAYOUT INITIALIZATION
+        # ------------------------------------------------------------------
+        self.create_widgets()
+
+    def center_window(self):
+        """
+        Calculates the screen dimensions and repositions the window to be perfectly centered.
+        This uses 'update_idletasks' to ensure the window has calculated its own 
+        required size before we ask for its width/height.
+        """
+        # Force an update of the window's internal state. This ensures that 
+        # self.winfo_width() and self.winfo_height() return accurate values 
+        # reflecting the widgets inside, rather than the default '1x1'.
+        self.update_idletasks()
+
+        # Get the width and height of the window itself
+        window_width = self.winfo_width()
+        window_height = self.winfo_height()
+
+        # Get the width and height of the user's screen (primary monitor)
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+
+        # Calculate the X and Y coordinates to center the window
+        # Formula: (Screen Dimension - Window Dimension) / 2
+        x_coordinate = int((screen_width / 2) - (window_width / 2))
+        y_coordinate = int((screen_height / 2) - (window_height / 2))
+
+        # Apply the new geometry string with the calculated coordinates
+        self.geometry(f"{window_width}x{window_height}+{x_coordinate}+{y_coordinate}")
+
+    def create_widgets(self):
+        """Instantiates and arranges the control widgets."""
+        
+        # Main Header Label
+        self.lbl_info = tk.Label(
+            self, 
+            text="Advanced Window Controls Active.\nUse buttons below to test OS integration.",
+            font=("Helvetica", 12, "bold"),
+            fg="#333333"
+        )
+        self.lbl_info.pack(pady=20)
+
+        # --- Control Buttons Frame ---
+        # Using a Frame to group buttons makes the layout cleaner and easier to manage.
+        btn_frame = tk.Frame(self)
+        btn_frame.pack(pady=10)
+
+        # Button 1: Toggle Always-on-Top
+        # Demonstrates modifying the Z-order stack dynamically.
+        tk.Button(
+            btn_frame, 
+            text="Toggle 'Pin on Top' (-topmost)", 
+            command=self.toggle_topmost,
+            width=30
+        ).pack(pady=5)
+
+        # Button 2: Toggle Fullscreen
+        # Demonstrates switching between windowed and immersive modes.
+        tk.Button(
+            btn_frame, 
+            text="Toggle Fullscreen Mode", 
+            command=self.toggle_fullscreen,
+            width=30
+        ).pack(pady=5)
+
+        # Button 3: Minimize (Iconify)
+        # Demonstrates state change to "iconic" (taskbar representation).
+        tk.Button(
+            btn_frame, 
+            text="Minimize to Taskbar", 
+            command=self.minimize_window,
+            width=30
+        ).pack(pady=5)
+
+        # Button 4: Open Modal Auxiliary Window
+        # Demonstrates the 'withdraw' (hide parent) and 'deiconify' (show parent) cycle.
+        # This is how "Wizard" or "Login" flows usually work.
+        tk.Button(
+            btn_frame, 
+            text="Open Aux Window (Hide Parent)", 
+            command=self.open_auxiliary,
+            width=30
+        ).pack(pady=5)
+
+        # Button 5: Simulate Crash/Hang
+        # This button is purely for educational purposes to show what happens 
+        # when we manually force a refresh vs. letting the loop handle it.
+        tk.Button(
+            btn_frame, 
+            text="Force UI Refresh (Update)", 
+            command=self.force_refresh,
+            width=30,
+            bg="#ffcccc"
+        ).pack(pady=5)
+
+    # =======================================================================
+    #  LOGIC & EVENT HANDLERS
+    # =======================================================================
+
+    def toggle_topmost(self):
+        """
+        Inverts the current 'topmost' state.
+        If the window is currently floating above others, it will sink to normal layer.
+        If normal, it will rise to the top.
+        """
+        current_state = self.attributes("-topmost")
+        new_state = not current_state
+        self.attributes("-topmost", new_state)
+        
+        status = "PINNED (Floating)" if new_state else "Normal Layering"
+        self.lbl_info.config(text=f"Window Status: {status}", fg="blue" if new_state else "black")
+
+    def toggle_fullscreen(self):
+        """
+        Toggles the window between occupying the entire screen and standard windowed mode.
+        Note: This hides the title bar and window borders.
+        """
+        current_state = self.attributes("-fullscreen")
+        new_state = not current_state
+        self.attributes("-fullscreen", new_state)
+        
+        status = "FULLSCREEN" if new_state else "Windowed"
+        self.lbl_info.config(text=f"Display Mode: {status}", fg="green" if new_state else "black")
+
+    def minimize_window(self):
+        """
+        Changes the window state to 'iconic'.
+        'Iconic' is the technical X11/Windows term for minimized (visible only in taskbar).
+        """
+        self.state("iconic")
+        # Note: We cannot update the label text here because the window is 
+        # already minimized, so the user wouldn't see the change.
+
+    def force_refresh(self):
+        """
+        Demonstrates the 'update()' method.
+        Normally, Tkinter waits for the mainloop to redraw the screen.
+        Calling 'update()' forces an immediate synchronous repaint.
+        This is useful during long processing loops to prevent the GUI from 'freezing'.
+        """
+        self.lbl_info.config(text="Forcing immediate GUI repaint...", fg="purple")
+        self.update() # Forces the screen to redraw immediately
+        self.after(1000, lambda: self.lbl_info.config(text="Refresh complete.", fg="black"))
+
+    def open_auxiliary(self):
+        """
+        Creates a secondary window (Toplevel) and hides the main window.
+        This simulates a flow where the main window is a 'Launcher' and the 
+        auxiliary window is the 'Workspace'.
+        """
+        # 1. Hide the main window completely from the screen and taskbar.
+        self.withdraw()
+
+        # 2. Create a Toplevel window. This is a separate, independent window 
+        # that belongs to this application instance.
+        aux = tk.Toplevel(self)
+        aux.title("Auxiliary Workspace")
+        aux.geometry("400x300")
+        
+        # 3. Centering the auxiliary window using the same logic
+        aux.update_idletasks()
+        ww = aux.winfo_width()
+        wh = aux.winfo_height()
+        sw = aux.winfo_screenwidth()
+        sh = aux.winfo_screenheight()
+        aux.geometry(f"{ww}x{wh}+{int((sw/2)-(ww/2))}+{int((sh/2)-(wh/2))}")
+
+        # 4. Content for Auxiliary Window
+        tk.Label(
+            aux, 
+            text="This is a Modal/Child window.\nThe Main App is hidden.\nClose this to restore Main App.",
+            font=("Arial", 11)
+        ).pack(expand=True)
+
+        # 5. Define what happens when this auxiliary window is closed.
+        # We must ensure that closing this window brings back the main window.
+        def on_aux_close():
+            aux.destroy()       # Remove the auxiliary window
+            self.deiconify()    # Make the main window visible again
+            # Optional: Bring it to the front
+            self.lift()         
+
+        # Bind the close event of the auxiliary window to our handler
+        aux.protocol("WM_DELETE_WINDOW", on_aux_close)
+
+    def confirm_shutdown(self):
+        """
+        Intercepts the system close event to perform a safety check.
+        This is the standard place to add 'Save before quit?' logic.
+        """
+        # askokcancel returns True if user clicks OK, False if Cancel.
+        if messagebox.askokcancel("Exit Confirmation", "Are you sure you want to terminate the application?"):
+            # If confirmed, we destroy the main window. This stops the mainloop
+            # and terminates the Python script.
+            self.destroy()
+
+if __name__ == "__main__":
+    # Instantiate the application
+    app = AdvancedWindowApp()
+    # Start the Tkinter event loop (infinite listener)
+    app.mainloop()
+
+
+```
+
+
+
+
 
 
 
