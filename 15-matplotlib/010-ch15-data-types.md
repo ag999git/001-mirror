@@ -402,6 +402,12 @@ plt.show()
 
 ```
 
+#### The resulting plot is as follows:-
+
+![Four plots](/resources/ch15-4-plots.png)
+
+
+
 ### Case Study: Analyzing Continuous Groups with Box Plots
 
 When exploring data, you will often find yourself needing to compare a continuous numerical variable against distinct qualitative groups. For instance, if you are looking at a dataset of wild animals, you might wonder: _How does physical weight vary across different species? Do some species run a wider range of sizes while others remain uniform?_ To answer these questions visually, we use a **Box Plot** (sometimes called a box-and-whisker plot). A box plot is uniquely suited for mapping a **Ratio scale** variable (where values are measurable and have a true absolute zero, like weight in grams) across a **Nominal scale** variable (where values are purely distinct categories with no inherent order, like species names).
@@ -488,6 +494,10 @@ plt.savefig("penguins_boxplot_distribution.png", dpi=300)
 plt.show()
 
 ```
+
+#### Resulting plot is shown below
+
+![Box plot](/resources/ch15-box-plot.png)
 
 ### Explanation (of the Script)
 
