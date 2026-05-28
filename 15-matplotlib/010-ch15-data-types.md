@@ -597,8 +597,76 @@ Now that you have rendered the plot, let’s explore the technical nuances your 
 
 
 
+## Script 4: The Scatter Plot (Visualizing Two-Variable Correlation)
 
+#### Explanatory Note Before the Script
 
+While a histogram isolates a single variable, data analysts frequently need to look at two continuous variables simultaneously to find out if they influence one another. _Does an increase in a company's advertising budget lead to an increase in product sales? Does a student's study time correlate with their final exam score?_
 
+To track these interactions, we use a **Scatter Plot**. A scatter plot projects data points onto an X/Y coordinate grid, where the horizontal position represents the value of the first continuous variable, and the vertical position represents the second. It is the ultimate diagnostic tool for detecting patterns, patterns of movement, and clusters between two continuous variables.
 
+The script below maps the relationship between the `total_bill` left on a restaurant table and the subsequent `tip` amount given to the server.
 
+```python
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# ==============================================================================
+# STEP 1: LOAD THE REAL-WORLD DATASET
+# ==============================================================================
+# We fetch the built-in 'tips' dataset again.
+tips = sns.load_dataset("tips")
+
+# ==============================================================================
+# STEP 2: INITIALIZE THE MATPLOTLIB CANVAS
+# ==============================================================================
+fig, ax = plt.subplots(figsize=(8, 6))
+
+# ==============================================================================
+# STEP 3: RENDER THE SCATTER PLOT
+# ==============================================================================
+# We use Matplotlib's native ax.scatter() function.
+# - X-axis: tips["total_bill"] (Independent Variable / Baseline)
+# - Y-axis: tips["tip"] (Dependent Variable / Outcome)
+# - color: Colors the interior of the coordinate dots.
+# - alpha=0.7: Adds transparency so you can see where multiple dots overlap.
+# - edgecolors="none": Removes outlines from individual dots for a cleaner visual profile.
+ax.scatter(
+    tips["total_bill"],     # The 'total_bill' column from the 'tips' dataset, which contains continuous numerical values representing the total bill amounts for each transaction. This will be plotted on the X-axis as the independent variable or baseline.
+    tips["tip"],            # The 'tip' column from the 'tips' dataset, which contains continuous numerical values representing the tip amounts for each transaction. This will be plotted on the Y-axis as the dependent variable or outcome we want to analyze in relation to the total bill.
+    color="#e91e63",      # This sets the color of the dots in the scatter plot to a vibrant pink, making the data points visually distinct and easy to identify on the chart.
+    alpha=0.7,              # This sets the transparency level of the dots to 0.7 (on a scale from 0 to 1), allowing for better visibility when points overlap. This can help to reveal patterns in areas of high density where many points are clustered together.
+    edgecolors="none"       # This removes the edges (borders) from the individual dots in the scatter plot, giving them a cleaner and more modern appearance. This can help to reduce visual clutter and make the overall pattern of the data points easier to see.
+)
+
+# ==============================================================================
+# STEP 4: CUSTOMIZE TITLES AND LABELS
+# ==============================================================================
+ax.set_title("Relationship Between Total Bill and Tip Amount", fontsize=14, fontweight="bold", pad=15)
+ax.set_xlabel("Total Bill ($) (Continuous Ratio Scale)", fontsize=11, labelpad=10)
+ax.set_ylabel("Tip Amount ($) (Continuous Ratio Scale)", fontsize=11, labelpad=10)
+
+# ==============================================================================
+# STEP 5: AESTHETIC POLISH & DISPLAY
+# ==============================================================================
+# A scatter plot benefits immensely from a full grid layout (both X and Y axes)
+# to let the reader track precise coordinate values anywhere on the canvas.
+ax.grid(True, linestyle="--", alpha=0.4)    # Add a dashed grid to enhance readability and make it easier to see the distribution of points across the plot.
+
+# Optimize canvas spacing and render.
+plt.tight_layout()    # Automatically adjusts subplot parameters to give specified padding and prevent clipping of labels and titles.
+plt.savefig("bill_vs_tip_scatterplot.png", dpi=300)    # Save the figure as a high-resolution PNG file for documentation purposes.
+plt.show()
+
+```
+
+### Explanatory Note After the Script
+
+Let's analyze what the code reveals about the logic of data relationships:
+
+-   **Identifying Correlation:** As your eyes move from left to right across the X-axis (higher total bills), the clouds of dots naturally trend upward along the Y-axis (higher tips). This upward slope demonstrates a **positive correlation**. It visually proves the real-world theory that as a restaurant bill grows, the tip scales up along with it.
+    
+-   **The Importance of Alpha (Opacity):** When thousands of data points are plotted, dots will inevitably land directly on top of one another, masking the density of clusters (a problem known as _overplotting_). By setting `alpha=0.7`, the dots become semi-transparent. Areas where dots heavily overlap will look darker and more vibrant, immediately showing students where the highest density of the restaurant's customer demographic sits.
+    
+-   **Spotting Variance and Anomalies:** Point out to students that while the overall trend is upward, the cloud widens as it moves right. At a $10 bill, the tip variance is tiny (roughly $1 to $3). At a $40 bill, the variance expands wildly (tips ranging from a low of $2 to a high of $10). A scatter plot is brilliant because it captures both the rule (the positive trend) and the exceptions (the generous or frugal tippers) simultaneously.
