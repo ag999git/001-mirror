@@ -517,6 +517,83 @@ A box plot compresses hundreds of rows of data into a clean, five-number summary
 -   **Enhancing Readability with a Y-Axis Grid:** By explicitly invoking `ax.grid(True, axis="y")`, we place light, non-distracting dashed lines across the background horizontally. This simple design decision significantly upgrades the chart's user experience, allowing a reader's eyes to trace a straight line from a penguin's outlier dot over to the Y-axis to instantly read its weight in grams.
 
 
+## Script 3: The Histogram (Visualizing Single-Variable Distribution)
+
+### Explanatory Note of the Script
+
+When you are handed a column full of continuous numeric data (like a list of salaries, home prices, or test scores), looking at the raw numbers tells you very little. You need to know how those numbers are distributed. _Are most values clustered in the lower range? Is there a long tail of high values? Is the distribution symmetrical like a bell curve, or is it skewed?_
+
+To answer this, we use a **Histogram**. A histogram cuts a continuous numerical variable into equal intervals called **"bins"** and counts how many data points fall into each bin. The height of each bar represents the frequency (count) of data points within that range.
+
+The script below uses the real-world `tips` dataset from Seaborn to show exactly how the continuous ratio variable `total_bill` behaves across an establishment's transactions.
+
+```python
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# ==============================================================================
+# STEP 1: LOAD THE REAL-WORLD DATASET
+# ==============================================================================
+# We fetch the built-in 'tips' dataset from Seaborn. 
+# This dataset contains a continuous 'total_bill' column tracking restaurant bills.
+tips = sns.load_dataset("tips")
+
+# ==============================================================================
+# STEP 2: INITIALIZE THE MATPLOTLIB CANVAS
+# ==============================================================================
+# Set up a single plot canvas measuring 8 inches wide by 6 inches tall.
+# 'fig' is the overall figure object, and 'ax' is the specific subplot (axis) where we will draw our histogram.
+fig, ax = plt.subplots(figsize=(8, 6))
+
+# ==============================================================================
+# STEP 3: RENDER THE HISTOGRAM
+# ==============================================================================
+# We use Matplotlib's native ax.hist() function.
+# - data: tips["total_bill"] (The continuous numerical variable)
+# - bins=15: Cuts the bill range into 15 equal slices along the X-axis.
+# - color: Sets the main bar fill color.
+# - edgecolor: Draws a clean darker border around each bar so they don't blend together.
+# - alpha=0.8: Adds slight transparency so the chart feels light and professional.
+ax.hist(
+    tips["total_bill"],     # The 'total_bill' column from the 'tips' dataset, which contains continuous numerical values representing the total bill amounts for each transaction. This is the data we want to visualize in the histogram.
+    bins=15,                # This parameter specifies that we want to divide the range of 'total_bill' values into 15 equal-width bins (or intervals). Each bin will count how many 'total_bill' values fall into that range, which is essential for creating the histogram.
+    color="#ff9800",      # This sets the fill color of the bars in the histogram to a vibrant orange, making the chart visually appealing and easy to read.
+    edgecolor="#e65100",  # This sets the color of the edges (borders) of the bars to a darker orange, which helps to visually separate each bar and enhance readability.
+    alpha=0.8               # This sets the transparency level of the bars to 0.8 (on a scale from 0 to 1), making the bars slightly transparent. This can help to reduce visual clutter and give the chart a more polished, professional look.
+)
+
+# ==============================================================================
+# STEP 4: CUSTOMIZE TITLES AND LABELS
+# ==============================================================================
+ax.set_title("Distribution of Restaurant Total Bills", fontsize=14, fontweight="bold", pad=15)
+ax.set_xlabel("Total Bill Amount ($) (Continuous Ratio Scale)", fontsize=11, labelpad=10)
+ax.set_ylabel("Frequency / Count of Tables", fontsize=11, labelpad=10)
+
+# ==============================================================================
+# STEP 5: AESTHETIC POLISH & DISPLAY
+# ==============================================================================
+# Add a dashed background grid along the Y-axis to make reading counts effortless.
+ax.grid(True, axis="y", linestyle="--", alpha=0.4)
+
+# Optimize canvas margins and output the chart.
+plt.tight_layout()    # Automatically adjusts subplot parameters to give specified padding and prevent clipping of labels and titles.
+plt.savefig("total_bill_histogram.png", dpi=300)    # Save the figure as a high-resolution PNG file for documentation purposes.
+plt.show()
+
+```
+
+
+
+#### Explanatory Note of the Script
+
+Now that you have rendered the plot, let’s explore the technical nuances your students should look for:
+
+-   **Understanding the X-Axis Gaps:** Notice that unlike a Bar Chart, a Histogram has **no gaps between the bars**. This is intentional! The X-axis represents a continuous numerical timeline. Gaps in a histogram would mathematically imply that there were ranges of bills (e.g., no bills between $20 and $22) where it was physically impossible to spend money.
+    
+-   **The Magic of the `bins` Parameter:** The choice of how many bins to display drastically alters a histogram. If `bins` is too low (e.g., `bins=3`), the data gets lumped into massive blocks, hiding the underlying patterns. If `bins` is too high (e.g., `bins=100`), the chart turns into a jagged, unreadable mess of tiny toothpicks. Setting it between 10 and 25 is generally the sweet spot for data exploration.
+    
+-   **Reading the Skewness:** Looking at the generated chart, students will see a sharp peak around $13 to $18, with a long tail stretching out to the right toward $50. This tells an analyst that while the vast majority of dining parties spend a modest amount, a few rare, high-spending tables drag the distribution out, creating a **right-skewed** distribution.
 
 
 
