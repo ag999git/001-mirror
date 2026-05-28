@@ -593,6 +593,10 @@ plt.show()
 
 ```
 
+### The resulting plot is as follows
+
+![Histogram](/resources/ch15-histogram.png)
+
 
 
 #### Explanatory Note of the Script
@@ -670,6 +674,12 @@ plt.savefig("bill_vs_tip_scatterplot.png", dpi=300)    # Save the figure as a hi
 plt.show()
 
 ```
+
+### The ouptut plot is as follows
+
+![Scatter plot](/resources/ch15-scatter-plot.png)
+
+
 
 ### Explanatory Note After the Script
 
