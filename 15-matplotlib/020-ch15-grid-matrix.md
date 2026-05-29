@@ -285,10 +285,33 @@ This is called a **matrix or grid**.
 ## Script
 
 ```python
+# Import required libraries
+import matplotlib.pyplot as plt
+import numpy as np
 
-XXX
+# Create matrix data. This is a 3x3 matrix where each row represents a 
+# different set of temperature readings.
+data = np.array([
+    [18, 21, 25],
+    [15, 19, 22],
+    [26, 28, 30]
+])
+
+# Display matrix using colors. 
+# Each cell's color intensity corresponds to its value, creating a heatmap effect.
+plt.imshow(data)
+
+# Add title
+plt.title("Temperature Grid")
+
+# Display graph
+plt.show()
+
 
 ```
+#### Output
+![Temperature Grid](/resources/ch15-temperature-grid.png)
+
 
 ### Common Plot Types for Grid/Matrix Data
 
