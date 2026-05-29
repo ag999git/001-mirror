@@ -965,7 +965,364 @@ Thus: `data[3:10, :]` means: select rows 3 to 9 and all columns.
 
 ```
 
+## Part B — Programming Model Solution (Continued)
 
+### Task 4 — Plot Coordinate Data
+
+### Objective
+
+To create:
+
+1.  a **line graph using `plot()`**
+2.  a **scatter plot using `scatter()`**
+
+using data for one selected year from the flights dataset.
+
+----------
+
+## Why This Task is Important
+
+The flights dataset stores passenger information for:
+
+-   different years
+-   different months
+
+When one year is selected:
+
+| Month | Passengers |
+| --- | --- |
+| Jan | 196 |
+| Feb | 196 |
+| Mar | 236 |
+
+the data becomes **coordinate data (X–Y data)**.
+
+Here:
+
+-   x-axis → months
+-   y-axis → passenger count
+
+This type of data can be plotted using:
+
+```python
+plot()
+scatter()
+```
+
+----------
+
+## Step 1 — Load Dataset and Select One Year
+
+### Script
+
+```python
+# Import required libraries
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load flights dataset. This dataset contains monthly passenger counts for 
+# a commercial airline from 1949 to 1960.
+df = sns.load_dataset("flights")
+
+# Select data for one year. Here, we choose 1955 as an example to analyze 
+# the monthly passenger counts.
+selected_year = 1955
+
+# Extract records for 1955. This creates a new DataFrame 'year_data' 
+# that contains only the rows corresponding to the selected year.
+year_data = df[df["year"] == selected_year]
+
+# Display selected data
+print(year_data)
+
+
+```
+
+#### Output
+
+```python
+
+76  1955   May         270
+77  1955   Jun         315
+78  1955   Jul         364
+79  1955   Aug         347
+80  1955   Sep         312
+81  1955   Oct         274
+82  1955   Nov         237
+83  1955   Dec         278
+
+```
+
+### Step 2 — Create Line Plot using plot()
+#### Script
+
+```python
+# Import required libraries
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load dataset. The 'flights' dataset contains monthly passenger counts for an 
+# airline over several years.
+df = sns.load_dataset("flights")
+
+# Select one year. Here, we choose 1955 to analyze the monthly passenger trend 
+# for that specific year.
+selected_year = 1955
+
+# Filter data. We create a new DataFrame 'year_data' that contains only 
+# the rows from the original 'df' where the 'year' column matches our selected year (1955). 
+# This allows us to focus our line graph on the passenger trend for that particular year.
+year_data = df[df["year"] == selected_year]
+
+# Create figure. We set the size of the plotting area to 8 inches wide by 4 inches tall, 
+# which provides a good aspect ratio for a line graph showing monthly trends.
+plt.figure(figsize=(8, 4))
+
+# Create line graph. We plot the 'month' column on the X-axis and the 'passengers' column 
+# on the Y-axis.
+plt.plot(
+    year_data["month"],       # The 'month' column from the 'year_data' DataFrame, which contains the names of the months (e.g., January, February, etc.) for the selected year (1955). This will be plotted on the X-axis to show the progression of months throughout the year.
+    year_data["passengers"]   # The 'passengers' column from the 'year_data' DataFrame, which contains the number of passengers for each month in the selected year (1955). This will be plotted on the Y-axis to show the trend in passenger counts over the months.
+)
+
+# Add title
+plt.title("Passenger Trend in 1955")
+
+# Add axis labels
+plt.xlabel("Month")   # Label for the X-axis, indicating the months of the year.
+plt.ylabel("Number of Passengers")   # Label for the Y-axis, indicating the number of passengers.
+
+# Add grid
+plt.grid(True)   # Enable grid lines for better readability of the graph.
+
+# Display graph
+plt.show()
+
+
+```
+
+#### Output
+
+```python
+76  1955   May         270
+77  1955   Jun         315
+78  1955   Jul         364
+79  1955   Aug         347
+80  1955   Sep         312
+81  1955   Oct         274
+82  1955   Nov         237
+83  1955   Dec         278
+```
+
+### Explanation
+
+`plot()` joins points using lines.
+
+This helps students observe:
+
+-   increasing trend
+-   decreasing trend
+-   seasonal variation
+
+For example:
+
+Passenger count may rise during holiday seasons.
+
+
+### Step 3 — Create Scatter Plot using scatter()
+#### Script
+
+```python
+
+# Import required libraries
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load dataset
+df = sns.load_dataset("flights")
+
+# Select one year. This will give us 12 data points (one for each month) to plot on the graph.
+selected_year = 1955
+
+# Filter data. We create a new DataFrame 'year_data' that contains only the rows from 'df' where the 'year' column matches our selected year (1955). This allows us to focus our scatter plot on the passenger distribution for that specific year.
+year_data = df[df["year"] == selected_year]
+
+# Create figure. We set the figure size to 8 inches wide by 4 inches tall, which provides a wide aspect ratio that is ideal for displaying the monthly distribution of passengers across the year.
+plt.figure(figsize=(8, 4))
+
+# Create scatter plot
+plt.scatter(                # We use the 'scatter' function from Matplotlib to create a scatter plot.
+    year_data["month"],     # The 'month' column from the 'year_data' DataFrame is plotted on the X-axis. This column contains categorical data representing the months of the year (e.g., January, February, etc.).
+    year_data["passengers"]  # The 'passengers' column from the 'year_data' DataFrame is plotted on the Y-axis. This column contains numerical data representing the number of passengers for each month in the selected year (1955). This allows us to visualize how passenger numbers vary across different months of that year.
+)
+
+# Add title
+plt.title("Passenger Distribution in 1955")
+
+# Add labels
+plt.xlabel("Month")   # Label for the X-axis, indicating the months of the year.
+plt.ylabel("Number of Passengers")   # Label for the Y-axis, indicating the number of passengers.
+
+# Add grid
+plt.grid(True)   # Enable grid lines for better readability of the graph.
+
+# Display graph
+plt.show()
+
+```
+
+#### Output
+
+![Passenger distribution](/resources/ch15-passenger-distribution.png)
+
+
+#### Comparison Between plot() and scatter()
+
+
+| Feature | plot() | scatter() |
+| --- | --- | --- |
+| Joins points | Yes | No |
+| Best for | Trend analysis | Relationship analysis |
+| Visual appearance | Continuous line | Separate points |
+| Easy to observe pattern | Yes | Moderate |
+
+
+#### Common Error Example
+
+```python
+# WRONG EXAMPLE
+# Missing quotes around column name
+# year_data[month]
+# This causes NameError
+# because month is treated
+# as a variable instead of text
+
+```
+
+### Task 5 — Plot Grid or Matrix Data
+
+### Objective
+
+To visualize matrix-style data using:
+
+1.  `imshow()`
+2.  `contourf()`
+
+----------
+
+### Why This Task is Important
+
+After conversion into matrix form:
+
+-   rows represent years
+-   columns represent months
+-   values represent passenger count
+
+The dataset becomes suitable for:
+
+```python
+imshow()
+contourf()
+```
+
+These methods work better with **grid or matrix data**.
+
+----------
+
+#### Step 1 — Create Matrix Data
+
+#### Script
+
+```python
+# Import libraries
+import seaborn as sns
+
+# Load flights dataset
+df = sns.load_dataset("flights")
+
+# Convert into matrix form
+flights_matrix = df.pivot(    # This pivot operation transforms the DataFrame from a long format to a wide format, creating a matrix where:
+    index="year",             # The 'year' column becomes the index (rows) of the matrix, representing different years of flight data.
+    columns="month",          # The 'month' column becomes the columns of the matrix, representing different months of the year.
+    values="passengers"       # The 'passengers' column provides the values that fill the matrix, representing the number of passengers for each year and month combination.
+)
+
+# Convert into NumPy array. This step is necessary because Matplotlib's plotting functions 
+# often require data in array format for efficient processing and rendering.
+data = flights_matrix.to_numpy()
+
+# Slice selected years. We take rows 3 to 9 (inclusive) from the matrix, which correspond 
+# to the years 1956 to 1962.
+selected_data = data[3:10, :]
+
+```
+### Step 2 — Plot using imshow()
+#### Script
+
+```python
+
+# Import libraries
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load dataset
+df = sns.load_dataset("flights")
+
+# Convert into matrix
+flights_matrix = df.pivot(    # This pivot operation transforms the 'flights' DataFrame from a long format into a wide format, creating a matrix where:
+    index="year",             # The 'year' column becomes the index (rows) of the matrix, representing different years of flight data.
+    columns="month",          # The 'month' column becomes the columns of the matrix, representing different months of the year.
+    values="passengers"       # The 'passengers' column provides the values that fill the matrix, representing the number of passengers for each year and month combination.
+)
+
+# Convert to NumPy array. This step is necessary because Matplotlib's imshow() function 
+# requires a 2D array input to create the heatmap visualization.
+data = flights_matrix.to_numpy()
+
+# Slice selected rows. We take rows 3 to 9 (inclusive) to focus on a specific 
+# subset of the data, which corresponds to the years 1956 to 1962. 
+# This allows us to create a more focused visualization that highlights trends in 
+# passenger numbers during this period.
+selected_data = data[3:10, :]
+
+# Create graph
+plt.figure(figsize=(8, 4))
+
+# Display matrix as color image. Each cell's color intensity corresponds to the 
+# number of passengers, creating a heatmap effect that visually represents the 
+# data distribution across years and months.
+plt.imshow(selected_data)
+
+# Add title
+plt.title("Passenger Data using imshow()")
+
+# Add color scale. This adds a color bar to the side of the heatmap, which 
+# serves as a legend to indicate the mapping between color intensity and 
+# the number of passengers. This helps viewers interpret the heatmap accurately
+plt.colorbar()
+
+# Add labels
+plt.xlabel("Months")
+plt.ylabel("Years")
+
+# Display graph
+plt.show()
+
+```
+
+#### Output
+
+![Passenger Data using imshow()](/resources/ch15-passenger-imshow.png)
+
+
+### Step 3 — Plot using contourf()
+#### Script
+
+```python
+
+
+
+```
 
 
 
