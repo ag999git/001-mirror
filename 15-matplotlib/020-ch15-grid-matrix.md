@@ -1320,9 +1320,259 @@ plt.show()
 
 ```python
 
+# Import libraries
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load dataset
+df = sns.load_dataset("flights")
+
+# Convert into matrix
+flights_matrix = df.pivot(     # This line transforms the 'flights' DataFrame into a matrix format suitable for contour plotting.
+    index="year",              # The 'year' column will become the index (rows) of the matrix, representing the different years in the dataset.
+    columns="month",           # The 'month' column will become the columns of the matrix, representing the different months in the dataset.
+    values="passengers"        # The 'passengers' column will provide the values for the matrix, representing the number of passengers for each year and month combination.
+)
+
+# Convert to NumPy array. This step is necessary because Matplotlib's contourf() function requires 
+# a 2D array input to create the contour plot.
+data = flights_matrix.to_numpy()
+
+# Slice selected rows. We take rows 3 to 9 (inclusive) to focus on a specific range of 
+# years for our contour plot, which can help to highlight trends or patterns in that 
+# subset of the data.
+selected_data = data[3:10, :]
+
+# Create figure. We set the figure size to 8 inches wide by 4 inches tall, which provides 
+# a wide aspect ratio that is suitable for visualizing the contour plot of passenger data 
+# across months and years.
+plt.figure(figsize=(8, 4))
+
+# Create contour graph. The contourf() function creates a filled contour plot based on the 
+# selected data. Each contour level will represent a range of passenger numbers, and the colors will indicate the intensity of those values, allowing us to visually analyze the distribution of passengers over the selected years and months.
+contour_plot = plt.contourf(selected_data)
+
+# Add title
+plt.title("Passenger Data using contourf()")
+
+# Add color scale. The colorbar() function adds a color scale to the plot, 
+# which helps to interpret the contour levels by showing the mapping between colors 
+# and passenger numbers. This allows viewers to understand the intensity of the contours 
+# in terms of actual passenger counts.
+plt.colorbar(contour_plot)
+
+# Add labels. The xlabel() and ylabel() functions set the labels for the X and Y axes, respectively.
+# - The X-axis is labeled "Months" to indicate that it represents the different months of the year.
+# - The Y-axis is labeled "Years" to indicate that it represents the different years in the dataset. 
+# These labels provide context for interpreting the contour plot and understanding the dimensions 
+# of the data being visualized.
+plt.xlabel("Months")
+plt.ylabel("Years")
+
+# Display graph
+plt.show()
+
+```
+
+#### Output
+
+![contourf()](/resources/ch15-contourf.png)
+
+#### Difference Between imshow() and contourf()
+
+
+| Feature | imshow() | contourf() |
+| --- | --- | --- |
+| Display style | Color blocks | Filled contour regions |
+| Easy for beginners | Yes | Moderate |
+| Best for | Heat maps | Region comparison |
+| Appearance | Image-like | Map-like |
+
+#### Common Error Example
+
+
+```python
+
+# WRONG EXAMPLE
+
+# Passing a simple list
+# instead of matrix data
+# values = [1, 2, 3, 4]
+# plt.imshow(values)
+# This may produce an error
+# because imshow()
+# expects matrix-style data
+
+```
+
+
+## Task 6 — Comparative Discussion
+
+### Q1. Which methods were easier to understand?
+
+For most beginners: `plot()scatter()` are easier to understand because:
+
+-   data is simple
+-   only x-values and y-values are required
+-   graphs are familiar
+
+----------
+
+### Q2. When should `plot()` be preferred?
+
+`plot()` should be preferred when:
+
+-   trends are important
+-   values change over time
+-   continuous change must be shown
+
+Examples:
+
+-   rainfall across months
+-   stock prices
+-   student progress
+
+----------
+
+### Q3. When should `imshow()` or `contourf()` be preferred?
+
+These methods should be preferred when:
+
+-   data exists in rows and columns
+-   values form a matrix
+-   comparison across regions is required
+
+Examples:
+
+-   weather maps
+-   temperature grids
+-   passenger count across months and years
+
+----------
+
+### Q4. Which graph looked most informative?
+
+The answer may vary.
+
+However:
+
+### `plot()`
+
+helps observe trends clearly.
+
+### `imshow()`
+
+helps identify regions of high and low values quickly.
+
+### `contourf()`
+
+helps compare regions visually.
+
+----------
+
+# Full Combined Model Script
+
+
+```python
+# ==================================================
+# Complete Project Solution
+# Coordinate Data and Matrix Data
+# ==================================================
+
+# Import libraries
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# --------------------------------
+# Load dataset
+# --------------------------------
+df = sns.load_dataset("flights")
+
+# --------------------------------
+# Task 4: Coordinate Data
+# --------------------------------
+
+# Select one year. We will visualize the number of passengers for each month in that year.
+year_data = df[df["year"] == 1955]
+
+# Create figure. 
+fig, ax = plt.subplots(1, 2, figsize=(12, 4))
+
+# Line plot. This will show the trend of passengers across the months of the selected year.
+ax[0].plot(                   # We use the plot() function to create a line plot, which is ideal for showing trends over time. The X-axis will represent the months, and the Y-axis will represent the number of passengers.
+    year_data["month"],       # The 'month' column from the filtered DataFrame 'year_data', which contains the month names (e.g., 'Jan', 'Feb', etc.) for the year 1955. This will be plotted on the X-axis.
+    year_data["passengers"]   # The 'passengers' column from the filtered DataFrame 'year_data', which contains the number of passengers for each month in the year 1955. This will be plotted on the Y-axis, showing how the number of passengers changes across the months.
+)
+
+ax[0].set_title("Line Plot")   # Set the title of the first subplot to "Line Plot" to indicate the type of visualization being displayed.
+ax[0].set_xlabel("Month")      # Set the label for the X-axis of the first subplot to "Month" to indicate that the X-axis represents the months of the year.
+ax[0].set_ylabel("Passengers") # Set the label for the Y-axis of the first subplot to "Passengers" to indicate that the Y-axis represents the number of passengers for each month.
+ax[0].grid(True)               # Add a grid to the first subplot to enhance readability and make it easier to see the values corresponding to each month.
+
+# Scatter plot. This will show the individual data points for each month, which can help identify any outliers or specific patterns in the data.
+ax[1].scatter(                  # We use the scatter() function to create a scatter plot, which is ideal for showing individual data points and identifying patterns or outliers. The X-axis will represent the months, and the Y-axis will represent the number of passengers.
+    year_data["month"],         # The 'month' column from the filtered DataFrame 'year_data', which contains the month names (e.g., 'Jan', 'Feb', etc.) for the year 1955. This will be plotted on the X-axis.
+    year_data["passengers"]     # The 'passengers' column from the filtered DataFrame 'year_data', which contains the number of passengers for each month in the year 1955. This will be plotted on the Y-axis, showing the distribution of passengers across the months as individual points.
+)
+
+ax[1].set_title("Scatter Plot")  # Set the title of the second subplot to "Scatter Plot" to indicate the type of visualization being displayed.
+ax[1].set_xlabel("Month")        # Set the label for the X-axis of the second subplot to "Month" to indicate that the X-axis represents the months of the year.
+ax[1].set_ylabel("Passengers")   # Set the label for the Y-axis of the second subplot to "Passengers" to indicate that the Y-axis represents the number of passengers for each month.
+ax[1].grid(True)                 # Add a grid to the second subplot to enhance readability and make it easier to see the values corresponding to each month.
+
+# Display graphs
+plt.show()
+
+# --------------------------------
+# Task 5: Matrix Data
+# --------------------------------
+
+# Convert into matrix. We pivot the DataFrame to create a matrix where rows represent years, columns represent months, and values represent the number of passengers.
+matrix = df.pivot(       # The pivot() function is used to reshape the DataFrame 'df' into a matrix format. We specify the 'index', 'columns', and 'values' parameters to define how the data should be organized in the resulting matrix.
+    index="year",        # The 'year' column from the original DataFrame 'df' will be used as the index (rows) of the resulting matrix. Each unique year will correspond to a row in the matrix.
+    columns="month",     # The 'month' column from the original DataFrame 'df' will be used as the columns of the resulting matrix. Each unique month will correspond to a column in the matrix.
+    values="passengers"  # The 'passengers' column from the original DataFrame 'df' will be used as the values in the resulting matrix. Each cell in the matrix will contain the number of passengers corresponding to the specific year (row) and month (column).
+)
+
+# Convert to NumPy array. The pivoted DataFrame 'matrix' is converted to a NumPy array using the to_numpy() method, which allows us to perform numerical operations and visualizations on the data in a more efficient format.
+data = matrix.to_numpy()       # The to_numpy() method is called on the pivoted DataFrame 'matrix' to convert it into a NumPy array. This conversion allows us to work with the data in a format that is optimized for numerical computations and visualizations, such as using functions like imshow() and contourf() for plotting.
+
+# Slice matrix
+selected_data = data[3:10, :]   # We slice the NumPy array 'data' to select a specific subset of the matrix for visualization. The slicing operation data[3:10, :] selects rows 3 to 9 (inclusive) and all columns. This allows us to focus on a specific range of years while visualizing the number of passengers across all months.
+
+# Create figure. We set up a figure with two subplots arranged in one row and two columns, with a total size of 12 inches wide and 4 inches tall. This layout allows us to display two different types of visualizations side by side for easy comparison.
+fig, ax = plt.subplots(1, 2, figsize=(12, 4))
+
+# imshow plot. The imshow() function is used to display the selected matrix data as an image, where the color intensity represents the number of passengers. This type of plot is useful for visualizing the overall pattern and distribution of values in the matrix.
+im = ax[0].imshow(selected_data)
+
+ax[0].set_title("imshow()")   # Set the title of the first subplot to "imshow()" to indicate the type of visualization being displayed.
+
+# Add color bar. The colorbar() function is used to add a color bar to the first subplot, which provides a reference for interpreting the colors in the imshow plot. The color bar indicates the mapping between color intensity and the number of passengers, allowing viewers to understand the values represented by different colors in the plot.
+fig.colorbar(im, ax=ax[0])
+
+# contourf plot. The contourf() function is used to create a filled contour plot of the selected matrix data. This type of plot is useful for visualizing the gradients and contours in the data, showing how the number of passengers changes across different years and months.
+cp = ax[1].contourf(selected_data)
+
+ax[1].set_title("contourf()")   # Set the title of the second subplot to "contourf()" to indicate the type of visualization being displayed.
+
+# Add color bar. The colorbar() function is used to add a color bar to the second subplot, which provides a reference for interpreting the colors in the contourf plot. The color bar indicates the mapping between color intensity and the number of passengers, allowing viewers to understand the values represented by different colors in the plot.
+fig.colorbar(cp, ax=ax[1])
+
+# Display graph
+plt.show()
 
 
 ```
+
+
+
+
+
+
+
+
+
 
 
 
