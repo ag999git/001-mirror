@@ -780,6 +780,38 @@ Example: `A[1:4]` means: `1, 2, 3`, not: `1, 2, 3, 4`
 
 To load the **flights dataset** from Seaborn and understand its columns.
 
+```python
+# Import required libraries
+import seaborn as sns
+
+# Load flights dataset. This dataset contains monthly passenger counts for 
+# an airline over several years, making it ideal for time series analysis and visualization.
+df = sns.load_dataset("flights")
+
+# Display first five rows. This gives us a quick look at the structure of the dataset, 
+# including the columns and sample data.
+print(df.head())
+
+# Display column names. This helps us understand 
+# the different attributes available in the dataset.
+print(df.columns)
+
+```
+
+#### Output
+
+```python
+   year month  passengers
+0  1949   Jan         112
+1  1949   Feb         118
+2  1949   Mar         132
+3  1949   Apr         129
+4  1949   May         121
+Index(['year', 'month', 'passengers'], dtype='str')
+
+```
+
+
 
 
 
