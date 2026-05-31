@@ -120,6 +120,8 @@ plt.show()
 
 ### Output plot (From above script)
 
+![Stem Plot](/resources/ch15-matplotlib-stem1.png)
+
 # FIGURE
 
 
