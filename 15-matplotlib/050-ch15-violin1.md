@@ -65,10 +65,7 @@ The graph often looks like a musical violin:
 ### From Histogram to Violin Plot: The Transformation
 
 ### Step-by-Step Process
-
-
-
-# XXXX Figure here
+![From Histogram to Violin Plot](/resources/ch15-matplotlib-violin-steps-in-making.png)
 
 
 
