@@ -262,7 +262,7 @@ plt.show()
 
 ### Output Plot
 
-# FIGURE
+![Plot from above script](/resources/ch15-matplotlib-scatter-stem-line.png)
 
 ### What to Observe
 
