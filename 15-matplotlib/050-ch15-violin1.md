@@ -431,8 +431,29 @@ Why This Matters:
 | Very limited space | Box plot (more compact) |
 | Audience unfamiliar with statistics | Histogram (easier to understand) |
 
+## Further challenges
+```python
+# Challenge 1: Change the bimodal data to trimodal (three peaks)
+# Hint: Create three groups with different loc values
+# group1 = np.random.normal(loc=40, scale=5, size=40)
+# group2 = np.random.normal(loc=60, scale=5, size=40)
+# group3 = np.random.normal(loc=85, scale=5, size=40)
 
+# Challenge 2: Make the violin plots horizontal
+# Hint: Change vert=False in violinplot() and adjust labels
 
+# Challenge 3: Compare multiple groups side-by-side
+# Hint: Pass a list of lists to violinplot()
+# data = [group1, group2, group3]
+# ax.violinplot(data, showmeans=True, showmedians=True)
+
+# Challenge 4: Save the figure
+# Hint: Add fig.savefig("violin_comparison.png", dpi=300, 
+#                       bbox_inches='tight') before plt.show()
+
+# Challenge 5: Change the smoothness
+# Hint: Add points=200 to violinplot() for smoother curves
+```
 
 
 
