@@ -24,26 +24,8 @@ Common applications include:
 -   sampled data
 -   time-series measurements
 
-----------
 
-## What Does a Stem Plot Look Like?
 
-```
-Value
-
-  8 |        ●
-  7 |
-  6 |    ●
-  5 |
-  4 |          ●
-  3 | ●
-  2 |
-  1 |
-    +----------------
-      1  2  3  4
-```
-
-Each marker is connected to the baseline by a vertical stem.
 
 ----------
 
