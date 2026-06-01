@@ -650,9 +650,214 @@ print("Finished generating plots.")
 **20. How does plt.subplot2grid() build irregular grid layouts?**
 
 
+Standard subplot functions such as plt.subplot() and plt.subplots() divide a figure into a uniform grid where each subplot occupies exactly one grid cell. This works well for simple visualizations but becomes limiting when building dashboards, report layouts, or analytical interfaces where some charts need more space than others.
+
+plt.subplot2grid() solves this problem by treating the entire figure as a coordinate-based grid system. First, you define the total grid dimensions using the shape=(rows, cols) parameter. Each cell in this grid acts like a coordinate location. You then specify where a subplot should begin using loc=(row, column) and optionally allow it to span multiple rows or columns using the rowspan and colspan parameters.
+
+This makes it possible to create asymmetric dashboard layouts such as:
+
+A wide header chart spanning the full width of the figure
+A tall navigation or sidebar panel
+A large main analysis panel
+Multiple small supporting charts
+
+Internally, Matplotlib reserves the requested cells and merges them into a single plotting area. By combining different spans, you can construct complex dashboard-style interfaces while still working within a single figure canvas.
+
+```python
+# =====================================================================
+# File: github_subplot2grid_dashboard.py
+#
+# Description:
+# Demonstrates how subplot2grid() creates irregular dashboard layouts.
+#
+# Dashboard Structure:
+#
+#   +-----------------------------+
+#   |        Banner Plot          |
+#   +---------+-------------------+
+#   | Sidebar |                   |
+#   |         |   Main Plot       |
+#   |         |                   |
+#   +---------+-------------------+
+#
+# =====================================================================
+
+import matplotlib.pyplot as plt
+import numpy as np
 
 
+# =====================================================================
+# STEP 1: Define overall dashboard grid
+#
+# We create a 3-row x 3-column grid.
+#
+# Grid Coordinates:
+#
+#       Col0   Col1   Col2
+#
+# Row0  (0,0) (0,1) (0,2)
+# Row1  (1,0) (1,1) (1,2)
+# Row2  (2,0) (2,1) (2,2)
+#
+# =====================================================================
 
+grid_dimensions = (3, 3)
+
+
+# =====================================================================
+# STEP 2: Create Banner Panel
+#
+# Start at cell (0,0)
+#
+# colspan=3 means:
+# occupy all three columns across the top row.
+#
+# =====================================================================
+
+ax_banner = plt.subplot2grid(
+    shape=grid_dimensions,
+    loc=(0, 0),
+    colspan=3
+)
+
+x = np.linspace(0, 10, 100)
+
+ax_banner.plot(
+    x,
+    np.sin(x),
+    color="crimson",
+    linewidth=2
+)
+
+ax_banner.set_title(
+    "Banner Plot (Spans Entire Top Row)"
+)
+
+
+# =====================================================================
+# STEP 3: Create Sidebar Panel
+#
+# Start at cell (1,0)
+#
+# rowspan=2 means:
+# occupy both lower rows.
+#
+# =====================================================================
+
+ax_sidebar = plt.subplot2grid(
+    shape=grid_dimensions,
+    loc=(1, 0),
+    rowspan=2
+)
+
+sidebar_data = [12, 18, 9, 14]
+
+ax_sidebar.bar(
+    ["A", "B", "C", "D"],
+    sidebar_data,
+    color="steelblue"
+)
+
+ax_sidebar.set_title(
+    "Sidebar Panel"
+)
+
+
+# =====================================================================
+# STEP 4: Create Main Analytics Panel
+#
+# Start at cell (1,1)
+#
+# rowspan=2
+# colspan=2
+#
+# Occupies:
+#
+#   (1,1) (1,2)
+#   (2,1) (2,2)
+#
+# =====================================================================
+
+ax_main = plt.subplot2grid(
+    shape=grid_dimensions,
+    loc=(1, 1),
+    rowspan=2,
+    colspan=2
+)
+
+x = np.linspace(0, 20, 200)
+
+ax_main.plot(
+    x,
+    np.sin(x),
+    label="sin(x)"
+)
+
+ax_main.plot(
+    x,
+    np.cos(x),
+    label="cos(x)"
+)
+
+ax_main.set_title(
+    "Main Analytics Area"
+)
+
+ax_main.legend()
+
+
+# =====================================================================
+# STEP 5: Improve spacing
+#
+# Prevents titles and labels from overlapping.
+#
+# =====================================================================
+
+plt.tight_layout()
+
+
+# =====================================================================
+# STEP 6: Display dashboard
+#
+# block=False allows execution to continue.
+#
+# =====================================================================
+
+plt.show(block=False)
+
+
+# =====================================================================
+# STEP 7: Keep dashboard visible for 5 seconds
+#
+# Useful for demonstrations and teaching examples.
+#
+# =====================================================================
+
+plt.pause(5)
+
+
+# =====================================================================
+# STEP 8: Close figure and release memory
+#
+# =====================================================================
+
+plt.close()
+
+
+# =====================================================================
+# KEY TAKEAWAY
+#
+# shape     -> size of overall grid
+# loc       -> starting cell
+# rowspan   -> number of rows occupied
+# colspan   -> number of columns occupied
+#
+# subplot2grid() allows multiple cells to be merged,
+# enabling flexible dashboard-style layouts.
+#
+# =====================================================================
+
+```
 
 
 
