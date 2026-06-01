@@ -501,6 +501,39 @@ C --> D[Visual Output: Dark Purple Box next to Bright Yellow Box]
 Both tools prevent text overlapping by automatically adjusting the spacing between subplots, but they do so using different timing and logic. plt.tight_layout() is an optimization step run at the end of your script. It analyzes the positions of text labels and shifts subplots around after they have been drawn, which can sometimes break user-defined dimensions. The newer layout="constrained" option is set inside the initial subplot initialization call, like plt.subplots(layout="constrained"). It activates a live constraint solver that dynamically calculates padding and margins as layout elements are added, making it more stable for complex, multi-panel layouts.
 
 **16. How does indexing work when plt.subplots() creates a multi-row grid?**
+When you generate a single plot, plt.subplots() returns an individual Axes object. However, if you create a multi-row, multi-column grid using plt.subplots(2, 2), the method returns a 2-D NumPy array containing four distinct axes containers. To select a specific panel, you must navigate this array using standard grid indexing syntax: ax[row_index, col_index].
+
+```python
+# =====================================================================
+# File: github_subplot_matrix.py
+# Description: Demonstrates multidimensional axes tracking indices
+# =====================================================================
+import matplotlib.pyplot as plt
+
+# Generates a 2x2 grid (Two rows, Two columns)
+fig, ax = plt.subplots(2, 2)
+
+# Index positions are structured as multidimensional coordinates
+ax[0, 0].set_title("Top-Left Panel Position")
+ax[0, 1].set_title("Top-Right Panel Position")
+ax[1, 0].set_title("Bottom-Left Panel Position")
+ax[1, 1].set_title("Bottom-Right Panel Position")
+
+# Troubleshooting Note (Commented out to prevent runtime failure):
+# ---------------------------------------------------------------------
+# # COMMON STUDENT ERROR: Using a flat index on a 2-D axes layout array
+# ax[3].plot([1, 2], [10, 20]) 
+# # IndexError: index 3 is out of bounds for axis 0 with size 2
+# ---------------------------------------------------------------------
+
+plt.show(block=False)  # Display the plot without blocking further code execution
+plt.pause(15)          # Keep the plot open for 15 seconds to allow for viewing
+plt.close()            # Close the plot after the pause duration
+
+
+
+```
+
 
 
 **17. What is the execution danger of mixing global styles with local overrides?**
@@ -513,7 +546,106 @@ The standard ax.text(x, y, "Label") method adds text labels directly to specific
 
 **19. Detail how to clear memory when drawing thousands of plots in a loop.**
 
+By default, Matplotlib keeps every figure you create open in your system memory until you manually close it or end your Python session, allowing you to view and interact with multiple windows. If you generate thousands of charts inside a loop without clearing this cache, your system will quickly run out of RAM, leading to memory leaks and performance crashes. To prevent this, you must explicitly free up memory at the end of each loop iteration by calling plt.close(fig).
 
+```python
+
+# =====================================================================
+# Example: Clearing Memory When Generating Thousands of Plots
+#
+# Description:
+# This script simulates a batch-reporting pipeline that creates
+# many plots inside a loop.
+#
+# IMPORTANT:
+# Every call to plt.subplots() creates a new Figure object that
+# consumes memory.
+#
+# If figures are never closed, memory usage will continuously grow.
+#
+# The solution is to explicitly call:
+#
+#     plt.close(fig)
+#
+# after saving or displaying each figure.
+#
+# =====================================================================
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+# =====================================================================
+# STEP 1: Generate a large number of plots
+# =====================================================================
+
+for plot_id in range(1000):
+
+    # -----------------------------------------------------------------
+    # STEP 2: Create a new figure
+    #
+    # A Figure object allocates memory for:
+    #   - Axes
+    #   - Lines
+    #   - Labels
+    #   - Tick marks
+    #   - Rendering information
+    # -----------------------------------------------------------------
+
+    fig, ax = plt.subplots()
+
+    # -----------------------------------------------------------------
+    # STEP 3: Create sample data
+    # -----------------------------------------------------------------
+
+    x = np.linspace(0, 10, 100)
+
+    y = np.sin(x + plot_id * 0.1)
+
+    # -----------------------------------------------------------------
+    # STEP 4: Draw the plot
+    # -----------------------------------------------------------------
+
+    ax.plot(x, y)
+
+    ax.set_title(f"Plot {plot_id}")
+
+    # -----------------------------------------------------------------
+    # STEP 5: Save the figure
+    #
+    # In real-world batch pipelines this could be:
+    #   report_001.png
+    #   report_002.png
+    #   ...
+    # -----------------------------------------------------------------
+
+    fig.savefig(f"plot_{plot_id}.png")
+
+    # -----------------------------------------------------------------
+    # STEP 6: CRITICAL MEMORY CLEANUP
+    #
+    # Remove the figure from Matplotlib's internal figure manager
+    # and release the memory associated with this figure.
+    #
+    # Without this line:
+    #
+    #     plt.close(fig)
+    #
+    # all 1000 figures remain in memory, causing memory usage
+    # to grow continuously.
+    #
+    # -----------------------------------------------------------------
+
+    plt.close(fig)
+
+
+# =====================================================================
+# STEP 7: Completion Message
+# =====================================================================
+
+print("Finished generating plots.")
+
+```
 
 **20. How does plt.subplot2grid() build irregular grid layouts?**
 
