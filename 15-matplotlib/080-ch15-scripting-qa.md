@@ -1280,7 +1280,17 @@ plt.show()
 # --------------------------------------------------
 ```
 ________________________________________
-Comparative Table: Distribution Visualizations
+
+### Comparative Table: Distribution Visualizations
+
+| Feature | Histogram | Box Plot | Violin Plot |
+| --- | --- | --- | --- |
+| Shows Frequency | Yes | No | No |
+| Shows Median | No | Yes | Usually |
+| Shows Quartiles | No | Yes | Yes |
+| Shows Distribution Shape | Partially | Limited | Excellent |
+| Shows Outliers | Difficult | Yes | Sometimes |
+| Suitable for Large Data | Yes | Yes | Yes |
 
 
 16. Create a heat map using imshow() to visualize the marks obtained by students in five subjects. Add a color bar, title, and axis labels.
@@ -1774,9 +1784,16 @@ plt.show()
 # --------------------------------------------------
 ```
 ________________________________________
-Comparative Table – Matrix and Scientific Visualizations
+### Comparative Table – Matrix and Scientific Visualizations
 
-
+| Visualization | Data Type | Main Purpose |
+| --- | --- | --- |
+| imshow() | Matrix/Grid | Heat maps, images |
+| contour() | Matrix/Grid | Equal-value lines |
+| contourf() | Matrix/Grid | Filled contour regions |
+| annotate() | Any plot | Highlight important points |
+| Styles | Any plot | Change visual appearance |
+| savefig() | Any plot | Export graph to file |
 
 
 
