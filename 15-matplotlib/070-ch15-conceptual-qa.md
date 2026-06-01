@@ -98,6 +98,429 @@ A box plot provides a clean, abstract summary of a dataset using five key landma
 
 When you call a plotting method with a label argument, like ax.plot(x, y, label="Revenue"), Matplotlib creates a Line2D object and stores your text tag inside its internal metadata. When you later call ax.legend(), the engine scans the axis container, extracts all these hidden metadata tags, and pairs them with their matching line colors. It then builds an overlay box containing these color keys and text descriptions, placing it on the canvas based on your location settings.
 
+**13. Why does ax.twinx() create an independent Y-axis on a shared X-axis?**
+
+When you create a dual-axis layout using ax2 = ax1.twinx(), Matplotlib creates a brand new, transparent Axes object and overlays it directly on top of the original axis frame. This new axis object shares the exact same horizontal coordinate plane ($X$) as the original, but contains its own vertical coordinate plane ($Y$). This allows you to overlay two lines with completely different data units and scales (such as tracking temperature in degrees alongside rainfall in millimeters) on the same graph without distorting the layout.
+
+```python
+
+# =====================================================================
+# EXAMPLE: Dual Y-Axis Plot Using Matplotlib
+#
+# GOAL
+# ----
+# Display two different measurements on the same chart:
+#
+#   1. Temperature (°C)
+#   2. Humidity (%)
+#
+# These variables use different units and scales.
+#
+# If we plotted them on the same Y-axis, the chart could become
+# misleading or difficult to interpret.
+#
+# Therefore we use:
+#
+#   LEFT Y-AXIS   -> Temperature
+#   RIGHT Y-AXIS  -> Humidity
+#
+# Both datasets share the same X-axis (Days).
+#
+# =====================================================================
+
+
+# =====================================================================
+# STEP 1: Import Matplotlib
+# =====================================================================
+#
+# matplotlib.pyplot contains functions used to create figures,
+# axes, lines, labels, legends, and more.
+#
+# The alias "plt" is the standard convention.
+#
+# =====================================================================
+
+import matplotlib.pyplot as plt
+
+
+# =====================================================================
+# STEP 2: Define the data
+# =====================================================================
+#
+# The X-axis values represent days.
+#
+# Day 1
+# Day 2
+# Day 3
+# Day 4
+#
+# =====================================================================
+
+days = [1, 2, 3, 4]
+
+
+# Temperature values corresponding to each day.
+#
+# Day 1 -> 22°C
+# Day 2 -> 25°C
+# Day 3 -> 21°C
+# Day 4 -> 24°C
+#
+temperature = [22, 25, 21, 24]
+
+
+# Humidity values corresponding to each day.
+#
+# Day 1 -> 60%
+# Day 2 -> 85%
+# Day 3 -> 70%
+# Day 4 -> 75%
+#
+humidity = [60, 85, 70, 75]
+
+
+# =====================================================================
+# STEP 3: Create Figure and Primary Axis
+# =====================================================================
+#
+# plt.subplots() returns:
+#
+#   fig  -> entire drawing canvas
+#   ax1  -> first plotting area (primary axis)
+#
+# Think of it like:
+#
+#   Figure = sheet of paper
+#   Axis   = chart drawn on the paper
+#
+# =====================================================================
+
+fig, ax1 = plt.subplots(figsize=(8, 5))
+
+
+# =====================================================================
+# STEP 4: Plot Temperature on Primary Axis
+# =====================================================================
+#
+# We use ax1.plot() because temperature belongs to the
+# primary (left-side) Y-axis.
+#
+# color='crimson'
+#     Makes the line red.
+#
+# marker='o'
+#     Places a circular marker at each data point.
+#
+# =====================================================================
+
+ax1.plot(
+    days,
+    temperature,
+    color='crimson',
+    marker='o',
+    linewidth=2,
+    label="Temperature"
+)
+
+
+# =====================================================================
+# STEP 5: Configure X-Axis
+# =====================================================================
+#
+# Since both datasets share the same timeline,
+# only one X-axis is needed.
+#
+# =====================================================================
+
+ax1.set_xlabel("Timeline (Days)")
+
+
+# =====================================================================
+# STEP 6: Configure Left Y-Axis
+# =====================================================================
+#
+# This Y-axis belongs to temperature.
+#
+# We color the axis label red so that it visually matches
+# the temperature line.
+#
+# =====================================================================
+
+ax1.set_ylabel(
+    "Temperature (°C)",
+    color='crimson'
+)
+
+
+# =====================================================================
+# STEP 7: Color Tick Labels on Left Y-Axis
+# =====================================================================
+#
+# Tick labels are the numeric values shown along the axis.
+#
+# Example:
+#
+#   20
+#   22
+#   24
+#   26
+#
+# Coloring them red makes it easier to identify which
+# axis belongs to which line.
+#
+# =====================================================================
+
+ax1.tick_params(
+    axis='y',
+    labelcolor='crimson'
+)
+
+
+# =====================================================================
+# STEP 8: Create Secondary Y-Axis
+# =====================================================================
+#
+# twinx() means:
+#
+#   "Create another Y-axis that shares the same X-axis."
+#
+# Internally:
+#
+#          Humidity Axis (Right)
+#                    |
+#                    |
+# Temperature Axis (Left)
+#
+# Both axes occupy the same plotting area.
+#
+# =====================================================================
+
+ax2 = ax1.twinx()
+
+
+# =====================================================================
+# STEP 9: Plot Humidity on Secondary Axis
+# =====================================================================
+#
+# Humidity belongs to ax2, not ax1.
+#
+# color='navy'
+#     Dark blue line
+#
+# linestyle='--'
+#     Dashed line
+#
+# =====================================================================
+
+ax2.plot(
+    days,
+    humidity,
+    color='navy',
+    linestyle='--',
+    linewidth=2,
+    label="Humidity"
+)
+
+
+# =====================================================================
+# STEP 10: Configure Right Y-Axis
+# =====================================================================
+#
+# This axis represents humidity values.
+#
+# =====================================================================
+
+ax2.set_ylabel(
+    "Humidity (%)",
+    color='navy'
+)
+
+
+# =====================================================================
+# STEP 11: Color Tick Labels on Right Y-Axis
+# =====================================================================
+#
+# The blue tick labels visually connect to the blue humidity line.
+#
+# =====================================================================
+
+ax2.tick_params(
+    axis='y',
+    labelcolor='navy'
+)
+
+
+# =====================================================================
+# STEP 12: Add Chart Title
+# =====================================================================
+#
+# A title helps explain what the chart represents.
+#
+# =====================================================================
+
+plt.title(
+    "Temperature and Humidity Over Time",
+    fontsize=14,
+    fontweight='bold'
+)
+
+
+# =====================================================================
+# STEP 13: Add Grid (Optional)
+# =====================================================================
+#
+# Grids make it easier to read values.
+#
+# alpha controls transparency:
+#
+#   0.0 = invisible
+#   1.0 = fully opaque
+#
+# =====================================================================
+
+ax1.grid(
+    True,
+    linestyle=':',
+    alpha=0.6
+)
+
+
+# =====================================================================
+# STEP 14: Adjust Layout
+# =====================================================================
+#
+# Prevent labels and titles from overlapping.
+#
+# Highly recommended before displaying or saving figures.
+#
+# =====================================================================
+
+plt.tight_layout()
+
+
+# =====================================================================
+# STEP 15: Display Figure
+# =====================================================================
+#
+# block=False means:
+#
+#     Show the figure window
+#     BUT continue executing the remaining code.
+#
+# Without block=False, execution would stop here until
+# the user manually closes the window.
+#
+# =====================================================================
+
+plt.show(block=False)
+
+
+# =====================================================================
+# STEP 16: Keep Figure Visible
+# =====================================================================
+#
+# Pause execution for 5 seconds.
+#
+# During this time the figure remains visible.
+#
+# You can increase or decrease the number.
+#
+# Examples:
+#
+#     plt.pause(2)
+#     plt.pause(10)
+#     plt.pause(30)
+#
+# =====================================================================
+
+plt.pause(5)
+
+
+# =====================================================================
+# STEP 17: Close Figure Automatically
+# =====================================================================
+#
+# After the pause completes, the figure is closed.
+#
+# Useful for:
+#
+# • Automated demos
+# • Batch report generation
+# • Educational examples
+# • Previewing plots briefly
+#
+# =====================================================================
+
+plt.close()
+
+
+# =====================================================================
+# END RESULT
+# =====================================================================
+#
+# LEFT AXIS (Red)
+# ----------------
+# Temperature (°C)
+#
+# RIGHT AXIS (Blue)
+# -----------------
+# Humidity (%)
+#
+# SHARED X-AXIS
+# -------------
+# Day 1  Day 2  Day 3  Day 4
+#
+# The plot appears for 5 seconds and then closes
+# automatically.
+#
+# =====================================================================
+
+```
+**14. Explain how multi-dimensional datasets map to a 2-D heatmap via ax.imshow().**
+
+The ax.imshow() method processes a structured 2-D grid or nested array matrix where data points are arranged in explicit rows and columns. Instead of drawing coordinate points, the engine treats each cell in the matrix as a square pixel. It maps the numerical value inside each cell to a specific color along a gradient scale, converting raw data tables into a visual matrix of color intensities.
+
+
+```
+Code snippet
+
+graph TD
+
+Subscript1[Raw Nested Matrix Array] -->|Row 0, Col 0: Value 10| B(Normalizing Engine)
+
+Subscript1 -->|Row 0, Col 1: Value 50| B
+
+B -->|Maps 10 to Min Boundary| C[Color Mapping Palette]
+
+B -->|Maps 50 to Max Boundary| C
+
+C --> D[Visual Output: Dark Purple Box next to Bright Yellow Box]
+```
+**15. Differentiate between plt.tight_layout() and layout="constrained".**
+
+Both tools prevent text overlapping by automatically adjusting the spacing between subplots, but they do so using different timing and logic. plt.tight_layout() is an optimization step run at the end of your script. It analyzes the positions of text labels and shifts subplots around after they have been drawn, which can sometimes break user-defined dimensions. The newer layout="constrained" option is set inside the initial subplot initialization call, like plt.subplots(layout="constrained"). It activates a live constraint solver that dynamically calculates padding and margins as layout elements are added, making it more stable for complex, multi-panel layouts.
+
+**16. How does indexing work when plt.subplots() creates a multi-row grid?**
+
+
+**17. What is the execution danger of mixing global styles with local overrides?**
+
+Global themes set via plt.style.use('ggplot') update universal default settings across your entire Python session. If you change global styles in the middle of a script, it alters how text, lines, and colors render across every plot window initialized afterward. Local overrides, such as setting custom face colors using ax.set_facecolor('black'), modify only that specific axis container. The danger of mixing them is that a global theme change can silently overwrite your local settings if the global theme configuration file contains explicit styling overrides for those same parameters.
+
+**18. Why does ax.text() use data coordinates while annotations use reference arrows?**
+
+The standard ax.text(x, y, "Label") method adds text labels directly to specific coordinate positions on the plot canvas, meaning the label shifts or rescales if you adjust your axis limits. The advanced ax.annotate() method separates the text location from the data target point. It allows you to point an arrow at a specific data coordinate (xy=(x, y)) while positioning the descriptive text box at a stable layout position (xytext=(x_offsets, y_offsets)). This ensures your labels remain readable and beautifully arranged even if the underlying plot scales change.
+
+**19. Detail how to clear memory when drawing thousands of plots in a loop.**
+
+
+
+**20. How does plt.subplot2grid() build irregular grid layouts?**
+
+
+
+
+
 
 
 
