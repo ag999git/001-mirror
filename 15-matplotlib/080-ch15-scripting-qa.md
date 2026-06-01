@@ -462,7 +462,7 @@ J --> K
 ```
 
 
-## XXX Mermaid Concept Map
+
 
 
 6. Customise line appearance: Plot monthly sales and demonstrate different line styles, colours, markers, marker sizes, line widths, and transparency.
@@ -868,7 +868,7 @@ plt.show()
 # =================================================
 ```
 ________________________________________
-## XXX Mermaid Concept Map for Set 2
+
 
 11. Create a bar chart project showing the number of books issued by different departments in a college library. Add data labels, title, labels, legend, and gridlines.
 Answer:
