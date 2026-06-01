@@ -18,9 +18,16 @@ The pyplot state-based dialect relies on a hidden global engine that tracks the 
 
 Matplotlib organizes its graphical workspace as a nested container architecture resembling a professional picture frame. The highest container is the Figure (represented by the fig object), which acts as the outer structural frame handling the display window, global background canvas, size dimensions, and layout engines. Inside this frame sits one or more Axes (represented by the ax object), which serves as the actual drawing canvas. The Axes container holds the coordinate plane, grid lines, tick labels, title boxes, and the actual geometric plots.
 
-Code snippet
+```mermaid
+graph TD
+    Figure[Figure Object: Top-Level Canvas Window] --> Axes1[Axes Object 1: Coordinate Canvas]
+    Figure --> Axes2[Axes Object 2: Coordinate Canvas]
+    Axes1 --> AxisX[X-Axis: Ticks & Gridlines]
+    Axes1 --> AxisY[Y-Axis: Ticks & Gridlines]
+    Axes1 --> Artist[Artist Elements: Line2D, Patches, Text]
 
-## graph TD
+
+```
 
 
 
