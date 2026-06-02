@@ -978,6 +978,29 @@ print("Z shape =", Z.shape)  # Z shape = (50, 50)
 | colorbar() | Displays colour scale |
 | projection="3d" | Creates 3D plotting area |
 
+#### Workflow
+
+```mermaid
+flowchart TD
+
+A[X Values]
+B[Y Values]
+
+A --> C[meshgrid]
+B --> C
+
+C --> D[X Grid]
+C --> E[Y Grid]
+
+D --> F[Calculate Z]
+E --> F
+
+F --> G[plot_surface]
+
+G --> H[Apply Colormap]
+
+H --> I[Display Colorbar]
+```
 
 
 ## Script 4 (Wireframe)
