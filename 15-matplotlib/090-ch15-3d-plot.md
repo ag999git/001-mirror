@@ -758,7 +758,63 @@ A helix may be thought of as a circle that gradually rises in height. As a point
 ### 3D Helix Using plot(x, y, z)
 
 
+```python
 
+# Import required modules
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Create Figure and 3D Axes. subplot_kw={"projection": "3d"} creates a 3D plot.
+fig, ax = plt.subplots(
+    figsize=(8, 6),
+    subplot_kw={"projection": "3d"}
+)
+
+# Generate parameter values. t is a sequence of 1000 values from 0 to 20π, 
+# which will create multiple turns of the helix.
+t = np.linspace(0, 20 * np.pi, 1000)
+
+# Radius of helix. A larger radius will create a wider helix, 
+# while a smaller radius will create a tighter helix.
+r = 5
+
+# Coordinates of helix. The x and y coordinates are calculated using cosine and sine functions,
+# which create a circular pattern in the XY plane. The z coordinate increases linearly, 
+# creating the vertical progression of the helix.
+x = r * np.cos(t)
+y = r * np.sin(t)
+
+# Height increases gradually. The z coordinate is simply the parameter t, which means that as t increases,
+# the height of the helix increases, creating a spiral effect.
+z = np.linspace(0, 10, 1000)
+
+# Create 3D line plot. The color is set to blue and the line width is set to 2 for better visibility.
+ax.plot(
+    x,
+    y,
+    z,
+    color="blue",
+    linewidth=2
+)
+
+# Add title and axis labels
+ax.set_title("3D Helix")
+ax.set_xlabel("X-axis")
+ax.set_ylabel("Y-axis")
+ax.set_zlabel("Z-axis")
+
+# Display graph
+plt.show()
+# After closure print shape and statistics of the cone matrix for reference, verification and learning purposes. This will help us understand the dimensions and value distribution of the matrix we created.
+print("X Coordinates Shape:", x.shape)
+print("Y Coordinates Shape:", y.shape)
+print("Z Coordinates Shape:", z.shape)
+print("X Coordinates Statistics: min =", np.min(x), ", max =", np.max(x), ", mean =", np.mean(x))
+print("Y Coordinates Statistics: min =", np.min(y), ", max =", np.max(y), ", mean =", np.mean(y))
+print("Z Coordinates Statistics: min =", np.min(z), ", max =", np.max(z), ", mean =", np.mean(z))
+
+
+```
 
 
 
