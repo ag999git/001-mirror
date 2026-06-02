@@ -886,7 +886,15 @@ plt.show()
 #### Output Plot
 ![3D Scatter plot](/resources/ch15-matplotlib-3D-scatter.png)
 
+#### What this script demonstrates
 
+| Statement | Purpose |
+| --- | --- |
+| projection="3d" | Creates a 3D plotting area |
+| scatter(x,y,z) | Creates 3D scatter plot |
+| s=80 | Controls marker size |
+| set_zlabel() | Adds label to z-axis |
+| (x,y,z) | Defines position of each point |
 
 
 ## Script 3: Surface Plot Using `meshgrid()`, `plot_surface()`, `cmap` and `colorbar`
