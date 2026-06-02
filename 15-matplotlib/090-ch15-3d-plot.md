@@ -967,6 +967,17 @@ print("Z shape =", Z.shape)  # Z shape = (50, 50)
 ![3D Surface Plot](/resources/ch15-matplotlib-3d-surface.png)
 
 
+#### What this script demonstrates
+
+| Statement | Purpose |
+| --- | --- |
+| meshgrid() | Creates coordinate grid |
+| Z = X**2 + Y**2 | Calculates surface height |
+| plot_surface() | Draws 3D surface |
+| cmap="viridis" | Colours surface according to height |
+| colorbar() | Displays colour scale |
+| projection="3d" | Creates 3D plotting area |
+
 
 
 ## Script 4 (Wireframe)
@@ -1072,7 +1083,17 @@ plt.show()
 ![Wireframe](/resources/ch15-matplotlib-3D-wireframe.png)
 
 
+#### What this script demonstrates
 
+| Statement | Purpose |
+| --- | --- |
+| meshgrid() | Creates coordinate grid |
+| plot_surface() | Draws solid coloured surface |
+| plot_wireframe() | Draws mesh representation |
+| cmap="viridis" | Applies colour mapping |
+| colorbar() | Displays colour scale |
+| view_init() | Controls viewing angle |
+| rstride, cstride | Controls wireframe density |
 
 
 
