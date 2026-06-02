@@ -813,8 +813,166 @@ print("X Coordinates Statistics: min =", np.min(x), ", max =", np.max(x), ", mea
 print("Y Coordinates Statistics: min =", np.min(y), ", max =", np.max(y), ", mean =", np.mean(y))
 print("Z Coordinates Statistics: min =", np.min(z), ", max =", np.max(z), ", mean =", np.mean(z))
 
+```
+
+#### Output Plot
+![Helix](/resources/ch15-matplotlib-3d-helix.png)
+
+#### Output on terminal
+
+```python
+X Coordinates Shape: (1000,)
+Y Coordinates Shape: (1000,)
+Z Coordinates Shape: (1000,)
+X Coordinates Statistics: min = -4.99997527658723 , max = 5.0 , mean = 0.004999999999999495
+Y Coordinates Statistics: min = -4.999993819142987 , max = 4.999993819142987 , mean = 0.0
+Z Coordinates Statistics: min = 0.0 , max = 10.0 , mean = 4.999999999999999
 
 ```
+
+
+## Script 2 (3D Scatter Plot)
+Introductory Note
+
+A 2D scatter plot represents each point using two coordinates: x and y. A 3D scatter plot extends this idea by introducing a third coordinate, z. Each point is therefore represented by `(x, y, z)`, allowing spatial relationships to be visualized in three dimensions.
+
+----------
+
+### 3D Scatter Plot Using scatter(x, y, z)
+
+
+```python
+
+# Import required modules
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Create Figure and 3D Axes. subplot_kw={"projection": "3d"} creates a 3D plot.
+fig, ax = plt.subplots(
+    figsize=(8, 6),
+    subplot_kw={"projection": "3d"}
+)
+
+# Sample coordinates. In a real-world scenario, these could be data points 
+# from an experiment or survey.
+x = [1, 2, 3, 4, 5, 6]
+y = [2, 5, 3, 7, 4, 8]
+z = [1, 3, 2, 5, 4, 6]
+
+# Create 3D scatter plot. Each point is represented by a marker in 3D space.
+ax.scatter(
+    x,
+    y,
+    z,
+    color="crimson",
+    s=80        # Marker size
+)
+
+# Add title and axis labels
+ax.set_title("3D Scatter Plot")
+ax.set_xlabel("X-axis")
+ax.set_ylabel("Y-axis")
+ax.set_zlabel("Z-axis")
+
+# Display graph
+plt.show()
+# After displaying the graph, it is crucial to free up memory by closing the figure.
+# plt.close(fig)  # But it is commented out here for demonstration purposes. 
+# In a batch processing scenario, you would uncomment this line to prevent memory leaks.
+
+
+```
+
+#### Output Plot
+![3D Scatter plot](/resources/ch15-matplotlib-3D-scatter.png)
+
+
+
+
+## Script 3: Surface Plot Using `meshgrid()`, `plot_surface()`, `cmap` and `colorbar`
+Introductory Note
+
+A surface plot is one of the most common 3D visualizations. It is typically used to display a mathematical relationship of the form:
+
+$z=f(x,y)$
+
+To create such a plot, Matplotlib requires a grid of x and y coordinates. The NumPy function `meshgrid()` generates this coordinate grid, after which the corresponding z-values can be calculated. The `plot_surface()` method then draws the surface. A colormap (`cmap`) is used to color the surface according to the z-values, while a color bar provides a key for interpreting these colors.
+
+----------
+
+### Script
+
+```python
+
+# Import required modules
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Create Figure and 3D Axes. subplot_kw={"projection": "3d"} creates a 3D plot.
+fig, ax = plt.subplots(
+    figsize=(8, 6),
+    subplot_kw={"projection": "3d"}
+)
+
+# Create x and y values. linspace(-3, 3, 50) creates 50 evenly spaced points from -3 to 3.
+x = np.linspace(-3, 3, 50)
+y = np.linspace(-3, 3, 50)
+
+# Create coordinate grid. meshgrid(x, y) creates two 2D arrays X and Y from the 1D arrays x and y.
+X, Y = np.meshgrid(x, y)
+
+# Calculate z values.
+# The surface equation z = x² + y² means that at the center (0, 0), z is 0, and as you move away from the 
+# center, in any direction positive or negative, x or y, z increases quadratically.
+# Surface equation: z = x² + y²
+Z = X**2 + Y**2
+
+# Create surface plot. plot_surface() creates a 3D surface plot. 
+# cmap="viridis" applies a colour map to the surface.
+surface = ax.plot_surface(
+    X,
+    Y,
+    Z,
+    cmap="viridis"     # Apply colour map
+)
+
+# Add colour bar. The colour bar shows the mapping of Z values to colours in the plot.
+# Low Z values (near the center) will be colored in dark purple, 
+# and high Z values (towards the edges) will be colored in bright yellow.
+fig.colorbar(
+    surface,
+    ax=ax,
+    shrink=0.7  # Shrink the colour bar to fit better with the plot
+)
+
+# Add title and axis labels
+ax.set_title("3D Surface Plot")
+ax.set_xlabel("X-axis")
+ax.set_ylabel("Y-axis")
+ax.set_zlabel("Z-axis")
+
+# Display graph
+plt.show()
+
+# Optional: Show dimensions of grids
+print("X shape =", X.shape)  # X shape = (50, 50)
+print("Y shape =", Y.shape)  # Y shape = (50, 50)
+print("Z shape =", Z.shape)  # Z shape = (50, 50)
+
+
+```
+
+#### Output Plot
+
+![3D Surface Plot](/resources/ch15-matplotlib-3d-surface.png)
+
+
+
+
+
+
+
+
 
 
 
