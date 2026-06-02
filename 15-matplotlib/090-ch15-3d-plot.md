@@ -969,6 +969,107 @@ print("Z shape =", Z.shape)  # Z shape = (50, 50)
 
 
 
+## Script 4 (Wireframe)
+Introductory Note
+
+Both **surface plots** and **wireframe plots** are used to visualize three-dimensional surfaces. They use the same coordinate grids (`X`, `Y`, and `Z`) but display the surface differently.
+
+A **surface plot** draws a solid coloured surface and is useful when the overall shape and height variations are important. A **wireframe plot** draws only the grid lines of the surface and is useful when the underlying structure of the surface needs to be examined.
+
+This example displays both plots side-by-side using the same dataset. It also demonstrates the use of `view_init()`, which controls the viewing angle of a 3D graph.
+
+
+### Script
+
+```python
+
+# Import required modules
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Create figure with two 3D subplots. 
+# subplot_kw={"projection": "3d"} specifies that both subplots will be 3D.
+fig, ax = plt.subplots(
+    1, 2,
+    figsize=(12, 5),
+    subplot_kw={"projection": "3d"}
+)
+
+# Create x and y values. linspace(-3, 3, 50) creates 50 evenly spaced points between -3 and 3.
+x = np.linspace(-3, 3, 50)
+y = np.linspace(-3, 3, 50)
+
+# Create coordinate grid. meshgrid(x, y) creates two 2D arrays X and Y from the 1D arrays x and y.
+X, Y = np.meshgrid(x, y)
+
+# Calculate z values. Here we create a cone-shaped surface by using the formula Z = X^2 + Y^2.
+Z = X**2 + Y**2
+
+# 1. Surface Plot
+# plot_surface() creates a 3D surface plot. 
+# cmap="viridis" applies a color map to the surface based on Z values.
+surface = ax[0].plot_surface(
+    X,
+    Y,
+    Z,
+    cmap="viridis"
+)
+
+ax[0].set_title("Surface Plot")
+ax[0].set_xlabel("X-axis")
+ax[0].set_ylabel("Y-axis")
+ax[0].set_zlabel("Z-axis")
+
+# Set viewing angle. 
+# elev is the elevation angle in the z plane, and 
+# azim is the azimuth angle in the x,y plane.
+ax[0].view_init(
+    elev=25,    # Vertical viewing angle
+    azim=45     # Horizontal rotation angle
+)
+
+# Add color bar for surface plot. 
+# This shows the mapping of Z values to colors in the viridis colormap.
+fig.colorbar(
+    surface,
+    ax=ax[0],
+    shrink=0.7
+)
+
+# 2. Wireframe Plot
+
+# plot_wireframe() creates a 3D wireframe plot.
+# rstride and cstride specify the row and column stride (step size) for plotting the wireframe.
+ax[1].plot_wireframe(
+    X,
+    Y,
+    Z,
+    rstride=2,
+    cstride=2
+)
+
+ax[1].set_title("Wireframe Plot")
+ax[1].set_xlabel("X-axis")
+ax[1].set_ylabel("Y-axis")
+ax[1].set_zlabel("Z-axis")
+
+# Use same viewing angle for comparison
+ax[1].view_init(
+    elev=25,
+    azim=45
+)
+
+# Improve spacing. tight_layout() automatically adjusts subplot parameters to give specified padding.
+plt.tight_layout()
+
+# Display graphs
+plt.show()
+
+
+```
+
+#### Output Plot
+![Wireframe](/resources/ch15-matplotlib-3D-wireframe.png)
 
 
 
