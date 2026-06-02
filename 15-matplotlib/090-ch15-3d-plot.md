@@ -830,6 +830,17 @@ Z Coordinates Statistics: min = 0.0 , max = 10.0 , mean = 4.999999999999999
 
 ```
 
+#### What this script demonstrates
+
+
+| Statement | Purpose |
+| --- | --- |
+| projection="3d" | Creates a 3D plotting area |
+| scatter(x,y,z) | Creates 3D scatter plot |
+| s=80 | Controls marker size |
+| set_zlabel() | Adds label to z-axis |
+| (x,y,z) | Defines position of each point |
+
 
 ## Script 2 (3D Scatter Plot)
 Introductory Note
