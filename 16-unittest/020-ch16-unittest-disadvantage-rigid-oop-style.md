@@ -86,7 +86,93 @@ Modern Pytest fixtures completely decouple the test data from the test framework
 
 ```python
 
+import pytest
+from bank_account import BankAccount
 
+# FIXTURES
+# A fixture is a function that prepares data or objects
+# needed by one or more tests.
+# Think of a fixture as a "setup service".
+# Instead of creating BankAccount objects inside every test,
+# we create them once in a fixture and allow pytest to
+# provide them to the tests that need them.
+# The code before the yield statement performs SETUP.
+# The code after the yield statement performs CLEANUP.
+
+@pytest.fixture
+def regular_account():
+    """
+    Creates a regular bank account for testing.
+    Initial state:
+        Customer : John
+        Balance  : 100
+    Pytest executes the code before 'yield'
+    before the test starts.
+    """
+    account = BankAccount("John", 100)
+    # Give the account object to the test function.
+    yield account
+    # Any cleanup code goes here.
+    # This runs after the test finishes.
+    del account
+
+@pytest.fixture
+def vip_account():
+    """
+    Creates a VIP account for testing.
+
+    Initial state:
+        Customer : Bruce
+        Balance  : 10000
+
+    Each test gets its own fresh VIP account.
+    """
+    account = BankAccount("Bruce", 10000)
+    yield account
+    del account
+
+# TEST FUNCTIONS
+# Notice that the test functions do NOT create
+# BankAccount objects themselves.
+# Instead, they simply ask for the fixture by name.
+# Pytest sees the fixture name in the function parameter
+# list and automatically calls the fixture.
+# This mechanism is called Dependency Injection.
+
+def test_regular_deposit(regular_account):
+    """
+    Test that money can be deposited
+    into a regular account.
+
+    Pytest automatically supplies the
+    'regular_account' fixture.
+    """
+
+    regular_account.deposit(50)
+    assert regular_account.get_balance() == 150
+
+def test_vip_withdrawal(vip_account):
+    """
+    Test that money can be withdrawn
+    from a VIP account.
+    Pytest automatically supplies the
+    'vip_account' fixture.
+    """
+
+    vip_account.withdraw(1000)
+    assert vip_account.get_balance() == 9000
+
+def test_static_utility():
+    """
+    This test does not need a BankAccount object.
+
+    Since no fixture is requested,
+    pytest does not execute any fixture setup
+    or cleanup code.
+    The test runs completely independently.
+    """
+    
+    assert True
 
 ```
 
