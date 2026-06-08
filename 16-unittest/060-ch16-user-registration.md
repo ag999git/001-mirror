@@ -13,6 +13,17 @@ It contains a user-registration validation example together with a detailed walk
 Readers are encouraged to study both the source code and the accompanying discussion to gain a deeper understanding of how exception testing is used in real-world applications.
 
 
+## Folder structure 
+It should be something similar to as given below:
+
+```python
+ch16-scripts/
+│
+├── user_registration.py
+└── test_user_registration.py
+
+```
+
 ##  user_registration.py. This module contains the create_user function that we want to test. 
 
 
@@ -40,6 +51,11 @@ def create_user(username, age, email):  # This function creates a user dictionar
     }
 
 ```
+
+
+
+
+
 
 
 ## test_user_registration.py. This is the file used to test user_registration.py
@@ -89,7 +105,6 @@ def test_valid_user():  # Test that creating a valid user returns the correct us
     assert user["username"] == "alice"  # Assert that the username in the returned user dictionary is correct
     assert user["age"] == 20  # Assert that the age in the returned user dictionary is correct
     assert user["email"] == "alice@example.com"  # Assert that the email in the returned user dictionary is correct
-
 
 ```
 
