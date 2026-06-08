@@ -136,5 +136,365 @@ test_user_registration.py::test_valid_user PASSED                               
 
 
 
+# Discussion: Testing User Validation with pytest.raises()
+
+## Overview
+
+This example demonstrates how exceptions can be used to enforce validation rules and how those exceptions can be tested using `pytest.raises()`.
+
+The application code contains a small user-registration function called `create_user()`. Before creating a user record, the function validates the supplied information and rejects invalid input by raising exceptions.
+
+Although the example is intentionally small, it mirrors patterns frequently found in production systems, including:
+
+-   Input validation
+-   Business-rule enforcement
+-   Defensive programming
+-   Exception-based error handling
+-   Fail-fast design
+
+The example was specifically chosen because it provides several opportunities to demonstrate different ways of testing exceptions with pytest.
+
+## What the Script Does
+
+The purpose of the script is to create a user record.
+
+The function accepts three pieces of information:
+
+```python
+username
+age
+email
+```
+
+Before returning a user record, the function verifies that:
+
+1.  A username has been provided.
+2.  The user is at least 13 years old.
+3.  The email address appears to be valid.
+
+If any of these requirements are violated, the function immediately raises a `ValueError`.
+
+Only valid data is allowed through.
+
+
+
+## Need for validation in the Script
+
+Real-world applications constantly receive input from users and external systems.
+
+Examples include:
+
+-   Registration forms
+-   Login pages
+-   Configuration files
+-   APIs
+-   Databases
+
+Input cannot be trusted automatically.
+
+Users make mistakes.
+
+Applications therefore validate incoming information before processing it.
+
+This script demonstrates that principle in a simple and approachable form.
+
+----------
+
+## How the Script Works
+
+### Username Validation
+
+```python
+if not username:
+    raise ValueError("Username cannot be empty")
+```
+
+The first validation checks whether a username exists.
+
+Examples that fail:
+
+```python
+create_user("", 20, "alice@example.com")
+```
+
+```python
+create_user(None, 20, "alice@example.com")
+```
+
+The function raises an exception because an empty username is not acceptable.
+
+----------
+
+### Age Validation
+
+```python
+if age < 13:
+    raise ValueError(
+        "User must be at least 13 years old"
+    )
+```
+
+This validation enforces a business rule.
+
+The application has decided that users younger than 13 cannot register.
+
+Example:
+
+```python
+create_user("alice", 10, "alice@example.com")
+```
+
+Result:
+
+```python
+ValueError:
+User must be at least 13 years old
+```
+
+----------
+
+### Email Validation
+
+```python
+if not re.match(
+    r"^[^@]+@[^@]+\.[^@]+$",
+    email
+):
+    raise ValueError(
+        "Invalid email address"
+    )
+```
+
+This validation uses a regular expression.
+
+The expression checks that the email roughly follows this pattern:
+
+```python
+name@example.com
+```
+
+The validation is intentionally simple.
+
+Its purpose is to demonstrate validation logic rather than provide industrial-strength email verification.
+
+----------
+
+### Successful Completion
+
+If all validation checks pass, the function returns a dictionary.
+
+Example:
+
+```python
+user = create_user(
+    "alice",
+    20,
+    "alice@example.com"
+)
+```
+
+Result:
+
+```python
+{
+    "username": "alice",
+    "age": 20,
+    "email": "alice@example.com"
+}
+```
+
+----------
+
+## Why ValueError Is Used
+
+The function raises `ValueError` because the values supplied by the caller are unacceptable.
+
+The arguments themselves are valid parameters.
+
+The problem lies in their contents.
+
+Examples:
+
+```python
+""
+```
+
+```python
+10
+```
+
+```python
+"not-an-email"
+```
+
+This is exactly the situation for which `ValueError` was designed.
+
+----------
+
+## Learning Points
+
+### Input Validation
+
+The script demonstrates how applications verify incoming data before using it.
+
+Validation is one of the most common tasks in software development.
+
+----------
+
+### Defensive Programming
+
+The function assumes that callers may provide invalid data.
+
+Instead of trusting its inputs, it verifies them.
+
+This style is known as `defensive programming`.
+
+----------
+
+### Raising Exceptions
+
+The script shows how exceptions communicate errors.
+
+```python
+raise ValueError(...)
+```
+
+Rather than returning an error code, the function raises an exception containing meaningful information.
+
+----------
+
+### Fail-Fast Design
+
+Notice that validation stops as soon as a problem is discovered.
+
+For example:
+
+```python
+create_user("", 10, "bad-email")
+```
+
+The username validation fails first.
+
+The remaining validations never execute.
+
+This is known as fail-fast behavior.
+
+----------
+
+### Business Rules
+
+ - The age requirement is not a Python rule.
+ - It is a business rule defined by the application.
+ - Many production systems contain hundreds of similar rules.
+
+----------
+
+### Regular Expressions
+
+The script introduces practical regex usage.
+
+Regular expressions are widely used for:
+
+-   Validation
+-   Searching
+-   Parsing
+-   Data extraction
+-   Data cleaning
+
+----------
+
+## Why This Example Is Good for `pytest.raises()`
+
+The function contains multiple independent failure paths.
+
+Each path can be tested separately.
+
+Examples include:
+
+-   Empty username
+-   Underage user
+-   Invalid email address
+
+This allows us to demonstrate several pytest features.
+
+----------
+
+## Testing Exception Occurrence
+
+```python
+with pytest.raises(ValueError):
+    create_user("", 20, "alice@example.com")
+```
+
+This verifies that an exception is raised.
+
+----------
+
+## Testing Exception Messages
+
+```python
+with pytest.raises(
+    ValueError,
+    match="Username cannot be empty"
+):
+    create_user("", 20, "alice@example.com")
+```
+
+This verifies both the exception type and message.
+
+----------
+
+## Using excinfo
+
+```python
+with pytest.raises(ValueError) as excinfo:
+    create_user("alice", 10, "alice@example.com")
+```
+
+The captured exception can then be inspected.
+
+```python
+assert excinfo.type is ValueError
+```
+
+```python
+assert "13 years old" in str(excinfo.value)
+```
+
+----------
+
+## Functional Form
+
+Pytest also supports a functional style.
+
+```python
+pytest.raises(
+    ValueError,
+    create_user,
+    "",
+    20,
+    "alice@example.com"
+)
+```
+
+Although less common today, readers may encounter this form in older codebases.
+
+----------
+
+## Key Takeaways
+
+This small example demonstrates several important software engineering concepts:
+
+-   Input validation
+-   Defensive programming
+-   Exception handling
+-   Fail-fast design
+-   Business-rule enforcement
+-   Regular-expression matching
+-   Unit testing with pytest
+
+More importantly, it shows how `pytest.raises()` can be used to verify that code behaves correctly when invalid input is encountered.
+
+
 
 
