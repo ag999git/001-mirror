@@ -109,7 +109,29 @@ def test_valid_user():  # Test that creating a valid user returns the correct us
 ```
 
 
+## pytest
+The output on following command on terminal:
+`pytest -v test_user_registration.py`
 
+### The output is as follows
+```python
+C:\ch16-scripts> pytest -v test_user_registration.py
+========================================== test session starts ===========================================
+platform win32 -- Python 3.10.10, pytest-9.0.3, pluggy-1.6.0 -- C:\Programs\Python\Python310\python.exe
+cachedir: .pytest_cache
+rootdir: C:\ch16-scripts
+plugins: anyio-4.12.1
+collected 5 items                                                                                         
+
+test_user_registration.py::test_empty_username PASSED                                               [ 20%]
+test_user_registration.py::test_username_message PASSED                                             [ 40%]
+test_user_registration.py::test_underage_user PASSED                                                [ 60%]
+test_user_registration.py::test_invalid_email PASSED                                                [ 80%]
+test_user_registration.py::test_valid_user PASSED                                                   [100%]
+
+=========================================== 5 passed in 0.03s ============================================
+
+```
 
 
 
