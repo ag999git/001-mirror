@@ -105,8 +105,84 @@ def test_state(db):
 
     print("[TEST 3] state modification successful")
 
+```
+
+## Further discussion
+
+
+
+### 1. What is Dependency Injection?
+
+Dependency Injection is a design pattern where an object (dependency) is created outside a function and provided to it automatically or externally instead of being created inside the function.
+
+This helps:
+
+-   reduce repeated setup code
+-   improve test readability
+-   separate creation logic from usage logic
+
+----------
+
+### 2. How pytest uses dependency injection
+
+In pytest, dependency injection happens through **fixtures**.
+
+When a test function declares a parameter:
 
 ```
+def test_one(db):
+```
+
+pytest performs the following steps:
+
+1.  It sees the parameter name `db`
+2.  It looks for a fixture with the same name `db`
+3.  It executes the fixture function
+4.  It receives the returned object
+5.  It injects that object into the test function parameter
+
+### Flow for EACH test (test_injection / test_connect / test_state)
+
+```python
+test_injection(db)
+        ↓
+pytest starts executing test_injection
+        ↓
+pytest detects parameter name: "db"
+        ↓
+pytest searches for a fixture named "db"
+        ↓
+finds:
+
+    @pytest.fixture
+    def db():
+        return Database()
+
+        ↓
+pytest calls db() fixture function
+        ↓
+inside fixture:
+    Database() object is created
+        ↓
+fixture returns Database object
+        ↓
+pytest injects returned object into test_injection(db)
+        ↓
+NOW inside test_injection:
+    db → refers to Database object
+        ↓
+test code executes:
+    - type(db)
+    - isinstance check
+        ↓
+test completes
+
+
+```
+
+
+
+
 
 
 
