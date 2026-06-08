@@ -181,6 +181,67 @@ test completes
 ```
 
 
+### SAME FLOW applies to all 3 tests
+
+```python
+test_connect(db)
+        ↓
+pytest sees "db" parameter
+        ↓
+find db fixture
+        ↓
+call db()
+        ↓
+create Database object
+        ↓
+return Database object
+        ↓
+inject into test_connect(db)
+        ↓
+run:
+    db.connect()
+        ↓
+assert result == "connected"
+
+
+```
+
+
+
+### For test_state(db):
+
+```python
+test_state(db)
+        ↓
+pytest sees "db"
+        ↓
+find db fixture
+        ↓
+call db()
+        ↓
+create Database object
+        ↓
+return Database object
+        ↓
+inject into test_state(db)
+        ↓
+run:
+    db.new_flag = "set in test_state"
+        ↓
+assert db.new_flag
+
+
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
