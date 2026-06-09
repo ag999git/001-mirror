@@ -184,6 +184,9 @@ Here the problem of approximation solved by using `pytest.approx()`
 
 # 9. Flowchart — Parametrized Testing + Execution
 
+![Flowchart — Parametrized Testing + Execution](/resources/ch16-pytest-040-project-tax-collector.png)
+
+
 ## Flowchart here
 
 
