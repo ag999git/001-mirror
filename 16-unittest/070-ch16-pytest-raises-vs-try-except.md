@@ -81,6 +81,10 @@ def test_create_user():
     with pytest.raises(ValueError):        
         create_user(10)
 ```
+#### Flow chart of pytest raises
+
+![Flow chart of pytest raises](/resources/ch16-pytest-030-pytest-raises.png)
+
 
 ### Why this is better
 
