@@ -65,6 +65,12 @@ def test_create_user():
 -   `except` → handles expected exception
 -   `else` → catches missing exception
 
+
+#### Flow chart for try/except with else
+
+![Flow chart for try/except with else](/resources/ch16-pytest-020-try-except-with-else.png)
+
+
 ----------
 
 ## 5. Recommended Approach (`pytest.raises`)
