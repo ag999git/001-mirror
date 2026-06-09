@@ -42,6 +42,10 @@ def test_create_user():
 
 If the function is broken and stops raising the exception, the test still passes.
 
+#### Flow chart (Using only try/except without else)
+![try/except without else](/resources/ch16-pytest-010-only-try-except-no-else.png)
+
+
 ----------
 
 ## 4. Improved Manual Approach (try/except/else)
