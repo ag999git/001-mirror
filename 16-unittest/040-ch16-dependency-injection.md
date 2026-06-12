@@ -23,7 +23,7 @@ Then, analyze the following code and explain how dependency injection is happeni
 ## Practical Example
 
 #### database.py
-The file which ic to be trsted
+The file which is to be tested
 
 ```python
 
