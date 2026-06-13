@@ -166,7 +166,7 @@ This lookup pipeline maps how the engine matches arguments inside your refactore
 
 
 #### Flowchart
-![Flow chart]()
+![Flow chart](/resources/ch16-pytest-010-conftest-py.png)
 
 #### Summary Table
 
