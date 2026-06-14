@@ -329,21 +329,7 @@ Hello
 ## Context Manager Flow
 
 ```mermaid
-flowchart TD
-
-A["with fake_file"]
-
-A --> B["__enter__()"]
-
-B --> C["Return fake_file"]
-
-C --> D["Execute block"]
-
-D --> E["read()"]
-
-E --> F["Hello"]
-
-F --> G["__exit__()"]
+![Simulating Context Manager](/resources/ch16-pytest-099-magicmock3.png)
 
 ```
 
