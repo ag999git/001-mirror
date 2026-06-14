@@ -58,7 +58,7 @@ Think of these flags as controlling different aspects of pytest.
 
 When pytest starts, it first discovers tests and then applies any command-line flags supplied by the user.
 
-![]()
+![How pytest processes flags](/resources/ch16-pytest-090-how-process-flags.png)
 
 
 ## The -v Flag (Verbose Mode)
