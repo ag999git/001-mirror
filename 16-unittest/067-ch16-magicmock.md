@@ -161,18 +161,7 @@ Output:
 
 ## Execution Flow
 
-```mermaid
-flowchart TD
-
-A["len(fake_list)"]
-
-A --> B["Python calls __len__()"]
-
-B --> C["MagicMock intercepts call"]
-
-C --> D["return_value = 5"]
-
-D --> E["Result = 5"]
+![Simulating __len__()](/resources/ch16-pytest-097-magicmock1.png)
 
 ```
 
