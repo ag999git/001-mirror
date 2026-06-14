@@ -77,6 +77,12 @@ Python tools use configuration files very widely. You will encounter them throug
 
 If you have ever used pip install -r requirements.txt, you have already used a configuration file. The requirements.txt file is nothing more than a list of settings (package names and versions) that tells pip what to install. There was no magic — you wrote a list in a file, and a tool read it. All configuration files work on exactly this principle.
 
+#### Flowchart explaining how configuration file is used
+
+![Flocchart explaining how configuration file works](/resources/ch16-pytest-060-config1.png)
+
+
+
 ### 2. Why Does Pytest Need One?
 
 The most common reason beginners create a configuration file is to fix a specific warning.
