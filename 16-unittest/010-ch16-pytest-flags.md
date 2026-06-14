@@ -442,9 +442,6 @@ A common workflow during development is:
 9. Run the full test suite
 ```
 
-### Workflow Diagram
-![]()
-
 
 
 
