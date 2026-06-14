@@ -1,28 +1,13 @@
 
-
-
-
+# MagicMock — An Introduction
 
 **Additional Online Resource: MagicMock**
 
-This chapter introduced the basics of `Mock`, which is sufficient for simulating ordinary objects and methods. However, many real-world Python objects support special operations such as `len(obj)`, iteration (`for item in obj`), dictionary-style access (`obj[key]`), membership testing (`x in obj`), and context managers (`with obj:`). These operations are implemented using Python's special (magic) methods.
+The chapter in the printed book introduced the basics of `Mock`, which is sufficient for simulating ordinary objects and methods. However, many real-world Python objects support special operations such as `len(obj)`, iteration (`for item in obj`), dictionary-style access (`obj[key]`), membership testing (`x in obj`), and context managers (`with obj:`). These operations are implemented using Python's special (magic) methods.
 
-The accompanying online resource introduces `MagicMock`, a specialized form of `Mock` designed to simulate such objects. It includes detailed explanations, comparison tables, execution flowcharts, and practical examples involving iterators, containers, dictionaries, files, and context managers.
-
-
-## XXXX
-
-For a beginner Python book, I would strongly recommend that you **teach `MagicMock` immediately after `Mock`**, but keep the focus narrow:
-
-> **Mock can fake ordinary attributes and methods.**
-> 
-> **MagicMock can additionally fake Python's special ("magic") methods.**
-
-That single idea is the key.
+Here we discuss `MagicMock`, a specialized form of `Mock` designed to simulate such objects. It includes detailed explanations, comparison tables, execution flowcharts, and practical examples involving iterators, containers, dictionaries, files, and context managers.
 
 ----------
-
-# MagicMock — An Introduction
 
 ## What is MagicMock?
 
