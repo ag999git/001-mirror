@@ -144,6 +144,10 @@ my_project/ <-- Project Root (Put file here)
 
 **How Pytest finds it:** When you run `pytest`, it looks at the folder you are currently in. If it doesn't see a config file, it looks in the parent folder, and then the grandparent folder, until it finds one.
 
+#### Flowchart showing how Pytest finds the configuration file
+
+![Flowchart showing how Pytest finds the configuration file](/resources/ch16-pytest-065-config2.png)
+
 ----------
 
 ### 5. How to Fix the Warning (Step-by-Step)
