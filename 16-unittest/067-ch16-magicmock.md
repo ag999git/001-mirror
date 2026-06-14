@@ -256,23 +256,7 @@ Output:
 ----------
 
 ## Execution Flow
-
-```mermaid
-flowchart TD
-
-A["for item in data"]
-
-A --> B["Python calls __iter__()"]
-
-B --> C["MagicMock returns iterator"]
-
-C --> D["10"]
-
-C --> E["20"]
-
-C --> F["30"]
-
-```
+![Execution Flow](/resources/ch16-pytest-098-magicmock2-iter.png)
 
 ----------
 
