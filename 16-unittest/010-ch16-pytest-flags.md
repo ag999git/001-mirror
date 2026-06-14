@@ -208,7 +208,7 @@ Output capture collects printed text and hides it unless the test fails or the u
 
 ### Output Capture Flow
 
-![]()
+![Output Capture Flow](/resources/ch16-pytest-092-flags-output-capture.png)
 
 
 ### Why Use -s ?
@@ -347,7 +347,7 @@ test_withdraw
 
 ## How -k Works
 
-![]()
+![How -k works](/resources/ch16-pytest-095-flag-k.png)
 
 
 ## Why Use -k ?
@@ -377,7 +377,7 @@ Meaning:
 
 ### Combined Execution Flow
 
-![]()
+![Combined Execution Flow](/resources/ch16-pytest-096-combining-tests.png)
 
 
 ### Common Development Scenarios
