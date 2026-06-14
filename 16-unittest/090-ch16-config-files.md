@@ -226,7 +226,7 @@ addopts = -v --tb=short
 
 ### 7. Visualizing the Lifecycle (Flowchart)
 
-![Flowchart]()
+![Flowchart](/resources/ch16-pytest-070-config3.png)
 
 
 ### 8. A Complete Worked Example
