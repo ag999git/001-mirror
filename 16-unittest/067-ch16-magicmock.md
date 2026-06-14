@@ -328,10 +328,8 @@ Hello
 
 ## Context Manager Flow
 
-```mermaid
 ![Simulating Context Manager](/resources/ch16-pytest-099-magicmock3.png)
 
-```
 
 ----------
 
