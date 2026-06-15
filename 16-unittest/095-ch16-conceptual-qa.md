@@ -48,14 +48,7 @@ project/
         └── test_add()
  ```
 Execution flow:
-```mermaid
-flowchart TD
-A[1. Run pytest command] --> B[2. Search project files]
-B --> C[3. Find files matching test patterns]
-C --> D[4. Find test functions]
-D --> E[5. Execute tests]
-E --> F[6. Display results]
-```
+![Execution flow](/resources/ch16-pytest-100-conceptual-qa2.png)
 This automatic discovery removes the need to manually call every test function.
 ________________________________________
 **3. What is the role of assert in pytest? Why does pytest use normal Python assert?**
