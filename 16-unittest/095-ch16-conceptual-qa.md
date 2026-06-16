@@ -117,7 +117,9 @@ def test_connection(database):
     assert database.connect()
 ```
 Execution:
-![Flowchart](/ch16-pytest-101-conceptual-qa5.png)
+
+![Flowchart](/resources/ch16-pytest-101-conceptual-qa5.png)
+
 The parameter name is not a normal variable assignment. Pytest uses it as a request for a fixture.
 ________________________________________
 **6. What is the difference between a fixture and a normal function?
