@@ -117,14 +117,7 @@ def test_connection(database):
     assert database.connect()
 ```
 Execution:
-```mermaid
-flowchart TD
-A[1. pytest sees test_connection(database)] --> B[2. Looks for fixture named database]
-B --> C[3. Calls fixture function]
-C --> D[4. Gets returned Database object]
-D --> E[5. Injects object into parameter database]
-E --> F[6. Runs test]
-```
+![Flowchart](/ch16-pytest-101-conceptual-qa5.png)
 The parameter name is not a normal variable assignment. Pytest uses it as a request for a fixture.
 ________________________________________
 **6. What is the difference between a fixture and a normal function?
