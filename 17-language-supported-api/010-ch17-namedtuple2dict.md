@@ -82,12 +82,13 @@ Store both records in a list and convert each record into a dictionary.
 Expected output:
 
 ```python
-[ {'name':'Anita','age':20,'course':'Python'}, {'name':'Rahul','age':22,'course':'Java'}]
+[ {'name':'Anita','age':20,'course':'Python'},
+{'name':'Rahul','age':22,'course':'Java'}]
 ```
 
 ----------
 
-This fits well after `_fields` because students see a practical reason for a namedtuple to know its own structure.
+This fits well after `_fields` because you can see a practical reason for a namedtuple to know its own structure.
 
 
 
