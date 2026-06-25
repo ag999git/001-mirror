@@ -311,21 +311,33 @@ while  tasks:
 
 ## 3. The `bisect` Module
 
-### High Score Leaderboard
-**Usage:** You are making a game. When a player finishes, their score needs to be inserted into a global leaderboard. You want to keep the list sorted at all times so you can easily display the top 10.
+Student Marks List
+
+Usage: A teacher maintains a sorted list of student marks. When a new student's marks are received, the mark needs to be inserted at the correct position so that the list remains sorted. This makes it easy to display marks in ascending or descending order. bisect finds the correct insertion position quickly.
 ```python
 import bisect
 
-# Current top scores (must be sorted beforehand!)
-leaderboard = [100, 200, 400, 800, 1000]
-new_score = 350
+# List of student marks.
+# IMPORTANT: The list must already be sorted for bisect to work.
+marks = [40, 55, 70, 80, 95]
 
-# Find exactly where 350 should go to keep the list sorted
-insert_index = bisect.bisect_left(leaderboard, new_score)
-bisect.insort(leaderboard, new_score)
+# New student's marks that we want to insert
+# while keeping the list sorted.
+new_marks = 65
 
-print(f"Inserted at index {insert_index}")
-print("Updated Leaderboard:", leaderboard)
+# bisect_left() uses binary search to find the position
+# where new_marks should be inserted.
+#
+# It only returns the index.
+# It does not modify the list.
+insert_index = bisect.bisect_left(marks, new_marks)
+
+# insort() inserts the value at the correct position
+# and keeps the list sorted.
+bisect.insort(marks, new_marks)
+
+print(f"Inserted at index {insert_index}")  # Output: Inserted at index 2
+print("Updated marks:", marks)  # Output: Updated marks: [40, 55, 65, 70, 80, 95]
 ```
 **Explanation:** `bisect_left` instantly calculates that 350 belongs at index 2. `insort` then physically inserts it at that exact spot. Doing this manually with a `for` loop and `.insert()` would be much slower for large leaderboards.
 
@@ -338,15 +350,37 @@ print("Updated Leaderboard:", leaderboard)
 ```python
 import queue
 
+
+# Create a Queue object.
+# Queue follows FIFO rule:
+# First In, First Out
+# The item added first will be removed first.
+# It is similar to a real-life queue:
+# the first person standing in line is served first.
 coffee_orders = queue.Queue()
 
-coffee_orders.put("Latte")
-coffee_orders.put("Espresso")
-coffee_orders.put("Cappuccino")
+# Add items to the queue using put().
+# These orders are stored in the order they arrive:
+# 1. Latte
+# 2. Espresso
+# 3. Cappuccino
+coffee_orders.put("Latte")  # Add an item to the end of the queue.
+coffee_orders.put("Espresso")  # Add an item to the end of the queue.
+coffee_orders.put("Cappuccino")  # Add an item to the end of the queue.
 
 print("Making:")
+# Continue until the queue becomes empty.
+# empty() checks whether there are no more items.
 while not coffee_orders.empty():
+    # get() removes and returns the first item in the queue.
+    # Order of removal: Latte → Espresso → Cappuccino
     print(f"  - {coffee_orders.get()}")
+
+# Output:
+# Making:
+#   - Latte
+#   - Espresso
+#   - Cappuccino
 ```
 **Explanation:** `.put()` adds to the back of the line. `.get()` safely removes from the front. While a `deque` is faster for single-threaded code, `queue.Queue` is mandatory if you have multiple threads (e.g., one thread taking orders, another thread making coffee).
 
@@ -355,15 +389,33 @@ while not coffee_orders.empty():
 ```python
 import queue
 
+# Create a LifoQueue object.
+# LIFO means: Last In, First Out
+# The most recent item added is removed first.
+# It works like a stack of plates:
+# the last plate placed on top is the first one removed.
 action_history = queue.LifoQueue()
 
-# User types some things
+# Add user actions to the stack using put().
+# Actions are stored in the order they happen
+# 1. Typed 'Hello'
+# 2. Typed ' World'
+# 3. Deleted 'World'
+#
+# The last action is now at the top of the stack.
 action_history.put("Typed 'Hello'")
 action_history.put("Typed ' World'")
 action_history.put("Deleted 'World'")
 
 print("Undoing last action:")
-print(f"  Reversed: {action_history.get()}")
+# get() removes and returns the most recent action.
+# Because this is a LifoQueue:
+# Deleted 'World' is removed before Typed ' World' and Typed 'Hello'.
+# This is the same idea used in
+# Undo operations in text editors.
+print(f"  Reversed: {action_history.get()}")  
+
+# Output: Reversed: Deleted 'World'
 ```
 **Explanation:** Because it's Last-In, First-Out, putting "Deleted 'World'" in last means it's the very first thing `.get()` pulls out, perfectly simulating an Undo stack.
 
@@ -394,19 +446,41 @@ while not er.empty():
 ```python
 from enum import Enum
 
+# Create an Enum class for HTTP status codes.
+# An Enum allows us to create meaningful names
+# instead of using unexplained numbers.
+# Without Enum:
+#     200  → What does this mean?
+#     404  → What does this mean?
+# With Enum:
+#     OK          → 200
+#     NOT_FOUND   → 404
+#     SERVER_ERROR → 500
+
 class HttpStatus(Enum):
+    # Each name is an enum member.
+    # The assigned value is the actual HTTP status code.
     OK = 200
     NOT_FOUND = 404
     SERVER_ERROR = 500
 
+# Function receives an HttpStatus value.
+# It is clearer to pass: HttpStatus.OK instead of: 200
+# because the meaning is obvious.
 def send_response(status):
+    # Compare the enum member.
     if status == HttpStatus.OK:
         print("Success! Sending data...")
+
     elif status == HttpStatus.NOT_FOUND:
         print("Error: Page does not exist.")
 
-# Much clearer than typing: send_response(404)
+
+# Call the function using the readable enum name.
+# Internally Python compares:
+# HttpStatus.NOT_FOUND.value which is: 404
 send_response(HttpStatus.NOT_FOUND)
+# Output: Error: Page does not exist.
 ```
 **Explanation:** `HttpStatus.NOT_FOUND` evaluates to `404`, but it makes the code instantly understandable to another developer. If you type `HttpStatus.NOT_FOUNT` by mistake, Python will immediately throw an error, preventing typos.
 
@@ -419,19 +493,64 @@ send_response(HttpStatus.NOT_FOUND)
 ```python
 from dataclasses import dataclass, field
 
+# @dataclass is a decorator that automatically adds
+# useful methods to a class.
+# It can automatically create methods such as:
+# - __init__()  → creates objects
+# - __repr__()  → gives a readable print output
+# - __eq__()    → compares objects
+# We do not need to write these methods manually.
 @dataclass
 class Product:
+    # These are dataclass fields.
+    # Type hints tell us what type of data we expect to store.
+    # They are suggestions, not strict rules.
     name: str
     price: float
+
+    # A normal default value.
+    # If no value for attribute in_stock is provided while creating an object, 
+    # in_stock will be True.
     in_stock: bool = True
+
+    # A list is a mutable object. We should not write:
+    # tags: list = []
+    # because all objects could accidentally share the same list.
+    # default_factory=list means:
+    # create a new empty list for every Product object.
     tags: list = field(default_factory=list)
 
-# Create products easily
+# Create a Product object.
+# The dataclass automatically creates the constructor:
+# Product(name, price, in_stock, tags)
+# Here:
+# name = "Laptop"
+# price = 999.99
+# tags = ["electronics", "computer"]
+# in_stock is not given, so it uses the default True.
 p1 = Product("Laptop", 999.99, tags=["electronics", "computer"])
+
+
+# Another Product object.
+# Here we provide:
+# in_stock=False
+# so the default value True is replaced.
 p2 = Product("Desk", 150.00, in_stock=False)
 
-print(p1) # Automatically prints beautifully
+# Printing a dataclass object.
+# Because of the automatically created __repr__(),
+# Python displays the object with field names and values.
+# Example:
+# Product(name='Laptop', price=999.99, ...)
+print(p1)  
+# Output: Product(name='Laptop', price=999.99, in_stock=True, tags=['electronics', 'computer'])
+
+# Accessing fields using attribute names.
+# p1.name gives:
+# "Laptop"
+# p1.tags gives: ["electronics", "computer"]
 print(f"Tags for {p1.name}: {p1.tags}")
+# Output: Tags for Laptop: ['electronics', 'computer']
 ```
 **Explanation:** The `@dataclass` decorator saves us from writing `def __init__(self, name, price...` etc. It auto-generates the setup and the string representation. `field(default_factory=list)` safely ensures `p1` and `p2` don't accidentally share the same tags list.
 
@@ -445,17 +564,73 @@ print(f"Tags for {p1.name}: {p1.tags}")
 from functools import lru_cache
 import time
 
+# lru_cache is a decorator that stores the results returned by a function.
+# This technique is called memoization.
+# If the same function is called again with the same # arguments, 
+# Python returns the saved result instead of running the function again.
+# This is useful for expensive operations such as:
+# - database queries
+# - API calls
+# - complex calculations
+#
+# maxsize=None means: keep all cached results.
+# (No limit on number of stored results.)
 @lru_cache(maxsize=None)
 def get_user_from_db(user_id):
+    # This line runs only when the result is not
+    # already stored in the cache.
+    # If the same user_id is requested again,
+    # this function body will be skipped.
     print(f"  -> Querying database for User {user_id}...")
-    time.sleep(1) # Simulate a 1-second network delay
-    return {"id": user_id, "name": "Alice"}
 
-# Call the same ID three times
+    # Simulate a slow operation.
+    # In real life this could be:
+    # - reading from a database
+    # - calling a web service
+    # We wait for 1 second to demonstrate
+    # the benefit of caching.
+    time.sleep(1)
+
+    # Return the user information.
+    # lru_cache stores this returned value
+    # along with the input argument (user_id).
+    return {
+        "id": user_id,
+        "name": "Alice"
+    }
+
+# Request the same user multiple times.
 print("Fetching user 42:")
+
+# First call:
+# - user_id = 42 is not in cache
+# - function executes
+# - database query happens
+# - result is stored in cache
 print(get_user_from_db(42))
-print(get_user_from_db(42)) # Instant! Uses cache.
-print(get_user_from_db(42)) # Instant! Uses cache.
+# Output:
+# Fetching user 42:
+#  -> Querying database for User 42...
+# {'id': 42, 'name': 'Alice'}
+
+# Second call:
+# - user_id = 42 already exists in cache
+# - function does NOT execute again
+# - saved result is returned immediately
+print(get_user_from_db(42))
+# Output:
+# {'id': 42, 'name': 'Alice'}
+# Note Fetching user 42: is printed only once, because the function body is skipped for subsequent calls with the same argument.
+
+
+# Third call:
+# Same as above.
+# No database query.
+# Result comes from cache.
+print(get_user_from_db(42))
+# Output:
+# {'id': 42, 'name': 'Alice'}
+# Note Fetching user 42: is printed only once, because the function body is skipped for subsequent calls with the same argument.
 ```
 **Explanation:** The first call takes 1 second. The next two calls take 0 seconds because `lru_cache` remembers the output for ID 42. In real life, this simple decorator can speed up applications by thousands of percent.
 
@@ -464,15 +639,38 @@ print(get_user_from_db(42)) # Instant! Uses cache.
 ```python
 from functools import partial
 
+# log_message() is a normal function that accepts two arguments:
+    # message → the text we want to display
+    # level   → the type/importance of the message
+# Example:
+# log_message("Server started", "INFO")
 def log_message(message, level):
+    # upper() converts the level text to uppercase.
+    # Example: "error" becomes "ERROR"
     print(f"[{level.upper()}] {message}")
 
-# Create a new function where 'level' is permanently locked to "ERROR"
+# partial() creates a new function from an existing function.
+# Here we fix (pre-fill) the value of:
+# level = "ERROR"
+# The original function:
+# log_message(message, level)
+# becomes:
+# log_error(message)
+# because the level is already decided.
+# partial() does not call the function immediately.
+# It creates a new function object.
 log_error = partial(log_message, level="ERROR")
 
-# Now we only need to provide the message
-log_error("Database connection failed!")
-log_error("File not found!")
+# Now we only need to provide the remaining argument:
+# message
+# Internally this becomes:
+# log_message("Database connection failed!", "ERROR")
+log_error("Database connection failed!")  # Output: [ERROR] Database connection failed!
+
+# Same idea:
+# level is automatically "ERROR"
+# only the message changes.
+log_error("File not found!")  # Output: [ERROR] File not found!
 ```
 **Explanation:** `partial` takes a function and "freezes" some of its arguments. `log_error` is now a brand new function that only requires one argument (`message`), automatically passing `"ERROR"` to the background.
 
@@ -501,16 +699,36 @@ print(f"Grand Total: ${total:.2f}")
 **Usage:** You have a matrix (a list of lists) or multiple separate data streams, and you just want to loop through all the numbers in one continuous loop without creating a massive new list in memory.
 ```python
 from itertools import chain
-
+# A 2-dimensional list (list of lists).
+# Each inner list represents a row.
+# Think of it like a table:
+# Row 1:  1  2  3
+# Row 2:  4  5  6
+# Row 3:  7  8  9
 matrix = [
     [1, 2, 3],
     [4, 5, 6],
     [7, 8, 9]
 ]
 
-# Flatten the 2D list into a 1D sequence
+# chain.from_iterable() combines multiple iterables into one sequence.
+# Here the iterable is: matrix
+# which contains:
+# [1,2,3]
+# [4,5,6]
+# [7,8,9]
+# It takes items from the first list, then the second list, then the third list.
+# Resulting sequence:
+# 1 2 3 4 5 6 7 8 9
+# It does not create a new list.
+# It returns an iterator that gives values one by one.
 for num in chain.from_iterable(matrix):
+    # Each value produced by the iterator is printed.
+    # end=" " keeps the output on the same line with spaces between numbers.
     print(num, end=" ")
+
+# Output:
+# 1 2 3 4 5 6 7 8 9
 ```
 **Explanation:** `chain.from_iterable` takes an iterable of iterables (a list of lists) and links them together. It yields `1, 2, 3, 4...` one by one. It is incredibly memory efficient because it never actually creates the flattened list in RAM.
 
@@ -518,16 +736,52 @@ for num in chain.from_iterable(matrix):
 **Usage:** You have a list of bank transactions sorted by date. You want to print a summary showing all transactions that happened in January, then February, etc.
 ```python
 from itertools import groupby
-
-# Data MUST be sorted by the key you want to group by
+# groupby() groups consecutive items that have the same key.
+# IMPORTANT: 
+# The data should be sorted by the same value that we are using for grouping.
+# Here we want to group by month, so all transactions of the same month should be together.
 transactions = [
-    ("Jan", "Coffee"), ("Jan", "Gas"), 
-    ("Feb", "Rent"), ("Feb", "Groceries"),
+    ("Jan", "Coffee"),
+    ("Jan", "Gas"),
+    ("Feb", "Rent"),
+    ("Feb", "Groceries"),
     ("Mar", "Electricity")
 ]
 
+# groupby() returns pairs:
+# (key, group_iterator)
+# key:
+#     The value used for grouping.
+# items:
+#     An iterator containing all items belonging to that group.
+# The lambda function:
+# lambda t: t[0]
+# means:
+# take each transaction tuple and use
+# its first element (month) as the key.
+# Example:
+# ("Jan", "Coffee") → "Jan"
+# ("Feb", "Rent")   → "Feb"
+#
 for month, items in groupby(transactions, key=lambda t: t[0]):
+    # items is an iterator containing transactions of the current month.
+    # Example:
+    # For January:
+    # [
+    #   ("Jan", "Coffee"),
+    #   ("Jan", "Gas")
+    # ]
+    # The list comprehension extracts only
+    # the expense names (second value).
+    # item[1] gives:
+    # Coffee
+    # Gas
     print(f"{month}: {[item[1] for item in items]}")
+
+# Output:
+# Jan: ['Coffee', 'Gas']
+# Feb: ['Rent', 'Groceries']
+# Mar: ['Electricity']
 ```
 **Explanation:** The `key` function tells `groupby` to look at index 0 (the month). It groups consecutive identical months together, allowing us to easily print a clean summary without writing complex `if/else` state-tracking logic.
 
@@ -551,14 +805,45 @@ for combo in combinations:
 **Usage:** You have 3 friends coming to dinner, but your table only has 3 distinct chairs. You want to know all the possible ways they can sit down.
 ```python
 from itertools import permutations
+# A list of people who need to be arranged.
+# We want to find all possible seating orders for these friends.
+friends = [
+    "Alice",
+    "Bob",
+    "Charlie"
+]
 
-friends = ["Alice", "Bob", "Charlie"]
-
+# permutations() creates all possible arrangements of the given items.
+# Important: # In permutations, the order matters.
+# Example: ("Alice", "Bob", "Charlie") is different from: ("Bob", "Alice", "Charlie")
+# because the seating order has changed.
+# permutations() returns an iterator, so we convert it to a list to store all results.
 seating_charts = list(permutations(friends))
 
+
+# The number of possible arrangements is the number of items in the list.
+# For 3 people:→ 3 × 2 × 1 = 6 arrangements
+# This is called 3 factorial (3!).
 print(f"Total seating arrangements: {len(seating_charts)}")
+
+# Loop through every possible arrangement.
+# Each arrangement is a tuple representing one possible seating order.
+# Example: ('Alice', 'Bob', 'Charlie')
+# means:
+# Seat 1 → Alice
+# Seat 2 → Bob
+# Seat 3 → Charlie
 for arrangement in seating_charts:
     print(arrangement)
+
+# Output:
+# Total seating arrangements: 6
+# ('Alice', 'Bob', 'Charlie')
+# ('Alice', 'Charlie', 'Bob')
+# ('Bob', 'Alice', 'Charlie')
+# ('Bob', 'Charlie', 'Alice')
+# ('Charlie', 'Alice', 'Bob')
+# ('Charlie', 'Bob', 'Alice')
 ```
 **Explanation:** Unlike `product`, `permutations` doesn't allow an item to be used more than once, and order matters (Alice-Bob-Charlie is different from Charlie-Bob-Alice). It instantly generates all $n!$ (n-factorial) arrangements.
 
