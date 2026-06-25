@@ -11,7 +11,7 @@ Below are practical, real-world examples of how to use the specialized data stru
 
 ## 1. The `collections` Module
 
-### `Counter`: Log File Analysis
+### 1.1 `Counter`: Log File Analysis
 **Usage:** Imagine you are a server administrator. You have a text file containing thousands of server log entries, and you need to quickly find the top 3 most common error codes to see what is breaking the most.
 ```python
 from collections import Counter
@@ -44,7 +44,7 @@ Top 3 Issues:
 ```
 **Explanation:** We use a simple list comprehension to extract just the numbers (e.g., "404") from each line. Then, `Counter` does all the heavy lifting. The `.most_common(3)` method instantly grabs the top three issues, saving us from writing complex sorting logic.
 
-### `deque`: Terminal Command History
+### 1.2 `deque`: Terminal Command History
 **Usage:** When building a command-line application (like a terminal or an interactive text game), you want to store the user's recent commands so they can press the "Up" arrow to see what they just typed. You also want to limit this memory so it doesn't grow infinitely.
 ```python
 from collections import deque
@@ -71,7 +71,7 @@ Current History: ['pwd', 'mkdir new_folder', 'ls -l']
 
 **Explanation:** By setting `maxlen=3`, the `deque` automatically discards the oldest item the moment a 4th item is added. A standard Python list cannot do this automatically; you would have to write `if-else` logic to check the length and manually delete items.
 
-### `defaultdict`: Grouping Grades by Letter
+### 1.3 `defaultdict`: Grouping Grades by Letter
 **Usage:** A teacher has a list of student scores and needs to group all the students who got an 'A', 'B', or 'C' together. With a normal dictionary, checking if 'A' exists and creating a list for it is tedious.
 ```python
 from collections import defaultdict
@@ -96,7 +96,7 @@ print(dict(grade_book))
 
 **Explanation:** Because we used `defaultdict(list)`, the first time Python sees the grade "A", it realizes the key doesn't exist. Instead of crashing with a `KeyError`, it silently creates an empty list `[]` for "A", and then appends "Alice" to it.
 
-### `OrderedDict`: Most Recently Used (MRU) Cache
+### 1.4 `OrderedDict`: Most Recently Used (MRU) Cache
 **Usage:** Web browsers and apps keep a "Recently Viewed" list. When you view an old item again, it gets pulled out of the middle of the list and moved to the very end.
 ```python
 from collections import OrderedDict
@@ -123,7 +123,7 @@ After viewing About again: ['Home', 'Contact', 'About']
 
 **Explanation:** A modern standard `dict` remembers insertion order, but it doesn't have tools to manipulate that order. `OrderedDict` gives us the `move_to_end()` method, which perfectly simulates an MRU list by moving "About" to the back of the line.
 
-### `namedtuple`: Parsing CSV Data
+### 1.5 `namedtuple`: Parsing CSV Data
 **Usage:** You read a line of data from a comma-separated file. Instead of accessing `row[2]` and hoping it's the right column, you use a `namedtuple` to make your code self-documenting.
 ```python
 from  collections  import  namedtuple
@@ -196,7 +196,7 @@ Name: Sarah | Dept: Engineering
 
 **Explanation:** The `*csv_row.split(',')` unpacks the 4 strings directly into the `Employee` constructor. Now, you have a lightweight object where you can access data using `.name` and `.salary` instead of trying to remember index numbers.
 
-### `ChainMap`: Application Configuration
+### 1.6 `ChainMap`: Application Configuration
 **Usage:** Apps have default settings, user settings, and command-line arguments. If a user provides a setting, it should override the default. `ChainMap` lets you layer these without merging them.
 ```python
 from  collections  import  ChainMap
@@ -333,7 +333,7 @@ print("Updated Leaderboard:", leaderboard)
 
 ## 4. The `queue` Module
 
-### `Queue` (FIFO): Coffee Shop Orders
+### 4.1 `Queue` (FIFO): Coffee Shop Orders
 **Usage:** A barista takes orders one by one. The first order placed should be the first one served.
 ```python
 import queue
@@ -350,7 +350,7 @@ while not coffee_orders.empty():
 ```
 **Explanation:** `.put()` adds to the back of the line. `.get()` safely removes from the front. While a `deque` is faster for single-threaded code, `queue.Queue` is mandatory if you have multiple threads (e.g., one thread taking orders, another thread making coffee).
 
-### `LifoQueue` (LIFO): The "Undo" Button
+### 4.2 `LifoQueue` (LIFO): The "Undo" Button
 **Usage:** In a text editor, when a user hits "Undo", you need to reverse the very last action they took, not the first one.
 ```python
 import queue
@@ -367,7 +367,7 @@ print(f"  Reversed: {action_history.get()}")
 ```
 **Explanation:** Because it's Last-In, First-Out, putting "Deleted 'World'" in last means it's the very first thing `.get()` pulls out, perfectly simulating an Undo stack.
 
-### `PriorityQueue`: Hospital Triage
+### 4.3 `PriorityQueue`: Hospital Triage
 **Usage:** Patients arrive at an ER, but they shouldn't be treated in the order they arrived. A patient with a heart attack (priority 1) must jump ahead of a patient with a scraped knee (priority 5).
 ```python
 import queue
@@ -439,7 +439,7 @@ print(f"Tags for {p1.name}: {p1.tags}")
 
 ## 7. `functools` Module
 
-### `lru_cache`: Simulating a Slow Database
+### 7.1 `lru_cache`: Simulating a Slow Database
 **Usage:** Fetching data from a database over a network takes time. If multiple parts of your program ask for "User #42"'s profile, you don't want to query the database three times.
 ```python
 from functools import lru_cache
@@ -459,7 +459,7 @@ print(get_user_from_db(42)) # Instant! Uses cache.
 ```
 **Explanation:** The first call takes 1 second. The next two calls take 0 seconds because `lru_cache` remembers the output for ID 42. In real life, this simple decorator can speed up applications by thousands of percent.
 
-### `partial`: Pre-filling Log Levels
+### 7.2 `partial`: Pre-filling Log Levels
 **Usage:** You have a logging function that takes a message and a severity level. You find yourself typing `log("message", "ERROR")` over and over. You can use `partial` to create a dedicated `log_error` function.
 ```python
 from functools import partial
@@ -476,7 +476,7 @@ log_error("File not found!")
 ```
 **Explanation:** `partial` takes a function and "freezes" some of its arguments. `log_error` is now a brand new function that only requires one argument (`message`), automatically passing `"ERROR"` to the background.
 
-### `reduce`: Calculating Shopping Cart Total
+### 7.3 `reduce`: Calculating Shopping Cart Total
 **Usage:** You have a list of dictionary items in a shopping cart, and you need to calculate the grand total.
 ```python
 from functools import reduce
@@ -497,7 +497,7 @@ print(f"Grand Total: ${total:.2f}")
 
 ## 8. `itertools` Module
 
-### `chain`: Flattening 2D Data
+### 8.1 `chain`: Flattening 2D Data
 **Usage:** You have a matrix (a list of lists) or multiple separate data streams, and you just want to loop through all the numbers in one continuous loop without creating a massive new list in memory.
 ```python
 from itertools import chain
@@ -514,7 +514,7 @@ for num in chain.from_iterable(matrix):
 ```
 **Explanation:** `chain.from_iterable` takes an iterable of iterables (a list of lists) and links them together. It yields `1, 2, 3, 4...` one by one. It is incredibly memory efficient because it never actually creates the flattened list in RAM.
 
-### `groupby`: Grouping Transactions by Month
+### 8.2 `groupby`: Grouping Transactions by Month
 **Usage:** You have a list of bank transactions sorted by date. You want to print a summary showing all transactions that happened in January, then February, etc.
 ```python
 from itertools import groupby
@@ -531,7 +531,7 @@ for month, items in groupby(transactions, key=lambda t: t[0]):
 ```
 **Explanation:** The `key` function tells `groupby` to look at index 0 (the month). It groups consecutive identical months together, allowing us to easily print a clean summary without writing complex `if/else` state-tracking logic.
 
-### `product`: Combination Lock Generator
+### 8.3 `product`: Combination Lock Generator
 **Usage:** You are building a security tool or a puzzle game, and you need to generate every possible combination of a 2-dial lock, where each dial has numbers 0 through 2.
 ```python
 from itertools import product
@@ -547,7 +547,7 @@ for combo in combinations:
 ```
 **Explanation:** `product` acts like a set of nested `for` loops. `repeat=2` tells it to combine the `dials` list with itself twice. It perfectly simulates Cartesian math (e.g., $3 \times 3 = 9$ combinations).
 
-### `permutations`: Seating Arrangements
+### 8.4 `permutations`: Seating Arrangements
 **Usage:** You have 3 friends coming to dinner, but your table only has 3 distinct chairs. You want to know all the possible ways they can sit down.
 ```python
 from itertools import permutations
