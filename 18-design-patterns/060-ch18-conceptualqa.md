@@ -45,7 +45,7 @@ D --> E["5. Easier maintenance and extension"]
 **Q2. Classify design patterns. Compare Creational, Structural and Behavioral patterns. When is each category used?**
 •	Answer
 The Gang of Four (GoF) classified design patterns into three major categories according to the kind of design problem they solve.
-##### 1. Creational Patterns
+1. Creational Patterns
 Creational patterns focus on object creation.
 Instead of creating objects directly throughout the program, these patterns centralize or control the creation process.
       -   Typical examples include:
@@ -101,7 +101,9 @@ A --> D["4. Behavioral<br/>Object Communication"]
 ```
 ________________________________________
 **Q3. Explain the Factory Method Pattern. What problem does it solve? How does it improve software compared to directly creating objects?**
-•	Answer
+
+Answer
+
 The Factory Method pattern centralizes object creation inside a factory method instead of allowing client code to directly create objects.
 Without a factory, a program may contain many statements such as:
 `report = PDFReport()`
@@ -141,7 +143,9 @@ C --> D["4. Client uses object"]
 
 ________________________________________
 **Q4. Compare the Singleton and Factory Method patterns. When should each be preferred?**
-•	Answer
+
+Answer
+
 Although both patterns deal with object creation, they solve different problems.
 The Singleton pattern ensures that only one instance of a class exists throughout the program.
 Examples include:
@@ -185,6 +189,7 @@ D -->|Yes| E["Use Factory Method"]
 ```
 ________________________________________
 **Q5. Explain the Decorator Pattern. How does it differ from inheritance? Why are Python decorators considered a Pythonic alternative?**
+
 Answer
 The Decorator pattern allows new functionality to be added to an existing object without modifying its original class.
 Instead of changing the class itself, another object wraps the original object and adds additional behaviour.
@@ -227,6 +232,7 @@ C --> D["4. Execute Enhanced Function"]
 **Q6. Explain the Abstract Factory Pattern. What problem does it solve? How does it ensure that related objects are created together?**
 
 Answer
+
 The Abstract Factory pattern provides a way to create families of related objects without specifying their concrete classes. Unlike the Factory Method pattern, which typically creates a single object, the Abstract Factory creates multiple objects that are designed to work together.
 Consider a graphical user interface (GUI) application. If the application is running on Windows, all interface elements should have the Windows look and feel. Similarly, if it is running on macOS, all interface elements should have the Mac appearance.
 Instead of creating each object individually, the application asks a factory to create all the required objects. The factory ensures that every object belongs to the same family.
@@ -262,6 +268,7 @@ ________________________________________
 **Q7. Explain the Builder Pattern. Why is it preferred when constructing complex objects? Compare it with using a constructor having many parameters.**
 
 Answer
+
 The Builder pattern constructs a complex object step by step. Instead of supplying every value to a large constructor, the object is assembled gradually.
 Suppose a Computer object contains many optional components such as RAM, SSD, processor, graphics card and operating system. A constructor with numerous parameters becomes difficult to read and use.
 The Builder pattern solves this problem by allowing each component to be added separately. After all required components have been specified, the final object is constructed.
@@ -294,6 +301,7 @@ D --> E["5. Build Final Object"]
 **Q8. Explain the Adapter Pattern. What problem does it solve? How does it help integrate incompatible classes?**
 
 Answer
+
 The Adapter pattern allows two incompatible classes to work together without modifying either of them.
 Often, an application needs to use an existing class whose interface differs from what the application expects. Instead of rewriting the existing class, an adapter converts one interface into another.
 For example, suppose an application expects every payment system to provide a method named pay(). A third-party payment library may instead provide a method called make_payment(). An adapter can translate calls to pay() into calls to make_payment().
@@ -328,6 +336,7 @@ ________________________________________
 Q9. Explain the Facade Pattern. How does it simplify the use of complex subsystems? Give suitable situations where it is useful.
 
 Answer
+
 The Facade pattern provides a single, simple interface to a complex subsystem.
 Large software systems often consist of many classes that must be called in a particular order. Requiring every programmer to remember this sequence increases complexity and the chance of errors.
 A facade hides this complexity behind a single method or class. The client interacts only with the facade, while the facade internally coordinates all the necessary subsystem objects.
@@ -362,6 +371,7 @@ ______________________________________
 **Q10. Compare the Decorator, Adapter and Facade patterns. Although all are structural patterns, how do their purposes differ?**
 
 Answer
+
 Decorator, Adapter and Facade all belong to the Structural Design Pattern category because they organise relationships among objects. However, each addresses a different design problem.
 The Decorator pattern adds new behaviour to an existing object without modifying its class.
 The Adapter pattern changes the interface of an existing object so that it becomes compatible with another system.
@@ -398,7 +408,9 @@ ________________________________________
 
 
 **Q11. Explain the Composite Pattern. What problem does it solve? How does it allow individual objects and groups of objects to be treated uniformly?**
-•	Answer
+
+Answer
+
 The Composite Pattern allows individual objects and groups of objects to be treated in the same way. It organizes objects into a tree-like structure, where both individual objects (called leaf objects) and collections of objects (called composites) support the same operations.
 Without this pattern, the client code would need separate logic to handle a single object and a collection of objects. This increases complexity and reduces code reusability.
 For example, a company's organizational structure may contain employees as well as departments. A department can contain employees and even other departments. Using the Composite Pattern, both employees and departments can implement the same method, such as display().
@@ -445,7 +457,9 @@ A --> H["8. Same display() method used for all"]
 
 ________________________________________
 **Q12. Explain the Proxy Pattern. Why is it used? Compare it with directly accessing an object.**
-•	Answer
+
+Answer
+
 The Proxy Pattern provides a substitute or placeholder for another object. Instead of allowing the client to communicate directly with the real object, all requests pass through the proxy.
 The proxy can perform additional tasks before or after forwarding the request.
 Typical responsibilities of a proxy include:
@@ -485,7 +499,9 @@ D --> E["5. Perform Operation"]
 
 ________________________________________
 **Q13. Explain the Observer Pattern. How does it support communication between objects? Give suitable applications.**
-•	Answer
+
+Answer
+
 The Observer Pattern establishes a one-to-many relationship between objects. When one object changes its state, all dependent objects are automatically notified.
 The object being observed is called the Subject, while the objects receiving notifications are called Observers.
 Instead of manually informing every object about a change, the subject automatically broadcasts notifications to all registered observers.
@@ -493,7 +509,8 @@ A common example is a weather station. Whenever the temperature changes, all sub
 Similarly, graphical user interfaces use this pattern extensively. When a user clicks a button, multiple components may react simultaneously.
 The Observer Pattern reduces coupling because the subject does not need to know the internal details of the observers.
 ________________________________________
-•	Comparison Table
+
+Comparison Table
 
 | Without Observer | With Observer |
 | --- | --- |
@@ -521,7 +538,9 @@ B --> E["5. Observer C Updates"]
 
 ________________________________________
 **Q14. Explain the Strategy Pattern. How does it allow algorithms to be changed at runtime? Compare it with using large if-elif statements.**
-•	Answer
+
+Answer
+
 The Strategy Pattern allows different algorithms to be encapsulated inside separate classes or functions. The client selects the required strategy at runtime.
 Without the Strategy Pattern, programmers often write large if-elif blocks to choose among several algorithms. Such code becomes difficult to read and maintain as the number of choices increases.
 With the Strategy Pattern, each algorithm is implemented independently. The client simply chooses the required strategy.
@@ -533,7 +552,8 @@ For example, an online shopping application may support multiple payment methods
 Each payment method becomes a separate strategy.
 Adding another payment option usually requires creating only one new strategy rather than modifying existing code.
 ________________________________________
-•	Comparison Table
+
+Comparison Table
 
 | Large if-elif | Strategy Pattern |
 | --- | --- |
@@ -567,7 +587,9 @@ E --> F
 ```
 ________________________________________
 **Q15. Explain the Command Pattern. How does it help in implementing undo operations, menus and task queues?**
-•	Answer
+
+Answer
+
 The Command Pattern converts a request into an object. Instead of directly performing an operation, the request is stored inside a command object.
 Each command object contains all the information required to perform the requested action.
 For example, in a text editor, clicking the Copy, Paste, or Undo buttons creates corresponding command objects. The application executes these commands whenever required.
@@ -580,7 +602,8 @@ Since commands are ordinary objects, they can be:
 The Command Pattern separates the object requesting an operation from the object performing it.
 This makes the application more flexible and simplifies features such as menus, toolbars, macros and undo-redo functionality.
 ________________________________________
-•	Comparison Table
+
+Comparison Table
 
 | Direct Method Call | Command Pattern |
 | --- | --- |
@@ -608,7 +631,9 @@ D --> E["5. Receiver Performs Action"]
 ________________________________________
 .
 **Q16. Explain the Iterator and Template Method patterns. What problems do they solve? Compare their purposes and typical applications.**
+
 Answer
+
 The Iterator and Template Method patterns are both behavioral design patterns, but they address different kinds of problems.
 The Iterator Pattern provides a standard way to access the elements of a collection one at a time without exposing its internal implementation. Whether the collection is a list, tuple, set or a custom data structure, the client can traverse it using the same basic approach.
 In Python, many built-in objects such as list, tuple, set, dict and str already support iteration using the for loop. This makes the Iterator pattern feel natural in Python.
@@ -654,7 +679,9 @@ B --> E["5. End of Collection"]
 
 ________________________________________
 **Q17. Explain Pythonic Design Patterns. How do Python features such as decorators, context managers, mixins, duck typing and dataclasses simplify classical design patterns?**
+
 Answer
+
 Many classical design patterns were originally developed for languages such as C++ and Java, where the language itself provided fewer high-level features.
 Python includes many language features that naturally support the same design goals with much less code. These are often referred to as Pythonic patterns.
 For example:
@@ -697,7 +724,9 @@ C --> D
 
 ________________________________________
 Q18. How should a programmer choose the appropriate design pattern? What factors should be considered before applying one?
+
 Answer
+
 Selecting the correct design pattern is one of the most important software design decisions. No single pattern is suitable for every problem.
 A programmer should first understand the nature of the problem before selecting a pattern.
 Some useful questions include:
@@ -742,7 +771,9 @@ D -->|No| F["Behavioral Pattern"]
 
 ________________________________________
 Q19. Why are multiple design patterns sometimes combined in a single application? Explain with suitable examples.
+
 Answer
+
 Large software systems often solve many different design problems simultaneously. As a result, a single design pattern is usually insufficient.
 Instead, multiple patterns are combined, with each pattern solving a specific aspect of the overall problem.
 For example, a graphical application may use:
@@ -789,6 +820,7 @@ ________________________________________
 Q20. What are anti-patterns? Explain common design-pattern mistakes such as over-engineering, God Object and cargo-cult programming. How can they be avoided?
 
 Answer
+
 An anti-pattern is a commonly used solution that appears useful but ultimately leads to poor software design.
 One common mistake is over-engineering, where programmers introduce unnecessary classes, factories and abstractions for very simple problems. This increases complexity without providing significant benefits.
 Another common anti-pattern is the God Object. In this situation, a single class performs too many responsibilities, such as data storage, business logic, user interface management, database access and logging. Such classes become difficult to understand, test and maintain.
