@@ -45,7 +45,7 @@ D --> E["5. Easier maintenance and extension"]
 **Q2. Classify design patterns. Compare Creational, Structural and Behavioral patterns. When is each category used?**
 •	Answer
 The Gang of Four (GoF) classified design patterns into three major categories according to the kind of design problem they solve.
-1. Creational Patterns
+##### 1. Creational Patterns
 Creational patterns focus on object creation.
 Instead of creating objects directly throughout the program, these patterns centralize or control the creation process.
       -   Typical examples include:
