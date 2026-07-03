@@ -24,10 +24,10 @@ It is important to understand that a design pattern is not an algorithm.
 | Usually has many possible implementations | Usually has one well-defined procedure |
 
 For example:
-•	Merge Sort is an algorithm. 
-•	Singleton is a design pattern. 
-•	Observer is a design pattern. 
-•	Binary Search is an algorithm. 
+-  Merge Sort is an algorithm. 
+- Singleton is a design pattern.
+- Observer is a design pattern.
+- Binary Search is an algorithm. 
 
 ```mermaid
 flowchart LR
