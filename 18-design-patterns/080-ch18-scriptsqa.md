@@ -25,8 +25,8 @@ config2 = AppConfig()
 print(f"Are instances identical? {config1 is config2}")  # Output: True
 ```
 **Pattern Explanation:**
-•	Design Pattern Used: Singleton Pattern (Creational family).
-•	Core Mechanics: The `__new__` magic method intercepts the creation phase of an object before `__init__` is invoked. By checking if cls._instance is already cached, it ensures that no matter how many times a client calls AppConfig(), they always receive a reference to the exact same block of allocated memory. This serves as a centralized "source of truth" to prevent state synchronization conflicts across complex application layers.
+  -  Design Pattern Used: Singleton Pattern (Creational family).
+  -  Core Mechanics: The `__new__` magic method intercepts the creation phase of an object before `__init__` is invoked. By checking if cls._instance is already cached, it ensures that no matter how many times a client calls AppConfig(), they always receive a reference to the exact same block of allocated memory. This serves as a centralized "source of truth" to prevent state synchronization conflicts across complex application layers.
 
 **Q2. Implement a Factory Method function named `get_vehicle `that returns an instance of a `Car` or `Bike` object based on an input string parameter.**
 
@@ -52,8 +52,8 @@ print(v1.drive())  # Output: Driving a car!
 print(v2.drive())  # Output: Riding a bike!
 ```
 **Pattern Explanation:**
-•	Design Pattern Used: Factory Method Pattern (Creational family).
-•	Core Mechanics: The client script avoids calling `Car()` or `Bike()` directly. Instead, object lifecycle generation is delegated to `get_vehicle()`. This structural decoupling conforms to clean architectural principles because if a new class like `Truck` is introduced, only the centralized factory logic changes; the calling application code remains untouched.
+  -  Design Pattern Used: Factory Method Pattern (Creational family).
+  -  Core Mechanics: The client script avoids calling `Car()` or `Bike()` directly. Instead, object lifecycle generation is delegated to `get_vehicle()`. This structural decoupling conforms to clean architectural principles because if a new class like `Truck` is introduced, only the centralized factory logic changes; the calling application code remains untouched.
 
 **Q3. Design an Abstract Factory setup featuring a `DarkButton` and `DarkWindow `under a `DarkThemeFactory`, and a `LightButton` and `LightWindow` under a `LightThemeFactory`. Include a uniform client loader.**
 
@@ -85,8 +85,8 @@ render_ui(DarkThemeFactory())
 render_ui(LightThemeFactory())
 ```
 **Pattern Explanation:**
-•	Design Pattern Used: Abstract Factory Pattern (Creational family).
-•	Core Mechanics: This pattern defines a suite of related methods (`create_button, create_window`) designed to produce uniform sets of cohesive products. It acts as a factory of factories, preventing accidental cross-contamination (e.g., matching a `DarkButton` with a `LightWindow`), thereby ensuring complete system component consistency.
+  -  Design Pattern Used: Abstract Factory Pattern (Creational family).
+  -  Core Mechanics: This pattern defines a suite of related methods (`create_button, create_window`) designed to produce uniform sets of cohesive products. It acts as a factory of factories, preventing accidental cross-contamination (e.g., matching a `DarkButton` with a `LightWindow`), thereby ensuring complete system component consistency.
 
 **Q4. Build a Robot construction script using the Builder Pattern. Support method chaining for adding custom components step-by-step.**
 
@@ -110,8 +110,8 @@ print(f"Robot assembly: {my_bot.parts}")  # Output: ['Lidar Sensor', 'Mechanical
 ```
 **Pattern Explanation:**
 
-•	Design Pattern Used: Builder Pattern (Creational family).
-•	Core Mechanics: Instead of forcing a massive, confusing constructor containing multiple arbitrary arguments, the Builder pattern splits object construction piece-by-piece using descriptive incremental step methods. Returning self at the end of each customization action creates a clean fluent interface syntax.
+  -  Design Pattern Used: Builder Pattern (Creational family).
+  -  Core Mechanics: Instead of forcing a massive, confusing constructor containing multiple arbitrary arguments, the Builder pattern splits object construction piece-by-piece using descriptive incremental step methods. Returning self at the end of each customization action creates a clean fluent interface syntax.
 
 **Q5. Write a Prototype pattern script where a data-heavy configuration object clones itself via a distinct custom `.clone()` routine.**
 
@@ -136,8 +136,8 @@ print(f"Data matches: {base_obj.dataset == cloned_obj.dataset}")  # True
 print(f"Are distinct objects: {base_obj is not cloned_obj}")     # True
 ```
 **Pattern Explanation:**
-•	Design Pattern Used: Prototype Pattern (Creational family).
-•	Core Mechanics: The Prototype pattern bypasses expensive standard system initialization workflows by allocating a new raw object structure and duplicating the populated operational properties of an existing blueprint instance directly. This optimization ensures that subsequent variations save CPU processing cycles.
+  -  Design Pattern Used: Prototype Pattern (Creational family).
+  -  Core Mechanics: The Prototype pattern bypasses expensive standard system initialization workflows by allocating a new raw object structure and duplicating the populated operational properties of an existing blueprint instance directly. This optimization ensures that subsequent variations save CPU processing cycles.
 
 **Q6. Construct a manual structural Decorator class named `BoldDecorator` that wraps a base text-generation function to format string outputs.**
 
@@ -160,8 +160,8 @@ wrapped = BoldDecorator(get_text)
 print(wrapped.render())  # Output: <b>Hello World</b>
 ```
 **Pattern Explanation:**
-•	Design Pattern Used: Decorator Pattern (Structural family).
-•	Core Mechanics: This structural design uses aggregation or wrapping to dynamically assign extra behavior to an object or execution handle at runtime without altering its underlying class architecture. The original function remains entirely isolated and simple, respecting the Open/Closed Principle.
+  -  Design Pattern Used: Decorator Pattern (Structural family).
+  -  Core Mechanics: This structural design uses aggregation or wrapping to dynamically assign extra behavior to an object or execution handle at runtime without altering its underlying class architecture. The original function remains entirely isolated and simple, respecting the Open/Closed Principle.
 
 **Q7. Convert the previous BoldDecorator script into an automated native Python syntax format using magic dunder methods.**
 
@@ -184,8 +184,8 @@ def get_custom_text():
 print(get_custom_text())  # Output: <b>Python Design Patterns</b>
 ```
 **Pattern Explanation:**
-•	Design Pattern Used: Pythonic Decorator Pattern (Structural family).
-•	Core Mechanics: By defining the` __call__` dunder method inside the structural wrapper wrapper class, Python automatically substitutes the raw function descriptor with a `BoldDecoratorSyntax` instance block. This approach provides a natural alternative to traditional Gang of Four class boilerplate.
+  -  Design Pattern Used: Pythonic Decorator Pattern (Structural family).
+  -  Core Mechanics: By defining the` __call__` dunder method inside the structural wrapper wrapper class, Python automatically substitutes the raw function descriptor with a `BoldDecoratorSyntax` instance block. This approach provides a natural alternative to traditional Gang of Four class boilerplate.
 
 **Q8. Write an Adapter pattern script that converts a legacy incompatible `.request_xml()` output method style into a client-expected `.get_json()` format.**
 
@@ -211,8 +211,8 @@ bridge = DataAdapter(legacy)
 print(bridge.get_json())  # Output: {"data": "Converted from <data>Value</data>"}
 ```
 **Pattern Explanation:**
-•	Design Pattern Used: `Adapter` Pattern (Structural family).
-•	Core Mechanics: The `Adapter` acts as a translation layer between two incompatible architectural boundaries. It wraps the legacy system instance inside a wrapper object that exposes the method contract expected by modern clients (`get_json`), preventing the need to refactor existing legacy systems.
+  -  Design Pattern Used: `Adapter` Pattern (Structural family).
+  -  Core Mechanics: The `Adapter` acts as a translation layer between two incompatible architectural boundaries. It wraps the legacy system instance inside a wrapper object that exposes the method contract expected by modern clients (`get_json`), preventing the need to refactor existing legacy systems.
 
 **Q9. Implement a unified `HomeFacade` architecture containing `TV` and `SoundSystem` subsystems to expose an incredibly simple `.start_movie()` unified action.**
 
@@ -240,8 +240,8 @@ theater = HomeFacade()
 print(theater.start_movie())  # Output: TV screen active. | Surround sound initialized.
 ```
 **Pattern Explanation:**
-•	Design Pattern Used: Facade Pattern (Structural family).
-•	Core Mechanics: A Facade provides a single, high-level interface that masks complex internal structural dependencies. Instead of requiring client logic to manage multiple lower-level components independently, the Facade consolidates these operations behind a simplified interface.
+  -  Design Pattern Used: Facade Pattern (Structural family).
+  -  Core Mechanics: A Facade provides a single, high-level interface that masks complex internal structural dependencies. Instead of requiring client logic to manage multiple lower-level components independently, the Facade consolidates these operations behind a simplified interface.
 
 **Q10. Model an hierarchical filesystem structure with a unified leaf/composite interface using a File and a Folder component via the Composite design pattern.**
 
@@ -278,8 +278,8 @@ root.add(sub_folder)
 print(f"Total structured sizing: {root.get_size()} bytes")  # Output: 1700 bytes
 ```
 **Pattern Explanation:**
-•	Design Pattern Used: Composite Pattern (Structural family).
-•	Core Mechanics: The Composite pattern establishes a uniform method contract (`get_size`) across both primitive items (File) and organizational container objects (Folder). This allows clients to treat individual objects and complex hierarchical groupings interchangeably without writing conditional type-checking branching statements.
+  -  Design Pattern Used: Composite Pattern (Structural family).
+  -  Core Mechanics: The Composite pattern establishes a uniform method contract (`get_size`) across both primitive items (File) and organizational container objects (Folder). This allows clients to treat individual objects and complex hierarchical groupings interchangeably without writing conditional type-checking branching statements.
 
 **Q11. Implement a lazy-loading proxy pattern class (ImageProxy) that defers actual instantiation of an expensive internal `_RealImage` object until `.display()` is invoked.**
 
@@ -311,8 +311,8 @@ print("--- Proxy initialized ---")
 img.display()  # Triggers real loading routine and display actions on-demand
 ```
 **Pattern Explanation:**
-•	Design Pattern Used: Proxy Pattern (Structural family).
-•	Core Mechanics: The Proxy pattern acts as a surrogate or placeholder. Because both the `ImageProxy` and `_RealImage` share equivalent logical public operations, the proxy transparently intercepts requests. It defers resource-intensive operations until they are explicitly needed, saving system memory and startup time.
+  -  Design Pattern Used: Proxy Pattern (Structural family).
+  -  Core Mechanics: The Proxy pattern acts as a surrogate or placeholder. Because both the `ImageProxy` and `_RealImage` share equivalent logical public operations, the proxy transparently intercepts requests. It defers resource-intensive operations until they are explicitly needed, saving system memory and startup time.
 
 **Q12. Build an architectural event listener tracking routine matching an Observer workflow by linking a `WeatherStation` subject update with registered display units.**
 
@@ -346,8 +346,8 @@ station.set_temperature(32)  # Output: Phone screen updated broadcast metrics: 3
 ```
 
 **Pattern Explanation:**
-•	Design Pattern Used: Observer Pattern (Behavioral family).
-•	Core Mechanics: This pattern implements a loose Publish-Subscribe (Pub-Sub) architecture. The Subject class tracks listener handles (_observers) and automatically pushes state alerts out to them via individual .update() calls. This decouples sender and receiver modules, allowing you to add new independent display listeners without modifying the core data engine.
+  -  Design Pattern Used: Observer Pattern (Behavioral family).
+  -  Core Mechanics: This pattern implements a loose Publish-Subscribe (Pub-Sub) architecture. The Subject class tracks listener handles (_observers) and automatically pushes state alerts out to them via individual .update() calls. This decouples sender and receiver modules, allowing you to add new independent display listeners without modifying the core data engine.
 
 **Q13. Code a Strategy layout that encapsulates runtime interchangeable mathematical algorithms by writing an adaptive processing system handling Add or Multiply.**
 
@@ -375,8 +375,8 @@ calc.strategy = StrategyMultiply()  # Swap algorithm behavior dynamically
 print(calc.calculate(10, 5))  # Output: 50
 ```
 **Pattern Explanation:**
-•	Design Pattern Used: Strategy Pattern (Behavioral family).
-•	Core Mechanics: The Strategy pattern organizes a family of algorithms into independent, interchangeable classes. By extracting operational variations out of complex conditional blocks (if-elif) and delegating execution to an isolated strategy object, the application context remains lean and easily testable.
+  -  Design Pattern Used: Strategy Pattern (Behavioral family).
+  -  Core Mechanics: The Strategy pattern organizes a family of algorithms into independent, interchangeable classes. By extracting operational variations out of complex conditional blocks (if-elif) and delegating execution to an isolated strategy object, the application context remains lean and easily testable.
 
 **Q14. Implement an undoable transaction command routing pipeline using the descriptive Command Pattern framework mapping action targets against a Light resource receptor.**
 
@@ -405,8 +405,8 @@ cmd.undo()
 print(f"After undo instruction status state: {bulb.state}")  # Output: OFF
 ```
 **Pattern Explanation:**
-•	Design Pattern Used: Command Pattern (Behavioral family).
-•	Core Mechanics: The Command pattern wraps user requests into standalone objects containing all the context needed for execution. By separating the invoker from the receiver, actions can be stored in queues, passed as parameters, or undone by pairing execution triggers with inverse execution actions.
+  -  Design Pattern Used: Command Pattern (Behavioral family).
+  -  Core Mechanics: The Command pattern wraps user requests into standalone objects containing all the context needed for execution. By separating the invoker from the receiver, actions can be stored in queues, passed as parameters, or undone by pairing execution triggers with inverse execution actions.
 
 **Q15. Write a custom sequence traversal loop pattern using the traditional Iterator architecture by defining sequential steps inside `CustomIterator` and `CustomCollection`.**
 
@@ -435,8 +435,8 @@ for token in CustomCollection():
     print(token)  # Prints: A, then B, then C sequential outputs
 ```
 **Pattern Explanation:**
-•	Design Pattern Used: Iterator Pattern (Behavioral family).
-•	Core Mechanics: The Iterator pattern moves data traversal logic out of a collection class and into a dedicated iterator object. This decouples data storage from list navigation, allowing the client to traverse data elements sequentially via standard loops without needing to know how the collection is structured internally.
+  -  Design Pattern Used: Iterator Pattern (Behavioral family).
+  -  Core Mechanics: The Iterator pattern moves data traversal logic out of a collection class and into a dedicated iterator object. This decouples data storage from list navigation, allowing the client to traverse data elements sequentially via standard loops without needing to know how the collection is structured internally.
 
 **Q16. Create a structural text document printing layout that utilizes a generic standard workflow structure according to the Template Method format.**
 
@@ -463,8 +463,8 @@ class PDFReport(BaseDocumentRenderer):
 PDFReport().render_all()
 ```
 **Pattern Explanation:**
-•	Design Pattern Used: Template Method Pattern (Behavioral family).
-•	Core Mechanics: The parent class establishes an immutable algorithmic skeleton (`render_all`), hardcoding the order of execution. It provides common default steps (`print_header`) while deferring specific structural steps (`print_body`) to subclasses. This eliminates code duplication across variations.
+  -  Design Pattern Used: Template Method Pattern (Behavioral family).
+  -  Core Mechanics: The parent class establishes an immutable algorithmic skeleton (`render_all`), hardcoding the order of execution. It provides common default steps (`print_header`) while deferring specific structural steps (`print_body`) to subclasses. This eliminates code duplication across variations.
 
 **Q17. Develop an elegant Pythonic native alternative to resource management workflows by configuring a class utilizing Context Manager protocols.**
 
@@ -484,8 +484,8 @@ with DbSessionConnection() as session:
     print("Executing operations inside context boundary scopes...")
 ```
 **Pattern Explanation:**
-•	Design Pattern Used: Pythonic Context Manager Pattern (Alternative to Creational/Behavioral resource management).
-•	Core Mechanics: The `__enter__` and `__exit__` magic methods automate the setup and teardown phases of resource lifecycles. This ensures that files, sockets, or database connections are reliably cleaned up even if unexpected errors break execution flow within the block.
+  -  Design Pattern Used: Pythonic Context Manager Pattern (Alternative to Creational/Behavioral resource management).
+  -  Core Mechanics: The `__enter__` and `__exit__` magic methods automate the setup and teardown phases of resource lifecycles. This ensures that files, sockets, or database connections are reliably cleaned up even if unexpected errors break execution flow within the block.
 
 **Q18. Write a Python mixin architecture script featuring independent small single-purpose feature additions via structural multi-inheritance parameters.**
 
@@ -506,8 +506,8 @@ worker = EmployeeProfile("Alex")
 print(worker.to_json())  # Output: {"data_dump": {'username': 'Alex'}}
 ```
 **Pattern Explanation:**
-•	Design Pattern Used: Pythonic Mixin Pattern (Structural technique).
-•	Core Mechanics: A Mixin is a specialized parent class designed solely to add distinct, reusable features to child implementations via multiple inheritance. It provides an elegant alternative to heavy, rigid, traditional Gang of Four class hierarchies.
+  -  Design Pattern Used: Pythonic Mixin Pattern (Structural technique).
+  -  Core Mechanics: A Mixin is a specialized parent class designed solely to add distinct, reusable features to child implementations via multiple inheritance. It provides an elegant alternative to heavy, rigid, traditional Gang of Four class hierarchies.
 
 **Q19. Demonstrate Pythonic Duck Typing flexibility by defining classes lacking explicit interface inheritances that execute uniformly when parsed inside a generalized calling routine.**
 ```python
@@ -528,8 +528,8 @@ broadcast_media(AudioFile())
 broadcast_media(VideoFile())
 ```
 **Pattern Explanation:**
-•	Design Pattern Used: Duck Typing Interface Style (Pythonic structural behavior alternative).
-•	Core Mechanics: Python bypasses rigid, formal interface definitions by focusing on an object's actual capabilities over its explicit inheritance tree. If an object implements the required methods (play), it is deemed fully compatible, significantly reducing software structural boilerplate.
+  -  Design Pattern Used: Duck Typing Interface Style (Pythonic structural behavior alternative).
+  -  Core Mechanics: Python bypasses rigid, formal interface definitions by focusing on an object's actual capabilities over its explicit inheritance tree. If an object implements the required methods (play), it is deemed fully compatible, significantly reducing software structural boilerplate.
 
 **Q20. Implement a native Python `@dataclass` setup acting as an immutable Value Object, and configure its parameters to raise runtime modifications errors.**
 
@@ -551,8 +551,8 @@ print(f"Stored points metrics parameters: {point.latitude}, {point.longitude}")
 # point.latitude = 25.00  # Raises dataclasses.FrozenInstanceError
 ```
 **Pattern Explanation:**
-•	Design Pattern Used: Pythonic Value Object Pattern via Dataclasses.
-•	Core Mechanics: Storing simple attributes using lightweight `@dataclass(frozen=True)` containers helps implement the clean immutable structural patterns pattern. It treats data structures as read-only values rather than stateful entities, preventing unpredictable side effects and data corruption.
+  -  Design Pattern Used: Pythonic Value Object Pattern via Dataclasses.
+  -  Core Mechanics: Storing simple attributes using lightweight `@dataclass(frozen=True)` containers helps implement the clean immutable structural patterns pattern. It treats data structures as read-only values rather than stateful entities, preventing unpredictable side effects and data corruption.
 
 
 
