@@ -1,6 +1,4 @@
-
-
-# Time Series Basics 
+# Time Series Basics
 
 ## Research Topic: Temporal Analysis of Airline Passenger Traffic
 
@@ -8,19 +6,19 @@
 
 **Project Scenario:** The "Airline Passenger Traffic" dataset (`flights`) provides monthly counts of airline passengers from 1949 to 1960. While the dataset contains time information, it is currently split across two distinct columns: `year` (Integer) and `month` (String). To perform effective time series analysis, one must first engineer a unified datetime object. The objective is to:
 
-1.  **Construct a single Datetime Index** from the separate year and month columns.
-2.  **Slice the data** to isolate specific eras (e.g., the 1950s).
-3.  **Resample the data** to convert noisy monthly data into smoothed quarterly and yearly averages, allowing for a clearer analysis of long-term trends.
+1. **Construct a single Datetime Index** from the separate year and month columns.
+2. **Slice the data** to isolate specific eras (e.g., the 1950s).
+3. **Resample the data** to convert noisy monthly data into smoothed quarterly and yearly averages, allowing for a clearer analysis of long-term trends.
 
 **Task:** Using the Seaborn `flights` dataset, write a Python script to:
 
-1.  Load the data and inspect its structure.
-2.  Create a function or logic to combine the `year` and `month` columns into a single `datetime` column.
-3.  Set this new column as the DataFrame Index.
-4.  Resample the data to calculate the **Quarterly Average** and **Yearly Total** number of passengers.
-5.  Print the resampled data to compare the volatility of monthly data versus the trend in yearly data.
+1. Load the data and inspect its structure.
+2. Create a function or logic to combine the `year` and `month` columns into a single `datetime` column.
+3. Set this new column as the DataFrame Index.
+4. Resample the data to calculate the **Quarterly Average** and **Yearly Total** number of passengers.
+5. Print the resampled data to compare the volatility of monthly data versus the trend in yearly data.
 
-----------
+***
 
 ## 1. Conceptual Deep Dive
 
@@ -32,26 +30,23 @@ Real-world datasets often split dates. The `flights` dataset has `year: 1949` an
 
 Resampling is the process of changing the frequency of time-series observations.
 
--   **Upsampling:** Increasing frequency (e.g., Monthly -> Daily). Requires interpolation.
--   **Downsampling:** Decreasing frequency (e.g., Monthly -> Yearly). Requires aggregation (Sum, Mean, Max).
+* **Upsampling:** Increasing frequency (e.g., Monthly -> Daily). Requires interpolation.
+* **Downsampling:** Decreasing frequency (e.g., Monthly -> Yearly). Requires aggregation (Sum, Mean, Max).
 
 **Table of Resampling Offsets for Flights Data**
 
-| Alias | Description | Logical Output for Flights |
-| --- | --- | --- |
-| M' | Month End | Original data (already monthly). |
-| Q' | Quarter End | Smoother trend (3-month averages). |
-| Y' / 'A' | Year End | Shows total passengers per year (Annual growth). |
-| MS' | Month Start | Shifts index to 1st of month (purely for formatting). |
-
+| Alias    | Description | Logical Output for Flights                            |
+| -------- | ----------- | ----------------------------------------------------- |
+| M'       | Month End   | Original data (already monthly).                      |
+| Q'       | Quarter End | Smoother trend (3-month averages).                    |
+| Y' / 'A' | Year End    | Shows total passengers per year (Annual growth).      |
+| MS'      | Month Start | Shifts index to 1st of month (purely for formatting). |
 
 ## Script implementing the research problem/ Project
-
 
 <details>
 
 <summary>Script implementing the research problem/ Project</summary>
-
 
 ```python
 
@@ -350,94 +345,99 @@ BEST PRACTICES:
 """)
 
 ```
+
 </details>
 
 ## Flowchart of the script
-<details>
-<summary> Flowchart of the script </summary>
 
-![Flowchart of the script](/resources/ch12-timeline.png)
+<details>
+
+<summary>Flowchart of the script</summary>
+
+![Flowchart of the script](../.gitbook/assets/ch12-timeline.png)
 
 </details>
 
 ## Step by step explanation of the script
+
 <details>
-<summary> Step by step explanation of the script</summary>
 
+<summary>Step by step explanation of the script</summary>
 
-## STEP 0: Import Libraries
+### STEP 0: Import Libraries
 
-###  Code
+#### Code
 
-`import  pandas  as  pd`
-`import  seaborn  as  sns`
+`import pandas as pd` `import seaborn as sns`
 
-### Purpose
+#### Purpose
 
--   Load required libraries for:
-    -   Data manipulation → `pandas`
-    -   Dataset access → `seaborn`
+* Load required libraries for:
+  * Data manipulation → `pandas`
+  * Dataset access → `seaborn`
 
-### Output
+#### Output
 
--   No visible output
--   Libraries loaded into memory
+* No visible output
+* Libraries loaded into memory
 
-### Do’s & Don’ts
+#### Do’s & Don’ts
 
- - Import with standard aliases (`pd`, `sns`)   
- - Avoid re-importing    multiple times unnecessarily
+* Import with standard aliases (`pd`, `sns`)
+* Avoid re-importing multiple times unnecessarily
 
-----------
+***
 
-### STEP 1: Load and Inspect Data
+#### STEP 1: Load and Inspect Data
 
-----------
+***
 
-#### STEP 1.1: Load Dataset
+**STEP 1.1: Load Dataset**
 
-`df  =  sns.load_dataset('flights')`
+`df = sns.load_dataset('flights')`
 
-#### STEP 1.2: Inspect Data
+**STEP 1.2: Inspect Data**
+
 ```python
 df.head()  
 df.dtypes  
 df.shape
 ```
-### STEP 2: Create Datetime Column (Robust Method)
 
-----------
+#### STEP 2: Create Datetime Column (Robust Method)
 
-#### STEP 2.1: Map Month Names
+***
 
-`df['month_num'] =  df['month'].map(month_map)`
+**STEP 2.1: Map Month Names**
 
+`df['month_num'] = df['month'].map(month_map)`
 
-#### Method details
-| Feature | Description |
-| --- | --- |
-| Method | Series.map() |
-| Signature | Series.map(arg) |
-| Input | dict / function |
-| Output | Transformed Series |
+**Method details**
 
-#### Output Hint
+| Feature   | Description        |
+| --------- | ------------------ |
+| Method    | Series.map()       |
+| Signature | Series.map(arg)    |
+| Input     | dict / function    |
+| Output    | Transformed Series |
+
+**Output Hint**
 
 `Jan → 1, Feb → 2 ...`
 
-#### Reason
+**Reason**
 
--   Converts categorical month → numeric
--   Required for structured datetime creation
+* Converts categorical month → numeric
+* Required for structured datetime creation
 
-#### Do’s & Don’ts
+**Do’s & Don’ts**
 
- - Use mapping for categorical → numeric   
- - Avoid manual loops
+* Use mapping for categorical → numeric
+* Avoid manual loops
 
-----------
+***
 
-#### STEP 2.2: Create Datetime
+**STEP 2.2: Create Datetime**
 
 ```python
 df['date'] =  pd.to_datetime(  
@@ -445,86 +445,85 @@ df['date'] =  pd.to_datetime(
 )
 ```
 
-#### Method Details
+**Method Details**
 
-| Feature | Description |
-| --- | --- |
-| Method | pd.to_datetime() |
-| Signature | to_datetime(arg, errors='raise', format=None, ...) |
-| Input | dict / Series / string |
-| Output | Datetime Series |
+| Feature   | Description                                         |
+| --------- | --------------------------------------------------- |
+| Method    | pd.to\_datetime()                                   |
+| Signature | to\_datetime(arg, errors='raise', format=None, ...) |
+| Input     | dict / Series / string                              |
+| Output    | Datetime Series                                     |
 
+#### Output Hint
 
-### Output Hint
-
-1949-01-01  
+1949-01-01\
 1949-02-01
 
-### Why This is BEST Method
+#### Why This is BEST Method
 
--   No string parsing
--   No dtype issues
--   Fully vectorized
+* No string parsing
+* No dtype issues
+* Fully vectorized
 
-### Do’s & Don’ts
+#### Do’s & Don’ts
 
-DO: Prefer structured dict input  
-Avoid string concatenation with category dtype  
+DO: Prefer structured dict input\
+Avoid string concatenation with category dtype\
 Avoid `.apply()` unless necessary
 
-----------
+***
 
-### STEP 3: Set Datetime Index
+#### STEP 3: Set Datetime Index
 
-----------
+***
 
-#### STEP 3.1: Set Index
+**STEP 3.1: Set Index**
 
 `df.set_index('date', inplace=True)`
 
-#### Method Details
-| Feature | Description |
-| --- | --- |
-| Method | set_index() |
-| Signature | df.set_index(keys, drop=True, inplace=False) |
-| Output | DataFrame with new index |
+**Method Details**
 
-#### Output
+| Feature   | Description                                   |
+| --------- | --------------------------------------------- |
+| Method    | set\_index()                                  |
+| Signature | df.set\_index(keys, drop=True, inplace=False) |
+| Output    | DataFrame with new index                      |
 
--   `date` becomes index
+**Output**
 
-----------
+* `date` becomes index
 
-#### STEP 3.2: Drop Columns
+***
+
+**STEP 3.2: Drop Columns**
 
 `df.drop(columns=['year', 'month', 'month_num'], inplace=True)`
 
-#### Method details
+**Method details**
 
-
-| Feature | Description |
-| --- | --- |
-| Method | drop() |
+| Feature   | Description             |
+| --------- | ----------------------- |
+| Method    | drop()                  |
 | Signature | df.drop(labels, axis=1) |
-| Output | Reduced DataFrame |
+| Output    | Reduced DataFrame       |
 
-####  Output Hint
+**Output Hint**
 
-Columns → passengers only  
+Columns → passengers only\
 Shape → (144, 1)
 
-#### Reason
+**Reason**
 
--   Avoid redundancy
--   Cleaner dataset
+* Avoid redundancy
+* Cleaner dataset
 
-----------
+***
 
-### STEP 4: Extract Time Components
+#### STEP 4: Extract Time Components
 
-----------
+***
 
-#### Code
+**Code**
 
 ```python
 df['Year'] =  df.index.year  
@@ -532,174 +531,168 @@ df['Quarter'] =  df.index.quarter
 df['Month'] =  df.index.month
 ```
 
-#### Method Details
+**Method Details**
 
-| Feature | Description |
-| --- | --- |
+| Feature  | Description          |
+| -------- | -------------------- |
 | Accessor | .dt / datetime index |
-| Output | Numeric columns |
+| Output   | Numeric columns      |
 
+**Output Hint**
 
-#### Output Hint
-
-Year → 1949  
-Quarter → 1  
+Year → 1949\
+Quarter → 1\
 Month → 1
 
-#### Reason
+**Reason**
 
--   Enables grouping and analysis
+* Enables grouping and analysis
 
-#### Do’s & Don’ts
+**Do’s & Don’ts**
 
-DO Use `.dt` or index attributes  
+DO Use `.dt` or index attributes\
 DONT Works only on datetime dtype
 
-----------
+***
 
-### STEP 5: Time-Based Slicing
+#### STEP 5: Time-Based Slicing
 
-----------
+***
 
-####  Code
+**Code**
 
-`fifties_data  =  df.loc['1950':'1959']`
+`fifties_data = df.loc['1950':'1959']`
 
-#### Method Details
+**Method Details**
 
-| Feature | Description |
-| --- | --- |
-| Method | `.loc[]` |
+| Feature   | Description         |
+| --------- | ------------------- |
+| Method    | `.loc[]`            |
 | Signature | `df.loc[start:end]` |
-| Input | Date strings |
-| Output | Filtered DataFrame |
+| Input     | Date strings        |
+| Output    | Filtered DataFrame  |
 
-#### Output Hint
+**Output Hint**
 
 Rows from 1950 to 1959
 
-#### Key Feature
+**Key Feature**
 
--   Inclusive slicing
--   Works only with DatetimeIndex
+* Inclusive slicing
+* Works only with DatetimeIndex
 
-----------
+***
 
-#### Analysis
+**Analysis**
 
-sum()  
+sum()\
 mean()
 
-#### Methods
+**Methods**
 
-| Method | Output |
-| --- | --- |
-| sum() | Total passengers |
+| Method | Output             |
+| ------ | ------------------ |
+| sum()  | Total passengers   |
 | mean() | Average passengers |
 
-### STEP 6: Resampling
+#### STEP 6: Resampling
 
-----------
+***
 
-#### STEP 6.1: Quarterly Average
+**STEP 6.1: Quarterly Average**
 
-`quarterly_avg  =  df['passengers'].resample('Q').mean()`
+`quarterly_avg = df['passengers'].resample('Q').mean()`
 
-#### Method details
+**Method details**
 
-| Feature | Description |
-| --- | --- |
-| Method | resample() |
+| Feature   | Description       |
+| --------- | ----------------- |
+| Method    | resample()        |
 | Signature | df.resample(rule) |
-| Input | Frequency string |
-| Output | Resampler object |
+| Input     | Frequency string  |
+| Output    | Resampler object  |
 
-#### Common frequencies
+**Common frequencies**
 
-| Code | Meaning |
-| --- | --- |
-| Q | Quarterly |
-| Y | Yearly |
-| M | Monthly |
+| Code | Meaning   |
+| ---- | --------- |
+| Q    | Quarterly |
+| Y    | Yearly    |
+| M    | Monthly   |
 
-#### Output Hint
+**Output Hint**
 
 Index → quarter-end dates
 
-----------
+***
 
-### STEP 6.2: Yearly Total
+#### STEP 6.2: Yearly Total
 
-`yearly_total  =  df['passengers'].resample('Y').sum()`
+`yearly_total = df['passengers'].resample('Y').sum()`
 
-#### Output Hint
+**Output Hint**
 
 `1949-12-31 → total passengers`
 
-----------
+***
 
-####  Important Rule
+**Important Rule**
 
 **`resample()` requires:**
 
--   DatetimeIndex
--   Sorted index
+* DatetimeIndex
+* Sorted index
 
-----------
+***
 
-### STEP 7: Summary Block
+#### STEP 7: Summary Block
 
-#### Purpose
+**Purpose**
 
--   Reinforce learning
--   Highlight best practices
+* Reinforce learning
+* Highlight best practices
 
-## Summary table of methods used
+### Summary table of methods used
 
-| Method | Purpose | Input | Output |
-| --- | --- | --- | --- |
-| load_dataset() | Load data | dataset name | DataFrame |
-| map() | Transform values | dict | Series |
-| to_datetime() | Create datetime | dict/series | datetime Series |
-| set_index() | Set index | column | DataFrame |
-| drop() | Remove columns | list | DataFrame |
-| .loc[] | Slice data | labels | DataFrame |
-| resample() | Change frequency | rule | Resampler |
-| sum() | Aggregate | numeric | scalar/Series |
-| mean() | Aggregate | numeric | scalar/Series |
+| Method          | Purpose          | Input        | Output          |
+| --------------- | ---------------- | ------------ | --------------- |
+| load\_dataset() | Load data        | dataset name | DataFrame       |
+| map()           | Transform values | dict         | Series          |
+| to\_datetime()  | Create datetime  | dict/series  | datetime Series |
+| set\_index()    | Set index        | column       | DataFrame       |
+| drop()          | Remove columns   | list         | DataFrame       |
+| .loc\[]         | Slice data       | labels       | DataFrame       |
+| resample()      | Change frequency | rule         | Resampler       |
+| sum()           | Aggregate        | numeric      | scalar/Series   |
+| mean()          | Aggregate        | numeric      | scalar/Series   |
 
-### 3. DOS AND DON’TS (IMPORTANT FOR STUDENTS)
+#### 3. DOS AND DON’TS (IMPORTANT FOR STUDENTS)
 
-----------
+***
 
-#### DO’s
+**DO’s**
 
--   Use structured datetime creation
--   Always set datetime index before resampling
--   Check data types (`dtypes`)
--   Use vectorized operations
+* Use structured datetime creation
+* Always set datetime index before resampling
+* Check data types (`dtypes`)
+* Use vectorized operations
 
-----------
+***
 
-#### DON’Ts
+**DON’Ts**
 
--   Avoid string concatenation with categorical data
--   Do not use `resample()` without datetime index
--   Avoid `.apply()` for large datasets
--   Do not ignore missing/invalid dates
-
+* Avoid string concatenation with categorical data
+* Do not use `resample()` without datetime index
+* Avoid `.apply()` for large datasets
+* Do not ignore missing/invalid dates
 
 </details>
 
-
 ## Breaking up script into parts and discussing it part by part. Also analysing the output
 
-<details>
+Breaking up script into parts and discussing it part by part. Also analysing the output
 
-<sunnary> Breaking up script into parts and discussing it part by part. Also analysing the output  </summary>
-
-
-### Part 0
+#### Part 0
 
 ```python
 print("\nSTEP 0: IMPORT LIBRARIES")
@@ -708,15 +701,16 @@ import pandas as pd
 import seaborn as sns
 
 ```
-#### EXPLANATION STEP 0: IMPORT LIBRARIES
 
-#### Output Explanation
+**EXPLANATION STEP 0: IMPORT LIBRARIES**
 
--   No visible output is produced.
--   This step simply loads the required libraries (`pandas` and `seaborn`) into memory.
--   It prepares the environment for data analysis.
+**Output Explanation**
 
-### STEP 1 and 1.1
+* No visible output is produced.
+* This step simply loads the required libraries (`pandas` and `seaborn`) into memory.
+* It prepares the environment for data analysis.
+
+#### STEP 1 and 1.1
 
 ```python
 
@@ -736,7 +730,7 @@ print(df.head())
 
 ```
 
-#### Output 
+**Output**
 
 ```python
 
@@ -755,23 +749,22 @@ First 5 rows:
 
 ```
 
-#### EXPLANATION STEP 1: LOAD AND INSPECT DATA
+**EXPLANATION STEP 1: LOAD AND INSPECT DATA**
 
-----------
+***
 
-#### STEP 1.1: First 5 Rows
+**STEP 1.1: First 5 Rows**
 
-#### Output Explanation
+**Output Explanation**
 
--   Displays the first 5 rows of the dataset.
--   Shows three columns:
-    -   `year` → numerical year
-    -   `month` → categorical month name (Jan, Feb, etc.)
-    -   `passengers` → number of airline passengers
--   Helps verify that the dataset has loaded correctly.
+* Displays the first 5 rows of the dataset.
+* Shows three columns:
+  * `year` → numerical year
+  * `month` → categorical month name (Jan, Feb, etc.)
+  * `passengers` → number of airline passengers
+* Helps verify that the dataset has loaded correctly.
 
-
-### STEP 1.2
+#### STEP 1.2
 
 ```python
 # ----------------------------------------------------------
@@ -792,7 +785,7 @@ print("\nShape:", df.shape)
 
 ```
 
-#### Output STEP 1.2
+**Output STEP 1.2**
 
 ```python
 Data Types:
@@ -805,20 +798,19 @@ Shape: (144, 3)
 
 ```
 
-#### EXPLANATION: STEP 1.2: Data Types and Shape
+**EXPLANATION: STEP 1.2: Data Types and Shape**
 
-#### Output Explanation
+**Output Explanation**
 
--   `dtypes` shows:
-    -   `year` → integer
-    -   `month` → category (important for later operations)
-    -   `passengers` → integer
--   `shape` shows `(144, 3)`:
-    -   144 rows → 12 months × 12 years
-    -   3 columns → year, month, passengers
+* `dtypes` shows:
+  * `year` → integer
+  * `month` → category (important for later operations)
+  * `passengers` → integer
+* `shape` shows `(144, 3)`:
+  * 144 rows → 12 months × 12 years
+  * 3 columns → year, month, passengers
 
-
-### STEP 2 and 2.1
+#### STEP 2 and 2.1
 
 ```python
 # ==========================================================
@@ -852,7 +844,7 @@ print(df[['month', 'month_num']].head())
 
 ```
 
-#### Output STEP 2 and 2.1
+**Output STEP 2 and 2.1**
 
 ```python
 
@@ -868,23 +860,18 @@ Month Mapping Preview:
 
 ```
 
+**EXPLANATION: STEP 2: CREATE DATETIME COLUMN**
 
-#### EXPLANATION: STEP 2: CREATE DATETIME COLUMN
+**STEP 2.1: Month Mapping**
 
+**Output Explanation**
 
-#### STEP 2.1: Month Mapping
+* Shows a new column `month_num`.
+* Each month name is converted to a numeric value:
+  * Jan → 1, Feb → 2, etc.
+* Confirms that categorical months have been successfully transformed into numbers.
 
-#### Output Explanation
-
--   Shows a new column `month_num`.
--   Each month name is converted to a numeric value:
-    -   Jan → 1, Feb → 2, etc.
--   Confirms that categorical months have been successfully transformed into numbers.
-
-
-
-
-### STEP 2.2
+#### STEP 2.2
 
 ```python
 
@@ -914,7 +901,7 @@ print(df.head(3))
 
 ```
 
-#### Output STEP 2.2
+**Output STEP 2.2**
 
 ```python
 
@@ -926,20 +913,17 @@ Preview with 'date' column:
 
 ```
 
-#### EXPLANATION: STEP 2.2: Datetime Creation
+**EXPLANATION: STEP 2.2: Datetime Creation**
 
-#### Output Explanation
+**Output Explanation**
 
--   A new column `date` is created.
--   Combines `year` and `month_num` into a proper datetime:
-    -   Example: `1949-01-01`
--   Day is set to `1` since only month-level data exists.
--   This column is crucial for time-series operations.
+* A new column `date` is created.
+* Combines `year` and `month_num` into a proper datetime:
+  * Example: `1949-01-01`
+* Day is set to `1` since only month-level data exists.
+* This column is crucial for time-series operations.
 
-
-
-
-### STEP 3, 3.1 and 3.2
+#### STEP 3, 3.1 and 3.2
 
 ```python
 
@@ -979,7 +963,7 @@ print("\nShape:", df.shape)
 
 ```
 
-#### Output STEP 3, 3.1 and 3.2
+**Output STEP 3, 3.1 and 3.2**
 
 ```python
 
@@ -998,26 +982,24 @@ Shape: (144, 1)
 
 ```
 
-#### EXPLANATION: STEP 3: SET DATETIME INDEX
+**EXPLANATION: STEP 3: SET DATETIME INDEX**
 
-----------
+***
 
-#### STEP 3.1 & 3.2 Combined
+**STEP 3.1 & 3.2 Combined**
 
-#### Output Explanation
+**Output Explanation**
 
--   The `date` column becomes the index of the DataFrame.
--   Old columns (`year`, `month`, `month_num`) are removed.
--   Now:
-    -   Index → datetime values
-    -   Column → only `passengers`
--   Shape becomes `(144, 1)`:
-    -   Same rows, fewer columns
--   Data is now structured as a **time series**.
+* The `date` column becomes the index of the DataFrame.
+* Old columns (`year`, `month`, `month_num`) are removed.
+* Now:
+  * Index → datetime values
+  * Column → only `passengers`
+* Shape becomes `(144, 1)`:
+  * Same rows, fewer columns
+* Data is now structured as a **time series**.
 
-
-
-### STEP 4, 4.1 and 4.2
+#### STEP 4, 4.1 and 4.2
 
 ```python
 # ==========================================================
@@ -1058,7 +1040,7 @@ print(df.head())
 
 ```
 
-#### Output  STEP 4, 4.1 and 4.2
+**Output STEP 4, 4.1 and 4.2**
 
 ```python
 
@@ -1074,26 +1056,23 @@ date
 1949-05-01         121  1949        2      5
 
 ```
-#### EXPLANATION: STEP 4: EXTRACT TIME COMPONENTS
 
-----------
+**EXPLANATION: STEP 4: EXTRACT TIME COMPONENTS**
 
-#### Output Explanation
+***
 
--   New columns are added:
-    -   `Year` → extracted from index
-    -   `Quarter` → values from 1 to 4
-    -   `Month` → numeric month (1–12)
--   The dataset now contains both:
-    -   Original data (`passengers`)
-    -   Derived time features
--   Useful for grouping and analysis.
+**Output Explanation**
 
+* New columns are added:
+  * `Year` → extracted from index
+  * `Quarter` → values from 1 to 4
+  * `Month` → numeric month (1–12)
+* The dataset now contains both:
+  * Original data (`passengers`)
+  * Derived time features
+* Useful for grouping and analysis.
 
-
-
-
-### STEP 5, 5.1 and 5.2
+#### STEP 5, 5.1 and 5.2
 
 ```python
 
@@ -1133,7 +1112,7 @@ print("Average passengers:", fifties_data['passengers'].mean())
 
 ```
 
-#### Output 
+**Output**
 
 ```python
 
@@ -1145,34 +1124,31 @@ Average passengers: 276.075
 
 ```
 
-#### EXPLANATION: STEP 5: TIME-BASED SLICING
+**EXPLANATION: STEP 5: TIME-BASED SLICING**
 
-----------
+***
 
-#### STEP 5.1: Filtering 1950s
+**STEP 5.1: Filtering 1950s**
 
-#### Output Explanation
+**Output Explanation**
 
--   Only rows from 1950 to 1959 are selected.
--   Uses datetime index slicing (inclusive).
--   Creates a subset DataFrame (`fifties_data`).
+* Only rows from 1950 to 1959 are selected.
+* Uses datetime index slicing (inclusive).
+* Creates a subset DataFrame (`fifties_data`).
 
-----------
+***
 
-#### EXPLANATION: STEP 5.2: Summary Statistics
+**EXPLANATION: STEP 5.2: Summary Statistics**
 
-#### Output Explanation
+**Output Explanation**
 
--   `Total passengers: 33129`
-    -   Sum of all passengers in the 1950s
--   `Average passengers: 276.075`
-    -   Mean monthly passengers in that decade
--   Indicates **growth trend** compared to earlier years.
+* `Total passengers: 33129`
+  * Sum of all passengers in the 1950s
+* `Average passengers: 276.075`
+  * Mean monthly passengers in that decade
+* Indicates **growth trend** compared to earlier years.
 
-
-
-
-### STEP 6 and 6.1
+#### STEP 6 and 6.1
 
 ```python
 # ==========================================================
@@ -1202,7 +1178,7 @@ print(quarterly_avg.head())
 
 ```
 
-#### Output 
+**Output**
 
 ```python
 
@@ -1220,30 +1196,27 @@ date
 
 ```
 
-#### EXPLANATION: STEP 6: RESAMPLING
+**EXPLANATION: STEP 6: RESAMPLING**
 
-----------
+***
 
-#### STEP 6.1: Quarterly Average
+**STEP 6.1: Quarterly Average**
 
-#### Output Explanation
+**Output Explanation**
 
--   Data is grouped into quarters (3 months each).
--   Each value represents the **average passengers per quarter**.
--   Index shows **quarter-end dates**:
-    -   Example: `1949-03-31`, `1949-06-30`
--   Output is a **Series with float values**.
+* Data is grouped into quarters (3 months each).
+* Each value represents the **average passengers per quarter**.
+* Index shows **quarter-end dates**:
+  * Example: `1949-03-31`, `1949-06-30`
+* Output is a **Series with float values**.
 
-#### Important Observation
+**Important Observation**
 
--   Warning shown:
-    -   `'Q' is deprecated → use 'QE'`
--   This indicates newer pandas prefers updated frequency codes.
+* Warning shown:
+  * `'Q' is deprecated → use 'QE'`
+* This indicates newer pandas prefers updated frequency codes.
 
-
-
-
-### STEP 6.2
+#### STEP 6.2
 
 ```python
 # ----------------------------------------------------------
@@ -1272,7 +1245,7 @@ print(yearly_total.head())
 
 ```
 
-### OUTPUT
+#### OUTPUT
 
 ```python
   yearly_total = df['passengers'].resample('Y').sum()
@@ -1289,46 +1262,31 @@ Freq: YE-DEC, Name: passengers, dtype: int64
 
 ```
 
-#### EXPLANATION: STEP 6.2: Yearly Total
+**EXPLANATION: STEP 6.2: Yearly Total**
 
-#### Output Explanation
+**Output Explanation**
 
--   Data is grouped by year.
--   Each value shows **total passengers in that year**.
--   Index shows year-end dates:
-    -   Example: `1949-12-31`
--   Values increase over time → indicates strong upward trend.
+* Data is grouped by year.
+* Each value shows **total passengers in that year**.
+* Index shows year-end dates:
+  * Example: `1949-12-31`
+* Values increase over time → indicates strong upward trend.
 
-#### Warning
+**Warning**
 
--   `'Y' is deprecated → use 'YE'`
--   Same reason as above (updated pandas standards)
+* `'Y' is deprecated → use 'YE'`
+* Same reason as above (updated pandas standards)
 
+### STEP 7 (It is just a summary)
 
+**EXPLANATION: STEP 7: SUMMARY**
 
+**Output Explanation**
 
-## STEP 7 (It is just a summary)
-
-
-#### EXPLANATION:  STEP 7: SUMMARY
-
-#### Output Explanation
-
--   Displays key learning points from the script.
--   Reinforces:
-    -   Datetime creation
-    -   Importance of index
-    -   Time-based slicing
-    -   Resampling concepts
--   Acts as a conceptual conclusion for students.
-
-</details>
-
-
-
-
-
-
-
-
-
+* Displays key learning points from the script.
+* Reinforces:
+  * Datetime creation
+  * Importance of index
+  * Time-based slicing
+  * Resampling concepts
+* Acts as a conceptual conclusion for students.

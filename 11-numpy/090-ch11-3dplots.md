@@ -1,190 +1,185 @@
-
-
-
 # PROJECT: Visualizing Surfaces using NumPy and Matplotlib
 
-----------
+***
 
 ## Objective
 
 Understand how:
 
--   `linspace()` creates values
--   `meshgrid()` creates coordinate grids
--   functions 
-$$Z=f(X,Y)$$ 
-create surfaces
--   Matplotlib visualizes them
+* `linspace()` creates values
+* `meshgrid()` creates coordinate grids
+* functions $$Z=f(X,Y)$$ create surfaces
+* Matplotlib visualizes them
 
-----------
+***
 
 ## PART A — Conceptual Study
 
 ### Study the following:
 
-1.  What does `np.linspace()` do?
-2.  How does `np.meshgrid()` convert 1D arrays into 2D grids?
-3.  What does each of these represent:
-    -   X → x-coordinates
-    -   Y → y-coordinates
-    -   Z → height (function output)
+1. What does `np.linspace()` do?
+2. How does `np.meshgrid()` convert 1D arrays into 2D grids?
+3. What does each of these represent:
+   * X → x-coordinates
+   * Y → y-coordinates
+   * Z → height (function output)
 
-----------
+***
 
 ### Study these matplotlib functions
 
-| Function | Purpose |
-| --- | --- |
-| plt.figure() | Create a figure |
-| add_subplot(projection='3d') | Enable 3D plotting |
-| plot_surface(X, Y, Z) | Plot surface |
-| set_xlabel(), set_ylabel(), set_zlabel() | Label axes |
-| set_title() | Add title |
-| plt.show() | Display plot |
-
+| Function                                    | Purpose            |
+| ------------------------------------------- | ------------------ |
+| plt.figure()                                | Create a figure    |
+| add\_subplot(projection='3d')               | Enable 3D plotting |
+| plot\_surface(X, Y, Z)                      | Plot surface       |
+| set\_xlabel(), set\_ylabel(), set\_zlabel() | Label axes         |
+| set\_title()                                | Add title          |
+| plt.show()                                  | Display plot       |
 
 <details>
-  <summary> Matplotlib Functions Used (Explained Simply- Click to expand)   </summary>
-  
-  ## Matplotlib Functions Used (Explained Simply)
 
-----------
+<summary>Matplotlib Functions Used (Explained Simply- Click to expand)</summary>
 
-### 1. `plt.figure()`
+### Matplotlib Functions Used (Explained Simply)
 
-**Role:**  
+***
+
+#### 1. `plt.figure()`
+
+**Role:**\
 Creates a new drawing canvas (called a _figure_).
 
-**Purpose:**  
+**Purpose:**\
 To start a new plot. Without it, plots may overlap or reuse old figures.
 
 **Input parameters (common):**
 
--   `figsize=(width, height)` → optional size of figure
+* `figsize=(width, height)` → optional size of figure
 
-**Output:**  
+**Output:**\
 Returns a figure object (stored as `fig`)
 
 **Example:**
 
-fig  =  plt.figure()
+fig = plt.figure()
 
 **Key Idea:**
 
 > Think of this as opening a blank page for drawing.
 
-----------
+***
 
-### 2. `fig.add_subplot(projection='3d')`
+#### 2. `fig.add_subplot(projection='3d')`
 
-**Role:**  
+**Role:**\
 Adds a plotting area (axes) inside the figure.
 
-**Purpose:**  
+**Purpose:**\
 Enables **3D plotting**.
 
 **Input parameters:**
 
--   `projection='3d'` → required for 3D plots
+* `projection='3d'` → required for 3D plots
 
-**Output:**  
+**Output:**\
 Returns an axes object (stored as `ax`)
 
 **Example:**
 
-ax  =  fig.add_subplot(projection='3d')
+ax = fig.add\_subplot(projection='3d')
 
 **Key Idea:**
 
 > Converts the blank page into a 3D coordinate system.
 
-----------
+***
 
-### 3. `ax.plot_surface(X, Y, Z)`
+#### 3. `ax.plot_surface(X, Y, Z)`
 
-**Role:**  
+**Role:**\
 Plots a 3D surface.
 
-**Purpose:**  
+**Purpose:**\
 To visualize a function Z=f(X,Y)Z = f(X,Y)Z=f(X,Y)
 
 **Input parameters:**
 
--   `X, Y, Z` → NumPy arrays of same shape
+* `X, Y, Z` → NumPy arrays of same shape
 
-**Output:**  
+**Output:**\
 Draws a surface plot on the axes
 
 **Example:**
 
-ax.plot_surface(X, Y, Z)
+ax.plot\_surface(X, Y, Z)
 
 **Key Idea:**
 
 > Uses grid points (X,Y) and heights (Z) to draw a surface.
 
-----------
+***
 
-### 4. `ax.set_xlabel()`, `set_ylabel()`, `set_zlabel()`
+#### 4. `ax.set_xlabel()`, `set_ylabel()`, `set_zlabel()`
 
-**Role:**  
+**Role:**\
 Labels the axes.
 
-**Purpose:**  
+**Purpose:**\
 To make plots understandable.
 
 **Input parameters:**
 
--   A string (label name)
+* A string (label name)
 
-**Output:**  
+**Output:**\
 Updates axis labels
 
 **Example:**
 
-ax.set_xlabel("X")  
-ax.set_ylabel("Y")  
-ax.set_zlabel("Z")
+ax.set\_xlabel("X")\
+ax.set\_ylabel("Y")\
+ax.set\_zlabel("Z")
 
 **Key Idea:**
 
 > Always label axes—otherwise plots are meaningless.
 
-----------
+***
 
-### 5. `ax.set_title()`
+#### 5. `ax.set_title()`
 
-**Role:**  
+**Role:**\
 Adds a title to the plot.
 
-**Purpose:**  
+**Purpose:**\
 To describe what the plot represents.
 
 **Input:**
 
--   A string
+* A string
 
-**Output:**  
+**Output:**\
 Displays title above plot
 
 **Example:**
 
-ax.set_title("Z = X + Y")
+ax.set\_title("Z = X + Y")
 
-----------
+***
 
-### 6. `plt.show()`
+#### 6. `plt.show()`
 
-**Role:**  
+**Role:**\
 Displays the plot window.
 
-**Purpose:**  
+**Purpose:**\
 To render all figures created
 
-**Input:**  
+**Input:**\
 None
 
-**Output:**  
+**Output:**\
 Shows the final plot
 
 **Example:**
@@ -195,57 +190,50 @@ plt.show()
 
 > Without this, plots may not appear.
 
-  
-
-| Function | Role | Input | Output |
-| --- | --- | --- | --- |
-| figure() | Create canvas | optional size | figure |
-| add_subplot() | Create axes | projection | axes |
-| plot_surface() | Draw surface | X,Y,Z arrays | 3D plot |
-| set_xlabel() etc | Label axes | string | labeled axes |
-| set_title() | Add title | string | titled plot |
-| show() | Display plot | none | visible output |
-
+| Function          | Role          | Input         | Output         |
+| ----------------- | ------------- | ------------- | -------------- |
+| figure()          | Create canvas | optional size | figure         |
+| add\_subplot()    | Create axes   | projection    | axes           |
+| plot\_surface()   | Draw surface  | X,Y,Z arrays  | 3D plot        |
+| set\_xlabel() etc | Label axes    | string        | labeled axes   |
+| set\_title()      | Add title     | string        | titled plot    |
+| show()            | Display plot  | none          | visible output |
 
 </details>
-
-
 
 ## Part B — Task
 
 Write a program that:
 
-1.  Creates a grid using `linspace()` and `meshgrid()`
-2.  Plots two surfaces:
+1. Creates a grid using `linspace()` and `meshgrid()`
+2. Plots two surfaces:
 
-----------
+***
 
 ### Surface 1 (Plane)
 
-$$Z=X+Y$$
-----------
+## $$Z=X+Y$$
 
 ### Surface 2 (Cone-like surface)
 
 $$Z= \sqrt{X^2 + Y^2}$$
 
 Derived from $$Z^2 =X^2+Y^2$$
- 
 
-----------
+***
 
 ### Hints
 
--   Use same X and Y for both surfaces
--   Z must have same shape as X and Y
--   Use two different figures
--   Keep grid symmetric (e.g., -5 to 5)
+* Use same X and Y for both surfaces
+* Z must have same shape as X and Y
+* Use two different figures
+* Keep grid symmetric (e.g., -5 to 5)
 
 ### Flowchart of the process
+
 ![Flowchart](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-numpy-flowchart-matplotlib.png)
 
 ## Script
-
 
 ```python
 
@@ -300,23 +288,10 @@ plt.show()  # show() renders the plots on the screen.
 
 ```
 
-
 ### Output Figure (Plane)
+
 ![Figure Plane](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-numpy-matplotlib-plane.png)
 
-
 ### Output Figure (Cone)
+
 ![Figure Cone](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch11-numpy-matplotlib-cone.png)
-
-
-
-
-
-
-
-
-
-
-
-
-

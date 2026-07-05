@@ -1,53 +1,50 @@
-
-
 # Grouping and Aggregation
 
-## Research Topic: Comparative Morphology and Population Stability
+## Grouping and Aggregation
+
+### Research Topic: Comparative Morphology and Population Stability
 
 **Research Question:** _How can the "Split-Apply-Combine" philosophy be utilized to analyze biological differences between penguin species and filter environmental variables based on population significance?_
 
 **Project Scenario:** A research team requires a statistical breakdown of the Palmer Penguins data to support a hypothesis. Specifically, they need:
 
-1.  **Descriptive Statistics:** Average bill length and flipper length per species.
-2.  **Complex Metrics:** A simultaneous calculation of the mean and maximum body mass for each island.
-3.  **Data Quality Control:** Filtering out islands that have fewer than 100 observations to ensure statistical significance (islands with too few samples are considered outliers or insufficient for the study).
+1. **Descriptive Statistics:** Average bill length and flipper length per species.
+2. **Complex Metrics:** A simultaneous calculation of the mean and maximum body mass for each island.
+3. **Data Quality Control:** Filtering out islands that have fewer than 100 observations to ensure statistical significance (islands with too few samples are considered outliers or insufficient for the study).
 
 **Student Task:** Using the Palmer Penguins dataset, write a script to group data by species and island, calculate aggregate metrics, and filter out groups with low sample counts.
 
-----------
+***
 
-## 1. Conceptual Deep Dive
+### 1. Conceptual Deep Dive
 
 Grouping and Aggregation is the core of data analysis. It relies on the **Split-Apply-Combine** paradigm, originally defined by Hadley Wickham.
 
-## The Split-Apply-Combine Strategy
+### The Split-Apply-Combine Strategy
 
-1.  **Split:** Break the DataFrame into distinct groups based on a key (e.g., "Species"). The DataFrame is not actually copied into separate variables; it is virtually partitioned.
-2.  **Apply:** Perform a calculation (aggregate) or transformation on each group independently.
-3.  **Combine:** Merge the results of the applied functions back into a new DataFrame or Series.
+1. **Split:** Break the DataFrame into distinct groups based on a key (e.g., "Species"). The DataFrame is not actually copied into separate variables; it is virtually partitioned.
+2. **Apply:** Perform a calculation (aggregate) or transformation on each group independently.
+3. **Combine:** Merge the results of the applied functions back into a new DataFrame or Series.
 
 **Flowchart of Grouping:**
 
-![Flowchart of Grouping](/resources/ch12-grouping.png)
+![Flowchart of Grouping](../.gitbook/assets/ch12-grouping.png)
 
+### What is `.groupby()`
 
-## What is `.groupby()`
-
-
-
-### Definition
+#### Definition
 
 `groupby()` is a Pandas method used to **split a DataFrame into groups based on one or more keys**, so that operations can be applied **independently to each group**.
 
-Philosophy:  _Split → Apply → Combine_
+Philosophy: _Split → Apply → Combine_
 
-| Stage | Meaning | Example |
-| --- | --- | --- |
-| Split | Divide data into groups | Group penguins by species |
-| Apply | Perform operation on each group | Compute mean body mass |
-| Combine | Merge results into output | Return summary table |
+| Stage   | Meaning                         | Example                   |
+| ------- | ------------------------------- | ------------------------- |
+| Split   | Divide data into groups         | Group penguins by species |
+| Apply   | Perform operation on each group | Compute mean body mass    |
+| Combine | Merge results into output       | Return summary table      |
 
-#### 2. Method Signature of `.groupby()`
+**2. Method Signature of `.groupby()`**
 
 ```python
 DataFrame.groupby(  
@@ -61,226 +58,219 @@ DataFrame.groupby(
   dropna=True  
 )
 ```
-----------
 
-#### 3. Parameter Explanation Table
+***
 
-#   
+**3. Parameter Explanation Table**
 
-| Parameter | Type | Default | Description | Example |
-| --- | --- | --- | --- | --- |
-| by | label / list / function | None | Column(s) used for grouping | species', ['species','island'] |
-| axis | 0 or 1 | 0 | Group along rows (0) or columns (1) | Usually 0 |
-| level | int / name | None | For MultiIndex grouping | level=0 |
-| as_index | bool | TRUE | Group labels become index | False → regular column |
-| sort | bool | TRUE | Sort group keys | False → faster |
-| group_keys | bool | TRUE | Include keys in output when applying | Used with .apply() |
-| observed | bool | FALSE | Only show observed categories | For categorical data |
-| dropna | bool | TRUE | Drop NA group keys | Include NaN groups if False |
+##
 
+| Parameter   | Type                    | Default | Description                          | Example                         |
+| ----------- | ----------------------- | ------- | ------------------------------------ | ------------------------------- |
+| by          | label / list / function | None    | Column(s) used for grouping          | species', \['species','island'] |
+| axis        | 0 or 1                  | 0       | Group along rows (0) or columns (1)  | Usually 0                       |
+| level       | int / name              | None    | For MultiIndex grouping              | level=0                         |
+| as\_index   | bool                    | TRUE    | Group labels become index            | False → regular column          |
+| sort        | bool                    | TRUE    | Sort group keys                      | False → faster                  |
+| group\_keys | bool                    | TRUE    | Include keys in output when applying | Used with .apply()              |
+| observed    | bool                    | FALSE   | Only show observed categories        | For categorical data            |
+| dropna      | bool                    | TRUE    | Drop NA group keys                   | Include NaN groups if False     |
 
-#### 4. What Does `groupby()` Return?
+**4. What Does `groupby()` Return?**
 
-####  5. Return Type
+**5. Return Type**
 
-`DataFrameGroupBy`  OR  `SeriesGroupBy`
+`DataFrameGroupBy` OR `SeriesGroupBy`
 
-#### 6. Important Insight
+**6. Important Insight**
 
-> `groupby()` **does NOT compute anything immediately**  
+> `groupby()` **does NOT compute anything immediately**\
 > It returns a **lazy object** (GroupBy object)
 
-----------
+***
 
-#### 7. Example
+**7. Example**
 
 ```python
 grouped  =  df.groupby("species")  
 print(type(grouped))
 ```
-#### 8. Output:
+
+**8. Output:**
 
 `<class 'pandas.core.groupby.generic.DataFrameGroupBy'>`
 
-#### 9. Typical Usage Patterns
+**9. Typical Usage Patterns**
 
-##### A. Simple Aggregation
+**A. Simple Aggregation**
 
 `df.groupby("species")["body_mass_g"].mean()`
 
-** Output: `Series`**
+\*\* Output: `Series`\*\*
 
-----------
+***
 
-##### B. Multiple Aggregations
+**B. Multiple Aggregations**
 
 `df.groupby("species").agg(["mean", "max"])`
 
 **Output: `DataFrame (MultiIndex columns)`**
 
-----------
+***
 
-##### C. Multi-column Grouping
+**C. Multi-column Grouping**
 
 `df.groupby(["species", "island"]).mean()`
 
 **Output: MultiIndex**
 
-----------
+***
 
-#### D. Filtering Groups
+**D. Filtering Groups**
 
-`df.groupby("species").filter(lambda  x: x["body_mass_g"].mean() >  4000)`
+`df.groupby("species").filter(lambda x: x["body_mass_g"].mean() > 4000)`
 
 **Output: Filtered DataFrame**
 
-----------
+***
 
-#### E. Transformation (Same Shape Output)
+**E. Transformation (Same Shape Output)**
 
 ```python
 df["mean_mass"] =  df.groupby("species")["body_mass_g"].transform("mean")
 ```
 
-## Aggregation methods (1) `.agg()` (2) `.transform()` (3) `.filter()`
+### Aggregation methods (1) `.agg()` (2) `.transform()` (3) `.filter()`
 
+***
 
+#### `.agg()` (Aggregation)
 
-
-----------
-
-###  `.agg()` (Aggregation)
-
-#### Description
+**Description**
 
 Applies one or more functions to each group and **returns a reduced summary**.
 
-#### Key Idea
+**Key Idea**
 
 > “Give me one (or few) values per group”
 
-----------
+***
 
-#### Example
+**Example**
 
 `df.groupby("species")["body_mass_g"].agg(["mean", "max"])`
 
-----------
+***
 
-#### Output
+**Output**
 
--   DataFrame (often with **MultiIndex columns**)
--   One row per group
+* DataFrame (often with **MultiIndex columns**)
+* One row per group
 
-----------
+***
 
-####  Typical Use Cases
-| Use Case | Example |
-| --- | --- |
+**Typical Use Cases**
+
+| Use Case           | Example          |
+| ------------------ | ---------------- |
 | Summary statistics | mean, sum, count |
-| Reporting | group-wise KPIs |
-| Data reduction | compress dataset |
+| Reporting          | group-wise KPIs  |
+| Data reduction     | compress dataset |
 
-#### Important parameters
+**Important parameters**
 
-| Parameter | Description |
-| --- | --- |
-| func | Function or list ('mean', ['mean','sum']) |
-| **kwargs | Named aggregations |
+| Parameter  | Description                                |
+| ---------- | ------------------------------------------ |
+| func       | Function or list ('mean', \['mean','sum']) |
+| \*\*kwargs | Named aggregations                         |
 
+#### `.transform()` (Same Shape Transformation)
 
-### `.transform()` (Same Shape Transformation)
-
-#### Description
+**Description**
 
 Applies a function **to each group** and returns output of **same size as original data**.
 
-#### Key Idea
+**Key Idea**
 
 > “Compute something per group, but keep all rows”
 
-----------
+***
 
-#### Example
+**Example**
 
 ```python
 df["mean_mass"] =  df.groupby("species")["body_mass_g"].transform("mean")
 ```
 
-----------
+***
 
-#### Output
+**Output**
 
--   Series or DataFrame
--   Same length as original
+* Series or DataFrame
+* Same length as original
 
-----------
+***
 
-#### Typical Use Cases
-| Use Case | Example |
-| --- | --- |
-| Feature engineering | group mean column |
-| Normalization | z-score within group |
-| Comparison | row vs group average |
+**Typical Use Cases**
 
+| Use Case            | Example              |
+| ------------------- | -------------------- |
+| Feature engineering | group mean column    |
+| Normalization       | z-score within group |
+| Comparison          | row vs group average |
 
+#### `.filter()` (Group Filtering)
 
-### `.filter()` (Group Filtering)
-
-#### Description
+**Description**
 
 Filters entire groups based on a condition and returns **subset of original rows**.
 
-#### Key Idea
+**Key Idea**
 
 > “Keep or remove entire groups”
 
-----------
+***
 
-#### Example
+**Example**
 
-`df.groupby("species").filter(lambda  x: x["body_mass_g"].mean() >  4000)`
+`df.groupby("species").filter(lambda x: x["body_mass_g"].mean() > 4000)`
 
-----------
+***
 
-#### Output
+**Output**
 
--   DataFrame (subset of original rows)
+* DataFrame (subset of original rows)
 
-----------
+***
 
-#### Typical Use Cases
+**Typical Use Cases**
 
-| Use Case | Example |
-| --- | --- |
-| Remove weak groups | low average |
-| Data cleaning | small groups |
+| Use Case              | Example                   |
+| --------------------- | ------------------------- |
+| Remove weak groups    | low average               |
+| Data cleaning         | small groups              |
 | Conditional selection | threshold-based filtering |
 
-#### Important Parameters
+**Important Parameters**
 
-| Parameter | Description |
-| --- | --- |
-| func | Function returning True/False |
-| dropna | Keep NaN groups |
+| Parameter | Description                   |
+| --------- | ----------------------------- |
+| func      | Function returning True/False |
+| dropna    | Keep NaN groups               |
 
+**Common Errors**
 
-#### Common Errors
+\*\*Passing string instead of function \*\* `df.groupby("species").filter("body_mass_g > 4000") # TypeError`
 
-**Passing string instead of function ** 
-`df.groupby("species").filter("body_mass_g > 4000")  # TypeError`
+#### Comparison of Aggregation Methods
 
+| Method         | Syntax                 | Input Type     | Returns            | Output Shape                | Use Case                                | Typical Example                               | Affects Original Data   | Common Pitfall                                                |
+| -------------- | ---------------------- | -------------- | ------------------ | --------------------------- | --------------------------------------- | --------------------------------------------- | ----------------------- | ------------------------------------------------------------- |
+| `.agg()`       | `.agg(['mean','sum'])` | GroupBy object | DataFrame / Series | Reduced (one row per group) | Calculate multiple summary statistics   | Mean and max body mass per species            | No (returns new object) | Using invalid function names (e.g., 'avg' instead of 'mean')  |
+| `.transform()` | `.transform('mean')`   | GroupBy object | Series / DataFrame | Same as original data       | Add group-level values to each row      | Add species average mass to every penguin row | No                      | Expecting reduced output (it does NOT summarize)              |
+| `.filter()`    | `.filter(func)`        | GroupBy object | DataFrame          | Subset of original rows     | Remove entire groups based on condition | Keep species with avg mass > 4000             | No                      | Writing condition incorrectly (must use function, not string) |
 
-### Comparison of Aggregation Methods
-
-| Method | Syntax | Input Type | Returns | Output Shape | Use Case | Typical Example | Affects Original Data | Common Pitfall |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `.agg()` | `.agg(['mean','sum'])` | GroupBy object | DataFrame / Series | Reduced (one row per group) | Calculate multiple summary statistics | Mean and max body mass per species | No (returns new object) | Using invalid function names (e.g., 'avg' instead of 'mean') |
-| `.transform()` | `.transform('mean')` | GroupBy object | Series / DataFrame | Same as original data | Add group-level values to each row | Add species average mass to every penguin row | No | Expecting reduced output (it does NOT summarize) |
-| `.filter()` | `.filter(func)` | GroupBy object | DataFrame | Subset of original rows | Remove entire groups based on condition | Keep species with avg mass > 4000 | No | Writing condition incorrectly (must use function, not string) |
-
-
-## Solution Script
+### Solution Script
 
 The following script performs grouping, calculates complex aggregates, and filters out islands with insufficient data volume.
 
@@ -565,8 +555,3 @@ BEST PRACTICES:
 
 
 ```
-
-
-
-
-

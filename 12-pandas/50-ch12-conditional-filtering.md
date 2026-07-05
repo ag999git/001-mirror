@@ -1,89 +1,86 @@
+# Conditional Filtering in Pandas
 
-
-
-# Research Question
+## Research Question
 
 > **How can conditional filtering techniques in Pandas (Boolean indexing, logical operators, `.isin()`, and string-based filtering using `.str.contains()`) be used to efficiently extract meaningful subsets of data from a real-world dataset such as the Palmer Penguins dataset, and what are their comparative advantages, limitations, and common sources of error?**
 
-## PROJECT: Conditional Filtering in Pandas
+### PROJECT: Conditional Filtering in Pandas
+
 DATASET: Palmer Penguins
 
->OBJECTIVE:
->To demonstrate:
->1. Boolean indexing
->2. Logical operators (&, |, ~)
->3. .isin() method
->4. .str.contains() for string filtering
->5. Common errors and handling
+> OBJECTIVE: To demonstrate:
+>
+> 1. Boolean indexing
+> 2. Logical operators (&, |, \~)
+> 3. .isin() method
+> 4. .str.contains() for string filtering
+> 5. Common errors and handling
 
-----------
+***
 
-# Task / Project Description
+## Task / Project Description
 
 You are required to:
 
-1.  Load and explore the **Palmer Penguins dataset**
-2.  Apply **basic Boolean filtering**
-3.  Combine multiple conditions using:
-    -   `&` (AND)
-    -   `|` (OR)
-    -   `~` (NOT)
-4.  Use `.isin()` for filtering multiple values
-5.  Use `.str.contains()` for string-based filtering
-6.  Identify and handle **common errors**
-7.  Present findings using:
-    -   Tables
-    -   Code with comments
-    -   Flowcharts
+1. Load and explore the **Palmer Penguins dataset**
+2. Apply **basic Boolean filtering**
+3. Combine multiple conditions using:
+   * `&` (AND)
+   * `|` (OR)
+   * `~` (NOT)
+4. Use `.isin()` for filtering multiple values
+5. Use `.str.contains()` for string-based filtering
+6. Identify and handle **common errors**
+7. Present findings using:
+   * Tables
+   * Code with comments
+   * Flowcharts
 
-----------
+***
 
-# Solution
+## Solution
 
+### STEP 0: Import Libraries and Load Dataset
 
-## STEP 0: Import Libraries and Load Dataset
-
-#### Why this step is done
+**Why this step is done**
 
 This step initializes the working environment. Without loading the required libraries and dataset, no data analysis can be performed.
 
-#### How it is done
+**How it is done**
 
--   Import `pandas` for data manipulation
--   Import `seaborn` to access the Palmer Penguins dataset
--   Load dataset into a DataFrame
+* Import `pandas` for data manipulation
+* Import `seaborn` to access the Palmer Penguins dataset
+* Load dataset into a DataFrame
 
-#### What to do
+**What to do**
 
--   Use standard aliases (`pd`, `sns`)
--   Ensure dataset loads correctly
+* Use standard aliases (`pd`, `sns`)
+* Ensure dataset loads correctly
 
-#### What not to do
+**What not to do**
 
--   Avoid reloading dataset multiple times unnecessarily
--   Avoid modifying original dataset unintentionally
+* Avoid reloading dataset multiple times unnecessarily
+* Avoid modifying original dataset unintentionally
 
-----------
+***
 
-#### Key Features / Sub-steps
+**Key Features / Sub-steps**
 
--   Library import
--   Dataset loading
--   Initial inspection (`head()` optional)
+* Library import
+* Dataset loading
+* Initial inspection (`head()` optional)
 
-----------
+***
 
-#### Methods / Attributes
+**Methods / Attributes**
 
- **`sns.load_dataset(name)`**
+**`sns.load_dataset(name)`**
 
--   **Input:** Dataset name (string)
--   **Output:** Pandas DataFrame
--   **Limitation:** Requires internet (in some environments)
+* **Input:** Dataset name (string)
+* **Output:** Pandas DataFrame
+* **Limitation:** Requires internet (in some environments)
 
-
-
-### Script for implementing STEP 0 
+#### Script for implementing STEP 0
 
 ```python
 # STEP 0: IMPORT LIBRARIES AND LOAD DATASET
@@ -97,6 +94,7 @@ print("\n--- FIRST 5 ROWS ---")
 print("df.head()->", df.head())  # Display the first 5 rows of the dataset to understand its structure and columns
 
 ```
+
 **Output**
 
 ```python
@@ -112,51 +110,50 @@ df.head()->   species     island  bill_length_mm  bill_depth_mm  flipper_length_
 
 ```
 
+### STEP 1: Basic Boolean Indexing\*\*
 
-
-## STEP 1: Basic Boolean Indexing**
-
-#### Why this step is done
+**Why this step is done**
 
 Boolean indexing is the **foundation of filtering**. It allows selection of rows based on conditions.
 
-#### How it is done
+**How it is done**
 
 A condition is applied to a column, producing `True/False`, which filters rows.
 
-----------
+***
 
-#### What to do
+**What to do**
 
--   Use clear conditions
--   Ensure correct column names
+* Use clear conditions
+* Ensure correct column names
 
-#### What not to do
+**What not to do**
 
--   Avoid mixing data types improperly
--   Avoid forgetting brackets
+* Avoid mixing data types improperly
+* Avoid forgetting brackets
 
-----------
+***
 
-#### Key Features
+**Key Features**
 
--   Produces Boolean Series
--   Filters rows directly
+* Produces Boolean Series
+* Filters rows directly
 
-----------
+***
 
-#### Methods / Syntax
+**Methods / Syntax**
 
 `df[condition]`
 
 **Example:**
 
-`df[df['body_mass_g'] >  4000]`
+`df[df['body_mass_g'] > 4000]`
 
--   **Input:** Boolean Series
--   **Output:** Filtered DataFrame
--   **Limitation:** Cannot handle multiple conditions without operators
-### Script for Step 1
+* **Input:** Boolean Series
+* **Output:** Filtered DataFrame
+* **Limitation:** Cannot handle multiple conditions without operators
+
+#### Script for Step 1
 
 ```python
 # STEP 1: BASIC BOOLEAN INDEXING
@@ -176,6 +173,7 @@ print("heavy_penguins.head()->", heavy_penguins.head())
 ```
 
 **Output**
+
 ```python
  STEP 1. BASIC BOOLEAN FILTERING
 
@@ -189,49 +187,44 @@ heavy_penguins.head()->    species     island  bill_length_mm  bill_depth_mm  fl
 
 ```
 
+### STEP 2: Combining Conditions
 
-
-
-## STEP 2: Combining Conditions
-
-### Why this step is done
+#### Why this step is done
 
 Real-world filtering often requires **multiple conditions simultaneously**.
 
-----------
+***
 
-### How it is done
+#### How it is done
 
 Using:
 
--   `&` → AND
--   `|` → OR
--   `~` → NOT
+* `&` → AND
+* `|` → OR
+* `~` → NOT
 
-----------
+***
 
-### What to do
+#### What to do
 
--   Always use parentheses
--   Use vectorized operators (`&`, `|`)
+* Always use parentheses
+* Use vectorized operators (`&`, `|`)
 
-### What not to do
+#### What not to do
 
--   Do NOT use `and`, `or`
--   Do NOT skip parentheses
+* Do NOT use `and`, `or`
+* Do NOT skip parentheses
 
-----------
+***
 
-### Key Features
+#### Key Features
 
--   Supports complex filtering
--   Works element-wise
+* Supports complex filtering
+* Works element-wise
 
-----------
+***
 
-### Operators
-
-
+#### Operators
 
 ```python
 # STEP 2: COMBINING CONDITIONS
@@ -261,7 +254,6 @@ print("cond_not.head()->", cond_not.head())
 # Always use parentheses around conditions
 
 ```
-
 
 **Output**
 
@@ -294,49 +286,45 @@ cond_not.head()->        species island  bill_length_mm  bill_depth_mm  flipper_
 
 ```
 
+### STEP 3: Using `.isin()`
 
-
-## STEP 3: Using `.isin()`
-
-### Why this step is done
+#### Why this step is done
 
 Used when filtering against **multiple values in a clean and readable way**.
 
-----------
+***
 
-### How it is done
+#### How it is done
 
 `df['column'].isin(list_of_values)`
 
-----------
+***
 
-### What to do
+#### What to do
 
--   Use for multiple value checks
--   Pass list or iterable
+* Use for multiple value checks
+* Pass list or iterable
 
-### What not to do
+#### What not to do
 
--   Avoid chaining multiple OR conditions unnecessarily
+* Avoid chaining multiple OR conditions unnecessarily
 
-----------
+***
 
-### Key Features
+#### Key Features
 
--   Cleaner than multiple ORs
--   Efficient
+* Cleaner than multiple ORs
+* Efficient
 
-----------
+***
 
-### Method
+#### Method
 
 **`.isin(values)`**
 
--   **Input:** List / iterable
--   **Output:** Boolean Series
--   **Limitation:** Exact match only (no partial matching)
-
-
+* **Input:** List / iterable
+* **Output:** Boolean Series
+* **Limitation:** Exact match only (no partial matching)
 
 ```python
 # STEP 3: USING .isin()
@@ -353,6 +341,7 @@ print("species_filter.head()->", species_filter.head())
 # .isin() checks membership in a list of values
 
 ```
+
 **Output**
 
 ```python
@@ -368,53 +357,47 @@ species_filter.head()->   species     island  bill_length_mm  bill_depth_mm  fli
 
 ```
 
+### STEP 4: String Filtering using `.str.contains()`
 
-
-
-
-## STEP 4: String Filtering using `.str.contains()`
-
-### Why this step is done
+#### Why this step is done
 
 Used for filtering **text data and patterns**.
 
-----------
+***
 
-### How it is done
+#### How it is done
 
 `df['column'].str.contains(pattern)`
 
-----------
+***
 
-### What to do
+#### What to do
 
--   Use `case=False` when needed
--   Use `na=False` for missing values
+* Use `case=False` when needed
+* Use `na=False` for missing values
 
-### What not to do
+#### What not to do
 
--   Avoid applying on non-string columns
+* Avoid applying on non-string columns
 
-----------
+***
 
-### Key Features
+#### Key Features
 
--   Supports regex
--   Case-sensitive by default
+* Supports regex
+* Case-sensitive by default
 
-----------
+***
 
-### Method
+#### Method
 
 **`.str.contains(pattern, case=True, na=None)`**
 
--   **Input:** String or regex
--   **Output:** Boolean Series
--   **Limitations:**
-    -   Fails with NaN unless handled
-    -   Slower than numeric filtering
-
-
+* **Input:** String or regex
+* **Output:** Boolean Series
+* **Limitations:**
+  * Fails with NaN unless handled
+  * Slower than numeric filtering
 
 ```python
 # STEP 4: STRING FILTERING USING .str.contains()
@@ -437,42 +420,40 @@ print("dream_case_insensitive.head()->", dream_case_insensitive.head())
 
 ```
 
+### STEP 5: Handling Missing Values in String Operations\*\*
 
-## STEP 5: Handling Missing Values in String Operations**
-
-### Why this step is done
+#### Why this step is done
 
 Real-world datasets contain **missing values**, which can break string operations.
 
-----------
+***
 
-### How it is done
+#### How it is done
 
 `.str.contains('value', na=False)`
 
-----------
+***
 
-### What to do
+#### What to do
 
--   Always handle NaN explicitly
+* Always handle NaN explicitly
 
-### What not to do
+#### What not to do
 
--   Avoid ignoring missing values
+* Avoid ignoring missing values
 
-----------
+***
 
-### Key Features
+#### Key Features
 
--   Prevents errors
--   Ensures clean filtering
+* Prevents errors
+* Ensures clean filtering
 
-----------
+***
 
-### Limitations
+#### Limitations
 
--   May silently exclude missing data
-
+* May silently exclude missing data
 
 ```python
 # STEP 5: HANDLING MISSING VALUES IN STRING OPERATIONS
@@ -504,31 +485,28 @@ safe_filter.head()->   species     island  bill_length_mm  bill_depth_mm  flippe
 
 ```
 
-## STEP 6: Error Demonstrations
+### STEP 6: Error Demonstrations
 
-### Why this step is done
+#### Why this step is done
 
 Understanding errors improves debugging and conceptual clarity.
 
-### Common errors  
+#### Common errors
 
-| Error Type | Cause |
-| --- | --- |
-| Syntax Error | Missing parentheses |
-| ValueError | Wrong operator |
-| AttributeError | Wrong method usage |
+| Error Type     | Cause               |
+| -------------- | ------------------- |
+| Syntax Error   | Missing parentheses |
+| ValueError     | Wrong operator      |
+| AttributeError | Wrong method usage  |
 
+#### What to do
 
-### What to do
+* Learn from errors
+* Read error messages carefully
 
--   Learn from errors
--   Read error messages carefully
+#### What not to do
 
-### What not to do
-
--   Do not ignore warnings/errors
-
-
+* Do not ignore warnings/errors
 
 ```python
 # STEP 6: ERROR DEMONSTRATIONS (COMMENTED OUT)
@@ -552,22 +530,21 @@ Understanding errors improves debugging and conceptual clarity.
 
 ```
 
-## STEP 7: Summary
+### STEP 7: Summary
 
-### Why this step is done
+#### Why this step is done
 
 To consolidate learning and reinforce key ideas.
 
-----------
+***
 
-### Key Takeaways
+#### Key Takeaways
 
--   Boolean indexing is fundamental
--   Logical operators combine conditions
--   `.isin()` simplifies multiple comparisons
--   `.str.contains()` handles text filtering
--   Missing values must be handled carefully
-
+* Boolean indexing is fundamental
+* Logical operators combine conditions
+* `.isin()` simplifies multiple comparisons
+* `.str.contains()` handles text filtering
+* Missing values must be handled carefully
 
 ```python
 # STEP 7: SUMMARY
@@ -589,7 +566,7 @@ Use clear and well-structured conditions for readability and correctness
 
 ```
 
-## The entire script as a single block is given below:-
+### The entire script as a single block is given below:-
 
 ```python
 
@@ -747,27 +724,10 @@ Use clear and well-structured conditions for readability and correctness
 
 ```
 
+### Flowchart
 
-
-
-## Flowchart
 **The following flowchart shows all the steps of the above script**
 
 ![Filtering Flowchart](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch12-filtering.png)
 
-![Filtering Flowchart](/resources/ch12-filtering.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![Filtering Flowchart](../.gitbook/assets/ch12-filtering.png)

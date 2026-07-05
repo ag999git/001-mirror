@@ -1,44 +1,42 @@
-
-
-
 # Research Project: Advanced Indexing and Selection in Pandas using Palmer Penguins Dataset
 
+## Research Project: Advanced Indexing and Selection in Pandas using Palmer Penguins Dataset
 
-## Research Question
+### Research Question
 
 > **How can different indexing and selection techniques in Pandas (`[]`, `.`, `.loc[]`, `.iloc[]`, and slicing) be used to efficiently extract, filter, and manipulate structured data, and what are their comparative advantages, limitations, and appropriate use cases when working with real-world datasets such as the Palmer Penguins dataset?**
 
-----------
+***
 
-## Task / Project Brief
+### Task / Project Brief
 
 You are required to:
 
-1.  Load and explore the **Palmer Penguins dataset**
-2.  Perform **column selection** using:
-    -   Bracket `[]`
-    -   Dot `.` notation
-3.  Perform **row selection** using:
-    -   `.loc[]` (label-based indexing)
-    -   `.iloc[]` (position-based indexing)
-4.  Perform **combined slicing of rows and columns**
-5.  Compare all methods in terms of:
-    -   Syntax
-    -   Flexibility
-    -   Limitations
-6.  Handle possible **errors/exceptions**
-7.  Document your findings with:
-    -   Tables
-    -   Code with comments
-    -   Flowcharts
+1. Load and explore the **Palmer Penguins dataset**
+2. Perform **column selection** using:
+   * Bracket `[]`
+   * Dot `.` notation
+3. Perform **row selection** using:
+   * `.loc[]` (label-based indexing)
+   * `.iloc[]` (position-based indexing)
+4. Perform **combined slicing of rows and columns**
+5. Compare all methods in terms of:
+   * Syntax
+   * Flexibility
+   * Limitations
+6. Handle possible **errors/exceptions**
+7. Document your findings with:
+   * Tables
+   * Code with comments
+   * Flowcharts
 
-----------
+***
 
-# Model Solution
+## Model Solution
 
-----------
+***
 
-### Step 1: Import Libraries and Load Dataset
+#### Step 1: Import Libraries and Load Dataset
 
 ```python
 import pandas as pd  # Step1 Import libraries and load dataset
@@ -48,9 +46,10 @@ import seaborn as sns
 df = sns.load_dataset("penguins")
 ```
 
-### Step 2: Understanding the Data Structure
+#### Step 2: Understanding the Data Structure
 
-#### Step 2(A)
+**Step 2(A)**
+
 ```python
 # Step 2:  Understanding the Data Structure
 # 2. A. df.info() gives us a concise summary of the DataFrame, including the number of non-null entries, 
@@ -79,7 +78,7 @@ memory usage: 18.9+ KB
 
 ```
 
-#### Step 2(B)
+**Step 2(B)**
 
 ```python
 
@@ -102,8 +101,7 @@ max        59.600000      21.500000         231.000000  6300.000000
 
 ```
 
-#### Step 2(C)
-
+**Step 2(C)**
 
 ```python
 # 2. C. df.columns and df.index provide information about the column names and row indices of the DataFrame, respectively.
@@ -115,7 +113,7 @@ df.columns:-> Index(['species', 'island', 'bill_length_mm', 'bill_depth_mm', 'fl
 
 ```
 
-#### Step 2(D)
+**Step 2(D)**
 
 ```python
 # 2. D. df.index gives us the row labels of the DataFrame, which can be useful for accessing specific rows or understanding 
@@ -126,9 +124,9 @@ df.index:-> RangeIndex(start=0, stop=344, step=1)
 """
 ```
 
-### Step 3 Selelcting columns using -3(A). Bracket notation and -3(B). Dot notation
+#### Step 3 Selelcting columns using -3(A). Bracket notation and -3(B). Dot notation
 
-#### Step 3(A): Using bracket `[]` notation
+**Step 3(A): Using bracket `[]` notation**
 
 ```python
 
@@ -173,7 +171,7 @@ subset.head()->
 
 ```
 
-#### Step 3(B): Using dot `.` notation
+**Step 3(B): Using dot `.` notation**
 
 ```python
 
@@ -205,22 +203,19 @@ Name: species, dtype: object
 
 ```
 
-#### Table comparing bracket `[]` notation to dot `.` notation
+**Table comparing bracket `[]` notation to dot `.` notation**
 
+| Feature            | `[]` Notation | `.` Notation        |
+| ------------------ | ------------- | ------------------- |
+| Multiple columns   | Yes           | No                  |
+| Special characters | Supported     | Not supported       |
+| Safe usage         | Recommended   | Risky in some cases |
+| Readability        | Moderate      | High                |
 
-  
+#### Step 4 Selecting Rows using -4(A) `.loc[]` (Label-based) and -4(B) `.iloc[]` (Integer-based)
 
-| Feature | `[]` Notation | `.` Notation |
-| --- | --- | --- |
-| Multiple columns | Yes | No |
-| Special characters | Supported | Not supported |
-| Safe usage | Recommended | Risky in some cases |
-| Readability | Moderate | High |
+**Step 4(A): Selecting using `.loc` (label-based)**
 
-
-### Step 4 Selecting Rows using -4(A) `.loc[]` (Label-based) and -4(B) `.iloc[]` (Integer-based)
-
-#### Step 4(A): Selecting using `.loc` (label-based)
 4. (A) `.loc[]` is used for label-based indexing, which means we can select rows and columns by their labels. For example, `df.loc[row_label, column_label]` allows us to select specific rows and columns based on their labels.
 
 ```python
@@ -281,8 +276,7 @@ subset_loc->
 
 ```
 
-
-#### Step 4(B) Selecting Rows using .iloc[] (Position/ Integer-based)
+**Step 4(B) Selecting Rows using .iloc\[] (Position/ Integer-based)**
 
 ```python
 
@@ -337,18 +331,18 @@ subset_iloc->
 
 ```
 
-#### Comparison Table: `.loc[]` vs `.iloc[]`   
+**Comparison Table: `.loc[]` vs `.iloc[]`**
 
-| Feature | `.loc[]` | `.iloc[]` |
-| --- | --- | --- |
-| Basis | Labels (index names) | Integer positions |
-| End index | Included | Excluded |
-| Flexibility | High | High |
-| Boolean indexing | Supported | Not directly |
+| Feature          | `.loc[]`             | `.iloc[]`         |
+| ---------------- | -------------------- | ----------------- |
+| Basis            | Labels (index names) | Integer positions |
+| End index        | Included             | Excluded          |
+| Flexibility      | High                 | High              |
+| Boolean indexing | Supported            | Not directly      |
 
+#### Step 5 Slicing Rows and Columns Simultaneously
 
-### Step 5 Slicing Rows and Columns Simultaneously
-#### Step 5(A) Using .loc[] for slicing by labels
+**Step 5(A) Using .loc\[] for slicing by labels**
 
 ```python
 # 5. Slicing Rows and Columns Simultaneously
@@ -376,7 +370,7 @@ slice_loc->
 
 ```
 
-#### Step 5(B): Using `.iloc[]` for slicing by integer position
+**Step 5(B): Using `.iloc[]` for slicing by integer position**
 
 ```python
 
@@ -402,35 +396,19 @@ slice_iloc->
 
 ```
 
+**Table: When to Use What**
 
-#### Table: When to Use What   
+| Scenario                    | Recommended Method |
+| --------------------------- | ------------------ |
+| Selecting one column        | `df['col']`        |
+| Selecting multiple columns  | `df[['col1']]`     |
+| Filtering by row labels     | `.loc[]`           |
+| Filtering by position       | `.iloc[]`          |
+| Complex slicing             | `.loc[] / .iloc[]` |
+| Safe, production-level code | `[] + .loc[]`      |
 
-| Scenario | Recommended Method |
-| --- | --- |
-| Selecting one column | `df['col']` |
-| Selecting multiple columns | `df[['col1']]` |
-| Filtering by row labels | `.loc[]` |
-| Filtering by position | `.iloc[]` |
-| Complex slicing | `.loc[] / .iloc[]` |
-| Safe, production-level code | `[] + .loc[]` |
-
-### Flow chart shows how indexing is done
+#### Flow chart shows how indexing is done
 
 ![FlowChart](https://github.com/ag999git/001-Python-book-2026/blob/main/resources/ch12-pandas-indexing.png)
 
-![FlowChart](/resources/ch12-pandas-indexing.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![FlowChart](../.gitbook/assets/ch12-pandas-indexing.png)

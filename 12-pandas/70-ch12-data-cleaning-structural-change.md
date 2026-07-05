@@ -1,56 +1,46 @@
-
-
-
-
-
 # Data Cleaning: Structural Changes
 
-## Research Topic: The Penguin Data Standardization Protocol
+## Data Cleaning: Structural Changes
+
+### Research Topic: The Penguin Data Standardization Protocol
 
 **Research Question:** _How can one transform a raw, unstructured dataset into a clean, analysis-ready format using Pandas structural manipulation methods?_
 
 **Project Scenario:** Imagine the Palmer Penguin dataset has been collected by three different research assistants. As a result, the dataset contains:
 
-1.  Inconsistent column naming conventions.
-2.  Numeric data stored as text strings.
-3.  Accidental duplicate entries.
-4.  A messy default index (0, 1, 2...) instead of a unique identifier for each penguin.
+1. Inconsistent column naming conventions.
+2. Numeric data stored as text strings.
+3. Accidental duplicate entries.
+4. A messy default index (0, 1, 2...) instead of a unique identifier for each penguin.
 
 **Task:** Download the Palmer Penguins dataset via Seaborn and write a Python script to perform the following structural changes to prepare the data for analysis.
 
-----------
+***
 
-## 1. Concepts
+### 1. Concepts
 
 Before proceeding to the solution, it is essential to understand the mechanics of structural cleaning.
 
-### A. Renaming Columns and Indices (`.rename()`)
+#### A. Renaming Columns and Indices (`.rename()`)
 
 The `.rename()` method allows for the alteration of axis labels. It accepts a dictionary (mapper) where keys are the old names and values are the new names.
 
-  
+| Parameter | Description                              | Usage                      |
+| --------- | ---------------------------------------- | -------------------------- |
+| mapper    | Dictionary or function to rename labels. | `{'old_name': 'new_name'}` |
+| index     | Alternative to mapper for index labels.  | `index={0: 'first_row'}`   |
+| columns   | Alternative to mapper for column labels. | `columns={'A': 'Alpha'}`   |
+| inplace   | Modifies the DataFrame directly if True. | `inplace=True`             |
 
-  
-
-| Parameter | Description | Usage |
-| --- | --- | --- |
-| mapper | Dictionary or function to rename labels. | `{'old_name': 'new_name'}` |
-| index | Alternative to mapper for index labels. | `index={0: 'first_row'}` |
-| columns | Alternative to mapper for column labels. | `columns={'A': 'Alpha'}` |
-| inplace | Modifies the DataFrame directly if True. | `inplace=True` |
-
-
-### B. Changing Data Types (`.astype()`)
+#### B. Changing Data Types (`.astype()`)
 
 Data type casting is crucial for memory optimization and mathematical operations.
-  
 
-| Target Type | Conversion Function | Use Case |
-| --- | --- | --- |
-| Numeric | astype('float64') / astype('int64') | Converting text numbers ("12.5") to actual numbers. |
-| Categorical | astype('category') | Columns with low cardinality (few unique values). |
-| String | astype('str') | Standardizing text formats. |
-
+| Target Type | Conversion Function                 | Use Case                                            |
+| ----------- | ----------------------------------- | --------------------------------------------------- |
+| Numeric     | astype('float64') / astype('int64') | Converting text numbers ("12.5") to actual numbers. |
+| Categorical | astype('category')                  | Columns with low cardinality (few unique values).   |
+| String      | astype('str')                       | Standardizing text formats.                         |
 
 ```python
 # Example of an error when casting non-numeric strings to integers
@@ -58,33 +48,28 @@ Data type casting is crucial for memory optimization and mathematical operations
 # This raises ValueError because of 'NaN' values, which cannot be int.
 # Solution: Use 'float64' or fill NaNs first.
 ```
-### C. Handling Duplicates (`.duplicated()` & `.drop_duplicates()`)
+
+#### C. Handling Duplicates (`.duplicated()` & `.drop_duplicates()`)
 
 Duplicate data can skew statistical results. Pandas identifies duplicates based on row content.
 
-  
+| Method              | Option                   | Description                                                                           |
+| ------------------- | ------------------------ | ------------------------------------------------------------------------------------- |
+| .duplicated()       | `keep='first' (Default)` | Marks the first occurrence as False (unique) and subsequent ones as True (duplicate). |
+|                     | `keep='last'`            | Marks the last occurrence as False.                                                   |
+|                     | `keep=False`             | Marks all duplicates as True.                                                         |
+| .drop\_duplicates() | `subset=[...]`           | Only consider specific columns to identify duplicates.                                |
 
-| Method | Option | Description |
-| --- | --- | --- |
-| .duplicated() | `keep='first' (Default)` | Marks the first occurrence as False (unique) and subsequent ones as True (duplicate). |
-|  | `keep='last'` | Marks the last occurrence as False. |
-|  | `keep=False` | Marks all duplicates as True. |
-| .drop_duplicates() | `subset=[...]` | Only consider specific columns to identify duplicates. |
-
-### D. Resetting and Setting Index (`.set_index()` & `.reset_index()`)
+#### D. Resetting and Setting Index (`.set_index()` & `.reset_index()`)
 
 The index is the "address" of a row.
 
-  
+| Operation   | Method                     | Effect                                                                         |
+| ----------- | -------------------------- | ------------------------------------------------------------------------------ |
+| Set Index   | df.set\_index('col\_name') | Moves a column into the index. Replaces the default numeric range.             |
+| Reset Index | df.reset\_index()          | Moves the current index back to a column. Restores default range (0, 1, 2...). |
 
-| Operation | Method | Effect |
-| --- | --- | --- |
-| Set Index | df.set_index('col_name') | Moves a column into the index. Replaces the default numeric range. |
-| Reset Index | df.reset_index() | Moves the current index back to a column. Restores default range (0, 1, 2...). |
-
-
-
-# Script 
+## Script
 
 ```python
 # IMPORT LIBRARIES AND LOAD DATASET
@@ -213,253 +198,234 @@ print("df_final head after setting index:->", df_final.head())
 
 ```
 
-# Steps in the script
+## Steps in the script
 
+### STEP 0: Import Libraries and Load Dataset
 
-## STEP 0: Import Libraries and Load Dataset
-
-### Purpose
+#### Purpose
 
 To initialize the environment and bring the dataset into a Pandas DataFrame for further processing.
 
-### Methods Used
+#### Methods Used
 
-### `sns.load_dataset(name)`
+#### `sns.load_dataset(name)`
 
-`df  =  sns.load_dataset("penguins")`
+`df = sns.load_dataset("penguins")`
 
-  
+| Aspect     | Detail                |
+| ---------- | --------------------- |
+| Input      | Dataset name (string) |
+| Output     | Pandas DataFrame      |
+| Limitation | May require internet  |
 
-| Aspect | Detail |
-| --- | --- |
-| Input | Dataset name (string) |
-| Output | Pandas DataFrame |
-| Limitation | May require internet |
+#### MethodsAttributes `df.head()`, `df.columns`, `df.dtypes`
 
-### MethodsAttributes `df.head()`, `df.columns`, `df.dtypes`
-
-
-  
-
-| Method | Purpose |
-| --- | --- |
-| `head()` | Preview data |
+| Method    | Purpose      |
+| --------- | ------------ |
+| `head()`  | Preview data |
 | `columns` | Column names |
-| `dtypes` | Data types |
+| `dtypes`  | Data types   |
 
-## PHASE 1: Creating Messy Data (Simulation)
+### PHASE 1: Creating Messy Data (Simulation)
 
-----------
+***
 
-### STEP 1.1: Inconsistent Column Names
+#### STEP 1.1: Inconsistent Column Names
 
-#### Why
+**Why**
 
 Real-world data often has **non-standard naming conventions**
 
-#### Method Used
+**Method Used**
 
 `df.columns = [...]`
 
-  
+| Feature | Detail                      |
+| ------- | --------------------------- |
+| Type    | Attribute assignment        |
+| Effect  | Directly modifies DataFrame |
+| Risk    | Overwrites original names   |
 
-| Feature | Detail |
-| --- | --- |
-| Type | Attribute assignment |
-| Effect | Directly modifies DataFrame |
-| Risk | Overwrites original names |
+### STEP 1.2: Incorrect Data Types
 
-## STEP 1.2: Incorrect Data Types
-
-### Why
+#### Why
 
 Simulates data import issues (e.g., CSV → strings)
 
-### Method Used
+#### Method Used
 
 `df['col'].astype(str)`
 
-### `.astype()` Signature
+#### `.astype()` Signature
 
 `Series.astype(dtype)`
 
--    Input → Target data type  
--     Output → Converted Series   
--    Limitation → Fails if incompatible
+* Input → Target data type
+* ```
+  Output → Converted Series   
+  ```
+* Limitation → Fails if incompatible
 
-## STEP 1.3: Creating Duplicates
+### STEP 1.3: Creating Duplicates
 
-### Why
+#### Why
 
 Duplicates are common in real datasets
 
-### Method Used
+#### Method Used
 
 `pd.concat([df1, df2], ignore_index=True)`
 
-| Parameter | Meaning |
-| --- | --- |
+| Parameter           | Meaning              |
+| ------------------- | -------------------- |
 | `ignore_index=True` | Resets row numbering |
 
-----------
+***
 
-## PHASE 2: Structural Cleaning
+### PHASE 2: Structural Cleaning
 
-----------
+***
 
-## STEP 2.1: Renaming Columns
+### STEP 2.1: Renaming Columns
 
-###  Why
+#### Why
 
 Improves readability and consistency
 
-### Method Used
+#### Method Used
 
 `df.rename(columns=dict)`
 
-### Signature
+#### Signature
 
 `DataFrame.rename(columns=None, index=None)`
 
--    Input → Dictionary   
--    Output → New DataFrame   
--    Limitation → Silent failure if column missing
+* Input → Dictionary
+* Output → New DataFrame
+* Limitation → Silent failure if column missing
 
-----------
+***
 
-##  STEP 2.2: Fixing Data Types
+### STEP 2.2: Fixing Data Types
 
-### Why
+#### Why
 
 Correct types are essential for:
 
--   Computation
--   Memory efficiency
+* Computation
+* Memory efficiency
 
-----------
+***
 
-### Methods Used
+#### Methods Used
 
-####  Numeric conversion
+**Numeric conversion**
 
 `df['col'].astype(float)`
 
-####  Category conversion
+**Category conversion**
 
 `df['col'].astype('category')`
 
-----------
+***
 
-### Comparison: Data Types
+#### Comparison: Data Types
 
-| Type | Use Case | Benefit |
-| --- | --- | --- |
-| float | Numeric | Calculations |
-| object | Mixed | Flexible |
+| Type     | Use Case      | Benefit          |
+| -------- | ------------- | ---------------- |
+| float    | Numeric       | Calculations     |
+| object   | Mixed         | Flexible         |
 | category | Repeated text | Memory efficient |
 
-## STEP 2.3: Handling Duplicates
+### STEP 2.3: Handling Duplicates
 
-### Why
+#### Why
 
 Duplicates distort analysis
 
-----------
+***
 
-### Methods Used
+#### Methods Used
 
-####  `.duplicated()`
+**`.duplicated()`**
 
 `df.duplicated(keep=False)`
 
--    Output → Boolean Series   
--    Use → Identify duplicates 
+* Output → Boolean Series
+* Use → Identify duplicates
 
-----------
+***
 
-####  `.drop_duplicates()`
+**`.drop_duplicates()`**
 
 `df.drop_duplicates()`
 
--    Output → Clean DataFrame   
--    Default → `keep='first'`
+* Output → Clean DataFrame
+* Default → `keep='first'`
 
-----------
+***
 
-### Duplicate Handling Summary
+#### Duplicate Handling Summary
 
-| Method | Purpose |
-| --- | --- |
-| `duplicated()` | Detect |
-| `drop_duplicates()` | Remove |
+| Method              | Purpose |
+| ------------------- | ------- |
+| `duplicated()`      | Detect  |
+| `drop_duplicates()` | Remove  |
 
-## STEP 2.4: Index Management
+### STEP 2.4: Index Management
 
-### Why
+#### Why
 
 Index improves:
 
--   Data access
--   Identification
+* Data access
+* Identification
 
-----------
+***
 
-### Methods Used
+#### Methods Used
 
-####  `.set_index()`
+**`.set_index()`**
 
->`df.set_index('column')`
+> `df.set_index('column')`
 
-####  `.reset_index()`
+**`.reset_index()`**
 
->`df.reset_index()`
+> `df.reset_index()`
 
-----------
+***
 
-### Index Comparison
+#### Index Comparison
 
-| Operation | Result |
-| --- | --- |
-| `set_index` | Column → Index |
+| Operation     | Result         |
+| ------------- | -------------- |
+| `set_index`   | Column → Index |
 | `reset_index` | Index → Column |
 
+### STEP 3: Summary
 
-## STEP 3: Summary
-
-### Purpose
+#### Purpose
 
 To consolidate learning and reinforce best practices
-### Comparison Table
 
-| Operation | Method | Risk | Best Practice |
-| --- | --- | --- | --- |
-| Rename | `.rename()` | Silent failure | Verify columns |
-| Type Conversion | `.astype()` | Conversion error | Check data |
-| Duplicates | `.drop_duplicates()` | Data loss | Inspect first |
-| Index | `.set_index()` | Confusion | Reset when needed |
+#### Comparison Table
 
+| Operation       | Method               | Risk             | Best Practice     |
+| --------------- | -------------------- | ---------------- | ----------------- |
+| Rename          | `.rename()`          | Silent failure   | Verify columns    |
+| Type Conversion | `.astype()`          | Conversion error | Check data        |
+| Duplicates      | `.drop_duplicates()` | Data loss        | Inspect first     |
+| Index           | `.set_index()`       | Confusion        | Reset when needed |
 
-### Common error summary
+#### Common error summary
 
-| Error | Reason |
-| --- | --- |
+| Error                  | Reason             |
+| ---------------------- | ------------------ |
 | Wrong dtype conversion | Incompatible types |
-| Missing assignment | No change |
-| Wrong column name | Silent ignore |
-| Index misuse | Hard-to-read data |
+| Missing assignment     | No change          |
+| Wrong column name      | Silent ignore      |
+| Index misuse           | Hard-to-read data  |
 
+### Flowchart of the steps in the script
 
-## Flowchart of the steps in the script
-
-![Flow chart Data cleaning Structural change](/resources/ch12-data-cleaning-structural-change.png)
-
-
-
-
-
-
-
-
-
-
-
+![Flow chart Data cleaning Structural change](../.gitbook/assets/ch12-data-cleaning-structural-change.png)

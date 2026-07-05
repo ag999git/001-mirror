@@ -1,46 +1,43 @@
-
-
-
-
 # Merging and Joining Data
 
 ## Research Topic: Integrating Disparate Research Logs
 
 **Research Question:** _How can one integrate fragmented datasets collected from different research teams using concatenation and database-style merging operations?_
+
 ## Project Scenario:
+
 The Palmer Penguin data is split into two separate Excel files saved by different research assistants:
 
-1.  **`df_measurements`:** Contains physical dimensions (bill, flipper, mass) and a unique `penguin_id`.
-2.  **`df_tags`:** Contains categorical data (species, island, sex) and the same `penguin_id`.
+1. **`df_measurements`:** Contains physical dimensions (bill, flipper, mass) and a unique `penguin_id`.
+2. **`df_tags`:** Contains categorical data (species, island, sex) and the same `penguin_id`.
 
 Due to a data entry error, the `df_tags` file is missing the last few penguins recorded in `df_measurements`. The goal is to:
 
-1.  Concatenate new observations vertically.
-2.  Merge the two tables using the `penguin_id`.
-3.  Compare **Inner Join** (clean intersection) vs **Left Join** (preserving all measurements).
+1. Concatenate new observations vertically.
+2. Merge the two tables using the `penguin_id`.
+3. Compare **Inner Join** (clean intersection) vs **Left Join** (preserving all measurements).
 
 ### Task: Simulate the split datasets, perform concatenation, and apply different types of merges (Inner, Left, Outer) to reconstruct the master dataset and analyze the impact on data retention.
 
-
-
 ## 1. Conceptual Deep Dive
+
 <details>
 
-<summary> Conceptual Deep Dive </summary>
+<summary>Conceptual Deep Dive</summary>
 
 Data integration is handled primarily by two functions: `pd.concat()` and `pd.merge()`.
 
-### 2. `pd.concat()` — Detailed Explanation
+#### 2. `pd.concat()` — Detailed Explanation
 
-----------
+***
 
-#### 2.1 Purpose
+**2.1 Purpose**
 
 > Combine multiple DataFrames **along rows or columns**
 
-----------
+***
 
-#### 2.2 Signature
+**2.2 Signature**
 
 ```python
 pd.concat(  
@@ -56,244 +53,86 @@ pd.concat(
   copy=True  
 )
 ```
-----------
 
-#### 2.3 Key Parameters
+***
 
-| Parameter | Description | Example |
-| --- | --- | --- |
-| objs | List of DataFrames | [df1, df2] |
-| axis | 0 = rows, 1 = columns | axis=0 |
-| join | outer' (default), 'inner' | Column alignment |
-| ignore_index | Reset index | TRUE |
-| keys | Add hierarchical index | keys=['A','B'] |
-| verify_integrity | Check duplicate index | TRUE |
-| sort | Sort columns | FALSE |
+**2.3 Key Parameters**
 
-#### 2.4 Output Behavior
+| Parameter         | Description               | Example          |
+| ----------------- | ------------------------- | ---------------- |
+| objs              | List of DataFrames        | \[df1, df2]      |
+| axis              | 0 = rows, 1 = columns     | axis=0           |
+| join              | outer' (default), 'inner' | Column alignment |
+| ignore\_index     | Reset index               | TRUE             |
+| keys              | Add hierarchical index    | keys=\['A','B']  |
+| verify\_integrity | Check duplicate index     | TRUE             |
+| sort              | Sort columns              | FALSE            |
 
-| Axis | Output |
-| --- | --- |
-| axis=0 | More rows |
-| axis=1 | More columns |
+**2.4 Output Behavior**
+
+| Axis             | Output                |
+| ---------------- | --------------------- |
+| axis=0           | More rows             |
+| axis=1           | More columns          |
 | Mismatch columns | NaN values introduced |
 
+**Example to understand `.concat`**
 
-#### Example to understand `.concat`
+**Typical use case**
 
-<details>
-<summary> Example 1 (Click to expand)</summary>
+| Use Case              | Description          |
+| --------------------- | -------------------- |
+| Append new data       | Add rows             |
+| Combine datasets      | Stack similar tables |
+| Side-by-side analysis | axis=1               |
 
-#### Example code
-```python
-import  pandas  as  pd  
-  
-# Create two simple DataFrames  
-df1  =  pd.DataFrame({  
-'A': [1, 2],  
-'B': [3, 4]  
-})  
-  
-df2  =  pd.DataFrame({  
-'A': [5, 6],  
-'B': [7, 8]  
-})  
-  
-# Concatenate them  
-df_concat  =  pd.concat([df1, df2], axis=0, ignore_index=True)  
-  
-print(df_concat)
+**Dos and Donts**
 
-```
-#### Output
-
-```python
-   A  B
-0  1  3
-1  2  4
-2  5  7
-3  6  8
-```
-#### Step-by-Step Explanation of What Happened
-
-#### **Step 1: Input DataFrames**
-
-**df1**
-```
- A  B  
-0  1  3  
-1  2  4
-```
-
-**df2**
-```
- A  B  
-0  5  7  
-1  6  8
-```
-----------
-
-#### Step 2: Column Alignment
-
--   Pandas checks column names in both DataFrames
--   Both have same columns → `A`, `B`  
- >No mismatch, so no `NaN` values introduced
-
-----------
-
-#### Step 3: Row-wise Stacking (axis=0)
-
--   `axis=0` means **stack rows vertically**
--   df2 is placed **below** df1
-
-Intermediate idea:
-
-df1  
-----  
-```
-1 3  
-2 4  
-```
-df2  
-----  
-```
-5 7  
-6 8
-```
-
-Combined:
-```
-1 3  
-2 4  
-5 7  
-6 8
-```
-----------
-
-### **Step 4: Index Handling (ignore_index=True)**
-
--   Old indices (0,1 and 0,1) are **removed**
--   New index is created:
-
-0  
-1  
-2  
-3
-
->**Clean, continuous indexing**
-
-----------
-
-#### Step 5: Final Output Created
-
--   A **new DataFrame** is returned
--   Original `df1` and `df2` remain unchanged
-
-Final result:
-```
- A  B  
-0  1  3  
-1  2  4  
-2  5  7  
-3  6  8
-```
-
-
-</details>
-
-<details>
-<summary> Example 2 </summary>
-
-#### What If Columns Differ? (Mini Example)
-```python
-df1  =  pd.DataFrame({'A': [1, 2]})  
-df2  =  pd.DataFrame({'B': [3, 4]})  
-pd.concat([df1, df2], ignore_index=True)
-```
-### Output:
-```
- A    B  
-0  1.0  NaN  
-1  2.0  NaN  
-2  NaN  3.0  
-3  NaN  4.0
-```
->Missing columns are automatically filled with `NaN`
-
-----------
-
-#### Key Learning
-
--   First: **See the result**
--   Then: Understand:
-    1.  Columns aligned
-    2.  Rows stacked
-    3.  Index reset
-
-**In one sentence:**
-
-> `pd.concat(..., axis=0)` means “append rows”, and `ignore_index=True` means “renumber them cleanly.”
-
-
-
-</details>
-
-
-
-
-#### Typical use case
-
-| Use Case | Description |
-| --- | --- |
-| Append new data | Add rows |
-| Combine datasets | Stack similar tables |
-| Side-by-side analysis | axis=1 |
-
-#### Dos and Donts
 **Dos**
-| Do | Why |
-| --- | --- |
-| Use ignore_index=True | Clean index |
-| Ensure column consistency | Avoid NaN explosion |
-| Use list of DataFrames | Required input |
 
+| Do                        | Why                 |
+| ------------------------- | ------------------- |
+| Use ignore\_index=True    | Clean index         |
+| Ensure column consistency | Avoid NaN explosion |
+| Use list of DataFrames    | Required input      |
 
 **Donts**
-| Don’t | Why |
-| --- | --- |
-| Pass non-iterable | Raises error |
-| Ignore column mismatch | Leads to NaN |
-| Confuse with merge | No key logic here |
 
-#### Common Errors
+| Don’t                  | Why               |
+| ---------------------- | ----------------- |
+| Pass non-iterable      | Raises error      |
+| Ignore column mismatch | Leads to NaN      |
+| Confuse with merge     | No key logic here |
 
-##### Error 1: Wrong Input
+**Common Errors**
+
+**Error 1: Wrong Input**
 
 `pd.concat(df1, df2) # TypeError`
 
-`pd.concat([df1, df2])  # Correct`
+`pd.concat([df1, df2]) # Correct`
 
-----------
+***
 
-#### Error 2: Duplicate Index
+**Error 2: Duplicate Index**
 
-`pd.concat([df1, df2], verify_integrity=True)  # ValueError if index duplicates exist`
+`pd.concat([df1, df2], verify_integrity=True) # ValueError if index duplicates exist`
 
-----------
+***
 
-----------
+***
 
-### 3. `pd.merge()` — Detailed Explanation
+#### 3. `pd.merge()` — Detailed Explanation
 
-----------
+***
 
-#### 3.1 Purpose
+**3.1 Purpose**
 
 > Combine DataFrames using **common keys (like database joins)**
 
-----------
+***
 
-#### 3.2 Signature
+**3.2 Signature**
 
 ```python
 pd.merge(  
@@ -312,136 +151,136 @@ pd.merge(
   validate=None  
 )
 ```
-----------
 
-#### 3.3 Key Parameters
+***
 
-| Parameter | Description | Example |
-| --- | --- | --- |
-| left, right | DataFrames | df1, df2 |
-| how | join type | inner', 'left' |
-| on | common column | id' |
-| left_on/right_on | different column names | id', 'user_id' |
-| left_index/right_index | join on index | TRUE |
-| suffixes | handle duplicate column names | ('_x','_y') |
-| indicator | shows merge source | TRUE |
-| validate | check join type | 1:1' |
+**3.3 Key Parameters**
 
-#### 3.4 Join Types (Very Important)
+| Parameter                | Description                   | Example         |
+| ------------------------ | ----------------------------- | --------------- |
+| left, right              | DataFrames                    | df1, df2        |
+| how                      | join type                     | inner', 'left'  |
+| on                       | common column                 | id'             |
+| left\_on/right\_on       | different column names        | id', 'user\_id' |
+| left\_index/right\_index | join on index                 | TRUE            |
+| suffixes                 | handle duplicate column names | ('\_x','\_y')   |
+| indicator                | shows merge source            | TRUE            |
+| validate                 | check join type               | 1:1'            |
 
-| Join | Description | Result |
-| --- | --- | --- |
-| Inner | Common keys only | Intersection |
-| Left | All left keys | Left preserved |
-| Right | All right keys | Right preserved |
-| Outer | All keys | Union |
+**3.4 Join Types (Very Important)**
 
-#### 3.5 Output Behavior
+| Join  | Description      | Result          |
+| ----- | ---------------- | --------------- |
+| Inner | Common keys only | Intersection    |
+| Left  | All left keys    | Left preserved  |
+| Right | All right keys   | Right preserved |
+| Outer | All keys         | Union           |
 
-| Case | Result |
-| --- | --- |
-| Missing match | NaN |
-| Duplicate keys | Row multiplication |
-| Same column names | Suffix added |
+**3.5 Output Behavior**
 
-#### 3.8 Typical Use Cases
-| Use Case | Description |
-| --- | --- |
-| Combine datasets | Based on ID |
-| Data enrichment | Add columns |
+| Case              | Result             |
+| ----------------- | ------------------ |
+| Missing match     | NaN                |
+| Duplicate keys    | Row multiplication |
+| Same column names | Suffix added       |
+
+**3.8 Typical Use Cases**
+
+| Use Case             | Description         |
+| -------------------- | ------------------- |
+| Combine datasets     | Based on ID         |
+| Data enrichment      | Add columns         |
 | Database-style joins | SQL-like operations |
 
-#### 3.9 Dos and Don’ts
+**3.9 Dos and Don’ts**
 
-##### DOs
+**DOs**
 
-| Do | Why |
-| --- | --- |
-| Ensure key columns exist | Avoid KeyError |
-| Use validate | Prevent duplication errors |
-| Check duplicates in keys | Avoid explosion |
+| Do                       | Why                        |
+| ------------------------ | -------------------------- |
+| Ensure key columns exist | Avoid KeyError             |
+| Use validate             | Prevent duplication errors |
+| Check duplicates in keys | Avoid explosion            |
 
-##### Donts
+**Donts**
 
-| Don’t | Why |
-| --- | --- |
-| Merge without keys | Wrong results |
-| Ignore duplicates | Row explosion |
-| Forget suffixes | Column confusion |
+| Don’t              | Why              |
+| ------------------ | ---------------- |
+| Merge without keys | Wrong results    |
+| Ignore duplicates  | Row explosion    |
+| Forget suffixes    | Column confusion |
 
-#### 3.10 Common Errors
+**3.10 Common Errors**
 
-----------
+***
 
-####  Error 1: Missing Key
+**Error 1: Missing Key**
 
-`pd.merge(df1, df2, on='id')  # KeyError if 'id' not present`
+`pd.merge(df1, df2, on='id') # KeyError if 'id' not present`
 
-----------
+***
 
-#### Error 2: Cartesian Explosion
+**Error 2: Cartesian Explosion**
 
-`pd.merge(df1, df2, left_index=True, right_index=True)  # If index not meaningful → huge dataset`
+`pd.merge(df1, df2, left_index=True, right_index=True) # If index not meaningful → huge dataset`
 
-----------
+***
 
-#### Error 3: Duplicate Columns
+**Error 3: Duplicate Columns**
 
-Without suffix: columns  overlap  but  no  suffix  specified
+Without suffix: columns overlap but no suffix specified
 
-----------
+***
 
-----------
+***
 
-#### 4. `concat()` vs `merge()` — Detailed Comparison
+**4. `concat()` vs `merge()` — Detailed Comparison**
 
-| Feature | concat() | merge() |
-| --- | --- | --- |
-| Logic | Axis-based | Key-based |
-| Similar to | Append | SQL JOIN |
-| Requires keys | No | Yes |
-| Output shape | Add rows/columns | Depends on join |
-| Missing data | Possible | Controlled |
-| Use case | Stack data | Relational combine |
+| Feature       | concat()         | merge()            |
+| ------------- | ---------------- | ------------------ |
+| Logic         | Axis-based       | Key-based          |
+| Similar to    | Append           | SQL JOIN           |
+| Requires keys | No               | Yes                |
+| Output shape  | Add rows/columns | Depends on join    |
+| Missing data  | Possible         | Controlled         |
+| Use case      | Stack data       | Relational combine |
 
+**5. Output Behavior Comparison**
 
-#### 5. Output Behavior Comparison
+| Scenario           | concat | merge               |
+| ------------------ | ------ | ------------------- |
+| New rows           | OK     | Not OK              |
+| New columns        | OK     | OK                  |
+| Key matching       | Not OK | OK                  |
+| NaN creation       | Yes    | Yes                 |
+| Row multiplication | No     | Yes (if duplicates) |
 
-| Scenario | concat | merge |
-| --- | --- | --- |
-| New rows | OK | Not OK |
-| New columns | OK | OK |
-| Key matching | Not OK | OK |
-| NaN creation | Yes | Yes |
-| Row multiplication | No | Yes (if duplicates) |
+**6. Visual Summary**
 
+| Operation      | Input     | Output        |
+| -------------- | --------- | ------------- |
+| concat(axis=0) | df1 + df2 | More rows     |
+| concat(axis=1) | df1 + df2 | More columns  |
+| merge(inner)   | df1 + df2 | Common rows   |
+| merge(left)    | df1 + df2 | All left rows |
 
-#### 6. Visual Summary
+**7. Best Practices Summary**
 
-| Operation | Input | Output |
-| --- | --- | --- |
-| concat(axis=0) | df1 + df2 | More rows |
-| concat(axis=1) | df1 + df2 | More columns |
-| merge(inner) | df1 + df2 | Common rows |
-| merge(left) | df1 + df2 | All left rows |
-
-
-#### 7. Best Practices Summary
-
-| Topic | Recommendation |
-| --- | --- |
-| concat | Use for stacking |
-| merge | Use for relational joins |
-| keys | Always verify |
-| duplicates | Check before merge |
-| debugging | Use indicator=True |
+| Topic      | Recommendation           |
+| ---------- | ------------------------ |
+| concat     | Use for stacking         |
+| merge      | Use for relational joins |
+| keys       | Always verify            |
+| duplicates | Check before merge       |
+| debugging  | Use indicator=True       |
 
 </details>
 
-
 ## Script
+
 <details>
-<summary> Script whichclearly explains merging and joining of tables (Left, Right, Inner, Outer) (Click to expand) </summary>
+
+<summary>Script whichclearly explains merging and joining of tables (Left, Right, Inner, Outer) (Click to expand)</summary>
 
 ```python
 
@@ -725,314 +564,201 @@ BEST PRACTICE:
 
 
 ```
+
 </details>
 
 ## Understanding LEFT, RIGHT, INNER and OUTER joins on rows and columns
+
 <details>
 
-<summary> Understanding LEFT, RIGHT, INNER and OUTER joins on rows and columns</summary>
+<summary>Understanding LEFT, RIGHT, INNER and OUTER joins on rows and columns</summary>
 
-When two tables are joined, the operation is performed using one or more columns called **keys**.  
+When two tables are joined, the operation is performed using one or more columns called **keys**.\
 The key column appears once in the result when the same column name is used for joining.
 
- - If keys are unique, the join produces a one-to-one mapping.   
- - If key are duplicated, the result may produce one-to-many or many-to-many relationships, leading to an increase in rows (m × n combinations).
+* If keys are unique, the join produces a one-to-one mapping.
+* If key are duplicated, the result may produce one-to-many or many-to-many relationships, leading to an increase in rows (m × n combinations).
 
 The number of rows in the result depends on the join type:
 
--   Inner → only matching rows
--   Left → all left rows
--   Right → all right rows
--   Outer → all rows from both
+* Inner → only matching rows
+* Left → all left rows
+* Right → all right rows
+* Outer → all rows from both
 
 For non-key columns:
 
--   Different names → preserved as-is
--   Same names → renamed with suffix `_x` and `_y`
+* Different names → preserved as-is
+* Same names → renamed with suffix `_x` and `_y`
 
 Missing matches result in NaN values depending on the join type.
 
+### Understanding LEFT, RIGHT, INNER and OUTER joins on rows and columns
 
-## Understanding LEFT, RIGHT, INNER and OUTER joins on rows and columns
-When joining 2 tables, 
--    A. For rows there can be 3 possible scenarion (1) Both tables have same number of rows (2) Left > Right (3) Left < Right
--    B. Similarly there can be many scenarios for columns. 
+When joining 2 tables,
+
+* A. For rows there can be 3 possible scenarion (1) Both tables have same number of rows (2) Left > Right (3) Left < Right
+* B. Similarly there can be many scenarios for columns.
 
 The effects of various types of joins on rows and columns are discussed below
 
-## Effect of Row Combinations on Different Types of Joins
-
-  <details>
-  <summary>Effect of Row Combinations on Different Types of Joins</summary>summary
-
-###  Concept Overview
-
-When two DataFrames are merged, the **number of rows in the result** depends on:
-
-1.  Number of rows in **Left table**
-2.  Number of rows in **Right table**
-3.  Type of **join used** (Inner, Left, Right, Outer)
-4.  Whether keys are **unique or repeated**
-
-### Key Principle
-
-> The merge operation works **row-wise based on matching keys**, not just total row counts.
-
-### Scenario Table: Row Behavior in Joins
-  
-
-| Scenario | Join Type | Rows in Result | Data Loss | Key Insight |
-| --- | --- | --- | --- | --- |
-| Equal | Inner | Same | None (if keys match) | Clean match |
-| Equal | Left | Same | None | LEFT preserved |
-| Equal | Right | Same | None | RIGHT preserved |
-| Equal | Outer | Same | None | Full union |
-| LEFT > RIGHT | Inner | Reduced | LEFT rows lost | Only intersection |
-| LEFT > RIGHT | Left | Same as LEFT | No LEFT loss | Best for preserving main data |
-| LEFT > RIGHT | Right | Same as RIGHT | LEFT lost | Rarely used here |
-| LEFT > RIGHT | Outer | Max(rows) | None | Missing filled with NaN |
-| LEFT < RIGHT | Inner | Reduced | RIGHT rows lost | Only intersection |
-| LEFT < RIGHT | Left | Same as LEFT | RIGHT lost | May hide extra data |
-| LEFT < RIGHT | Right | Same as RIGHT | No RIGHT loss | Use if RIGHT is important |
-| LEFT < RIGHT | Outer | Max(rows) | None | Complete union |
-
-## Special Case: Duplicate Keys
-
-| Left Matches | Right Matches | Result |
-| --- | --- | --- |
-| 1 | Many | Rows duplicate |
-| Many | 1 | Rows duplicate |
-| Many | Many | m × n explosion |
-
-
-### Formula
-
-> If key appears **m times in left** and **n times in right** → result has **$m × n$ rows**
-
-## KEY INTERPRETATION RULES
-
-### Rule 1: Control Comes from JOIN TYPE
-
--   INNER → Intersection
--   LEFT → Preserve LEFT
--   RIGHT → Preserve RIGHT
--   OUTER → Preserve BOTH
-
-### Rule 2: Size Difference ≠ Error
-
-| Situation | Reality |
-| --- | --- |
-| LEFT > RIGHT | Very common (missing auxiliary data) |
-| LEFT < RIGHT | Also valid (extra reference data) |
-| Problem arises only if | You EXPECT something else |
-
-### Rule 3: Think in Terms of “Preservation”
-
-| If you want to preserve… | Use |
-| --- | --- |
-| Main dataset | LEFT JOIN |
-| Reference dataset | RIGHT JOIN |
-| Only valid matches | INNER JOIN |
-| Everything | OUTER JOIN |
-
-## Key Takeaways
-
--   **Inner join → intersection → possible data loss**
--   **Left join → preserves left**
--   **Right join → preserves right**
--   **Outer join → preserves everything**
--   Duplicate keys can **multiply rows unexpectedly**
-
-
-
-
-
-
-
-  </details>
+### Effect of Row Combinations on Different Types of Joins
 
 </details>
 
 ## Effect of Column Names and Values in Joins
 
 <details>
-<summary> Effect of Column Names and Values in Joins </summary>
 
+<summary>Effect of Column Names and Values in Joins</summary>
 
+### Effect of Column Names and Values in Joins
 
-
-
-
-
-
-
-
-
-
-
-## Effect of Column Names and Values in Joins
-
-### Concept Overview
+#### Concept Overview
 
 During a merge, columns behave based on:
 
-1.  Whether column names are **same or different**
-2.  Whether they are **join keys or not**
-3.  Whether values are **same or different**
+1. Whether column names are **same or different**
+2. Whether they are **join keys or not**
+3. Whether values are **same or different**
 
-### Column Behavior Rules
+#### Column Behavior Rules
 
-| Case | Behavior |
-| --- | --- |
-| Join key column | Appears once |
-| Same column name (non-key) | Gets suffix _x, _y |
-| Different column names | Kept as-is |
+| Case                       | Behavior             |
+| -------------------------- | -------------------- |
+| Join key column            | Appears once         |
+| Same column name (non-key) | Gets suffix \_x, \_y |
+| Different column names     | Kept as-is           |
 
-
-### When Two Tables Are Joined (Merged)
+#### When Two Tables Are Joined (Merged)
 
 When two tables are joined:
 
--   The operation is performed using one or more **columns called keys**
--   These keys are used to **match rows between the two tables**
--   The final result depends on:
-    -   Type of join (**inner, left, right, outer**)
-    -   Nature of key (**unique or repeated**)
-    -   Column names (**same or different**)
+* The operation is performed using one or more **columns called keys**
+* These keys are used to **match rows between the two tables**
+* The final result depends on:
+  * Type of join (**inner, left, right, outer**)
+  * Nature of key (**unique or repeated**)
+  * Column names (**same or different**)
 
-### A. Key Column (Join Column)
+#### A. Key Column (Join Column)
 
-#### Principle
+**Principle**
 
 > The join key appears **only once** in the result **if the same column name is used in both tables via `on=`**
 
 **Example**
--   If using:
+
+* If using:
 
 `pd.merge(df1, df2, on='id')`
->The key column appears **once** with the same name (`id`)
 
--   If using:
+> The key column appears **once** with the same name (`id`)
+
+* If using:
 
 `pd.merge(df1, df2, left_on='id1', right_on='id2')`
 
->Both columns may appear unless handled explicitly
+> Both columns may appear unless handled explicitly
 
-----------
+***
 
-### A(1). Keys Identical (1:1 Match)
+#### A(1). Keys Identical (1:1 Match)
 
--   Same values
--   Same frequency (unique keys)
+* Same values
+* Same frequency (unique keys)
 
 ✔ Result:
 
--   Clean join
--   No duplication
--   Rows remain same (for inner/left/right)
+* Clean join
+* No duplication
+* Rows remain same (for inner/left/right)
 
-----------
+***
 
-### A(2). Keys Same Column but Values Differ
+#### A(2). Keys Same Column but Values Differ
 
-#### Explanation:
+**Explanation:**
 
 > If key values are **not perfectly matching across tables**, the result depends on join type:
 
--   **Inner join** → keeps only matching values
--   **Left join** → keeps all left keys, unmatched → NaN
--   **Right join** → keeps all right keys
--   **Outer join** → keeps all keys
+* **Inner join** → keeps only matching values
+* **Left join** → keeps all left keys, unmatched → NaN
+* **Right join** → keeps all right keys
+* **Outer join** → keeps all keys
 
-----------
+***
 
-### A(3). Duplicate Keys (Most Important Case)
-
+#### A(3). Duplicate Keys (Most Important Case)
 
 > Row increase happens when **keys are duplicated**, not just because values differ.
 
-#### Cases:
+**Cases:**
 
-| Left | Right | Result |
-| --- | --- | --- |
-| Unique | Unique | 1:1 |
-| One duplicate | Unique | 1:many |
-| Unique | Many duplicate | many:1 |
+| Left           | Right          | Result                            |
+| -------------- | -------------- | --------------------------------- |
+| Unique         | Unique         | 1:1                               |
+| One duplicate  | Unique         | 1:many                            |
+| Unique         | Many duplicate | many:1                            |
 | Many duplicate | Many duplicate | many:many → row explosion (m × n) |
 
-
-
-
-### A(4). Different Number of Rows
-
-
+#### A(4). Different Number of Rows
 
 > When tables have different row counts:
 
--   Inner join → reduces rows
--   Left join → keeps left count
--   Right join → keeps right count
--   Outer join → union of both
+* Inner join → reduces rows
+* Left join → keeps left count
+* Right join → keeps right count
+* Outer join → union of both
 
-----------
+***
 
-## B. Non-Key Columns
+### B. Non-Key Columns
 
-### B(1). Columns with Different Names
+#### B(1). Columns with Different Names
 
+* All such columns are included **unchanged**
 
+***
 
--   All such columns are included **unchanged**
-
-----------
-
-### B2. Columns with Same Name (Non-Key)
+#### B2. Columns with Same Name (Non-Key)
 
 > If two columns have the same name and are **not join keys**:
 
--   Pandas renames them as:
-    -   `column_x` (from left)
-    -   `column_y` (from right)
+* Pandas renames them as:
+  * `column_x` (from left)
+  * `column_y` (from right)
 
-**Optional: You can change the suffixes from _x and _y to something else as shown below**
+**Optional: You can change the suffixes from \_x and \_y to something else as shown below**
 
 `pd.merge(df1, df2, on='id', suffixes=('_left', '_right'))`
 
-----------
+***
 
-### B3. Missing Case 
+#### B3. Missing Case
 
 Here is the important addition:
 
-###  B3. Missing Matches
+#### B3. Missing Matches
 
 > If a row has no matching key:
 
-| Join Type | Result |
-| --- | --- |
-| Inner | Row removed |
-| Left | Right columns → NaN |
-| Right | Left columns → NaN |
-| Outer | Missing side → NaN |
+| Join Type | Result              |
+| --------- | ------------------- |
+| Inner     | Row removed         |
+| Left      | Right columns → NaN |
+| Right     | Left columns → NaN  |
+| Outer     | Missing side → NaN  |
 
-### Final Summary Table
+#### Final Summary Table
 
-| Aspect | Behavior |
-| --- | --- |
-| Key column (same name) | Appears once |
-| Key column (different names) | May appear twice |
-| Duplicate keys | Row multiplication |
-| Non-key same name | _x, _y suffix |
-| Non-key different name | Kept as-is |
-| Missing match | NaN (depends on join) |
-
-
-
-
-
-
+| Aspect                       | Behavior              |
+| ---------------------------- | --------------------- |
+| Key column (same name)       | Appears once          |
+| Key column (different names) | May appear twice      |
+| Duplicate keys               | Row multiplication    |
+| Non-key same name            | \_x, \_y suffix       |
+| Non-key different name       | Kept as-is            |
+| Missing match                | NaN (depends on join) |
 
 </details>
-
-
-

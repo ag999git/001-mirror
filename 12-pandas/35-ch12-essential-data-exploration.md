@@ -1,29 +1,26 @@
-
-
 # Research Project: Essential Data Exploration in Pandas
 
 ## Research Question
 
 > How can a Data Analyst quickly understand the structure, quality, and patterns of an unknown dataset using Pandas DataFrame exploration methods such as `.head()`, `.tail()`, `.sample()`, `.info()`, `.describe()`, `.value_counts()`, and `.nunique()`?
-> 
+>
 > Using the **Palmer Penguins dataset**, perform a systematic exploration and explain how each method contributes to understanding the dataset from both a structural and statistical perspective.
 
-----------
+***
 
 ## Learning Objectives
 
 You will learn to:
 
--   Inspect raw data using `.head()`, `.tail()`, `.sample()`
--   Understand structure using `.info()`
--   Generate statistical summaries using `.describe()`
--   Analyze categorical distributions using `.value_counts()` and `.nunique()`
--   Interpret outputs meaningfully (not just run code)
-
+* Inspect raw data using `.head()`, `.tail()`, `.sample()`
+* Understand structure using `.info()`
+* Generate statistical summaries using `.describe()`
+* Analyze categorical distributions using `.value_counts()` and `.nunique()`
+* Interpret outputs meaningfully (not just run code)
 
 ## Flowchart showing the steps of Essential Data Exploration in Pandas
 
-![Essential Data Exploration in Pandas](/resources/ch12-Essential-Data-Exploration.png)
+![Essential Data Exploration in Pandas](../.gitbook/assets/ch12-Essential-Data-Exploration.png)
 
 ## Script showing usage of Pandas DataFrame exploration methods such as `.head()`, `.tail()`, `.sample()`, `.info()`, `.describe()`, `.value_counts()`, and `.nunique()`
 
@@ -187,33 +184,28 @@ print(df.isnull().sum())
 
 ```
 
-
-
-
-
 ## Comparison Table
 
-| Method | Purpose | Output Type | When to Use |
-| --- | --- | --- | --- |
-| .head() | View first rows | DataFrame | Quick preview |
-| .tail() | View last rows | DataFrame | Check end data |
-| .sample() | Random rows | DataFrame | Avoid bias |
-| .info() | Structure | Summary | Data cleaning |
-| .describe() | Statistics | DataFrame | Numeric insights |
-| .nunique() | Unique count | Series | Category size |
-| .value_counts() | Frequency | Series | Distribution |
-
+| Method           | Purpose         | Output Type | When to Use      |
+| ---------------- | --------------- | ----------- | ---------------- |
+| .head()          | View first rows | DataFrame   | Quick preview    |
+| .tail()          | View last rows  | DataFrame   | Check end data   |
+| .sample()        | Random rows     | DataFrame   | Avoid bias       |
+| .info()          | Structure       | Summary     | Data cleaning    |
+| .describe()      | Statistics      | DataFrame   | Numeric insights |
+| .nunique()       | Unique count    | Series      | Category size    |
+| .value\_counts() | Frequency       | Series      | Distribution     |
 
 ## Key Difference Table
 
-| Feature | .describe() | .value_counts() |
-| --- | --- | --- |
-| Works on | Numeric (default) | Single column |
-| Output | Summary stats | Frequency count |
+| Feature  | .describe()           | .value\_counts()   |
+| -------- | --------------------- | ------------------ |
+| Works on | Numeric (default)     | Single column      |
+| Output   | Summary stats         | Frequency count    |
 | Use case | Distribution overview | Category dominance |
 
+## Some Common errors/ omissions
 
-## Some Common errors/ omissions 
 Given below are some common errors/ omissions in Essential Data Exploration in Pandas
 
 ```python
@@ -254,13 +246,6 @@ Given below are some common errors/ omissions in Essential Data Exploration in P
 
 ```
 
-
 ## Conclusion
->Data exploration is the first and most critical step in data analysis.
->These simple Pandas methods provide powerful insights within seconds, helping analysts understand structure, detect issues, and guide further analysis.
 
-
-
-
-
-
+> Data exploration is the first and most critical step in data analysis. These simple Pandas methods provide powerful insights within seconds, helping analysts understand structure, detect issues, and guide further analysis.
