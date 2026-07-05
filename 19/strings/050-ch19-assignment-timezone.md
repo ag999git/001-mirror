@@ -112,7 +112,7 @@ Mo Tu We Th Fr Sa Su
 
 ```
 
-## 4. Digital Lab Assignments & Self-Assessment
+## 4. Lab Assignments
 
 Complete these tasks in your local IDE or Google Colab notebook to understand/ implement these concepts.
 
@@ -122,7 +122,7 @@ Complete these tasks in your local IDE or Google Colab notebook to understand/ i
 
 -   _Hint:_ Ensure you import `ZoneInfo` from `zoneinfo`.
     
-Here is the detailed, step-by-step solution for your digital companion assignment.
+#### Step-by-step solution for assignment (Question 1).
 
 ```python
 
@@ -168,7 +168,7 @@ print(f"Aware Timezone Info:  {aware_dt.tzinfo}") # Aware Timezone Info:  Asia/K
 
 ```
 
-### Detailed Conceptual Breakdown
+### Detailed explanation
 
 #### Why We Use `datetime.now()` for the Naive Instance
 
