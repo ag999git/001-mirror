@@ -44,12 +44,11 @@ Tuple slicing using the syntax `tuple[start:stop:step]` reads a specified index 
 When optimizing performance-critical Python applications, tuples outperform lists across three primary architectural metrics:
 
 
-
-Efficiency Parameter	Python list Architecture	Python tuple Architecture
-Memory Allocation	Allocates extra over-provisioned slots to handle future append mutations efficiently. 	Allocates the exact block size needed for the elements at instantiation. 
-Execution Speed	Slower under-the-hood operations due to pointer indirection and resizing logic. 	Highly optimized, direct read access speeds within the runtime engine. 
-Data Integrity	Vulnerable to accidental programmatic mutations across shared module references. 	Guaranteed read-only immutability that serves as a permanent architectural lock. 
-
+| Efficiency Parameter | Python list Architecture | Python tuple Architecture |
+| --- | --- | --- |
+| Memory Allocation | Allocates extra over-provisioned slots to handle future append mutations efficiently. | Allocates the exact block size needed for the elements at instantiation. |
+| Execution Speed | Slower under-the-hood operations due to pointer indirection and resizing logic. | Highly optimized, direct read access speeds within the runtime engine. |
+| Data Integrity | Vulnerable to accidental programmatic mutations across shared module references. | Guaranteed read-only immutability that serves as a permanent architectural lock. |
 
 
 
