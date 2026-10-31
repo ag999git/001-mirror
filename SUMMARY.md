@@ -60,6 +60,7 @@
 * [Advanced Concepts of Generators](06-functions2/007-ch6-generators-advanced.md)
 * [Questions and Answers](06-functions2/008-ch6-q-a.md)
 * [Using `functools.wraps` in Decorators](06-functions2/009-ch6-functools-decorators.md)
+* [Type Hints](06-functions2/010-ch6-type-hints.md)
 
 ## Chapter 7: Object-Oriented Programming
 
@@ -126,6 +127,8 @@
 * [Scripting Questions](10-file-handling/120-ch10-scripts.md)
 * [LBYL versus EAFP](10-file-handling/130-ch10-lbyl-eafp.md)
 * [Studying `os.walk()`](10-file-handling/140-ch10-oswalk.md)
+* [Working with Files and Folders Using `pathlib`](10-file-handling/150-ch10-pathlib.md)
+* [Working with CSV Files Using the `csv` Module](10-file-handling/160-ch10-csv-module.md)
 
 ## Chapter 11: NumPy
 
